@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class HeadSection extends Component {
+export default class DocumentsPane extends Component {
 
   render() {
     return (
-      <div className="head-section">
+      <div className="documents-pane">
       </div>
     );
   }

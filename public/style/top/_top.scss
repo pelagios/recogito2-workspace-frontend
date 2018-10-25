@@ -1,0 +1,33 @@
+.top-bar {
+  position:relative;
+  background-color:#fff;
+  padding:25px 20px 20px 5px;
+  border-bottom:1px solid $lightgrey-border;
+  // @include box-shadow(0, 0, 6px, 0.2);
+
+  .top-left, .top-right {
+    display:inline-block;
+  }
+
+  .top-left {
+
+    * {
+      vertical-align:middle;
+    }
+
+    a {
+      padding:0 10px;
+    }
+
+    .home img {
+      width:130px;
+    }
+
+  }
+
+  .top-right {
+    float:right;
+    padding-top:8px;
+  }
+
+}

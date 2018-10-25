@@ -1,4 +1,34 @@
-html, body {
+@import "common/common";
+@import "documents/documents";
+@import "sidebar/sidebar";
+@import "top/top";
+
+html, body, #root {
   margin:0;
   padding:0;
+  background-color:#fff;
+  color:$standard-type;
+  font-family:Assistant;
+  font-weight:bold;
+  height:100%;
+}
+
+h1, h2 {
+  margin:0;
+  padding:0;
+}
+
+a {
+  color:$ocean;
+  text-decoration:none;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+
+.app {
+  display:flex;
+  flex-direction:column;
+  height:100%
 }

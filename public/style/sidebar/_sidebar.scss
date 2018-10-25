@@ -1,0 +1,54 @@
+.sidebar {
+  position:absolute;
+  top:0;
+  left:0;
+  width:240px;
+  height:100%;
+  padding:115px 25px 0 15px;
+  box-sizing:border-box;
+
+  .avatar {
+    position:relative;
+    bottom:-5px;
+    width:40px;
+    height:40px;
+    margin-right:10px;
+    text-align:center;
+    line-height:38px;
+    color:#fff;
+    font-size:21px;
+    @include rounded-corners(2px);
+    float:left;
+
+    // DUMMY
+    background-color:rgb(135, 197, 161);
+  }
+
+  .identity {
+    padding-bottom:30px;
+    border-bottom:1px solid $lightgrey-border;
+
+    h1 {
+      font-size:23px;
+    }
+
+    .member-since {
+      font-size:14px;
+      padding:0;
+      margin:0;
+      color:$lightblue-type;
+      font-weight:normal;
+    }
+    
+  }
+
+  .tagline {
+    padding:20px 0;
+    font-weight:normal;
+  }
+
+  .homepage {
+    padding-top:5px;
+  }
+
+}
