@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+import TopBar from './top/TopBar.jsx';
+
+export default class App extends Component {
   render() {
     return (
-      <div className="App">Hello World</div>
+      <div className="App">
+        <TopBar />
+      </div>
     );
   }
 }
-
-export default App;
