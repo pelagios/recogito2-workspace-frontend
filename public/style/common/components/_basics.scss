@@ -1,0 +1,12 @@
+.nostyle {
+  outline:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.icon {
+  font-family:FontAwesome;
+  font-weight:normal;
+  @include noselect();
+}
