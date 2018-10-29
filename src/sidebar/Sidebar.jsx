@@ -12,7 +12,7 @@ export default class Sidebar extends Component {
           <h1>Rainer Simon</h1>
           <p className="member-since">Joined on 08 Jun 2016</p>
         </div>
-        <div className="tagline">
+        <div className="bio">
           A collector of things worth knowing and things not worth knowing.
         </div>
         <div className="homepage">

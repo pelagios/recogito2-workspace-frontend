@@ -1,8 +1,5 @@
 .documents-pane {
-  background-color:$blueish-white;
   flex-grow:1;
-  margin:80px 0 0 250px;
-  border-style:solid;
-  border-color:$lightgrey-border;
-  border-width:1px 1px 0 1px;
+  margin:80px 0 0 240px;
+  border-top:1px solid $lightgrey-border;
 }

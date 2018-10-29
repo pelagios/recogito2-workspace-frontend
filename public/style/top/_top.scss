@@ -4,8 +4,10 @@
   position:relative;
   background-color:#fff;
   padding:25px 20px 20px 5px;
-  border-bottom:1px solid $lightgrey-border;
-  // @include box-shadow(0, 0, 6px, 0.2);
+  // border-top:3px solid $ocean;
+  border-bottom:3px solid $ocean;
+  box-shadow:0 0 5px rgba(96, 96, 96, 0.6);
+  z-index:1;
 
   .top-left, .top-right {
     display:inline-block;

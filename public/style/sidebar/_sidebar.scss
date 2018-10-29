@@ -5,7 +5,9 @@
   width:240px;
   height:100%;
   padding:115px 25px 0 15px;
-  box-sizing:border-box;
+  box-sizing:border-box; 
+  background-color:$blueish-white; 
+  border-right:1px solid $lightgrey-border;
 
   .avatar {
     position:relative;
@@ -42,7 +44,7 @@
     
   }
 
-  .tagline {
+  .bio {
     padding:20px 0;
     font-weight:normal;
   }
