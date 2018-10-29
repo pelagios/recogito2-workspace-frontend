@@ -1,0 +1,29 @@
+$sidebar-border:darken($lightgrey-border, 7.5%);
+
+@import "section-account";
+@import "section-create-new";
+@import "section-views";
+@import "section-storage";
+
+.sidebar {
+  position:absolute;
+  top:0;
+  left:0;
+  width:260px;
+  padding:0;
+  height:100%;
+  background-color:$blueish-white;
+  line-height:20px;
+  border-right:1px solid $lightgrey-border-darker;
+
+  .icon { font-size:20px; }
+}
+
+.sidebar-section {
+  font-weight:bold;
+  padding:20px;
+}
+
+.sidebar-section:first-child {
+  border-top:none;
+}

@@ -1,0 +1,36 @@
+.sidebar-section.views {
+  padding:15px 0;
+
+  .icon {
+    display:inline-block;
+    width:25px;
+  }
+
+  ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+  }
+
+  li {
+    position:relative;
+    cursor:pointer;
+    margin:5px 0;
+    padding:6px 20px;
+
+    .doc-count {
+      display:inline-block;
+      position:absolute;
+      right:20px;
+    }
+  }
+
+  li.current, li.current:hover {
+    background-color:rgba($ocean, 0.2);
+  }
+
+  li:hover {
+    background-color:rgba($ocean, 0.15);
+  }
+
+}

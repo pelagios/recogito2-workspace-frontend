@@ -1,0 +1,49 @@
+.dropzone-decoration {
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  background-color:rgba(49, 144, 241, 0.25);
+  border:2px solid #65affb;
+  pointer-events:none;
+  overflow:hidden;
+
+  .inner {
+    position:absolute;
+    bottom:30px;
+    left:0;
+    right:0;
+    color:#fff;
+    background-color:$ocean;
+    width:450px;
+    height:100px;
+    padding:20px;
+    margin:auto;
+    text-align:center;
+    @include rounded-corners(2px);
+    @include box-shadow(2px, 2px, 18px, 0.3);
+
+    .icon {
+      display:block;
+      font-size:28px;
+      padding:6px 0 12px 0;
+    }
+
+    p {
+      padding:0;
+      margin:0;
+    }
+
+    p.instructions {
+      font-weight:bold;
+      padding:3px 0;
+    }
+
+    p.supported {
+      font-size:15px;
+    }
+
+  }
+
+}

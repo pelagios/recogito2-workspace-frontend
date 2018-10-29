@@ -1,0 +1,28 @@
+@import '../common/common';
+@import 'sidebar/sidebar';
+@import 'header/header';
+@import 'upload/upload';
+@import 'documents/documents';
+
+html, body, #app {
+  background-color:#fff;
+  color:$standard-type;
+  font-family:Assistant;
+  font-size:16px;
+  height:100%;
+  margin:0;
+  padding:0;
+}
+
+h1, h2 {
+  margin:0;
+  padding:0;
+}
+
+.container {
+  margin-left:261px;
+}
+
+.wrapper {
+  position:relative;
+}

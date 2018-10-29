@@ -11,7 +11,7 @@ import Sidebar from './sidebar/Sidebar.jsx';
 import StoredUIState from './StoredUIState.js';
 import Uploader from './upload/Uploader.jsx';
 
-import '../../assets/style/profile/index.scss';
+import '../../assets/style/workspace/index.scss';
 
 export default class App extends Component {
 

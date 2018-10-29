@@ -1,0 +1,30 @@
+.sidebar-section.create-new {
+  position:relative;
+  border-style:solid;
+  border-width:1px 0;
+  border-color:$sidebar-border;
+
+  button {
+    padding:10px 30px;
+    width:100%;
+    @include box-shadow(1px, 1px, 8px, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  button:hover {
+    @include box-shadow(1px, 1px, 10px, 0.6);
+  }
+
+  .icon {
+    padding-right:4px;
+  }
+
+  .label {
+    padding-right:10px;
+  }
+}
+
+.modal-menu.create-new {
+  top:11px;
+  left:15px;
+}
