@@ -5,7 +5,7 @@ import DocumentsPane from './documents/DocumentsPane.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import TopBar from './top/TopBar.jsx';
 
-import '../../public/style/index.scss';
+import '../../assets/style/profile/index.scss';
 
 export default class App extends Component {
   render() {
@@ -19,4 +19,4 @@ export default class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('app'));

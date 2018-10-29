@@ -1,0 +1,60 @@
+.badge {
+  background-color:$ocean;
+  color:#fff;
+  display:inline-block;
+  font-family:Assistant;
+  font-size:15px;
+  font-weight:700;
+  min-width:10px;
+  padding:1px 8px;
+  text-align:center;
+  vertical-align:baseline;
+  white-space:nowrap;
+  @include rounded-corners(12px);
+}
+
+.btn {
+  background-color:$ocean;
+  border:1px solid $ocean;
+  box-sizing:border-box;
+  color:#fff;
+  cursor:pointer;
+  display:inline-block;
+  font-family:Assistant;
+  font-size:16px;
+  margin:0;
+  outline:none;
+  text-decoration:none;
+  white-space:nowrap;
+  padding:8px 35px;
+  vertical-align:middle;
+  @include rounded-corners(2px);
+
+  * { vertical-align:middle; }
+  .icon { margin-right:4px; }
+}
+
+.btn:hover {
+  background-color:$ocean-hover;
+  border-color:$ocean-hover;
+}
+
+.btn.outline {
+  border:1px solid $ocean;
+  color:$ocean;
+  background-color:transparent;
+  text-shadow:none;
+}
+
+.nostyle {
+  outline:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.icon {
+  font-family:FontAwesome;
+  font-weight:normal;
+  @include noselect();
+}

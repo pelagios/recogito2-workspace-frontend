@@ -1,0 +1,79 @@
+.prompt {
+  color:$ocean;
+  position:absolute;
+  top:40%;
+  left:50%;
+  width:520px;
+  margin-left:-210px;
+  text-align:center;
+  overflow:hidden;
+  @include rounded-corners(4px);
+  @include box-shadow(2px, 2px, 42px, 0.4);
+}
+
+.prompt .prompt-header {
+  cursor:grab;
+
+  h1 {
+    background-color:$ocean;
+    text-align:left;
+    margin:0;
+    padding:0 12px;
+    font-size:17px;
+    font-weight:normal;
+    line-height:42px;
+    color:#fff;
+  }
+
+}
+
+.prompt .prompt-body {
+  background-color:#fff;
+  padding:20px;
+  font-weight:bold;
+  font-size:15px;
+
+  p {
+    margin:0;
+    padding:10px 0;
+  }
+
+  .buttons {
+    padding-top:20px;
+
+    button {
+      margin:0 8px;
+    }
+  }
+
+}
+
+.prompt.warning {
+  color:$error-msg-type;
+
+  h1 {
+    background-color:$error-msg-type;
+  }
+
+  .btn {
+    border-color:$error-msg-type;
+  }
+
+  .btn:not(.outline) {
+    background-color:$error-msg-type;
+  }
+
+  .btn.outline {
+    color:$error-msg-type;
+  }
+
+  .btn:not(.outline):hover {
+    border-color:darken($error-msg-type, 5%);
+    background-color:darken($error-msg-type, 5%);
+  }
+
+  .btn.outline:hover {
+    background-color:lighten($error-msg-bg, 5%);
+  }
+
+}

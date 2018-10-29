@@ -13,14 +13,15 @@ const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 
-
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 const publicPath = '/';
+
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
 const publicUrl = '';
+
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
@@ -96,7 +97,7 @@ module.exports = {
     ],
     public: [
       require.resolve('react-dev-utils/webpackHotDevClient'),
-      paths.appSrc + '/public/App.jsx'
+      paths.appSrc + '/profile/App.jsx'
     ]
   },
   output: {
@@ -337,7 +338,7 @@ module.exports = {
       inject: true,
       chunks: ['public'],
       template: paths.appHtml,
-      filename: 'public'
+      filename: 'profile'
     }),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
