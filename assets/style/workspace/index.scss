@@ -1,8 +1,9 @@
-@import '../common/common';
-@import 'sidebar/sidebar';
-@import 'header/header';
-@import 'upload/upload';
-@import 'documents/documents';
+@import "../common/globals/globals";
+
+@import "sidebar/sidebar";
+@import "header/header";
+@import "upload/upload";
+@import "documents/documents";
 
 html, body, #app {
   background-color:#fff;
