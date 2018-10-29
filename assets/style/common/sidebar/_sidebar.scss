@@ -1,0 +1,15 @@
+$sidebar-border:darken($lightgrey-border, 7.5%);
+
+.sidebar {
+  position:absolute;
+  top:0;
+  left:0;
+  width:260px;
+  padding:0;
+  height:100%;
+  background-color:$blueish-white;
+  line-height:20px;
+  border-right:1px solid $lightgrey-border-darker;
+
+  .icon { font-size:20px; }
+}

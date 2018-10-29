@@ -1,13 +1,7 @@
+@import "../../common/sidebar/sidebar";
+
 .sidebar {
-  position:absolute;
-  top:0;
-  left:0;
-  width:240px;
-  height:100%;
-  padding:115px 25px 0 15px;
-  box-sizing:border-box; 
-  background-color:$blueish-white; 
-  border-right:1px solid $lightgrey-border;
+  padding-top:115px;
 
   .avatar {
     position:relative;
