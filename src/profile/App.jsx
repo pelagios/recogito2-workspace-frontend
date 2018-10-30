@@ -82,12 +82,14 @@ export default class App extends Component {
               documents={this.state.documents}
               columns={this.state.table_columns}
               sorting={this.state.table_sorting}
-              busy={this.state.busy} /> 
+              busy={this.state.busy} 
+              disableFiledrop={true} /> 
             :
             <GridPane
               folders={[]}
               documents={this.state.documents}
-              busy={this.state.busy} />
+              busy={this.state.busy} 
+              disableFiledrop={true} />
           }
         </div>
       </React.Fragment>

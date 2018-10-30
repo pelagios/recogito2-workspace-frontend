@@ -225,6 +225,7 @@ export default class App extends Component {
               selection={this.state.selection}
               onSort={this.onSortTable.bind(this)}
               onSelect={this.onSelect.bind(this)} 
+              disableFiledrop={this.state.view !== 'MY_DOCUMENTS'}
               onDropFiles={this.startUpload.bind(this)} 
               onDropURL={this.startRegisterRemoteSource.bind(this)} 
               onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} >
@@ -238,6 +239,7 @@ export default class App extends Component {
               busy={this.state.busy}
               selection={this.state.selection}
               onSelect={this.onSelect.bind(this)} 
+              disableFiledrop={this.state.view !== 'MY_DOCUMENTS'}
               onDropFiles={this.startUpload.bind(this)}
               onDropURL={this.startRegisterRemoteSource.bind(this)} >
               

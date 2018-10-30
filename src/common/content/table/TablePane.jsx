@@ -116,6 +116,24 @@ export default class TablePane extends Component {
       .filter(c => c.type == Readme)
       .shift(); // First readme or undefined
 
+    const tablePane =
+      <div className="documents-pane table-pane">
+        <AutoSizer>
+          {({ height, width }) => (
+            <List
+              className="virtualized-list"
+              width={width}
+              height={height}
+              rowCount={this.props.folders.length + this.props.documents.length}
+              rowHeight={47}
+              rowRenderer={this.rowRenderer()} />
+          )}
+        </AutoSizer>
+
+        { this.state.drag && <DropzoneDecoration /> }
+        { this.props.busy && <div className="busy-mask" /> }
+      </div>
+
     return (
       <React.Fragment>
         <div className="documents-table-header">
@@ -132,32 +150,18 @@ export default class TablePane extends Component {
 
         {readme}
 
-        {/* <Dropzone
-          className="dropzone"
-          disableClick
-          disablePreview
-          onDragEnter={this.onDrag.bind(this, true)}
-          onDragLeave={this.onDrag.bind(this, false)}
-        onDrop={this.onDrop.bind(this)}> */}
-
-          <div className="documents-pane table-pane">
-            <AutoSizer>
-              {({ height, width }) => (
-                <List
-                  className="virtualized-list"
-                  width={width}
-                  height={height}
-                  rowCount={this.props.folders.length + this.props.documents.length}
-                  rowHeight={47}
-                  rowRenderer={this.rowRenderer()} />
-              )}
-            </AutoSizer>
-
-            { this.state.drag && <DropzoneDecoration /> }
-            { this.props.busy && <div className="busy-mask" /> }
-          </div>
-
-        {/* </Dropzone> */}
+        {this.props.disableFiledrop ? tablePane :
+          <Dropzone
+            className="dropzone"
+            disableClick={true}
+            onDragEnter={this.onDrag.bind(this, true)}
+            onDragLeave={this.onDrag.bind(this, false)}
+            onDrop={this.onDrop.bind(this)}>
+            
+            {tablePane}
+            
+          </Dropzone>
+        }
 
         {this.state.prefsOpen &&
           <PreferencesModal

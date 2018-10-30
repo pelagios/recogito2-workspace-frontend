@@ -117,35 +117,41 @@ export default class GridPane extends Component {
       .filter(c => c.type === Readme)
       .shift(); // First readme or undefined
 
+    const gridPane =
+      <AutoSizer>
+        {({ height, width }) => {
+          const itemCount = this.props.folders.length + this.props.documents.length;
+          const itemsPerRow = Math.floor(width / ITEM_SIZE);
+          const rowCount = Math.ceil(itemCount / itemsPerRow);
+
+          return (
+            <List
+              className="virtualized-grid"
+              width={width}
+              height={height}
+              rowCount={rowCount}
+              rowHeight={ITEM_SIZE}
+              rowRenderer={this.rowRenderer(itemsPerRow, rowCount)} />
+          )
+        }}
+      </AutoSizer>
+
     return (
       <React.Fragment>
         {readme}
         <div className="documents-pane grid-pane">
-          <Dropzone
-            className="dropzone"
-            disableClick={true}
-            onDragEnter={this.onDrag.bind(this, true)}
-            onDragLeave={this.onDrag.bind(this, false)}
-            onDrop={this.onDrop.bind(this)}>
+          {this.props.disableFiledrop ? gridPane :
+            <Dropzone
+              className="dropzone"
+              disableClick={true}
+              onDragEnter={this.onDrag.bind(this, true)}
+              onDragLeave={this.onDrag.bind(this, false)}
+              onDrop={this.onDrop.bind(this)}>
 
-            <AutoSizer>
-              {({ height, width }) => {
-                const itemCount = this.props.folders.length + this.props.documents.length;
-                const itemsPerRow = Math.floor(width / ITEM_SIZE);
-                const rowCount = Math.ceil(itemCount / itemsPerRow);
+              {gridPane}
 
-                return (
-                  <List
-                    className="virtualized-grid"
-                    width={width}
-                    height={height}
-                    rowCount={rowCount}
-                    rowHeight={ITEM_SIZE}
-                    rowRenderer={this.rowRenderer(itemsPerRow, rowCount)} />
-                )
-              }}
-            </AutoSizer>
-          </Dropzone>
+            </Dropzone>
+          }
 
           { this.state.drag && <DropzoneDecoration /> }
         </div>
