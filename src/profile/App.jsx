@@ -46,12 +46,14 @@ export default class App extends Component {
         <Sidebar 
           account={this.state.account}/>
 
-        <TablePane
-          folders={[]}
-          documents={[]}
-          columns={this.state.table_columns}
-          sorting={this.state.table_sorting}
-          busy={this.state.busy} />
+        <div className="container">
+          <TablePane
+            folders={[]}
+            documents={[]}
+            columns={this.state.table_columns}
+            sorting={this.state.table_sorting}
+            busy={this.state.busy} />
+        </div>
       </React.Fragment>
     );
   }

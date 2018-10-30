@@ -10,19 +10,19 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div className="sidebar">
-          <Account
-            account={this.props.account} />
+        <Account
+          account={this.props.account} />
 
-          <CreateNew 
-            onUploadFiles={this.props.onUploadFiles} />
-            
-          <ViewList
-            account={this.props.account}
-            currentView={this.props.currentView}
-            onChangeView={this.props.onChangeView} />
+        <CreateNew 
+          onUploadFiles={this.props.onUploadFiles} />
+          
+        <ViewList
+          account={this.props.account}
+          currentView={this.props.currentView}
+          onChangeView={this.props.onChangeView} />
 
-          <Storage 
-            account={this.props.account} /> 
+        <Storage 
+          account={this.props.account} /> 
       </div>
     )
   }
