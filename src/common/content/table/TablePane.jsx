@@ -84,7 +84,7 @@ export default class TablePane extends Component {
 
   sortBy(field) {
     const asc = this.props.sorting ?
-      this.props.sorting.by == field ? !this.props.sorting.asc : true :
+      this.props.sorting.by === field ? !this.props.sorting.asc : true :
       true;
 
     this.props.onSort({ by: field, asc: asc });
@@ -107,13 +107,13 @@ export default class TablePane extends Component {
 
     if (files.length > 0)
       this.props.onDropFiles(files);
-    else if (url && hostname != window.location.hostname) // Require external link
+    else if (url && hostname !== window.location.hostname) // Require external link
       this.props.onDropURL(url);
   }
 
   render() {
     const readme = React.Children.toArray(this.props.children)
-      .filter(c => c.type == Readme)
+      .filter(c => c.type === Readme)
       .shift(); // First readme or undefined
 
     const tablePane =
