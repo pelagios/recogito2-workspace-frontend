@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 export default class Identity extends Component {
 
+  formatURL(url) {
+    return url.replace(/^https?\:\/\//i, '');
+  }
+
   // https://medium.com/@pppped/compute-an-arbitrary-color-for-user-avatar-starting-from-his-username-with-javascript-cd0675943b66
   stringToHslColor(str) {
     let hash = 0;
@@ -57,7 +61,7 @@ export default class Identity extends Component {
 
           { dataAvailable && this.props.account.website && 
             <p className="homepage">
-              <a href={this.props.account.website}>{this.props.account.website}</a>
+              <a href={this.props.account.website}>{this.formatURL(this.props.account.website)}</a>
             </p>
           }
         </div>
