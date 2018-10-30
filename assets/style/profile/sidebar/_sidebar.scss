@@ -1,50 +1,11 @@
-@import "../../common/sidebar/sidebar";
+@import "../../common/layout/sidebar";
+@import "../../common/content/identity";
 
 .sidebar {
-  padding-top:115px;
+  padding-top:95px;
 
-  .avatar {
-    position:relative;
-    bottom:-5px;
-    width:40px;
-    height:40px;
-    margin-right:10px;
-    text-align:center;
-    line-height:38px;
-    color:#fff;
-    font-size:21px;
-    @include rounded-corners(2px);
-    float:left;
-
-    // DUMMY
-    background-color:rgb(135, 197, 161);
+  .section {
+    padding:20px;
+    border-bottom:1px solid $sidebar-border;
   }
-
-  .identity {
-    padding-bottom:30px;
-    border-bottom:1px solid $lightgrey-border;
-
-    h1 {
-      font-size:23px;
-    }
-
-    .member-since {
-      font-size:14px;
-      padding:0;
-      margin:0;
-      color:$lightblue-type;
-      font-weight:normal;
-    }
-    
-  }
-
-  .bio {
-    padding:20px 0;
-    font-weight:normal;
-  }
-
-  .homepage {
-    padding-top:5px;
-  }
-
 }

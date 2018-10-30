@@ -1,7 +1,8 @@
 @import "../common/globals/globals";
 
-@import "documents/documents";
 @import "sidebar/sidebar";
+@import "documents/documents";
+@import "../workspace/documents/documents";
 @import "top/top";
 
 html, body, #root {
@@ -26,10 +27,4 @@ a {
 
 a:hover {
   text-decoration:underline;
-}
-
-.app {
-  display:flex;
-  flex-direction:column;
-  height:100%
 }

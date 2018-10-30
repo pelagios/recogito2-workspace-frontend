@@ -10,6 +10,10 @@ $sidebar-border:darken($lightgrey-border, 7.5%);
   background-color:$blueish-white;
   line-height:20px;
   border-right:1px solid $lightgrey-border-darker;
+  font-weight:bold;
 
-  .icon { font-size:20px; }
+  .section {
+    position:relative;
+  }
+
 }

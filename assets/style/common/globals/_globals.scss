@@ -1,9 +1,18 @@
-@import "base/colors";
-@import "base/fonts";
-@import "base/mixins";
+@import "includes/colors";
+@import "includes/fonts";
+@import "includes/mixins";
+@import "includes/buttons";
+@import "includes/forms";
 
-@import "components/basic";
-@import "components/forms";
-@import "components/menupopup";
-@import "components/modal";
-@import "components/prompt";
+.nostyle {
+  outline:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.icon {
+  font-family:FontAwesome;
+  font-weight:normal;
+  @include noselect();
+}

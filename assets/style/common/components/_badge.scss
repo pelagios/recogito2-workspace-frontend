@@ -1,0 +1,14 @@
+.badge {
+  background-color:$ocean;
+  color:#fff;
+  display:inline-block;
+  font-family:Assistant;
+  font-size:15px;
+  font-weight:700;
+  min-width:10px;
+  padding:1px 8px;
+  text-align:center;
+  vertical-align:baseline;
+  white-space:nowrap;
+  @include rounded-corners(12px);
+}

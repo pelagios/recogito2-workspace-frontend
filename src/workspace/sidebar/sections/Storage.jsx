@@ -11,7 +11,7 @@ export default class Storage extends Component {
     const used = dataAvailable ? this.props.account.storage.used_mb : 0;
 
     return (
-      <div className="sidebar-section storage">
+      <div className="section storage">
         <span className="icon">&#xf1c0;</span> Storage
         <div className="used-diskspace">
           <Meter

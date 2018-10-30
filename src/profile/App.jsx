@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 
 import API from '../common/API.js';
 
-import DocumentsPane from './documents/DocumentsPane.jsx';
+import TablePane from '../workspace/documents/table/TablePane.jsx';
+
 import Sidebar from './sidebar/Sidebar.jsx';
 import TopBar from './top/TopBar.jsx';
 
@@ -15,7 +16,17 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      account : null
+      account : null,
+      table_columns : [
+        "author",
+        "title",
+        "language",
+        "date_freeform",
+        "uploaded_at",
+        "last_edit_at"
+      ],
+      table_sorting : null,
+      busy          : false
     }
   }
 
@@ -35,7 +46,12 @@ export default class App extends Component {
         <Sidebar 
           account={this.state.account}/>
 
-        <DocumentsPane />
+        <TablePane
+          folders={[]}
+          documents={[]}
+          columns={this.state.table_columns}
+          sorting={this.state.table_sorting}
+          busy={this.state.busy} />
       </React.Fragment>
     );
   }

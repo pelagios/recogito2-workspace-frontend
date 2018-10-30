@@ -30,7 +30,7 @@ export default class CreateNew extends Component {
 
   render() {
     return (
-      <div className="sidebar-section create-new">
+      <div className="section create-new">
         <button
           className="btn create-new"
           onClick={this.onShowOptions.bind(this)}>

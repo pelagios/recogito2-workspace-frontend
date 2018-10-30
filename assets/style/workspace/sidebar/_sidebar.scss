@@ -5,13 +5,4 @@ $sidebar-border:darken($lightgrey-border, 7.5%);
 @import "section-views";
 @import "section-storage";
 
-@import "../../common/sidebar/sidebar";
-
-.sidebar-section {
-  font-weight:bold;
-  padding:20px;
-}
-
-.sidebar-section:first-child {
-  border-top:none;
-}
+@import "../../common/layout/sidebar";

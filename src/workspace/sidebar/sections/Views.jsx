@@ -24,7 +24,7 @@ export default class ViewList extends Component {
     const dataAvailable = this.props.account && this.props.account.documents;
 
     return (
-      <div className="sidebar-section views">
+      <div className="section views">
         <ul>
           <ViewListItem
             icon="&#xf2be;"

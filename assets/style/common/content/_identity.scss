@@ -1,0 +1,68 @@
+.identity {
+
+  .placeholder {
+    display:inline-block;
+    background-color:#f4f4f4;
+    @include rounded-corners(2px);
+  }
+
+  .user {
+
+    .avatar {
+      position:relative;
+      width:40px;
+      height:40px;
+      margin-right:10px;
+      text-align:center;
+      line-height:38px;
+      color:#fff;
+      font-size:21px;
+      @include rounded-corners(2px);
+      float:left;
+    }
+
+    h1 {
+      padding-top:2px;
+      font-size:23px;
+
+      .placeholder {
+        height:20px;
+        width:120px;
+      }
+    }
+
+    .member-since {
+      font-size:14px;
+      padding:0;
+      margin:0;
+      color:$lightblue-type;
+      font-weight:normal;
+
+      .placeholder {
+        height:12px;
+        width:150px;
+      }
+    }
+
+  }
+
+  .user-extended {
+    padding-top:15px;
+
+    p {
+      margin:0;
+      padding:5px 0;
+    }
+
+    .bio {
+      font-weight:normal;
+    }
+
+    .homepage a {
+      color:$ocean;
+      text-decoration:underline;
+    }
+
+  }
+
+}
