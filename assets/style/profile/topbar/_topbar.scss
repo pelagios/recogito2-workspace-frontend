@@ -8,6 +8,8 @@
   box-shadow:0 0 5px rgba(96, 96, 96, 0.6);
   font-weight:bold;
   z-index:1;
+  display:flex;
+  flex-direction:row;
 
   a {
     color:$ocean;
@@ -20,6 +22,7 @@
 
   .top-left, .top-right {
     display:inline-block;
+    white-space:nowrap;
   }
 
   .top-left {
@@ -39,8 +42,9 @@
   }
 
   .top-right {
-    float:right;
-    padding-top:8px;
+    flex:1;
+    padding-top:12px;
+    text-align:right;
   }
 
 }
