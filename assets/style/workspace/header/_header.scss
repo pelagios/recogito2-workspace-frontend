@@ -1,4 +1,5 @@
-@import 'search/search';
+@import "../../common/content/breadcrumbs";
+@import "search/search";
 
 .header {
   flex:0;
@@ -40,16 +41,6 @@
 
 .subheader {
   position:relative;
-
-  .breadcrumbs {
-    border-bottom:1px solid $lightgrey-border;
-    margin:0 0 0 22px;
-    padding:12px 0;
-
-    h2 {
-      font-size:20px;
-    }
-  }
 
   .subheader-icons {
     position:absolute;

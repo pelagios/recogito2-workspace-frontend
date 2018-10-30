@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Identity from '../../common/components/Identity.jsx';
+import Identity from '../../common/content/Identity.jsx';
 
 export default class Sidebar extends Component {
 

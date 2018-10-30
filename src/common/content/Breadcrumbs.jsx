@@ -8,9 +8,10 @@ const VIEW_LABELS = {
 export default class Breadcrumbs extends Component {
 
   render() {
+    const label = (this.props.view) ? VIEW_LABELS[this.props.view] : this.props.label;
     return (
       <div className="breadcrumbs">
-        <h2>{VIEW_LABELS[this.props.view]}</h2>
+        <h2>{label}</h2>
       </div>
     )
   }

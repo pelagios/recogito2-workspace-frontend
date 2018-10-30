@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import Search from './search/Search.jsx';
 import HeaderIcon from './HeaderIcon.jsx';
-import Breadcrumbs from './subheader/Breadcrumbs.jsx';
+import Breadcrumbs from '../../common/content/Breadcrumbs.jsx';
 import DeleteAction from '../actions/DeleteAction.jsx';
 
 export default class Header extends Component {
@@ -18,7 +18,6 @@ export default class Header extends Component {
   }
 
   onKeydown(evt) {
-     // DELETE
     if (this.props.selection.length > 0 && evt.which == 46)
       this.setState({ action: 'DELETE' });
   }
@@ -41,9 +40,8 @@ export default class Header extends Component {
   }
 
   onDeleteError(error) {
-    // TODO error message
     this.setState({ action: null }, () => {
-      this.props.afterDelete();
+      this.props.afterDelete(); // TODO error message
     });
   }
 
