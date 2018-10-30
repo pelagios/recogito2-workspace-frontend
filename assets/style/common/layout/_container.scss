@@ -1,6 +1,9 @@
-@import 'readme';
-@import 'grid/grid';
-@import 'table/table';
+@import '../content/grid/grid';
+@import '../content/table/table';
+@import '../content/breadcrumbs';
+@import '../content/readme';
+
+@import "../components/modal";
 
 .container {
   height:100%;

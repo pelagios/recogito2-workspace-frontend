@@ -1,12 +1,13 @@
 @import "../common/globals/globals";
+@import "../common/layout/sidebar";
+@import "../common/layout/container";
 
 @import "../common/components/badge";
 @import "../common/components/menupopup";
-@import "../common/components/modal";
 @import "../common/components/prompt";
 
-@import "sidebar/sidebar";
+@import '../common/content/upload/upload';
+
 @import "header/header";
-@import "documents/documents";
-@import "upload/upload";
+@import "sidebar/sidebar";
 

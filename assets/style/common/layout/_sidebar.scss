@@ -1,5 +1,7 @@
 $sidebar-border:darken($lightgrey-border, 7.5%);
 
+@import "../content/identity";
+
 .sidebar {
   position:absolute;
   top:0;

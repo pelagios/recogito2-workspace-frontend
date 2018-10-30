@@ -1,9 +1,10 @@
 @import "../common/globals/globals";
 
+@import "../common/layout/sidebar";
+@import "../common/layout/container";
+
 @import "topbar/topbar";
 @import "sidebar/sidebar";
-@import "documents/documents";
-@import "../workspace/documents/documents";
 
 .container {
   padding-top:8px;
