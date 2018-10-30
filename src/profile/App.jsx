@@ -30,27 +30,16 @@ export default class App extends Component {
       ],
       table_sorting : null,
       busy          : false,
-      documents     : []
+      documents     : null // Can be null (not loaded yet) or [] (no shared documents)
     }
   }
 
   componentDidMount() {
-    this.fetchAccountData();
-    this.fetchMyDocuments();
+    this.fetchAccountData().then(() => this.setState({ documents: [] }));
   }
 
   fetchAccountData() {
     return API.accountData().then(result => { this.setState({ account: result.data }) });
-  }
-
-  fetchMyDocuments() {
-    this.setState({ busy: true });
-    return API.myDocuments().then(result => {
-      this.setState({
-        documents: result.data.items, 
-        busy: false 
-      });
-    });
   }
 
   onTogglePresentation(presentation) {
@@ -76,21 +65,28 @@ export default class App extends Component {
             icon={(this.state.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
             onClick={this.onTogglePresentation.bind(this)} />
 
-          {this.state.presentation === 'TABLE' ?
-            <TablePane
-              folders={[]}
-              documents={this.state.documents}
-              columns={this.state.table_columns}
-              sorting={this.state.table_sorting}
-              busy={this.state.busy} 
-              disableFiledrop={true} /> 
-            :
-            <GridPane
-              folders={[]}
-              documents={this.state.documents}
-              busy={this.state.busy} 
-              disableFiledrop={true} />
-          }
+          { this.state.documents && (
+              
+              this.state.documents.length === 0 ? 
+                <div className="no-public-documents">
+                  {this.state.account.username} has not shared any documents yet
+                </div> :
+
+                this.state.presentation === 'TABLE' ?
+                  <TablePane
+                    folders={[]}
+                    documents={this.state.documents}
+                    columns={this.state.table_columns}
+                    sorting={this.state.table_sorting}
+                    busy={this.state.busy} 
+                    disableFiledrop={true} /> 
+                  :
+                  <GridPane
+                    folders={[]}
+                    documents={this.state.documents}
+                    busy={this.state.busy} 
+                    disableFiledrop={true} />
+          )}
         </div>
       </React.Fragment>
     );

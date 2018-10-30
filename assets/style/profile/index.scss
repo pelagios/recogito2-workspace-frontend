@@ -24,5 +24,15 @@
     right:20px;
   }
 
+  .no-public-documents {
+    margin:0 0 0 22px;
+    flex:1;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    font-size:38px;
+    color: lighten($lightblue-type, 10%);
+  }
+
 }
 
