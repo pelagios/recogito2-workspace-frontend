@@ -1,19 +1,28 @@
 @import "../common/globals/globals";
 
+@import "../common/content/headericon";
+
 @import "../common/layout/sidebar";
 @import "../common/layout/container";
 
 @import "topbar/topbar";
 @import "sidebar/sidebar";
 
+#app {
+  display:flex;
+  flex-direction:column;
+}
+
 .container {
   padding-top:8px;
   flex:1;
   overflow:hidden;
-}
 
-#app {
-  display:flex;
-  flex-direction:column;
+  .header-icon {
+    position:absolute;
+    top:7px;
+    right:20px;
+  }
+
 }
 

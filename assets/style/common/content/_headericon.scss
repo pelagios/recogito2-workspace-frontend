@@ -1,0 +1,22 @@
+.header-icon {
+  cursor:pointer;
+  margin:2px;
+  display:inline-block;
+
+  .inner { 
+    color:$lightblue-type;
+    text-decoration:none;
+    width:48px;
+    height:48px;  
+    line-height:48px;
+    font-family:Tonicons; 
+    font-size:26px;
+    text-align:center;
+    @include rounded-corners(100%);
+  }
+}
+
+.header-icon.stroke7 .icon {
+  font-family:Stroke7;
+  font-size:30px;
+}

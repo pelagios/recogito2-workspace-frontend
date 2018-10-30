@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import Search from './search/Search.jsx';
-import HeaderIcon from './HeaderIcon.jsx';
+import HeaderIcon from '../../common/content/HeaderIcon.jsx';
 import Breadcrumbs from '../../common/content/Breadcrumbs.jsx';
 import DeleteAction from '../actions/DeleteAction.jsx';
 

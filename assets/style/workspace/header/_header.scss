@@ -1,41 +1,16 @@
 @import "search/search";
+@import "../common/content/headericon";
 
 .header {
   flex:0;
 }
 
-.header-icons, .header-icon {
-  display:inline-block;
-}
-
 .header-icons {
+  display:inline-block;
   position:absolute;
   top:20px;
   right:20px;
   height:44px;
-}
-
-.header-icon {
-  cursor:pointer;
-  margin:2px;
-
-  .inner { 
-    color:$lightblue-type;
-    text-decoration:none;
-    display:inline-block;
-    width:48px;
-    height:48px;  
-    line-height:48px;
-    font-family:Tonicons; 
-    font-size:26px;
-    text-align:center;
-    @include rounded-corners(100%);
-  }
-}
-
-.header-icon.stroke7 .icon {
-  font-family:Stroke7;
-  font-size:30px;
 }
 
 .subheader {
