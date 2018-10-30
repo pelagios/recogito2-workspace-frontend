@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import MenuPopup from '../../common/MenuPopup.jsx';
+import MenuPopup from '../../../common/components/MenuPopup.jsx';
 
 export default class CreateNew extends Component {
 

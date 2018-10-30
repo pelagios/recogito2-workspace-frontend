@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 import API from '../common/API.js';
-import { Columns } from './documents/table/Columns.js';
-import GridPane from './documents/grid/GridPane.jsx';
+import GridPane from '../common/content/grid/GridPane.jsx';
+import TablePane from '../common/content/table/TablePane.jsx';
+import Readme from '../common/content/Readme.jsx';
+import { Columns } from '../common/content/table/Columns.js';
+import Uploader from '../common/content/upload/Uploader.jsx';
+
 import Header from './header/Header.jsx';
-import TablePane from './documents/table/TablePane.jsx';
-import Readme from './documents/Readme.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import StoredUIState from './StoredUIState.js';
-import Uploader from './upload/Uploader.jsx';
 
 import '../../assets/style/workspace/index.scss';
 

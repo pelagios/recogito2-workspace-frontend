@@ -7,5 +7,12 @@
 
 .container {
   padding-top:8px;
+  flex:1;
+  overflow:hidden;
+}
+
+#app {
+  display:flex;
+  flex-direction:column;
 }
 

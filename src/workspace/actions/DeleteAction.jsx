@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import API from '../../common/API.js';
-import Prompt from '../common/Prompt.jsx';
+import Prompt from '../../common/components/Prompt.jsx';
 
 export default class DeleteAction extends Component {
 

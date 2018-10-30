@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Identity from '../../../common/content/Identity.jsx';
-import MenuPopup from '../../common/MenuPopup.jsx';
+import MenuPopup from '../../../common/components/MenuPopup.jsx';
 
 export default class Account extends Component {
 

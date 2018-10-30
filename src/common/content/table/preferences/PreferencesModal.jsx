@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
 
-import Modal from '../../../common/Modal.jsx';
+import Modal from '../../../components/Modal.jsx';
 import ColumnOrder from './ColumnOrder.jsx';
 
 import { COLUMNS, HEADER_NAMES } from '../Columns.js';

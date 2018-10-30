@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AutoSizer, List } from 'react-virtualized';
 import Dropzone from 'react-dropzone'
 
-import DropzoneDecoration from '../../upload/DropzoneDecoration.jsx';
+import DropzoneDecoration from '../upload/DropzoneDecoration.jsx';
 import Readme from '../Readme.jsx';
 import Selection from '../Selection.js';
 
@@ -10,8 +10,6 @@ import HeaderRow from './rows/HeaderRow.jsx';
 import DocumentRow from './rows/DocumentRow.jsx';
 import FolderRow from './rows/FolderRow.jsx';
 import PreferencesModal from  './preferences/PreferencesModal.jsx';
-
-import { HEADER_NAMES, Columns } from './Columns.js';
 
 export default class TablePane extends Component {
 
@@ -133,13 +131,13 @@ export default class TablePane extends Component {
 
         {readme}
 
-        <Dropzone
+        {/* <Dropzone
           className="dropzone"
           disableClick
           disablePreview
           onDragEnter={this.onDrag.bind(this, true)}
           onDragLeave={this.onDrag.bind(this, false)}
-          onDrop={this.onDrop.bind(this)}>
+        onDrop={this.onDrop.bind(this)}> */}
 
           <div className="documents-pane table-pane">
             <AutoSizer>
@@ -158,7 +156,7 @@ export default class TablePane extends Component {
             { this.props.busy && <div className="busy-mask" /> }
           </div>
 
-        </Dropzone>
+        {/* </Dropzone> */}
 
         {this.state.prefsOpen &&
           <PreferencesModal

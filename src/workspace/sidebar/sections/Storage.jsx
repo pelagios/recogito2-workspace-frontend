@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NumberFormat from 'react-number-format';
 
-import Meter from '../../common/Meter.jsx';
+import Meter from '../../../common/components/Meter.jsx';
 
 export default class Storage extends Component {
 

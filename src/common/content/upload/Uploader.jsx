@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Meter from '../common/Meter.jsx';
+import Meter from '../../components/Meter.jsx';
 
 export default class Uploader extends Component {
 

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import API from '../common/API.js';
 
-import TablePane from '../workspace/documents/table/TablePane.jsx';
+import TablePane from '../common/content/table/TablePane.jsx';
 import Breadcrumbs from '../common/content/Breadcrumbs.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import TopBar from './top/TopBar.jsx';
@@ -47,7 +47,7 @@ export default class App extends Component {
           account={this.state.account}/>
 
         <div className="container">
-          <Breadcrumbs label="My public docs" />
+          <Breadcrumbs label="Public Documents" />
 
           <TablePane
             folders={[]}

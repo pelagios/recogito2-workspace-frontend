@@ -8,7 +8,7 @@ import Folder from './Folder.jsx';
 import Document from './Document.jsx';
 import Readme from '../Readme.jsx';
 
-import DropzoneDecoration from '../../upload/DropzoneDecoration.jsx';
+import DropzoneDecoration from '../upload/DropzoneDecoration.jsx';
 
 const ITEM_SIZE = 192;
 
