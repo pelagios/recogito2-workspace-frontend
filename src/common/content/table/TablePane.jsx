@@ -34,13 +34,19 @@ export default class TablePane extends Component {
     const isShift = evt.getModifierState("Shift");
     const isCtrl = evt.getModifierState("Control");
 
-    if (isShift)
-      this.state.selection.selectRange(idx);
-    else
-      this.state.selection.selectItem(item, isCtrl);
+    // Is this a selection or deselection?
+    const isSelectAction = 
+      isShift || isCtrl || !this.props.selection.includes(item);
 
-    this.props.onSelect(this.state.selection.getSelectedItems());
-    evt.preventDefault();
+    if (isSelectAction) {
+      if (isShift)
+        this.state.selection.selectRange(idx);
+      else
+        this.state.selection.selectItem(item, isCtrl);
+
+      this.props.onSelect(this.state.selection.getSelectedItems());
+      evt.preventDefault();
+    }
   }
 
   onDoubleClick(item) {
