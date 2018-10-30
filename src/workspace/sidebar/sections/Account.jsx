@@ -10,21 +10,12 @@ export default class Account extends Component {
     this.state = { menuVisible: false };
   }
 
-  // https://medium.com/@pppped/compute-an-arbitrary-color-for-user-avatar-starting-from-his-username-with-javascript-cd0675943b66
-  stringToHslColor(str) {
-    let hash = 0;
-    for (let i=0; i<str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return hash % 360;
-  }
-
   onSelectMenuOption(option) {
-    if (option == 'SETTINGS')
+    if (option === 'SETTINGS')
       window.location.href= '/settings/account';
-    else if (option == 'SIGNOUT')
+    else if (option === 'SIGNOUT')
       window.location.href= '/logout';
-    else if (option == 'HELP');
+    else if (option === 'HELP');
       window.location.href= '/help';
   }
 
@@ -37,14 +28,6 @@ export default class Account extends Component {
   }
 
   render() {
-    const dataAvailable = 
-      this.props.account && 
-      this.props.account.username &&
-      this.props.account.member_since;
-      
-    const avatarColor = (dataAvailable) ?
-     `hsl(${this.stringToHslColor(this.props.account.username)}, 35%, 65%)` : '#e2e2e2';
-
     return (
       <div
         className="section account"

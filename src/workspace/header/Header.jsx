@@ -18,7 +18,7 @@ export default class Header extends Component {
   }
 
   onKeydown(evt) {
-    if (this.props.selection.length > 0 && evt.which == 46)
+    if (this.props.selection.length > 0 && evt.which === 46)
       this.setState({ action: 'DELETE' });
   }
 
@@ -79,10 +79,10 @@ export default class Header extends Component {
 
             <HeaderIcon
               className="presentation-toggle stroke7"
-              icon={(this.props.presentation == 'TABLE') ? '\ue645' : '\ue636'} 
+              icon={(this.props.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
               onClick={this.props.onTogglePresentation} />
 
-            {this.state.action == 'DELETE' && 
+            {this.state.action === 'DELETE' && 
                 <DeleteAction
                   selection={this.props.selection}
                   onStart={this.props.onDelete}

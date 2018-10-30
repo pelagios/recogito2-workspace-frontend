@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NumberFormat from 'react-number-format';
 import TimeAgo from 'react-timeago';
 
@@ -29,9 +29,9 @@ const FORMATTERS = {
     <TimeAgo date={datetime} />,
 
   public_visibility: (visibility) => {
-    if (visibility == 'PUBLIC') 
+    if (visibility === 'PUBLIC') 
       return ( <span className="icon" title="Open to anyone">&#xf09c;</span> );
-    else if (visibility == 'WITH_LINK')
+    else if (visibility === 'WITH_LINK')
       return ( <span className="icon" title="Open to anyone with the link">&#xf0c1;</span> );
     else 
       return ( <span className="icon" title="Private">&#xf023;</span> );
@@ -69,7 +69,7 @@ export default class DocumentRow extends BaseRowComponent {
   createField(url, field) {
     const formatter = FORMATTERS[field];
 
-    const value = this.props.item[field] != undefined ? 
+    const value = this.props.item[field] !== undefined ? 
       (formatter ? formatter(this.props.item[field]) : this.props.item[field]) :
       ''; // empty value
 
@@ -97,7 +97,7 @@ export default class DocumentRow extends BaseRowComponent {
           this.createAggregateField(url, field) : this.createField(url, field)) }
 
         <span className={`type icon ${type}`}>
-          <img src={`/assets/images/${ICONS[type]}`} />
+          <img src={`/assets/images/${ICONS[type]}`} alt={`icon type ${type}`} />
         </span>
       </div>
     )

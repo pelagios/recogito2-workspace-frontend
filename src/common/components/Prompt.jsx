@@ -10,7 +10,7 @@ export default class Prompt extends Component {
 
   /** Clear selection on ESC **/
   onKeydown(evt) {
-    if (evt.which == 27) this.props.onNo();
+    if (evt.which === 27) this.props.onNo();
   }
 
   componentDidMount() {

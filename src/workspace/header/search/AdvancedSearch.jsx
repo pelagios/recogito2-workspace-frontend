@@ -26,7 +26,7 @@ export default class AdvancedSearch extends Component {
   }
 
   onKeydown(evt) {
-    if (evt.which == 27) this.props.onClose();
+    if (evt.which === 27) this.props.onClose();
   }
 
   render() {

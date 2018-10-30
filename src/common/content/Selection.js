@@ -10,7 +10,7 @@ export default class Selection {
   }
 
   isEmpty() {
-    return this._selection.length == 0;
+    return this._selection.length === 0;
   }
 
   getSelectedItems() {

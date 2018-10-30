@@ -26,7 +26,7 @@ export default class Uploader extends Component {
   }
 
   componentWillReceiveProps(next) {
-    if (this.props.files == next.files && this.props.url == next.url)
+    if (this.props.files === next.files && this.props.url === next.url)
       return;
 
     this.setState(this._emptyState(next), () => this.start());
@@ -69,7 +69,7 @@ export default class Uploader extends Component {
    * or a 'New document' placeholder in case there are multiple files.
    */
   initNewDocument() {
-    const title = (this.state.files.length == 1) ? this.state.files[0].name : 'New document';
+    const title = (this.state.files.length === 1) ? this.state.files[0].name : 'New document';
     const formdata = new FormData();
     formdata.append('title', title);
 
@@ -158,7 +158,7 @@ export default class Uploader extends Component {
   }
 
   updateStatusForFile(filepartId, pollResult) {
-    const progress = pollResult.subtasks.find(t => t.filepart_id == filepartId);
+    const progress = pollResult.subtasks.find(t => t.filepart_id === filepartId);
     const idx = this.state.filepartIds.indexOf(filepartId);
 
     const setUploadStatus = (value) => {
@@ -183,7 +183,7 @@ export default class Uploader extends Component {
       .then(result => {
         // Update status per file
         this.state.filepartIds.map(id => this.updateStatusForFile(id, result.data));
-        const isDone = result.data.status == 'COMPLETED' || result.data.status == 'FAILED';
+        const isDone = result.data.status === 'COMPLETED' || result.data.status === 'FAILED';
         if (isDone)
           this.props.onUploadComplete()
         else
@@ -193,7 +193,7 @@ export default class Uploader extends Component {
 
   isUploadComplete() {
     return this.state.uploadStatus
-      .reduce((complete, next) => complete && (next == 'COMPLETED' || next == 'FAILED'));
+      .reduce((complete, next) => complete && (next === 'COMPLETED' || next === 'FAILED'));
   }
 
   onCancel(evt) {

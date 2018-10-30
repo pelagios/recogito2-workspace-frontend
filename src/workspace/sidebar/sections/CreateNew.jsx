@@ -16,7 +16,7 @@ export default class CreateNew extends Component {
   onSelectOption(option) {
     this.setState({ menuVisible: false });
 
-    if (option == 'FILE') this._input.click();
+    if (option === 'FILE') this._input.click();
   }
 
   onUploadFiles(evt) {

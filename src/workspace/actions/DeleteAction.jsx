@@ -12,7 +12,7 @@ export default class DeleteAction extends Component {
     if (ids.length > 0) {
       this.props.onStart();
 
-      if (ids.length == 1) {
+      if (ids.length === 1) {
         API.deleteDocument(ids[0])
            .then(() => {
              this.props.onSuccess();

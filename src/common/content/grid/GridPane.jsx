@@ -114,7 +114,7 @@ export default class GridPane extends Component {
 
   render() {
     const readme = React.Children.toArray(this.props.children)
-      .filter(c => c.type == Readme)
+      .filter(c => c.type === Readme)
       .shift(); // First readme or undefined
 
     return (

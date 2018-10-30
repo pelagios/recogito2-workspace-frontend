@@ -29,7 +29,7 @@ export default class ViewList extends Component {
           <ViewListItem
             icon="&#xf2be;"
             count={dataAvailable && this.props.account.documents.my_documents}
-            current={this.props.currentView == 'MY_DOCUMENTS'}
+            current={this.props.currentView === 'MY_DOCUMENTS'}
             onClick={this.props.onChangeView.bind(this, 'MY_DOCUMENTS')}>
             My Documents
           </ViewListItem>
@@ -37,7 +37,7 @@ export default class ViewList extends Component {
           <ViewListItem
             icon="&#xf064;"
             count={dataAvailable && this.props.account.documents.shared_with_me}
-            current={this.props.currentView == 'SHARED_WITH_ME'}
+            current={this.props.currentView === 'SHARED_WITH_ME'}
             onClick={this.props.onChangeView.bind(this, 'SHARED_WITH_ME')}>
             Shared with me
           </ViewListItem>

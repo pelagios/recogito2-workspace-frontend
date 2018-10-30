@@ -25,7 +25,7 @@ export default class MenuPopup extends Component {
   }
 
   onKeydown(evt) {
-    if (evt.which == 27) this.props.onCancel();
+    if (evt.which === 27) this.props.onCancel();
   }
 
   render() {

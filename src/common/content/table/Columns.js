@@ -72,13 +72,13 @@ export class Columns {
 
   static getSpan(field) {
     const w = COLUMN_WIDTH[field];
-    if (w == 'XL') 
+    if (w === 'XL') 
       return 6;
-    else if (w == 'L')
+    else if (w === 'L')
       return 4;
-    else if (w == 'M')
+    else if (w === 'M')
       return 2;
-    else if (w == 'S')
+    else if (w === 'S')
       return 1;
   }
 

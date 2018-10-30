@@ -10,7 +10,7 @@ export default class TopBar extends Component {
         <div className="top-bar">
           <div className="top-left">
             <a href="/my" className="home">
-              <img src="/assets/images/logo-recogito-small.png" />
+              <img src="/assets/images/logo-recogito-small.png" alt="Recogito logo" />
             </a>
             <a href="/my">My Workspace</a>
             <a href="/help">Help</a>

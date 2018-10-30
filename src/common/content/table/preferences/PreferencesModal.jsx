@@ -16,7 +16,7 @@ export default class PreferencesModal extends Component {
   }
 
   componentWillReceiveProps(next) {
-    if (next.columns != this.props.columns)
+    if (next.columns !== this.props.columns)
       this.setState({ columns: next.columns.slice(0) });
   }
 
@@ -56,7 +56,7 @@ export default class PreferencesModal extends Component {
    * checked, unchecks them.
    */
   onClickAll() {
-    const allRowsChecked = COLUMNS.length == this.state.columns.length;
+    const allRowsChecked = COLUMNS.length === this.state.columns.length;
     if (allRowsChecked)
       this.setAllRows(false);
     else

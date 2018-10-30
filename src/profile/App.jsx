@@ -55,7 +55,7 @@ export default class App extends Component {
 
   onTogglePresentation(presentation) {
     this.setState(before => { 
-      const p = (before.presentation == 'TABLE') ? 'GRID' : 'TABLE';
+      const p = (before.presentation === 'TABLE') ? 'GRID' : 'TABLE';
       return { presentation: p };
     });
   }
@@ -73,10 +73,10 @@ export default class App extends Component {
 
           <HeaderIcon
             className="presentation-toggle stroke7"
-            icon={(this.state.presentation == 'TABLE') ? '\ue645' : '\ue636'} 
+            icon={(this.state.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
             onClick={this.onTogglePresentation.bind(this)} />
 
-          {this.state.presentation == 'TABLE' ?
+          {this.state.presentation === 'TABLE' ?
             <TablePane
               folders={[]}
               documents={this.state.documents}

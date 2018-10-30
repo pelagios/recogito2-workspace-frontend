@@ -52,7 +52,7 @@ export default class App extends Component {
 
   /** Clear selection on ESC key **/
   onKeydown(evt) {
-    if (evt.which == 27) this.setState({ selection: [] });
+    if (evt.which === 27) this.setState({ selection: [] });
   }
 
   /** Clear selection on click ouside the document pane **/
@@ -79,7 +79,7 @@ export default class App extends Component {
   }
 
   getDisplayConfig() {
-    if (this.state.presentation == 'GRID')
+    if (this.state.presentation === 'GRID')
       return; // No configs for grid view
 
     return {
@@ -114,21 +114,21 @@ export default class App extends Component {
 
   /** Switch between different document views (currently: 'my' vs. 'shared') **/
   changeView(view) {
-    if (this.state.view != view) {
+    if (this.state.view !== view) {
       StoredUIState.save('view', view);
 
       this.setState({
         view: view,
         documents:[]
       }, () => {
-        (view == 'MY_DOCUMENTS') ? this.fetchMyDocuments() : this.fetchSharedWithMe();
+        (view === 'MY_DOCUMENTS') ? this.fetchMyDocuments() : this.fetchSharedWithMe();
       });
     }
   }
 
   /** Reloads the current view from the API */
   refreshCurrentView() {
-    if (this.state.view == 'MY_DOCUMENTS')
+    if (this.state.view === 'MY_DOCUMENTS')
       return this.fetchMyDocuments();
     else 
       return this.fetchSharedWithMe();
@@ -137,7 +137,7 @@ export default class App extends Component {
   /** Toggles the view presentation (table vs. grid) **/
   togglePresentation() {
     this.setState(before => { 
-      const p = (before.presentation == 'TABLE') ? 'GRID' : 'TABLE';
+      const p = (before.presentation === 'TABLE') ? 'GRID' : 'TABLE';
       StoredUIState.save('presentation', p);
       return { presentation: p };
     });
@@ -215,7 +215,7 @@ export default class App extends Component {
             afterDelete={this.afterDelete.bind(this)}
             onTogglePresentation={this.togglePresentation.bind(this)} />
 
-          {this.state.presentation == 'TABLE' ?
+          {this.state.presentation === 'TABLE' ?
             <TablePane
               folders={this.state.folders}
               documents={this.state.documents}
