@@ -1,8 +1,7 @@
-$sidebar-border:darken($lightgrey-border, 7.5%);
+@import "../../common/layout/sidebar";
 
 @import "section-account";
 @import "section-create-new";
 @import "section-views";
 @import "section-storage";
 
-@import "../../common/layout/sidebar";

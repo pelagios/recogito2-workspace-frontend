@@ -4,6 +4,21 @@
 @import "includes/buttons";
 @import "includes/forms";
 
+html, body, #app {
+  background-color:#fff;
+  color:$standard-type;
+  font-family:Assistant;
+  font-size:16px;
+  height:100%;
+  margin:0;
+  padding:0;
+}
+
+h1, h2 {
+  margin:0;
+  padding:0;
+}
+
 .nostyle {
   outline:none;
   background:none;
@@ -15,4 +30,8 @@
   font-family:FontAwesome;
   font-weight:normal;
   @include noselect();
+}
+
+.wrapper {
+  position:relative;
 }

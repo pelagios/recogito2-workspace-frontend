@@ -4,10 +4,19 @@
   position:relative;
   background-color:#fff;
   padding:25px 20px 20px 5px;
-  // border-top:3px solid $ocean;
   border-bottom:3px solid $ocean;
   box-shadow:0 0 5px rgba(96, 96, 96, 0.6);
+  font-weight:bold;
   z-index:1;
+
+  a {
+    color:$ocean;
+    text-decoration:none;
+  }
+  
+  a:hover {
+    text-decoration:underline;
+  }
 
   .top-left, .top-right {
     display:inline-block;

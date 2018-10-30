@@ -1,29 +1,16 @@
 @import "../common/globals/globals";
 
+@import "../common/components/badge";
+@import "../common/components/menupopup";
+@import "../common/components/modal";
+@import "../common/components/prompt";
+
 @import "sidebar/sidebar";
 @import "header/header";
-@import "upload/upload";
 @import "documents/documents";
-
-html, body, #app {
-  background-color:#fff;
-  color:$standard-type;
-  font-family:Assistant;
-  font-size:16px;
-  height:100%;
-  margin:0;
-  padding:0;
-}
-
-h1, h2 {
-  margin:0;
-  padding:0;
-}
+@import "upload/upload";
 
 .container {
   margin-left:261px;
 }
 
-.wrapper {
-  position:relative;
-}
