@@ -49,10 +49,6 @@ export default class TablePane extends Component {
     }
   }
 
-  onDoubleClick(item) {
-    window.location.href= `document/${item.id}/part/1/edit`;
-  }
-
   rowRenderer() {
     const allItems = this.props.folders.concat(this.props.documents);
 
@@ -72,8 +68,7 @@ export default class TablePane extends Component {
             columns={this.props.columns}
             item={item}
             selected={this.props.selection && this.props.selection.includes(item)}
-            onClick={e => this.onClick(e, item, args.index)} 
-            onDoubleClick={this.onDoubleClick.bind(this, item)} />
+            onClick={e => this.onClick(e, item, args.index)} />
         )
     })
   }
