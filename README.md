@@ -16,3 +16,4 @@ __public profile__ pages.
   - you are logged in to Recogito
 - Run `npm start` to launch the development server
 - If your browser doesn't launch automatically, go to [http://localhost:3000](http://localhost:3000)
+- Run `npm run build` to build compiled distribution

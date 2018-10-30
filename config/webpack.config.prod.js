@@ -108,7 +108,7 @@ module.exports = {
   // In production, we only want to load the app code.
   entry: {
     index: [paths.appIndexJs],
-    public: [paths.appSrc + '/public/App.jsx']
+    public: [paths.appSrc + '/profile/App.jsx']
   },
   output: {
     // The build folder.
