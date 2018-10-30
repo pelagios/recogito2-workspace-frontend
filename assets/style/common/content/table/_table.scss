@@ -105,16 +105,15 @@
     border-top:1px solid $lightgrey-border-darker;
     box-sizing:border-box;
     cursor:pointer;
-    padding:14px 0;
     @include noselect();
     
     a {
-      padding:0 8px;
+      padding:14px 8px;
     }
 
     .type.icon {
       position:absolute;
-      top:14px;
+      top:15px;
       left:0;
     }
 
