@@ -77,7 +77,7 @@ export default class GridPane extends Component {
               title={item.title}
               filetypes={item.filetypes}
               fileCount={item.file_count}
-              selected={this.props.selection.includes(item)}
+              selected={this.props.selection && this.props.selection.includes(item)}
               onClick={e => this.onClick(e, item, args.index)} 
               onDoubleClick={this.onDoubleClick.bind(this, item)} />
           )
@@ -123,8 +123,7 @@ export default class GridPane extends Component {
         <div className="documents-pane grid-pane">
           <Dropzone
             className="dropzone"
-            disableClick
-            disablePreview
+            disableClick={true}
             onDragEnter={this.onDrag.bind(this, true)}
             onDragLeave={this.onDrag.bind(this, false)}
             onDrop={this.onDrop.bind(this)}>

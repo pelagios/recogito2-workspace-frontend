@@ -65,7 +65,7 @@ export default class TablePane extends Component {
             style={args.style}
             columns={this.props.columns}
             item={item}
-            selected={this.props.selection.includes(item)}
+            selected={this.props.selection && this.props.selection.includes(item)}
             onClick={e => this.onClick(e, item, args.index)} 
             onDoubleClick={this.onDoubleClick.bind(this, item)} />
         )

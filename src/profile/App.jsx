@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import API from '../common/API.js';
 
+import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
 import Breadcrumbs from '../common/content/Breadcrumbs.jsx';
 import HeaderIcon from '../common/content/HeaderIcon.jsx';
@@ -28,16 +29,28 @@ export default class App extends Component {
         "last_edit_at"
       ],
       table_sorting : null,
-      busy          : false
+      busy          : false,
+      documents     : []
     }
   }
 
   componentDidMount() {
     this.fetchAccountData();
+    this.fetchMyDocuments();
   }
 
   fetchAccountData() {
     return API.accountData().then(result => { this.setState({ account: result.data }) });
+  }
+
+  fetchMyDocuments() {
+    this.setState({ busy: true });
+    return API.myDocuments().then(result => {
+      this.setState({
+        documents: result.data.items, 
+        busy: false 
+      });
+    });
   }
 
   onTogglePresentation(presentation) {
@@ -63,12 +76,19 @@ export default class App extends Component {
             icon={(this.state.presentation == 'TABLE') ? '\ue645' : '\ue636'} 
             onClick={this.onTogglePresentation.bind(this)} />
 
-          <TablePane
-            folders={[]}
-            documents={[]}
-            columns={this.state.table_columns}
-            sorting={this.state.table_sorting}
-            busy={this.state.busy} />
+          {this.state.presentation == 'TABLE' ?
+            <TablePane
+              folders={[]}
+              documents={this.state.documents}
+              columns={this.state.table_columns}
+              sorting={this.state.table_sorting}
+              busy={this.state.busy} /> 
+            :
+            <GridPane
+              folders={[]}
+              documents={this.state.documents}
+              busy={this.state.busy} />
+          }
         </div>
       </React.Fragment>
     );
