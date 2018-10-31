@@ -34,7 +34,7 @@ export default class App extends Component {
       documents      : null // Can be null (not loaded yet) or [] (no shared documents)
     }
 
-    this._profileOwner = 'pelagios3'; // window.location.pathname.substring(1);
+    this._profileOwner = window.location.pathname.substring(1);
   }
 
   componentDidMount() {
@@ -45,6 +45,10 @@ export default class App extends Component {
     API
       .fetchLoginStatus()
       .then(r => this.setState({ me: r.data })); 
+
+    API
+      .fetchAccessibleDocuments(this._profileOwner)
+      .then(r => this.setState({ documents: r.data.items }));
   }
 
   onTogglePresentation(presentation) {
