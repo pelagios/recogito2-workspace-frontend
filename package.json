@@ -66,6 +66,7 @@
     "test": "node scripts/test.js"
   },
   "proxy": "http://localhost:9000",
+  "homepage": "/assets/javascripts",
   "eslintConfig": {
     "extends": "react-app"
   },

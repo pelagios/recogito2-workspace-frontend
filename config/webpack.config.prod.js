@@ -412,13 +412,32 @@ module.exports = {
     ],
   },
   plugins: [
-    // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
-      template: paths.appHtml,
+      template: paths.appHtml + '/workspace.scala.html',
+      chunks: ['workspace'],
+      filename: 'workspace.html',
       minify: {
         removeComments: true,
-        collapseWhitespace: true,
+        collapseWhitespace: false,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: paths.appHtml + '/profile.scala.html',
+      chunks: ['profile'],
+      filename: 'profile.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: false,
         removeRedundantAttributes: true,
         useShortDoctype: true,
         removeEmptyAttributes: true,

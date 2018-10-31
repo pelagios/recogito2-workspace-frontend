@@ -325,13 +325,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       chunks: ['profile'],
-      template: paths.appHtml,
+      template: paths.appHtml + '/dev.html',
       filename: 'profile'
     }),
     new HtmlWebpackPlugin({
       inject: true,
       chunks: ['workspace'],
-      template: paths.appHtml,
+      template: paths.appHtml + '/dev.html',
       filename: 'workspace'
     }),
     // Makes some environment variables available in index.html.
