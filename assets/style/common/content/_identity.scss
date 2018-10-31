@@ -23,7 +23,8 @@
 
     h1 {
       padding-top:2px;
-      font-size:23px;
+      font-size:21px;
+      white-space:nowrap;
 
       .placeholder {
         height:20px;
@@ -47,7 +48,10 @@
   }
 
   .user-extended {
-    padding-top:15px;
+
+    p:first-child {
+      padding-top:20px;
+    }
 
     p {
       margin:0;

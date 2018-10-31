@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import API from '../common/API.js';
+import API from './API.js';
 import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
 import Readme from '../common/content/Readme.jsx';

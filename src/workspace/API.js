@@ -7,7 +7,7 @@ const fetchDocuments = (path, config) => {
 export default class API {
 
   static accountData() {
-    return axios.get(`/my/api/account`);
+    return axios.get('/my/api/account');
   }
 
   static myDocuments(config) {
@@ -25,7 +25,7 @@ export default class API {
 
   // Deletes multiple documents in one go via the bulk API
   static bulkDeleteDocuments(ids) {
-    return axios.delete(`/document/bulk`, { data: ids });
+    return axios.delete('/document/bulk', { data: ids });
   }
 
 }

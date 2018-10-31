@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import API from '../common/API.js';
+import API from './API.js';
 
 import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
@@ -18,9 +18,10 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      account : null,
-      presentation  : 'TABLE',
-      table_columns : [
+      me             : null, // Login identity
+      visitedAccount : null,
+      presentation   : 'TABLE',
+      table_columns  : [
         "author",
         "title",
         "language",
@@ -28,18 +29,22 @@ export default class App extends Component {
         "uploaded_at",
         "last_edit_at"
       ],
-      table_sorting : null,
-      busy          : false,
-      documents     : null // Can be null (not loaded yet) or [] (no shared documents)
+      table_sorting  : null,
+      busy           : false,
+      documents      : null // Can be null (not loaded yet) or [] (no shared documents)
     }
+
+    this._profileOwner = 'pelagios3'; // window.location.pathname.substring(1);
   }
 
   componentDidMount() {
-    this.fetchAccountData().then(() => this.setState({ documents: [] }));
-  }
+    API
+      .fetchPublicAccountInfo(this._profileOwner)
+      .then(r => this.setState({ visitedAccount: r.data }));
 
-  fetchAccountData() {
-    return API.accountData().then(result => { this.setState({ account: result.data }) });
+    API
+      .fetchLoginStatus()
+      .then(r => this.setState({ me: r.data })); 
   }
 
   onTogglePresentation(presentation) {
@@ -52,10 +57,11 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <TopBar />
+        <TopBar 
+          me={this.state.me} />
 
         <Sidebar 
-          account={this.state.account}/>
+          account={this.state.visitedAccount}/>
 
         <div className="container">
           <Breadcrumbs label="Public Documents" />
@@ -69,7 +75,7 @@ export default class App extends Component {
               
               this.state.documents.length === 0 ? 
                 <div className="no-public-documents">
-                  {this.state.account.username} has not shared any documents yet
+                  {this.state.visitedAccount.username} has not shared any documents yet
                 </div> :
 
                 this.state.presentation === 'TABLE' ?
