@@ -19,7 +19,7 @@ __public profile__ pages.
 
 ## Building & deployment for production
 
-Run `npm run build` to build compiled distribution. This will generate a `build` folder with 
+Run `npm run build` to build the compiled distribution. This will generate a `/build` folder with 
 the following structure:
 
 ```
@@ -30,6 +30,8 @@ profile.scala.html
 workspace.scala.html
 ```
 
-- Copy the `/static` folder into the `/public/javascripts` folder of Recogito
-- In Recogito's `app/views/my` directory, replace the corresponding
-  `profile.scala.html` and `workspace.scala.html` template files
+- copy the `/static` folder into the `/public/javascripts` folder of Recogito, replacing existing
+  contents
+- in Recogito's `/app/views/my` directory, replace the `profile.scala.html` and `workspace.scala.html`
+  template files
+- restart Recogito
