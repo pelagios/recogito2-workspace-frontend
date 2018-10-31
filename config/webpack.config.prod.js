@@ -416,7 +416,7 @@ module.exports = {
       inject: true,
       template: paths.appHtml + '/workspace.scala.html',
       chunks: ['workspace'],
-      filename: 'workspace.html',
+      filename: 'workspace.scala.html',
       minify: {
         removeComments: true,
         collapseWhitespace: false,
@@ -434,7 +434,7 @@ module.exports = {
       inject: true,
       template: paths.appHtml + '/profile.scala.html',
       chunks: ['profile'],
-      filename: 'profile.html',
+      filename: 'profile.scala.html',
       minify: {
         removeComments: true,
         collapseWhitespace: false,
@@ -483,22 +483,22 @@ module.exports = {
     // solution that requires the user to opt into importing specific locales.
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/) //,
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
-    new WorkboxWebpackPlugin.GenerateSW({
-      clientsClaim: true,
-      exclude: [/\.map$/, /asset-manifest\.json$/],
-      importWorkboxFrom: 'cdn',
-      navigateFallback: publicUrl + '/index.html',
-      navigateFallbackBlacklist: [
+    // new WorkboxWebpackPlugin.GenerateSW({
+    //  clientsClaim: true,
+    //  exclude: [/\.map$/, /asset-manifest\.json$/],
+    //   importWorkboxFrom: 'cdn',
+    //  navigateFallback: publicUrl + '/index.html',
+    //  navigateFallbackBlacklist: [
         // Exclude URLs starting with /_, as they're likely an API call
-        new RegExp('^/_'),
-        // Exclude URLs containing a dot, as they're likely a resource in
+    //    new RegExp('^/_'),
+    //    // Exclude URLs containing a dot, as they're likely a resource in
         // public/ and not a SPA route
-        new RegExp('/[^/]+\\.[^/]+$'),
-      ],
-    }),
+    //    new RegExp('/[^/]+\\.[^/]+$'),
+    //  ],
+    //}),
   ].filter(Boolean),
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

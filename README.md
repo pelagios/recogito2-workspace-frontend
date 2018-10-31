@@ -16,4 +16,20 @@ __public profile__ pages.
   - you are logged in to Recogito
 - Run `npm start` to launch the development server
 - If your browser doesn't launch automatically, go to [http://localhost:3000](http://localhost:3000)
-- Run `npm run build` to build compiled distribution
+
+## Building & deployment for production
+
+Run `npm run build` to build compiled distribution. This will generate a `build` folder with 
+the following structure:
+
+```
+/static
+/style
+asset-manifest.json
+profile.scala.html
+workspace.scala.html
+```
+
+- Copy the `/static` folder into the `/public/javascripts` folder of Recogito
+- In Recogito's `app/views/my` directory, replace the corresponding
+  `profile.scala.html` and `workspace.scala.html` template files
