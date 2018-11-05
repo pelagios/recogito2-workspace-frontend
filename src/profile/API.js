@@ -14,4 +14,8 @@ export default class API {
     return axios.get(`/api/documents/accessible/${owner}`);
   }
 
+  static fetchCollaborators(username) {
+    return axios.get(`/api/account/${username}/collaborators`);
+  }
+
 }

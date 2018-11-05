@@ -6,6 +6,7 @@
 
   .section {
     padding:20px;
+    border-bottom:1px solid $sidebar-border;
   }
 
   .section.compact {
@@ -13,16 +14,25 @@
   }
 
   .collaborators {
+    padding:25px 0 15px 0;
+
+    h2 {
+      font-size:17px;
+    }
 
     ul {
       list-style-type:none;
-      padding:20px 0;
       margin:0;
+      padding:15px 0;
     }
 
     li {
       display:inline-block;
       margin-right:8px;
+    }
+
+    a {
+      text-decoration:none;
     }
 
   }
