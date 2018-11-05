@@ -1,3 +1,5 @@
+@import "avatar";
+
 .identity {
 
   .placeholder {
@@ -9,21 +11,13 @@
   .user {
 
     .avatar {
-      position:relative;
-      width:40px;
-      height:40px;
-      margin-right:10px;
-      text-align:center;
-      line-height:38px;
-      color:#fff;
-      font-size:21px;
-      @include rounded-corners(2px);
       float:left;
+      margin-right:10px;
     }
 
     h1 {
       padding-top:2px;
-      font-size:21px;
+      font-size:19px;
       white-space:nowrap;
 
       .placeholder {

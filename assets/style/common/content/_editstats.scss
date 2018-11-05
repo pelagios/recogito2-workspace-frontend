@@ -1,0 +1,25 @@
+.edit-stats {
+  text-align:center;
+  border:1px solid darken($sidebar-border, 5%);
+  @include rounded-corners(3px);
+  background-color:darken($blueish-white, 4%);
+  color:darken($sidebar-border, 30%);
+  
+  p {
+    margin:0;
+    padding:5px 0;
+  }
+
+  .count {
+    font-size:24px;
+    padding:20px 0;
+    background-color:#fff;
+  }
+
+  .label {
+    font-weight:normal;
+    font-size:14px;
+    border-top:1px solid darken($sidebar-border, 5%);
+  }
+
+}

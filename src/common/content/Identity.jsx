@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 
+import Avatar from './Avatar.jsx';
+
 export default class Identity extends Component {
 
   formatURL(url) {
     return url.replace(/^https?\:\/\//i, '');
-  }
-
-  // https://medium.com/@pppped/compute-an-arbitrary-color-for-user-avatar-starting-from-his-username-with-javascript-cd0675943b66
-  stringToHslColor(str) {
-    let hash = 0;
-    for (let i=0; i<str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return hash % 360;
   }
 
   render() {
@@ -21,18 +14,10 @@ export default class Identity extends Component {
       this.props.account.username &&
       this.props.account.member_since;
       
-    const avatarColor = (dataAvailable) ?
-     `hsl(${this.stringToHslColor(this.props.account.username)}, 35%, 65%)` : '#e2e2e2';
-
     return (
       <div className="identity">
         <div className="user">
-          <div className="avatar" style={{ backgroundColor: avatarColor }}>
-            <div className="inner">
-              { dataAvailable &&
-                this.props.account.username.charAt(0).toUpperCase() }
-            </div>
-          </div>
+          <Avatar username={dataAvailable && this.props.account.username} />
 
           <h1>
             { dataAvailable ?
