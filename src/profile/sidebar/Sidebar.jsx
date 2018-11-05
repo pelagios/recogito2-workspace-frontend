@@ -10,11 +10,11 @@ export default class Sidebar extends Component {
     super(props);
     this.state = { collaborators: [] }
 
-    this.fetchCollaborators();
+    this.fetchCollaborators(props);
   }
 
   componentWillReceiveProps(props) {
-    this.fetchCollaborators();
+    this.fetchCollaborators(props);
   }
 
   fetchCollaborators(props) {
