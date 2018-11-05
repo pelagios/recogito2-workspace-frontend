@@ -8,12 +8,16 @@ export default class Sidebar extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      collaborators: []
-    }
+    this.state = { collaborators: [] }
+
+    this.fetchCollaborators();
   }
 
   componentWillReceiveProps(props) {
+    this.fetchCollaborators();
+  }
+
+  fetchCollaborators(props) {
     if (props.account && props.account.username)
       API
         .fetchCollaborators(props.account.username)
