@@ -48,6 +48,10 @@ export default class App extends Component {
       .fetchLoginStatus()
       .then(r => this.setState({ me: r.data })); 
 
+    this.reloadDocuments();
+  }
+
+  reloadDocuments() {
     API
       .fetchAccessibleDocuments(this._profileOwner, this.getDisplayConfig())
       .then(r => this.setState({ documents: r.data.items }));
@@ -72,13 +76,13 @@ export default class App extends Component {
 
   onChangeColumnPrefs(columns) {
     this.setState({ table_columns: columns }, () => {
-      this.refreshCurrentView();
+      this.reloadDocuments();
     });
   }
   
   onSortTable(sorting) {
     this.setState({ table_sorting: sorting }, () => {
-      this.refreshCurrentView();
+      this.reloadDocuments();
     });
   }
 
@@ -113,7 +117,9 @@ export default class App extends Component {
                     columns={this.state.table_columns}
                     sorting={this.state.table_sorting}
                     busy={this.state.busy} 
-                    disableFiledrop={true} /> 
+                    disableFiledrop={true} 
+                    onSort={this.onSortTable.bind(this)} 
+                    onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} /> 
                   :
                   <GridPane
                     folders={[]}
