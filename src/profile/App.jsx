@@ -34,7 +34,7 @@ export default class App extends Component {
       documents      : null // Can be null (not loaded yet) or [] (no shared documents)
     }
 
-    this._profileOwner = window.location.pathname.substring(1);
+    this._profileOwner = (process.env.NODE_ENV === 'development') ? 'rainer' : window.location.pathname.substring(1);
   }
 
   componentDidMount() {
@@ -75,7 +75,7 @@ export default class App extends Component {
             icon={(this.state.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
             onClick={this.onTogglePresentation.bind(this)} />
 
-          { this.state.documents && this.state.visitedAccount && (
+          {this.state.documents && this.state.visitedAccount && (
               
               this.state.documents.length === 0 ? 
                 <div className="no-public-documents">

@@ -51,6 +51,7 @@
     "react-timeago": "^4.1.9",
     "react-transition-group": "^2.5.0",
     "react-virtualized": "^9.21.0",
+    "recharts": "^1.3.5",
     "resolve": "1.8.1",
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",
@@ -65,7 +66,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
-  "proxy": "http://localhost:9000",
+  "proxy": "https://recogito.pelagios.org",
   "homepage": "/assets/javascripts",
   "eslintConfig": {
     "extends": "react-app"
