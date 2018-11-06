@@ -12,13 +12,16 @@
 
     .avatar {
       float:left;
-      margin-right:10px;
+      margin:3px 10px 0 0;
     }
 
     h1 {
-      padding-top:2px;
+      margin-top:-3px;
+      padding:3px 0;
       font-size:19px;
       white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
 
       .placeholder {
         height:20px;
