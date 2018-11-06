@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Bar, BarChart, XAxis } from 'recharts';
+import NumberFormat from 'react-number-format';
 
 import API from '../API.js';
 import Avatar from '../../common/content/Avatar.jsx';
@@ -46,7 +47,6 @@ export default class Sidebar extends Component {
     if (edits.length < 20) {
       const lastStamp = (edits.length > 0) ? edits[0].timestamp : new Date().getTime();
       const head = this.createEmpty(19 - edits.length, lastStamp);
-      console.log(head.concat(edits));
       return head.concat(edits); 
     }
 
@@ -62,6 +62,8 @@ export default class Sidebar extends Component {
       month: 'short'
     }).format(new Date(tick));
     
+    console.log(this.props.account);
+
     return (
       <div className="sidebar">
         <div className="section">
@@ -69,9 +71,18 @@ export default class Sidebar extends Component {
         </div>
 
         <div className="section compact edit-stats">
-          <h2>Activity <span className="count">3,412 edits</span></h2>
+          <h2>Activity 
+            {this.props.account && 
+              <span className="count">
+                <NumberFormat 
+                  displayType="text"
+                  value={this.props.account.stats.total_contributions}
+                  thousandSeparator={true} /> edits
+              </span>
+            }
+          </h2>
           {this.props.account && 
-            <BarChart width={237} height={55} data={this.padEdits(edits)}>
+            <BarChart width={237} height={55} data={this.padEdits(edits)} barCategoryGap={1.5}>
               <XAxis 
                 dataKey="timestamp"
                 type="number"
@@ -82,12 +93,12 @@ export default class Sidebar extends Component {
                   
                 }}
                 tickLine={{
-                  stroke: '#3f3f3f', 
-                  strokeWidth:0.5
+                  stroke: '#c2c2c2', 
+                  strokeWidth:1
                 }}
                 axisLine={{ 
-                  stroke: '#3f3f3f',
-                  strokeWidth:0.5
+                  stroke: '#c2c2c2',
+                  strokeWidth:1
                 }}
                 tickSize={4}
                 tickCount={6}
