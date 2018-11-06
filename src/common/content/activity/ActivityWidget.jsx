@@ -38,7 +38,7 @@ export default class ActivityWidget extends Component {
   }
 
   padTimeseries(t) {
-    const toTime = t.length > 0 ? t[0] : new Date().getTime();
+    const toTime = t.length > 0 ? t[0].timestamp : new Date().getTime();
     const padding = this.createEmptySeries(19 - t.length, toTime);
     return padding.concat(t);
   }

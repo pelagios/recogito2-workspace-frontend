@@ -34,7 +34,7 @@ export default class App extends Component {
       documents      : null // Can be null (not loaded yet) or [] (no shared documents)
     }
 
-    this._profileOwner = (process.env.NODE_ENV === 'development') ? 'pelagios3' : window.location.pathname.substring(1);
+    this._profileOwner = (process.env.NODE_ENV === 'development') ? 'rainer' : window.location.pathname.substring(1);
   }
 
   componentDidMount() {
