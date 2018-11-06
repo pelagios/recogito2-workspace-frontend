@@ -9,6 +9,8 @@ import Breadcrumbs from '../common/content/Breadcrumbs.jsx';
 import HeaderIcon from '../common/content/HeaderIcon.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 import TopBar from './top/TopBar.jsx';
+import { Columns } from '../common/content/table/Columns.js';
+
 
 import '../../assets/style/profile/index.scss';
 
@@ -47,14 +49,36 @@ export default class App extends Component {
       .then(r => this.setState({ me: r.data })); 
 
     API
-      .fetchAccessibleDocuments(this._profileOwner)
+      .fetchAccessibleDocuments(this._profileOwner, this.getDisplayConfig())
       .then(r => this.setState({ documents: r.data.items }));
+  }
+
+  getDisplayConfig() {
+    if (this.state.presentation === 'GRID')
+      return; // No configs for grid view
+
+    return {
+      columns: Columns.expandAggregatedColumns(this.state.table_columns),
+      sort: this.state.table_sorting
+    };
   }
 
   onTogglePresentation(presentation) {
     this.setState(before => { 
       const p = (before.presentation === 'TABLE') ? 'GRID' : 'TABLE';
       return { presentation: p };
+    });
+  }
+
+  onChangeColumnPrefs(columns) {
+    this.setState({ table_columns: columns }, () => {
+      this.refreshCurrentView();
+    });
+  }
+  
+  onSortTable(sorting) {
+    this.setState({ table_sorting: sorting }, () => {
+      this.refreshCurrentView();
     });
   }
 

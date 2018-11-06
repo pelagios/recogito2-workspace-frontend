@@ -10,8 +10,8 @@ export default class API {
     return axios.get(`/api/account/${username}`);
   }
 
-  static fetchAccessibleDocuments(owner) {
-    return axios.get(`/api/documents/accessible/${owner}`);
+  static fetchAccessibleDocuments(owner, config) {
+    return axios.post(`/api/documents/accessible/${owner}`, config);
   }
 
 }
