@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Bar, BarChart, XAxis } from 'recharts';
+import { Bar, BarChart, XAxis, CartesianGrid } from 'recharts';
 import NumberFormat from 'react-number-format';
 
 import API from '../API.js';
@@ -83,6 +83,7 @@ export default class Sidebar extends Component {
           </h2>
           {this.props.account && 
             <BarChart width={237} height={55} data={this.padEdits(edits)} barCategoryGap={1.5}>
+              <CartesianGrid strokeDasharray="3" horizontal={false}/>
               <XAxis 
                 dataKey="timestamp"
                 type="number"
@@ -105,7 +106,7 @@ export default class Sidebar extends Component {
                 height={20}
                 tickFormatter={tickFormatter}
                 domain={['dataMin', 'dataMax']}
-                padding={{ left: 5, right: 4 }}
+                padding={{ left: 5, right: 5 }}
                  />
               <Bar dataKey="value" fill="#4483c4" />
             </BarChart>

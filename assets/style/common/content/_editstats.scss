@@ -19,6 +19,10 @@
     svg {
       shape-rendering:crispEdges;
     }
+
+    .recharts-cartesian-grid .recharts-cartesian-grid-vertical line:last-child {
+      display: none;
+    }
   }
 
 }
