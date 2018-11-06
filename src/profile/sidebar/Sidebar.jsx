@@ -16,7 +16,7 @@ export default class Sidebar extends Component {
         <ActivityWidget 
           className="section" 
           width={237}
-          height={55}s
+          height={55}
           fill="#4483c4"
           stats={this.props.account && this.props.account.stats} />
 
