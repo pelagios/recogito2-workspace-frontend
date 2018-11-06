@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 import NumberFormat from 'react-number-format';
-import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 const LINE_STYLE = {
   stroke: '#c2c2c2', 

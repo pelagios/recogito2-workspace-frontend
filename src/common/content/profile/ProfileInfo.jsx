@@ -5,7 +5,7 @@ import Avatar from './Avatar.jsx';
 export default class Identity extends Component {
 
   formatURL(url) {
-    return url.replace(/^https?\:\/\//i, '');
+    return url.replace(/^https?:\/\//i, '');
   }
 
   render() {
