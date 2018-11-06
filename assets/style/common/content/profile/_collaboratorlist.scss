@@ -1,0 +1,23 @@
+.collaborator-list {
+  padding:20px 0 15px 0;
+
+  h2 {
+    font-size:17px;
+  }
+
+  ul {
+    list-style-type:none;
+    margin:0;
+    padding:8px 0;
+  }
+
+  li {
+    display:inline-block;
+    margin:3px 5px 2px 0;
+  }
+
+  a {
+    text-decoration:none;
+  }
+
+}

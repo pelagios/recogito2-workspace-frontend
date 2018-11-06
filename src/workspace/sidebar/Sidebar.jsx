@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 
+import CollaboratorList from '../../common/content/profile/CollaboratorList.jsx';
+
 import Account   from './sections/Account.jsx';
 import CreateNew from './sections/CreateNew.jsx';
 import ViewList  from './sections/Views.jsx';
 import Storage   from './sections/Storage.jsx';
 
 export default class Sidebar extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { collaborators: [] };
+  }
 
   render() {
     return (
@@ -23,6 +30,10 @@ export default class Sidebar extends Component {
 
         <Storage 
           account={this.props.account} /> 
+
+        <CollaboratorList 
+          className="section collaborators"
+          username={this.props.account && this.props.account.username} />
       </div>
     )
   }

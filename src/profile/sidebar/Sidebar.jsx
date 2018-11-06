@@ -2,29 +2,10 @@ import React, { Component } from 'react';
 import { Bar, BarChart, XAxis, CartesianGrid } from 'recharts';
 import NumberFormat from 'react-number-format';
 
-import API from '../API.js';
-import Avatar from '../../common/content/Avatar.jsx';
-import Identity from '../../common/content/Identity.jsx';
+import CollaboratorList from '../../common/content/profile/CollaboratorList.jsx';
+import ProfileInfo from '../../common/content/profile/ProfileInfo.jsx';
 
 export default class Sidebar extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { collaborators: [] }
-
-    this.fetchCollaborators(props);
-  }
-
-  componentWillReceiveProps(props) {
-    this.fetchCollaborators(props);
-  }
-
-  fetchCollaborators(props) {
-    if (props.account && props.account.username)
-      API
-        .fetchCollaborators(props.account.username)
-        .then(result => this.setState({ collaborators: result.data }));
-  }
 
   createEmpty(num, toTimestamp) {
     const interval = 3600000 * 24 * 7; // 1 week
@@ -62,12 +43,10 @@ export default class Sidebar extends Component {
       month: 'short'
     }).format(new Date(tick));
     
-    console.log(this.props.account);
-
     return (
       <div className="sidebar">
         <div className="section">
-          <Identity account={this.props.account} />
+          <ProfileInfo account={this.props.account} />
         </div>
 
         <div className="section compact edit-stats">
@@ -113,18 +92,9 @@ export default class Sidebar extends Component {
           }
         </div>
 
-        <div className="section compact">
-          <div className="collaborators">
-            <h2>Top collaborators</h2>
-            <ul>
-              {this.state.collaborators.map(user => 
-                <li key={user.username}>
-                  <a href={`/${user.username}`} title={user.username}><Avatar username={user.username} /></a>
-                </li>
-              )}
-            </ul>
-          </div>
-        </div>
+        <CollaboratorList 
+          className="section"
+          username={this.props.account && this.props.account.username} />
       </div>
     );
   }

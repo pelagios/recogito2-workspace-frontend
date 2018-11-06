@@ -66,7 +66,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
-  "proxy": "https://recogito.pelagios.org",
+  "proxy": "http://localhost:9000",
   "homepage": "/assets/javascripts",
   "eslintConfig": {
     "extends": "react-app"

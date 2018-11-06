@@ -1,5 +1,6 @@
 @import "../../common/content/editstats";
-@import "../../common/content/identity";
+@import "../../common/content/profile/collaboratorlist";
+@import "../../common/content/profile/identity";
 
 .sidebar {
   padding-top:95px;
@@ -11,34 +12,6 @@
 
   .section:last-child {
     border-bottom:none;
-  }
-
-  .section.compact {
-    padding:0 20px;
-  }
-
-  .collaborators {
-    padding:20px 0 15px 0;
-
-    h2 {
-      font-size:17px;
-    }
-
-    ul {
-      list-style-type:none;
-      margin:0;
-      padding:8px 0;
-    }
-
-    li {
-      display:inline-block;
-      margin:3px 5px 2px 0;
-    }
-
-    a {
-      text-decoration:none;
-    }
-
   }
 
 }

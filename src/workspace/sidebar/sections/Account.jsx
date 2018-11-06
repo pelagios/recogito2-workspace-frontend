@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Identity from '../../../common/content/Identity.jsx';
+import ProfileInfo from '../../../common/content/profile/ProfileInfo.jsx';
 import MenuPopup from '../../../common/components/MenuPopup.jsx';
 
 export default class Account extends Component {
@@ -33,7 +33,7 @@ export default class Account extends Component {
         className="section account"
         onClick={this.showMenu.bind(this)} >
 
-        <Identity account={this.props.account} />
+        <ProfileInfo account={this.props.account} />
 
         { this.state.menuVisible &&
           <MenuPopup
