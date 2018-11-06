@@ -25,21 +25,32 @@ export default class Sidebar extends Component {
         .then(result => this.setState({ collaborators: result.data }));
   }
 
-  padEdits() {
+  createEmpty(num, toTimestamp) {
     const interval = 3600000 * 24 * 7; // 1 week
 
-    const empty = new Array(19);
+    const empty = new Array(num);
     empty.fill(0);
 
     const timestamps = empty.reduce((arr, _) => {
       const prev = arr[arr.length - 1];
       arr.push(prev - interval);
       return arr;
-    }, [ new Date().getTime() ]).reverse();
+    }, [ toTimestamp - interval ]).reverse();
 
     return timestamps.map(timestamp => {
-      return { timestamp: timestamp, value: Math.random() };
+      return { timestamp: timestamp, value: 0 };
     });
+  }
+
+  padEdits(edits) {
+    if (edits.length < 20) {
+      const lastStamp = (edits.length > 0) ? edits[0].timestamp : new Date().getTime();
+      const head = this.createEmpty(19 - edits.length, lastStamp);
+      console.log(head.concat(edits));
+      return head.concat(edits); 
+    }
+
+    return edits;
   }
 
   render() {
@@ -60,7 +71,7 @@ export default class Sidebar extends Component {
         <div className="section compact edit-stats">
           <h2>Activity <span className="count">3,412 edits</span></h2>
           {this.props.account && 
-            <BarChart width={237} height={55} data={this.padEdits()}>
+            <BarChart width={237} height={55} data={this.padEdits(edits)}>
               <XAxis 
                 dataKey="timestamp"
                 type="number"
@@ -71,10 +82,12 @@ export default class Sidebar extends Component {
                   
                 }}
                 tickLine={{
-                  stroke: '#3f3f3f' 
+                  stroke: '#3f3f3f', 
+                  strokeWidth:0.5
                 }}
                 axisLine={{ 
-                  stroke: '#3f3f3f' 
+                  stroke: '#3f3f3f',
+                  strokeWidth:0.5
                 }}
                 tickSize={4}
                 tickCount={6}

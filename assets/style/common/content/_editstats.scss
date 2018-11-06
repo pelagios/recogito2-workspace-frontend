@@ -15,6 +15,10 @@
   .recharts-wrapper {
     padding-top:5px;
     margin-left:-3px;
+
+    svg {
+      shape-rendering:crispEdges;
+    }
   }
 
 }
