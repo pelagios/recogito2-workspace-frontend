@@ -33,6 +33,7 @@ export default class Sidebar extends Component {
 
         <CollaboratorList 
           className="section collaborators"
+          title="My top collaborators"
           username={this.props.account && this.props.account.username} />
       </div>
     )

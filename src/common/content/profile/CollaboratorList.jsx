@@ -27,7 +27,7 @@ export default class CollaboratorList extends Component {
       <React.Fragment>
         {this.state.collaborators.length > 0 &&
           <div className={this.props.className ? `collaborator-list ${this.props.className}` : 'collaborator-list'}>
-            <h2>Top collaborators</h2>
+            <h2>{this.props.title}</h2>
             <ul>
               {this.state.collaborators.map(user => 
                 <li key={user.username}>
