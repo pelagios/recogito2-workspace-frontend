@@ -15,6 +15,11 @@
       position:relative;
     }
 
+
+    .label:last-child {
+      padding-right:34px;
+    }
+
     .sort {
       position:absolute;
       top:-4px;
@@ -92,13 +97,11 @@
 }
 
 .documents-pane.table-pane {
-  // background-color:$blueish-white;
 
   .virtualized-list {
     outline: none;
     padding-bottom:30px;
     overflow-y:scroll !important;
-    // border-left:1px solid $lightgrey-border-darker;
   }
 
   .row {
@@ -118,6 +121,7 @@
     }
 
     a:first-child {
+      // Leave room for type icon
       padding-left:32px;
     }
 
