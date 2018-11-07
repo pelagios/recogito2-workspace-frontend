@@ -14,8 +14,10 @@ export default class HeaderRow extends BaseRowComponent {
             style={{ width: `${100 * super.getWidth(field)}%` }}
             className={`label ${field}`}
             onClick={this.props.onSort.bind(this, field)}>
-            <span className="inner">
-              {HEADER_NAMES[field] || field}
+            <span className="inner-wrapper">
+              <span className="inner">
+                {HEADER_NAMES[field] || field}
+              </span>
               {this.props.sortColumn === field &&
                 <span className="sort icon">
                   <span className="inner">
