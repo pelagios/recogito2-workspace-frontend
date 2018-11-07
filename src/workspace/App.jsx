@@ -6,11 +6,11 @@ import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
 import Readme from '../common/content/Readme.jsx';
 import { Columns } from '../common/content/table/Columns.js';
+import StoredUIState from '../common/StoredUIState.js';
 import Uploader from '../common/content/upload/Uploader.jsx';
 
 import Header from './header/Header.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
-import StoredUIState from './StoredUIState.js';
 
 import '../../assets/style/workspace/index.scss';
 

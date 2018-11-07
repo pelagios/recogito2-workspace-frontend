@@ -7,6 +7,7 @@ import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
 import Breadcrumbs from '../common/content/Breadcrumbs.jsx';
 import HeaderIcon from '../common/content/HeaderIcon.jsx';
+import StoredUIState from '../common/StoredUIState.js';
 import Sidebar from './sidebar/Sidebar.jsx';
 import TopBar from './top/TopBar.jsx';
 import { Columns } from '../common/content/table/Columns.js';
@@ -19,7 +20,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    const state = {
       me             : null, // Login identity
       visitedAccount : null,
       presentation   : 'TABLE',
@@ -35,6 +36,9 @@ export default class App extends Component {
       busy           : false,
       documents      : null // Can be null (not loaded yet) or [] (no shared documents)
     }
+
+    Object.assign(state, StoredUIState.load());
+    this.state = state;
 
     this._profileOwner = (process.env.NODE_ENV === 'development') ? 'rainer' : window.location.pathname.substring(1);
   }
@@ -70,17 +74,20 @@ export default class App extends Component {
   onTogglePresentation(presentation) {
     this.setState(before => { 
       const p = (before.presentation === 'TABLE') ? 'GRID' : 'TABLE';
+      StoredUIState.save('presentation', p);
       return { presentation: p };
     });
   }
 
   onChangeColumnPrefs(columns) {
+    StoredUIState.save('table_columns', columns);
     this.setState({ table_columns: columns }, () => {
       this.reloadDocuments();
     });
   }
   
   onSortTable(sorting) {
+    StoredUIState.save('table_sorting', sorting);
     this.setState({ table_sorting: sorting }, () => {
       this.reloadDocuments();
     });
