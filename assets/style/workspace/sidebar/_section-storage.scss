@@ -1,5 +1,7 @@
 .section.storage {
-  border-top:1px solid $sidebar-border;
+  border-style:solid;
+  border-color:$sidebar-border;
+  border-width:1px 0;  
   padding:20px;
 
   .icon {

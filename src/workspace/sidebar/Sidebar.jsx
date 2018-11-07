@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import ActivityWidget from '../../common/content/activity/ActivityWidget.jsx';
 import CollaboratorList from '../../common/content/profile/CollaboratorList.jsx';
 
 import Account   from './sections/Account.jsx';
@@ -30,6 +31,13 @@ export default class Sidebar extends Component {
 
         <Storage 
           account={this.props.account} /> 
+
+        <ActivityWidget 
+          className="section" 
+          width={237}
+          height={55}
+          fill="#4483c4"
+          stats={this.props.account && this.props.account.stats} />
 
         <CollaboratorList 
           className="section collaborators"

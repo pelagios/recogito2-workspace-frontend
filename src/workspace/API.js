@@ -1,21 +1,21 @@
 import axios from 'axios';
 
 const fetchDocuments = (path, config) => {
-  return axios.post(`/my/api/${path}`, config);
+  return axios.post(`/api/documents/${path}`, config);
 };
 
 export default class API {
 
   static accountData() {
-    return axios.get('/my/api/account');
+    return axios.get('/api/account/my');
   }
 
   static myDocuments(config) {
-    return fetchDocuments('my-documents', config);
+    return fetchDocuments('my', config);
   }
 
   static sharedWithMe(config) {
-    return fetchDocuments('shared-with-me', config);
+    return fetchDocuments('shared', config);
   }
 
   // Deletes one document via the API
