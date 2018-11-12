@@ -47,6 +47,7 @@ export default class Header extends Component {
 
   render() {
     const isOpen = this.props.selection.length > 0;
+
     return (
       <div className="header">
         <div className="top-row">
@@ -82,8 +83,9 @@ export default class Header extends Component {
               icon={(this.props.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
               onClick={this.props.onTogglePresentation} />
 
-            {this.state.action === 'DELETE' && 
+            {this.state.action === 'DELETE' &&
                 <DeleteAction
+                  view={this.props.view}
                   selection={this.props.selection}
                   onStart={this.props.onDelete}
                   onSuccess={this.onDeleteSuccess.bind(this)}

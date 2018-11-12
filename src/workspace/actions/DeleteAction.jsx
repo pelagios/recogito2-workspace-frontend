@@ -12,34 +12,35 @@ export default class DeleteAction extends Component {
     if (ids.length > 0) {
       this.props.onStart();
 
-      if (ids.length === 1) {
-        API.deleteDocument(ids[0])
-           .then(() => {
-             this.props.onSuccess();
-           })
-           .catch((error) => {
-             this.props.onError(error);
-           });
-      } else {
-        API.bulkDeleteDocuments(ids)
-          .then(() => {
-            this.props.onSuccess();
-          })
-          .catch((error) => {
-            this.props.onError(error);
-          });
-      }
+      const action =
+        ids.length === 1 ? (
+          this.props.view === 'MY_DOCUMENTS' ?
+            API.deleteDocument(ids[0]) : API.unshareDocument(ids[0]) 
+        ) : (
+          this.props.view === 'MY_DOCUMENTS' ?
+            API.bulkDeleteDocuments(ids) : API.bulkUnshareDocuments(ids)
+        )
+
+      action.then(() => {
+        this.props.onSuccess();
+      }).catch((error) => {
+        this.props.onError(error);
+      })
     } else {
       this.props.onCancel();
     }
   }
 
   render() {
+    const message = (this.props.view === 'MY_DOCUMENTS') ?
+      "You are about to permanently delete the selected documents. Are you sure?" :
+      "This will remove the selected documents from your shared documents list. Are you sure?";
+
     return ReactDOM.createPortal(
       <Prompt 
-        title="Delete Document"
+        title="Delete"
         type="WARNING"
-        message="You cannot undo this operation. Are you sure you want to do this?" 
+        message={message}
         onNo={this.props.onCancel}
         onYes={this.executeDelete.bind(this)} />,
 

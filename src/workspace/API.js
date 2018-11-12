@@ -28,4 +28,12 @@ export default class API {
     return axios.delete('/document/bulk', { data: ids });
   }
 
+  static unshareDocument(id) {
+    return axios.delete(`/api/documents/shared/${id}`);
+  }
+
+  static bulkUnshareDocuments(ids) {
+    return axios.delete('/api/documents/shared/bulk', { data: ids });
+  }
+
 }
