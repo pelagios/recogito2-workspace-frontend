@@ -1,5 +1,7 @@
 # A simple helper to copy the contents of the build folder to Recogito.
 # Use at your own risk!
+npm run build
+
 echo "Removing JS and view templates from previous build"
 rm -rf ../recogito2/public/javascripts/static/
 rm ../recogito2/app/views/my/profile.scala.html
