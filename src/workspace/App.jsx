@@ -34,7 +34,8 @@ export default class App extends Component {
       table_sorting : null,          // current table sorting (if any)
       busy          : false,          // Document pane in 'busy' state? (Docs loading, action onging, etc.)
       folders       : [],             // Folders
-      documents     : [],             // Documents
+      documents     : [],             // Documents in view
+      total_docs    : null,           // Total number of documents
       readme        : null,           // Current folder readme
       selection     : [],             // Selected items (folders and documents)
       fileUploads   : [],             // Files currently uploading
@@ -97,6 +98,7 @@ export default class App extends Component {
     return API.myDocuments(this.getDisplayConfig()).then(result => {
       this.setState({
         documents: result.data.items, 
+        total_docs: result.data.total,
         busy: false 
       });
     });
@@ -107,6 +109,7 @@ export default class App extends Component {
     return API.sharedWithMe(this.getDisplayConfig()).then(result => { 
       this.setState({
         documents: result.data.items, 
+        total_docs: result.data.total,
         busy: false 
       }) 
     });
@@ -209,6 +212,7 @@ export default class App extends Component {
         <div className="container">
           <Header
             view={this.state.view}
+            docCount={this.state.total_docs}
             selection={this.state.selection}
             presentation={this.state.presentation}
             onDelete={this.setBusy.bind(this, true)}

@@ -9,8 +9,6 @@ class ViewListItem extends Component {
         onClick={this.props.onClick}>
         <span className="icon">{this.props.icon}</span> {
           this.props.children
-        } {this.props.count != null &&
-          <span className="doc-count badge">{this.props.count}</span>
         }
       </li>
     )
@@ -21,14 +19,11 @@ class ViewListItem extends Component {
 export default class ViewList extends Component {
 
   render() {
-    const dataAvailable = this.props.account && this.props.account.documents;
-
     return (
       <div className="section views">
         <ul>
           <ViewListItem
             icon="&#xf2be;"
-            count={dataAvailable && this.props.account.documents.my_documents}
             current={this.props.currentView === 'MY_DOCUMENTS'}
             onClick={this.props.onChangeView.bind(this, 'MY_DOCUMENTS')}>
             My Documents
@@ -36,7 +31,6 @@ export default class ViewList extends Component {
 
           <ViewListItem
             icon="&#xf064;"
-            count={dataAvailable && this.props.account.documents.shared_with_me}
             current={this.props.currentView === 'SHARED_WITH_ME'}
             onClick={this.props.onChangeView.bind(this, 'SHARED_WITH_ME')}>
             Shared with me

@@ -8,10 +8,15 @@ const VIEW_LABELS = {
 export default class Breadcrumbs extends Component {
 
   render() {
-    const label = (this.props.view) ? VIEW_LABELS[this.props.view] : this.props.label;
+    const title = this.props.view ? VIEW_LABELS[this.props.view] : this.props.label;
+    const label = this.props.count > 1 ? 'documents' : 'document';
+
     return (
       <div className="breadcrumbs">
-        <h2>{label}</h2>
+        <h2>{title} {this.props.count !== null &&
+          <span className="count">{`(${this.props.count})`}</span>
+        }
+        </h2>
       </div>
     )
   }

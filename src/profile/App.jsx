@@ -34,7 +34,8 @@ export default class App extends Component {
       ],
       table_sorting  : null,
       busy           : false,
-      documents      : null // Can be null (not loaded yet) or [] (no shared documents)
+      documents      : null, // Can be null (not loaded yet) or [] (no shared documents)
+      total_docs     : null
     }
 
     Object.assign(state, StoredUIState.load());
@@ -58,7 +59,10 @@ export default class App extends Component {
   reloadDocuments() {
     API
       .fetchAccessibleDocuments(this._profileOwner, this.getDisplayConfig())
-      .then(r => this.setState({ documents: r.data.items }));
+      .then(r => this.setState({ 
+        documents: r.data.items,
+        total_docs: r.data.total
+      }));
   }
 
   getDisplayConfig() {
@@ -103,7 +107,9 @@ export default class App extends Component {
           account={this.state.visitedAccount}/>
 
         <div className="container">
-          <Breadcrumbs label="Public Documents" />
+          <Breadcrumbs
+            label="Public Documents" 
+            count={this.state.total_docs} />
 
           <HeaderIcon
             className="presentation-toggle stroke7"

@@ -59,7 +59,9 @@ export default class Header extends Component {
           </div>
         </div>
         <div className="subheader">
-          <Breadcrumbs view={this.props.view}/>
+          <Breadcrumbs 
+            view={this.props.view}
+            count={this.props.docCount} />
 
           <div className="subheader-icons">
             <CSSTransition
