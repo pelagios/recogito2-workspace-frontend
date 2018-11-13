@@ -227,7 +227,7 @@ export default class App extends Component {
             <TablePane
               folders={this.state.folders}
               documents={this.state.documents}
-              columns={this.state.table_columns}
+              columns={Columns.filterByView(this.state.table_columns, this.state.view)}
               sorting={this.state.table_sorting}
               busy={this.state.busy}
               selection={this.state.selection}

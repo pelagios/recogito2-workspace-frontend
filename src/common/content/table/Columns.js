@@ -1,4 +1,5 @@
-export const COLUMNS = [
+// Columns available in all views
+const COLUMNS_GENERAL = [
   // Aggregate fields
   // 'agg_document',
 
@@ -11,15 +12,19 @@ export const COLUMNS = [
   'last_edit_at',
   'last_edit_by',
   'annotations',
-  'public_visibility',
+  'public_visibility'
   // 'status_ratio',
-  // 'activity',
+  // 'activity'
+];
 
-  // Shared with me
-  // 'owner',
-  // 'shared_by',
-  // 'access_level'
-]
+// Columns specific to SHARED_WITH_ME view
+const COLUMNS_SHARED_WITH_ME = [
+  'owner',
+  'shared_by',
+  'access_level'
+];
+
+export const COLUMNS = COLUMNS_GENERAL.concat(COLUMNS_SHARED_WITH_ME);
 
 // Labels to use for fields
 export const HEADER_NAMES = {
@@ -40,7 +45,7 @@ export const HEADER_NAMES = {
   owner             : 'Document owner',
   shared_by         : 'Shared by',
   access_level      : 'Access level'
-}
+};
 
 // Relative width requirements per column (XL, L, M, S)
 export const COLUMN_WIDTH = {
@@ -60,12 +65,12 @@ export const COLUMN_WIDTH = {
 
   owner             : 'M',
   shared_by         : 'M',
-  access_level      : 'S'
-}
+  access_level      : 'M'
+};
 
 export const AGGREGATE_COLUMNS = {
   agg_document: [ 'author', 'document' ]
-}
+};
 
 // Static helper methods 
 export class Columns {
@@ -93,6 +98,16 @@ export class Columns {
 
       return result;
     }, []);
+  }
+
+  /** Removes the columns that are not applicable in the given view **/
+  static filterByView(columns, view) { 
+    if (view == 'MY_DOCUMENTS')
+      // Remove columns specific to 'Shared With Me'
+      return columns.filter(c => !COLUMNS_SHARED_WITH_ME.includes(c));
+    else
+      // All
+      return columns; 
   }
 
 }
