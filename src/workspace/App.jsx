@@ -182,7 +182,11 @@ export default class App extends Component {
   } 
 
   onUploadComplete() {
-    this.setState({ fileUploads: [], urlUpload: null }, () => {
+    this.setState({ 
+      view: 'MY_DOCUMENTS', // Force view back to 'My Documents'
+      fileUploads: [], 
+      urlUpload: null 
+    }, () => {
       this.refreshCurrentView()
         .then(this.fetchAccountData.bind(this));
     });
