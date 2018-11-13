@@ -50,7 +50,11 @@ const FORMATTERS = {
     <NumberFormat 
       displayType="text"
       value={annotations}
-      thousandSeparator={true} />
+      thousandSeparator={true} />,
+
+  status_ratio: (ratio) =>
+    // TODO graphical representation
+    <span>{`${ratio.verified}/${ratio.unverified}/${ratio.not_identifiable}`}</span>
 
 };
 

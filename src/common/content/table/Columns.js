@@ -12,8 +12,8 @@ const COLUMNS_GENERAL = [
   'last_edit_at',
   'last_edit_by',
   'annotations',
-  'public_visibility'
-  // 'status_ratio',
+  'public_visibility',
+  'status_ratio'
   // 'activity'
 ];
 
