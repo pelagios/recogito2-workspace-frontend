@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AutoSizer, List } from 'react-virtualized';
 import Dropzone from 'react-dropzone'
 
+import { Columns } from './Columns.js';
 import DropzoneDecoration from '../upload/DropzoneDecoration.jsx';
 import Readme from '../Readme.jsx';
 import Selection from '../Selection.js';
@@ -18,6 +19,7 @@ export default class TablePane extends Component {
 
     this.state = {
       prefsOpen: false,
+      columns: Columns.filterByView(props.columns, props.view),
       selection: new Selection(props.folders.concat(props.documents), props.selection)
     }
   }
@@ -25,6 +27,7 @@ export default class TablePane extends Component {
   /** Set derived state **/
   componentWillReceiveProps(next) {
     this.setState({ 
+      columns: Columns.filterByView(next.columns, next.view),
       selection: new Selection(next.folders.concat(next.documents), next.selection)
     });
   }
@@ -65,7 +68,7 @@ export default class TablePane extends Component {
           <DocumentRow
             key={args.key}
             style={args.style}
-            columns={this.props.columns}
+            columns={this.state.columns}
             item={item}
             selected={this.props.selection && this.props.selection.includes(item)}
             onClick={e => this.onClick(e, item, args.index)} />
@@ -138,7 +141,7 @@ export default class TablePane extends Component {
       <React.Fragment>
         <div className="documents-table-header">
           <HeaderRow 
-            columns={this.props.columns} 
+            columns={this.state.columns} 
             onSort={this.sortBy.bind(this)}
             sortColumn={this.props.sorting ? this.props.sorting.by : null} 
             sortAsc={this.props.sorting ? this.props.sorting.asc : null} />
