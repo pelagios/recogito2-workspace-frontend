@@ -37,6 +37,15 @@ const FORMATTERS = {
       return ( <span className="icon" title="Private">&#xf023;</span> );
   },
 
+  access_level: (level) => {
+    if (level === 'ADMIN')
+      return ( <span className="icon" title="ADMIN">&#xf0ad;</span> );
+    else if (level === 'WRITE')
+      return ( <span className="icon" title="WRITE">&#xf040;</span> );
+    else
+      return ( <span className="icon" title="READ">&#xf06e;</span> );
+  },
+
   annotations: (annotations) =>
     <NumberFormat 
       displayType="text"
