@@ -44,7 +44,7 @@ export const HEADER_NAMES = {
 
   owner             : 'Document owner',
   shared_by         : 'Shared by',
-  access_level      : 'Access level'
+  access_level      : 'Access'
 };
 
 // Relative width requirements per column (XL, L, M, S)
