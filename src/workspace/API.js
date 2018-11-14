@@ -18,6 +18,13 @@ export default class API {
     return fetchDocuments('shared', config);
   }
 
+  static createFolder(title, parentId) {
+    return axios.post('/folder/new', {
+      title: title,
+      parent: parentId
+    });
+  }
+
   // Deletes one document via the API
   static deleteDocument(id) {
     return axios.delete(`/document/${id}`);

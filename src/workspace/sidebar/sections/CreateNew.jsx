@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import API from '../../API.js';
 import MenuPopup from '../../../common/components/MenuPopup.jsx';
 
 export default class CreateNew extends Component {
@@ -15,8 +16,15 @@ export default class CreateNew extends Component {
 
   onSelectOption(option) {
     this.setState({ menuVisible: false });
+    if (option === 'FOLDER') {
+      API.createFolder('Unnamed Folder');
+    } else if (option === 'FILE') {
+      this._input.click();
+    }
+  }
 
-    if (option === 'FILE') this._input.click();
+  onCreateFolder() {
+
   }
 
   onUploadFiles(evt) {
@@ -50,7 +58,7 @@ export default class CreateNew extends Component {
             className="create-new"
             menu={[
               { group: 'local', options: [
-                { icon: '\uf07b', label: 'Folder', value: 'FOLDER', disabled: true },
+                { icon: '\uf07b', label: 'Folder', value: 'FOLDER' },
                 { icon: '\uf15b', label: 'File upload', value: 'FILE' }
               ]},
 
