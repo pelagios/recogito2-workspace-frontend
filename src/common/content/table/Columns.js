@@ -102,7 +102,7 @@ export class Columns {
 
   /** Removes the columns that are not applicable in the given view **/
   static filterByView(columns, view) { 
-    if (view == 'MY_DOCUMENTS')
+    if (view === 'MY_DOCUMENTS')
       // Remove columns specific to 'Shared With Me'
       return columns.filter(c => !COLUMNS_SHARED_WITH_ME.includes(c));
     else

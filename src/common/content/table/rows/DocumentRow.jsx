@@ -52,9 +52,32 @@ const FORMATTERS = {
       value={annotations}
       thousandSeparator={true} />,
 
-  status_ratio: (ratio) =>
-    // TODO graphical representation
-    <span>{`${ratio.verified}/${ratio.unverified}/${ratio.not_identifiable}`}</span>
+  status_ratio: (ratio) => {
+    const total = ratio.verified + ratio.unverified + ratio.not_identifiable;
+    const pctGreen = ratio.verified / total * 100;
+    const pctYellow = ratio.not_identifiable / total * 100;
+
+    const labels = {
+      'verified': 'verified',
+      'unverified': 'unverified',
+      'not_identifiable': 'flagged'
+    }
+
+    const tooltip = ['verified', 'unverified', 'not_identifiable'].reduce((tooltip, next) => {
+      const count = ratio[next];
+      if (count === 0)
+        return tooltip;
+      else
+        return `${tooltip} ${count} ${labels[next]},`;
+    }, '').slice(0, -1);
+
+    return (
+      <span className="bar" title={tooltip}>
+        <span className="verified" style={{ width: `${pctGreen}%` }} />
+        <span className="not_identifiable" style={{ width: `${pctYellow}%` }} />
+      </span>
+    )
+  }
 
 };
 
