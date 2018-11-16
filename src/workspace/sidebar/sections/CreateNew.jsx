@@ -23,10 +23,6 @@ export default class CreateNew extends Component {
     }
   }
 
-  onCreateFolder() {
-
-  }
-
   onUploadFiles(evt) {
     const files = Array.from(evt.target.files);
     this.props.onUploadFiles(files);

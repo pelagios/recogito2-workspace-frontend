@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const fetchDocuments = (path, config) => {
-  return axios.post(`/api/documents/${path}`, config);
+  return axios.post(`/api/directory/${path}`, config);
 };
 
 export default class API {
@@ -15,11 +15,11 @@ export default class API {
   }
 
   static sharedWithMe(config) {
-    return fetchDocuments('shared', config);
+    return fetchDocuments('my/shared', config);
   }
 
   static createFolder(title, parentId) {
-    return axios.post('/folder/new', {
+    return axios.post('/api/folder', {
       title: title,
       parent: parentId
     });
@@ -27,20 +27,20 @@ export default class API {
 
   // Deletes one document via the API
   static deleteDocument(id) {
-    return axios.delete(`/document/${id}`);
+    return axios.delete(`/api/document/${id}`);
   }
 
   // Deletes multiple documents in one go via the bulk API
   static bulkDeleteDocuments(ids) {
-    return axios.delete('/document/bulk', { data: ids });
+    return axios.delete('/api/document/bulk', { data: ids });
   }
 
   static unshareDocument(id) {
-    return axios.delete(`/api/documents/shared/${id}`);
+    return axios.delete(`/api/shared/document/${id}`);
   }
 
   static bulkUnshareDocuments(ids) {
-    return axios.delete('/api/documents/shared/bulk', { data: ids });
+    return axios.delete('/api/shared/document/bulk', { data: ids });
   }
 
 }
