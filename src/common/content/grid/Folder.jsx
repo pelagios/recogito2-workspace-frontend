@@ -8,7 +8,7 @@ export default class Folder extends Component {
         <div className="item-wrapper">
           <a href="#" className="folder">
             <div className="label">
-              {this.props.name}
+              {this.props.title}
             </div>
           </a>
         </div>

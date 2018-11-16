@@ -66,7 +66,7 @@ export default class GridPane extends Component {
 
         if (item.type === 'FOLDER')
           return (
-            <Folder key={idx} name={item.name} />
+            <Folder key={idx} title={item.title} />
           )
         else
           return (
