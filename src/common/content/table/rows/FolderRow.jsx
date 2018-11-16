@@ -7,8 +7,8 @@ export default class FolderRow extends Component {
       <div
         style={this.props.style}
         className="row folder">
-        <a href="#" className="folder-icon">&#xf07b;</a>
-        <a href="#" className="folder-name">{this.props.name}</a>
+        <a href="#" className="folder-title">{this.props.title}</a>
+        <span className="type icon">&#xf07b;</span>
       </div>
     )
   }

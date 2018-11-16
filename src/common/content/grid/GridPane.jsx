@@ -64,8 +64,7 @@ export default class GridPane extends Component {
         const idx = rowIdx + fromIndex;
         const item = allItems[idx];
 
-        const isFolder = item.name; // Dummy condition
-        if (isFolder)
+        if (item.type === 'FOLDER')
           return (
             <Folder key={idx} name={item.name} />
           )

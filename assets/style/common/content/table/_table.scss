@@ -133,12 +133,6 @@
       padding-left:32px;
     }
 
-    a.folder-icon {
-      font-family:FontAwesome;
-      color:darken($lightblue-type, 10%);
-      padding:1px 0 0 10px;
-    }
-
     a.document, a.folder-name {
       font-weight:bold;
     }
@@ -209,6 +203,15 @@
 
   .row:first-child {
     border-top:none;
+  }
+
+  .row.folder {
+
+    .type.icon {
+      color:darken($lightblue-type, 10%);
+      padding:1px 0 0 9px;
+    }
+
   }
 
 }

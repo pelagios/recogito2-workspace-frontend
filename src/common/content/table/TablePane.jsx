@@ -57,11 +57,10 @@ export default class TablePane extends Component {
 
     return ((args) => {
       const item = allItems[args.index];
-      const isFolder = item.name;
 
-      if (isFolder)
+      if (item.type === 'FOLDER')
         return (
-          <FolderRow key={args.key} style={args.style} name={item.name} />
+          <FolderRow key={args.key} style={args.style} title={item.title} />
         )
       else
         return (
