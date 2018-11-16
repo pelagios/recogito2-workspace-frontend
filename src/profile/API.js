@@ -11,7 +11,7 @@ export default class API {
   }
 
   static fetchAccessibleDocuments(owner, config) {
-    return axios.post(`/api/documents/accessible/${owner}`, config);
+    return axios.post(`/api/directory/${owner}`, config);
   }
 
 }
