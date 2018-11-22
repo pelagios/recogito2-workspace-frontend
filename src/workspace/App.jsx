@@ -22,6 +22,7 @@ export default class App extends Component {
     const state = {
       account       : null,           // account info
       view          : 'MY_DOCUMENTS', // view, as selected in sidebar (My Documents, Shared, Recent)
+      folder_path   : [],             // the current folder (and parent folders) we are in
       presentation  : 'TABLE',        // presentation mode TABLE or GRID
       table_columns : [               // current table view columns configuration
         "author",
@@ -49,6 +50,8 @@ export default class App extends Component {
 
     this.onKeydown = this.onKeydown.bind(this);
     this.onMousedown = this.onMousedown.bind(this);
+
+    window.onhashchange = this.changeFolder.bind(this);
   }
 
   /** Clear selection on ESC key **/
@@ -95,7 +98,12 @@ export default class App extends Component {
 
   fetchMyDocuments() {
     this.setState({ busy: true });
-    return API.myDocuments(this.getDisplayConfig()).then(result => {
+
+    const folderDepth = this.state.folder_path.length;
+    const currentFolder = folderDepth > 0 ? 
+      this.state.folder_path[folderDepth - 1] : null;
+
+    return API.myDocuments(this.getDisplayConfig(), currentFolder).then(result => {
       this.setState({
         documents: result.data.items, 
         total_docs: result.data.total,
@@ -135,6 +143,12 @@ export default class App extends Component {
       return this.fetchMyDocuments();
     else 
       return this.fetchSharedWithMe();
+  }
+
+  changeFolder(e) {
+    const hash = document.location.hash.substring(1);
+    this.setState({ folder_path: [ hash ]}, () =>
+      this.refreshCurrentView());
   }
 
   /** Toggles the view presentation (table vs. grid) **/

@@ -57,10 +57,16 @@ export default class TablePane extends Component {
 
     return ((args) => {
       const item = allItems[args.index];
+      const selected = this.props.selection && this.props.selection.includes(item);
 
       if (item.type === 'FOLDER')
         return (
-          <FolderRow key={args.key} style={args.style} title={item.title} />
+          <FolderRow 
+            key={args.key} 
+            style={args.style} 
+            item={item} 
+            selected={selected}
+            onClick={e => this.onClick(e, item, args.index)} />
         )
       else
         return (
@@ -69,7 +75,7 @@ export default class TablePane extends Component {
             style={args.style}
             columns={this.state.columns}
             item={item}
-            selected={this.props.selection && this.props.selection.includes(item)}
+            selected={selected}
             onClick={e => this.onClick(e, item, args.index)} />
         )
     })

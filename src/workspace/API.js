@@ -10,8 +10,9 @@ export default class API {
     return axios.get('/api/account/my');
   }
 
-  static myDocuments(config) {
-    return fetchDocuments('my', config);
+  static myDocuments(config, opt_folder) {
+    return opt_folder ?
+      fetchDocuments(`my/${opt_folder}`) : fetchDocuments('my', config);
   }
 
   static sharedWithMe(config) {
