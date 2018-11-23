@@ -143,7 +143,7 @@ export default class App extends Component {
       return this.fetchSharedWithMe();
   }
 
-  changeFolder(e) {
+  changeFolder() {
     this.refreshCurrentView();
   }
 

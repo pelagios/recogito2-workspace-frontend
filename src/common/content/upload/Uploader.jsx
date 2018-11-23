@@ -142,7 +142,13 @@ export default class Uploader extends Component {
    * Finalizes the upload, creating the document and starting processing tasks (if any)
    */
   finalizeDocument()  {
-    return axios.post(`/my/upload/${this.state.uploadId}/finalize`, {
+    const currentFolder = document.location.hash.substring(1);
+
+    const url = currentFolder ?
+      `/my/upload/${this.state.uploadId}/finalize?folder=${currentFolder}` :
+      `/my/upload/${this.state.uploadId}/finalize`;
+
+    return axios.post(url, {
       headers: { 'X-Requested-With': 'XMLHttpRequest' }
     }).then(result => {
       const tasks = result.data.running_tasks;

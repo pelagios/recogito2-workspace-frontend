@@ -12,7 +12,7 @@ export default class API {
 
   static myDocuments(config, opt_folder) {
     return opt_folder ?
-      fetchDocuments(`my/${opt_folder}`) : fetchDocuments('my', config);
+      fetchDocuments(`my/${opt_folder}`, config) : fetchDocuments('my', config);
   }
 
   static sharedWithMe(config) {
