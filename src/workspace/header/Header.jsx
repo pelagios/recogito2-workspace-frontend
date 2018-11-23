@@ -61,6 +61,7 @@ export default class Header extends Component {
         <div className="subheader">
           <Breadcrumbs 
             view={this.props.view}
+            path={this.props.breadcrumbs}
             count={this.props.docCount} />
 
           <div className="subheader-icons">

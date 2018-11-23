@@ -4,11 +4,36 @@
   padding:12px 0;
 
   h2 {
-    font-size:20px;
+    font-size:18px;
+    display:inline-block;
+
+    a {
+      color:$lightblue-type;
+      text-decoration:none;
+      padding-left:6px;
+    }
+
+    a:hover {
+      color:$standard-type;
+      text-decoration:underline;
+    }
+
+    a:last-child {
+      color:$standard-type;
+    }
+
+    a.folder::before {
+      content:'>';
+      display:inline-block;
+      font-family:FontAwesome;
+      padding-right:3px;
+    }
   }
 
   .count {
+    font-size:18px;
     padding-left:2px;
-    color:$lightblue-type;
+    font-weight:bold;
   }
+
 }

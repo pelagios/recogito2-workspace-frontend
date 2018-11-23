@@ -12,10 +12,17 @@ export default class Breadcrumbs extends Component {
 
     return (
       <div className="breadcrumbs">
-        <h2>{title} {this.props.count !== null &&
+        <h2>
+          <a className="root" href="#">{title}</a>
+
+          {this.props.path.map(b => 
+            <a className="folder" href={`#${b.id}`} key={b.id}>{b.title}</a>
+          )}
+        </h2>
+        
+        {this.props.count !== null &&
           <span className="count">{`(${this.props.count})`}</span>
         }
-        </h2>
       </div>
     )
   }

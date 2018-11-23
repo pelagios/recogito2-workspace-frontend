@@ -22,7 +22,7 @@ export default class App extends Component {
     const state = {
       account       : null,           // account info
       view          : 'MY_DOCUMENTS', // view, as selected in sidebar (My Documents, Shared, Recent)
-      folder_path   : [],             // the current folder (and parent folders) we are in
+      breadcrumbs   : [],             // the current folder (and parent folders) we are in
       presentation  : 'TABLE',        // presentation mode TABLE or GRID
       table_columns : [               // current table view columns configuration
         "author",
@@ -98,13 +98,10 @@ export default class App extends Component {
 
   fetchMyDocuments() {
     this.setState({ busy: true });
-
-    const folderDepth = this.state.folder_path.length;
-    const currentFolder = folderDepth > 0 ? 
-      this.state.folder_path[folderDepth - 1] : null;
-
-    return API.myDocuments(this.getDisplayConfig(), currentFolder).then(result => {
+    const currentFolderId = document.location.hash.substring(1);
+    return API.myDocuments(this.getDisplayConfig(), currentFolderId).then(result => {
       this.setState({
+        breadcrumbs: result.data.breadcrumbs,
         documents: result.data.items, 
         total_docs: result.data.total,
         busy: false 
@@ -116,6 +113,7 @@ export default class App extends Component {
     this.setState({ busy: true });
     return API.sharedWithMe(this.getDisplayConfig()).then(result => { 
       this.setState({
+        breadcrumbs: [],
         documents: result.data.items, 
         total_docs: result.data.total,
         busy: false 
@@ -146,9 +144,7 @@ export default class App extends Component {
   }
 
   changeFolder(e) {
-    const hash = document.location.hash.substring(1);
-    this.setState({ folder_path: [ hash ]}, () =>
-      this.refreshCurrentView());
+    this.refreshCurrentView();
   }
 
   /** Toggles the view presentation (table vs. grid) **/
@@ -230,6 +226,7 @@ export default class App extends Component {
         <div className="container">
           <Header
             view={this.state.view}
+            breadcrumbs={this.state.breadcrumbs}
             docCount={this.state.total_docs}
             selection={this.state.selection}
             presentation={this.state.presentation}
