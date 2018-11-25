@@ -117,8 +117,12 @@
     box-sizing:border-box;
     cursor:pointer;
     @include noselect();
+
+    .folder-title {
+      display:block;
+    }
     
-    a {
+    a, .folder-title {
       padding:14px 8px;
     }
 
@@ -128,7 +132,7 @@
       left:0;
     }
 
-    a:first-child {
+    a:first-child, .folder-title {
       // Leave room for type icon
       padding-left:32px;
     }
@@ -206,6 +210,8 @@
   }
 
   .row.folder {
+    text-decoration:none;
+    color:#444;
 
     .type.icon {
       color:darken($lightblue-type, 10%);

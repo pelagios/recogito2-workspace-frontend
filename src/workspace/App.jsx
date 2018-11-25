@@ -176,7 +176,7 @@ export default class App extends Component {
   }
 
   onRenameFolder(folder, title) {
-    // TODO API call
+    API.renameFolder(folder.id, title);
   }
 
   /** File upload **/

@@ -26,6 +26,18 @@ export default class API {
     });
   }
 
+  static renameFolder(id, title) {
+    return axios.put(`/api/folder/${id}?title=${title}`);
+  }
+
+  static deleteFolder(id) {
+    return axios.delete(`/api/folder/${id}`);
+  }
+
+  static bulkDeleteFolders(ids) {
+    return axios.delete(`/api/folder/bulk`, { data: ids });
+  }
+
   // Deletes one document via the API
   static deleteDocument(id) {
     return axios.delete(`/api/document/${id}`);
@@ -42,14 +54,6 @@ export default class API {
 
   static bulkUnshareDocuments(ids) {
     return axios.delete('/api/shared/document/bulk', { data: ids });
-  }
-
-  static deleteFolder(id) {
-    return axios.delete(`/api/folder/${id}`);
-  }
-
-  static bulkDeleteFolders(ids) {
-    return axios.delete(`/api/folder/bulk`, { data: ids });
   }
 
 }

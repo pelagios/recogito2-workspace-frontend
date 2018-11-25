@@ -5,11 +5,17 @@ export default class FolderRow extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { title: this.props.item.title }
+    this.state = { 
+      editable: false,
+      title: this.props.item.title 
+    }
   }
 
   componentWillReceiveProps(next) {
-    this.setState({ title: next.item.title });
+    this.setState({ 
+      editable: false,
+      title: next.item.title 
+    });
   }
 
   makeEditable(evt) {
@@ -17,7 +23,7 @@ export default class FolderRow extends Component {
     evt.preventDefault();
   }
 
-  onChange(evt, value) {
+  onChange(_, value) {
     this.setState({ title: value });
   }
 
@@ -28,24 +34,27 @@ export default class FolderRow extends Component {
 
   render() {
     return (
-      <div
+      <a
+        href={`#${this.props.item.id}`} 
         style={this.props.style}
         className={`row folder${(this.props.selected) ? ' selected' : ''}`}
         onClick={this.props.onClick}>
 
-        <ContentEditable 
-          tagName="a"
-          href={`#${this.props.item.id}`} 
-          className="folder-title"
-          content={this.state.title}
-          editable={this.state.editable}
-          multiLine={false}
-          onChange={this.onChange.bind(this)}
-          onClick={this.makeEditable.bind(this)} 
-          onKeyDown={this.onKeyPress.bind(this)} />
+        <span className="folder-title">
+          {this.state.editable ? 
+            <ContentEditable 
+              tagName="span"
+              content={this.state.title}
+              editable={true}
+              multiLine={false}
+              onClick={e => e.preventDefault()}
+              onChange={this.onChange.bind(this)}
+              onKeyDown={this.onKeyPress.bind(this)} />
+          : <span onClick={this.makeEditable.bind(this)} >{this.state.title}</span> }
+        </span>
 
         <span className="type icon">&#xf07b;</span>
-      </div>
+      </a>
     )
   }
 
