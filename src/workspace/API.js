@@ -44,4 +44,12 @@ export default class API {
     return axios.delete('/api/shared/document/bulk', { data: ids });
   }
 
+  static deleteFolder(id) {
+    return axios.delete(`/api/folder/${id}`);
+  }
+
+  static bulkDeleteFolders(ids) {
+    return axios.delete(`/api/folder/bulk`, { data: ids });
+  }
+
 }
