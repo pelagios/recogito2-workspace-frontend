@@ -66,7 +66,8 @@ export default class TablePane extends Component {
             style={args.style} 
             item={item} 
             selected={selected}
-            onClick={e => this.onClick(e, item, args.index)} />
+            onClick={e => this.onClick(e, item, args.index)} 
+            onRename={this.props.onRenameFolder} />
         )
       else
         return (

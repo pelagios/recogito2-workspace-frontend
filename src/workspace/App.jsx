@@ -175,6 +175,10 @@ export default class App extends Component {
     this.setState({ selection: selection });
   }
 
+  onRenameFolder(folder, title) {
+    // TODO API call
+  }
+
   /** File upload **/
   startUpload(files) {
     this.setState({ 
@@ -244,12 +248,13 @@ export default class App extends Component {
               sorting={this.state.table_sorting}
               busy={this.state.busy}
               selection={this.state.selection}
+              disableFiledrop={this.state.view !== 'MY_DOCUMENTS'}
               onSort={this.onSortTable.bind(this)}
               onSelect={this.onSelect.bind(this)} 
-              disableFiledrop={this.state.view !== 'MY_DOCUMENTS'}
               onDropFiles={this.startUpload.bind(this)} 
               onDropURL={this.startRegisterRemoteSource.bind(this)} 
-              onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} >
+              onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} 
+              onRenameFolder={this.onRenameFolder.bind(this)}>
 
               {this.state.readme && <Readme>{this.state.readme}</Readme> }
             </TablePane>
