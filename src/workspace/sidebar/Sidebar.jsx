@@ -22,6 +22,7 @@ export default class Sidebar extends Component {
           account={this.props.account} />
 
         <CreateNew 
+          onFolderCreated={this.props.onFolderCreated}
           onUploadFiles={this.props.onUploadFiles} />
           
         <ViewList

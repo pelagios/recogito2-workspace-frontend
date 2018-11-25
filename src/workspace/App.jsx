@@ -219,6 +219,7 @@ export default class App extends Component {
       <React.Fragment>
         <Sidebar
           account={this.state.account}
+          onFolderCreated={this.refreshCurrentView.bind(this)}
           onUploadFiles={this.startUpload.bind(this)}
           currentView={this.state.view}
           onChangeView={this.changeView.bind(this)} />

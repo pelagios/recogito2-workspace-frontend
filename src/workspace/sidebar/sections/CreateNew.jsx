@@ -17,7 +17,9 @@ export default class CreateNew extends Component {
   onSelectOption(option) {
     this.setState({ menuVisible: false });
     if (option === 'FOLDER') {
-      API.createFolder('Unnamed Folder');
+      const currentFolderId = document.location.hash.substring(1);
+      API.createFolder('Unnamed Folder', currentFolderId)
+         .then(() => this.props.onFolderCreated());
     } else if (option === 'FILE') {
       this._input.click();
     }
