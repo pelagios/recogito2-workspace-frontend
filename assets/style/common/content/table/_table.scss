@@ -120,6 +120,25 @@
 
     .folder-title {
       display:block;
+
+      input {
+        outline:none;
+        border:none;
+        padding:0;
+        margin:0;
+        font-size:14px;
+        letter-spacing:normal;
+        background-color:$blueish-white;
+      }
+    }
+
+    .editable {
+      cursor:text;
+      @include rounded-corners(3px);
+    }
+
+    .editable:hover {
+      background-color:$blueish-white;
     }
     
     a, .folder-title {

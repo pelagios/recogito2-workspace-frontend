@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ContentEditable from "react-sane-contenteditable";
 
 export default class FolderRow extends Component {
 
@@ -19,17 +18,23 @@ export default class FolderRow extends Component {
   }
 
   makeEditable(evt) {
-    this.setState({ editable: true });
+    this.setState({
+      editable: true 
+    },() => this._input.select());
     evt.preventDefault();
+    evt.stopPropagation();
   }
 
-  onChange(_, value) {
-    this.setState({ title: value });
+  onChange(evt) {
+    this.setState({ title: evt.target.value });
   }
 
   onKeyPress(evt) {
-    if (evt.which === 13)
-      this.props.onRename(this.props.item, this.state.title);
+    if (evt.which === 13) {
+      this.setState({ 
+        editable: false
+      }, () => this.props.onRename(this.props.item, this.state.title));
+    }
   }
 
   render() {
@@ -42,15 +47,15 @@ export default class FolderRow extends Component {
 
         <span className="folder-title">
           {this.state.editable ? 
-            <ContentEditable 
-              tagName="span"
-              content={this.state.title}
-              editable={true}
-              multiLine={false}
-              onClick={e => e.preventDefault()}
+            <input 
+              ref={i => this._input = i}
+              value={this.state.title}
+              onClick={this.makeEditable.bind(this)}
               onChange={this.onChange.bind(this)}
               onKeyDown={this.onKeyPress.bind(this)} />
-          : <span onClick={this.makeEditable.bind(this)} >{this.state.title}</span> }
+          : <span
+              className="editable" 
+              onClick={this.makeEditable.bind(this)} >{this.state.title}</span> }
         </span>
 
         <span className="type icon">&#xf07b;</span>

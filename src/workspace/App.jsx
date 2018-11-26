@@ -176,7 +176,8 @@ export default class App extends Component {
   }
 
   onRenameFolder(folder, title) {
-    API.renameFolder(folder.id, title);
+    API.renameFolder(folder.id, title)
+       .then(() => this.refreshCurrentView());
   }
 
   /** File upload **/
