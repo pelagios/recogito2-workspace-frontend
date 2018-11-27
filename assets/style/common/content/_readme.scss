@@ -1,7 +1,12 @@
 .container .readme {
   margin:20px 30px 10px 24px;
-  padding:20px;
+  padding:20px 20px 10px 20px;
   border:1px solid $lightgrey-border;
   background-color:lighten($blueish-white, 4%);
   @include rounded-corners(3px);
+
+  h1 {
+    font-size:22px;
+  }
+
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 export default class Readme extends Component {
 
@@ -6,7 +7,7 @@ export default class Readme extends Component {
     return (
       <div className="readme">
         <div className="inner">
-          {this.props.children}
+          <ReactMarkdown source={this.props.children} />
         </div>
       </div>
     )
