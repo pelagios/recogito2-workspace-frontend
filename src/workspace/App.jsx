@@ -102,6 +102,7 @@ export default class App extends Component {
     return API.myDocuments(this.getDisplayConfig(), currentFolderId).then(result => {
       this.setState({
         breadcrumbs: result.data.breadcrumbs,
+        readme: result.data.readme,
         documents: result.data.items, 
         total_docs: result.data.total,
         busy: false 
