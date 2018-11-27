@@ -5,6 +5,10 @@
   flex:0;
 }
 
+.header.no-readme .breadcrumbs {
+  border-bottom:1px solid $lightgrey-border;
+}
+
 .header-icons {
   display:inline-block;
   position:absolute;
@@ -18,7 +22,7 @@
 
   .subheader-icons {
     position:absolute;
-    top:0;
+    top:-4px;
     right:20px;
 
     .selection-actions {

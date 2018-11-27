@@ -49,7 +49,7 @@ export default class Header extends Component {
     const isOpen = this.props.selection.length > 0;
 
     return (
-      <div className="header">
+      <div className={this.props.readme ? "header" : "header no-readme"}>
         <div className="top-row">
           <Search/>
           <div className="header-icons">

@@ -234,6 +234,7 @@ export default class App extends Component {
           <Header
             view={this.state.view}
             breadcrumbs={this.state.breadcrumbs}
+            readme={this.state.readme}
             docCount={this.state.total_docs}
             selection={this.state.selection}
             presentation={this.state.presentation}

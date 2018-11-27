@@ -3,7 +3,6 @@
 .documents-table-header {
   flex:0;
   margin:0 0 0 22px;
-  padding-right:14px;
   position:relative;
   box-shadow:0 4px 4px -4px rgba(96, 96, 96, 0.3);
 
@@ -59,7 +58,7 @@
   .column-options-btn {
     position:absolute;
     right:10px;
-    top:12px;
+    bottom:12px;
     font-size:14px;
     width:25px;
     height:25px;

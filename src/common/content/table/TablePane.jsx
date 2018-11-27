@@ -146,6 +146,7 @@ export default class TablePane extends Component {
     return (
       <React.Fragment>
         <div className="documents-table-header">
+          {readme}
           <HeaderRow 
             columns={this.state.columns} 
             onSort={this.sortBy.bind(this)}
@@ -156,8 +157,6 @@ export default class TablePane extends Component {
             className="column-options-btn nostyle icon"
             onClick={this.showPreferences.bind(this, true)} >&#xf141;</button>
         </div>
-
-        {readme}
 
         {this.props.disableFiledrop ? tablePane :
           <Dropzone
