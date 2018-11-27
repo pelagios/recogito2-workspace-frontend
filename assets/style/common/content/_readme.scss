@@ -1,13 +1,27 @@
-.container .readme {
-  padding:15px 15px 5px 15px;
-  background-color:lighten($lightgrey-border, 8%);
-  border-color:$lightgrey-border;
-  border-style:solid;
-  border-width:1px 0 1px 1px;
-  @include rounded-corners(3px);
+.container {
 
-  h1 {
-    font-size:22px;
+  .readme {
+    padding:15px 15px 5px 15px;
+    background-color:lighten($lightgrey-border, 8%);
+    border-color:$lightgrey-border;
+    border-style:solid;
+    border-width:1px 0 1px 1px;
+    @include rounded-corners-left(3px);
+
+    .inner {
+      outline:none;
+    }
+
+    h1 {
+      font-size:22px;
+    }
+
+  }
+
+  .readme.editing {
+    padding:15px;
+    border-color:$ocean;
+    background-color:rgba($ocean, 0.25);
   }
 
 }
