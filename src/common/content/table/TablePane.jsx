@@ -145,8 +145,9 @@ export default class TablePane extends Component {
 
     return (
       <React.Fragment>
+        {readme}
+
         <div className="documents-table-header">
-          {readme}
           <HeaderRow 
             columns={this.state.columns} 
             onSort={this.sortBy.bind(this)}
