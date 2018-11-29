@@ -20,6 +20,22 @@
 .subheader {
   position:relative;
 
+  .add-abstract {
+    margin-left:8px;
+    padding:2px 6px;
+    font-family:Assistant;
+    font-size:14px;
+    background-color:rgba($lightblue-type, 0.4);
+    color:#fff;
+    font-weight:bold;
+    @include rounded-corners(4px);
+  }
+
+  .add-abstract:hover {
+    background-color:$lightblue-type;
+    color:#fff;
+  }
+
   .subheader-icons {
     position:absolute;
     top:-4px;

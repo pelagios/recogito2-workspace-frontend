@@ -62,7 +62,16 @@ export default class Header extends Component {
           <Breadcrumbs 
             view={this.props.view}
             path={this.props.breadcrumbs}
-            count={this.props.docCount} />
+            count={this.props.docCount}>
+
+            {!this.props.readme &&
+              <button 
+                className="add-abstract nostyle"
+                onClick={this.props.onCreateReadme} >
+                Add description...
+              </button>
+            }
+          </Breadcrumbs>
 
           <div className="subheader-icons">
             <CSSTransition

@@ -5,17 +5,19 @@ import ContentEditable from "react-sane-contenteditable";
 export default class Readme extends Component {
 
   constructor(props) {
-    super(props);
-    this.state = { 
-      editing: false,
-      content: this.props.content
-    }
+    super(props);    
+    this.state = this.initialState(props);
   }
 
   componentWillReceiveProps(props) {
-    this.setState({
-      content: props.content
-    });
+    if (props.content !== this.state.content)
+      this.setState(this.initialState(props));
+  }
+
+  initialState(props) {
+    const editing = typeof props.content === 'boolean'
+    const content = (editing) ? '' : props.content;
+    return { editing: editing, content: content };
   }
 
   onEdit() {
@@ -36,10 +38,13 @@ export default class Readme extends Component {
   }
 
   onCancel() {
-    this.setState({
-      editing: false,
-      content: this.props.content
-    })
+    if (typeof this.props.content === 'boolean')
+      this.onDelete();
+    else
+      this.setState({
+        editing: false,
+        content: this.props.content
+      });
   }
 
   renderView() {

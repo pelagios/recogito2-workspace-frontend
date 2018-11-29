@@ -145,6 +145,7 @@ export default class App extends Component {
   }
 
   changeFolder() {
+    this.setState({ selection: [] });
     this.refreshCurrentView();
   }
 
@@ -230,6 +231,10 @@ export default class App extends Component {
       .then(this.fetchAccountData.bind(this));
   }
 
+  createReadme() {
+    this.setState({ readme: true });
+  }
+
   render() {
     const isUploading = this.state.fileUploads.length > 0 || this.state.urlUpload;
 
@@ -252,7 +257,8 @@ export default class App extends Component {
             presentation={this.state.presentation}
             onDelete={this.setBusy.bind(this, true)}
             afterDelete={this.afterDelete.bind(this)}
-            onTogglePresentation={this.togglePresentation.bind(this)} />
+            onTogglePresentation={this.togglePresentation.bind(this)} 
+            onCreateReadme={this.createReadme.bind(this)} />
 
           {this.state.presentation === 'TABLE' ?
             <TablePane

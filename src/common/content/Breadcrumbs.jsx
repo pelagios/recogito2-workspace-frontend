@@ -23,6 +23,8 @@ export default class Breadcrumbs extends Component {
         {this.props.count !== null &&
           <span className="count">{`(${this.props.count})`}</span>
         }
+
+        {this.props.children}
       </div>
     )
   }
