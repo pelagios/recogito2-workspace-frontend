@@ -183,12 +183,14 @@ export default class App extends Component {
 
   onUpdateReadme(readme) {
     const currentFolderId = document.location.hash.substring(1);
-    API.updateReadme(readme, currentFolderId);
+    API.updateReadme(readme, currentFolderId)
+       .then(this.setState({ readme: readme }));
   }
 
   onDeleteReadme() {
     const currentFolderId = document.location.hash.substring(1);
-    API.deleteReadme(currentFolderId); 
+    API.deleteReadme(currentFolderId)
+       .then(this.setState({ readme: null })); 
   }
 
   /** File upload **/
