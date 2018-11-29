@@ -187,7 +187,6 @@ export default class App extends Component {
   }
 
   onUpdateReadme(readme) {
-    console.log('update', readme);
     const currentFolderId = document.location.hash.substring(1);
     API.updateReadme(readme, currentFolderId)
        .then(this.setState({ readme: readme }));

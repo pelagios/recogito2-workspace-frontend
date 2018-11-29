@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import ContentEditable from "react-sane-contenteditable";
 
+const INITIAL_STATE = {
+  editing: false,
+  modifiedContent: null
+}
+
 export default class Readme extends Component {
 
   constructor(props) {
-    super(props);    
-    this.state = this.initialState(props);
-  }
-
-  initialState(props) {
-    const editing = typeof props.content === 'boolean'
-    const content = (editing) ? '' : props.content;
-    return { editing: editing, content: content };
+    super(props);
+    this.state = {};
   }
 
   onEdit() {
@@ -24,33 +23,27 @@ export default class Readme extends Component {
   }
 
   onChange(_, value) {
-    this.setState({ content: value });
+    this.setState({ modifiedContent: value });
   }
 
   onSave() {
-    this.setState({ 
-      editing: false 
-    }, () => {
-      this.props.onUpdate && this.props.onUpdate(this.state.content);
-    });
+    this.props.onUpdate && this.props.onUpdate(this.state.modifiedContent);
+    this.setState(INITIAL_STATE);
   }
 
   onCancel() {
     if (typeof this.props.content === 'boolean')
       this.onDelete();
     else
-      this.setState({
-        editing: false,
-        content: this.props.content
-      });
+      this.setState(INITIAL_STATE);
   }
 
-  renderView() {
+  renderView(content) {
     return (
       <div className="readme">
         <div className="wrapper">
           <div className="textbox">
-            <ReactMarkdown source={this.state.content} />       
+            <ReactMarkdown source={content} />       
           </div>
 
           <span className="buttons modify">
@@ -69,14 +62,14 @@ export default class Readme extends Component {
     )
   }
 
-  renderEdit() {
+  renderEdit(content) {
     return (
       <div className="readme editing">
         <div className="wrapper">
           <ContentEditable 
             tagName="div"
             className="textbox"
-            content={this.state.content} 
+            content={content} 
             editable={true} 
             multiLine={true}
             onChange={this.onChange.bind(this)}/>            
@@ -99,7 +92,11 @@ export default class Readme extends Component {
   }
 
   render() {
-    return this.state.editing ? this.renderEdit() : this.renderView();
+    const editOnOpen = typeof this.props.content === 'boolean';
+    const content = editOnOpen ? '' : 
+      (this.state.modifiedContent ? this.state.modifiedContent : this.props.content);
+
+    return this.state.editing ? this.renderEdit(content) : this.renderView(content);
   }
 
 }
