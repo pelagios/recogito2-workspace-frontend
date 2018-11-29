@@ -9,11 +9,6 @@ export default class Readme extends Component {
     this.state = this.initialState(props);
   }
 
-  componentWillReceiveProps(props) {
-    if (props.content !== this.state.content)
-      this.setState(this.initialState(props));
-  }
-
   initialState(props) {
     const editing = typeof props.content === 'boolean'
     const content = (editing) ? '' : props.content;
@@ -28,13 +23,11 @@ export default class Readme extends Component {
     this.props.onDelete && this.props.onDelete();
   }
 
-  onChange(evt, value) {
-    console.log(value);
+  onChange(_, value) {
     this.setState({ content: value });
   }
 
   onSave() {
-    console.log('saving');
     this.setState({ 
       editing: false 
     }, () => {
