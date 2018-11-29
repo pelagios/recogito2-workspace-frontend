@@ -9,6 +9,36 @@
       font-size:14px;
       border:1px solid darken($lightgrey-border-darker, 6%);
       @include rounded-corners(2px);
+
+      .buttons.modify {
+        position:absolute;
+        display:inline-block;
+        padding:0;
+        top:8px;
+        right:6px;
+        overflow:hidden;
+        @include rounded-corners(16px);
+
+        button { 
+          text-align:center;
+          color:#fff;
+          font-size:14px;
+          margin:0;
+          padding:6px 10px 6px 8px;
+          background-color:rgba($lightblue-type, 0.4);
+        }
+
+        button:first-child {
+          padding:6px 8px 6px 10px;
+          border-right:1px solid #fff;
+        }
+
+        button:hover {
+          background-color:$lightblue-type;
+        }
+
+      }
+
     }
 
     .wrapper::before {
@@ -25,23 +55,6 @@
 
     .textbox {
       padding:15px 15px 8px 15px;
-    }
-
-    button.edit {
-      position:absolute;
-      top:7px;
-      right:3px;
-      font-size:14px;
-    }
-
-    button {
-      font-size:18px;
-      color:$lightblue-type;
-      margin-left:5px;
-    }
-
-    button:hover {
-      color:rgba($standard-type, 0.8);
     }
 
     h1 {
@@ -67,11 +80,22 @@
     .editbar {
       position:relative;
       padding:10px 5px 10px 15px;
-      background-color:$blueish-white;
-      border-top:1px solid $lightgrey-border-darker;
+      background-color:lighten($blueish-white, 3%);
+      border-top:1px solid $lightgrey-border;
 
       .buttons {
         float:right;
+
+        button {
+          font-size:18px;
+          color:lighten($lightblue-type, 10%);
+          margin-left:5px;
+        }
+    
+        button:hover {
+          color:rgba($standard-type, 0.8);
+        }
+
       }
 
     }

@@ -22,6 +22,10 @@ export default class Readme extends Component {
     this.setState({ editing: true });
   }
 
+  onDelete() {
+    this.props.onDelete && this.props.onDelete();
+  }
+
   onChange(evt, value) {
     this.setState({ content: value });
   }
@@ -46,9 +50,17 @@ export default class Readme extends Component {
             <ReactMarkdown source={this.state.content} />       
           </div>
 
-          <button
-            className="edit icon nostyle"
-            onClick={this.onEdit.bind(this)}>&#xf040;</button>     
+          <span className="buttons modify">
+            <button
+              className="icon nostyle"
+              title="Delete"
+              onClick={this.onDelete.bind(this)}>&#xf05e;</button>  
+
+            <button
+              className="icon nostyle"
+              title="Edit"
+              onClick={this.onEdit.bind(this)}>&#xf040;</button>
+          </span>
         </div>
       </div>
     )
