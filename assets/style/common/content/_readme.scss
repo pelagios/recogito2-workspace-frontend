@@ -35,17 +35,29 @@
     }
 
     .textbox {
-      padding:10px;
+      padding:20px 10px;
+      line-height:140%;
+      font-size:16px;
     }
 
     h1 {
-      font-size:18px;
-      margin-bottom:px;
+      font-size:24px;
+      margin:10px 0 20px 0;
     }
 
     p {
       padding:0;
-      margin:5px 0;
+      margin:10px 0;
+    }
+
+    ul {
+      margin:10px 30px;
+      padding:0;
+    }
+
+    a {
+      color:$ocean;
+      font-weight:bold;
     }
 
   }
