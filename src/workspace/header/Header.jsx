@@ -68,7 +68,8 @@ export default class Header extends Component {
               <button 
                 className="add-abstract nostyle"
                 onClick={this.props.onCreateReadme} >
-                Add description...
+                <span className="icon">&#xf055;</span>
+                <span className="label">Add a description...</span>
               </button>
             }
           </Breadcrumbs>

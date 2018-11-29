@@ -29,12 +29,17 @@ export default class Readme extends Component {
   }
 
   onChange(evt, value) {
+    console.log(value);
     this.setState({ content: value });
   }
 
   onSave() {
-    this.props.onUpdate && this.props.onUpdate(this.state.content);
-    this.setState({ editing: false });
+    console.log('saving');
+    this.setState({ 
+      editing: false 
+    }, () => {
+      this.props.onUpdate && this.props.onUpdate(this.state.content);
+    });
   }
 
   onCancel() {

@@ -182,7 +182,12 @@ export default class App extends Component {
        .then(() => this.refreshCurrentView());
   }
 
+  createReadme() {
+    this.setState({ readme: true });
+  }
+
   onUpdateReadme(readme) {
+    console.log('update', readme);
     const currentFolderId = document.location.hash.substring(1);
     API.updateReadme(readme, currentFolderId)
        .then(this.setState({ readme: readme }));
@@ -229,10 +234,6 @@ export default class App extends Component {
     this.refreshCurrentView()
       .then(() => this.setState({ busy: false, selection: []}))
       .then(this.fetchAccountData.bind(this));
-  }
-
-  createReadme() {
-    this.setState({ readme: true });
   }
 
   render() {

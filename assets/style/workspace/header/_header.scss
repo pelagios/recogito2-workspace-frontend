@@ -21,19 +21,24 @@
   position:relative;
 
   .add-abstract {
-    margin-left:8px;
-    padding:2px 6px;
+    margin-left:6px;
     font-family:Assistant;
     font-size:14px;
-    background-color:rgba($lightblue-type, 0.4);
-    color:#fff;
+    color:$lightblue-type;
     font-weight:bold;
-    @include rounded-corners(4px);
+
+    .icon {
+      font-weight:normal;
+      padding-right:5px;
+    }
   }
 
   .add-abstract:hover {
-    background-color:$lightblue-type;
-    color:#fff;
+    color:$standard-type;
+
+    .label {
+      text-decoration:underline;
+    }
   }
 
   .subheader-icons {
