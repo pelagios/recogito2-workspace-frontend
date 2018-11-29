@@ -27,7 +27,8 @@ export default class Readme extends Component {
   }
 
   onSave() {
-
+    this.props.onUpdate && this.props.onUpdate(this.state.content);
+    this.setState({ editing: false });
   }
 
   onCancel() {

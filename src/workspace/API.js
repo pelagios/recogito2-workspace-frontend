@@ -19,6 +19,7 @@ export default class API {
     return fetchDocuments('my/shared', config);
   }
 
+  // ~~~ Folder actions ~~~
   static createFolder(title, parentId) {
     return axios.post('/api/folder', {
       title: title,
@@ -34,6 +35,7 @@ export default class API {
     return axios.delete(`/api/folder/${id}`);
   }
 
+  // ~~~ Document actions ~~~
   static bulkDeleteFolders(ids) {
     return axios.delete(`/api/folder/bulk`, { data: ids });
   }
@@ -54,6 +56,21 @@ export default class API {
 
   static bulkUnshareDocuments(ids) {
     return axios.delete('/api/shared/document/bulk', { data: ids });
+  }
+
+  // ~~~ Readme actions ~~~
+  static updateReadme(content, opt_folder_id) {
+    if (opt_folder_id)
+      return axios.post(`/api/folder/${opt_folder_id}/readme`, { data: content });
+    else
+      return axios.post('/api/directory/my/readme', { data: content });
+  }
+
+  static deleteReadme(opt_folder_id) {
+    if (opt_folder_id)
+      return axios.delete(`/api/folder/${opt_folder_id}/readme`);
+    else
+      return axios.delete('/api/directory/my/readme');
   }
 
 }

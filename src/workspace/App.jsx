@@ -181,6 +181,16 @@ export default class App extends Component {
        .then(() => this.refreshCurrentView());
   }
 
+  onUpdateReadme(readme) {
+    const currentFolderId = document.location.hash.substring(1);
+    API.updateReadme(readme, currentFolderId);
+  }
+
+  onDeleteReadme() {
+    const currentFolderId = document.location.hash.substring(1);
+    API.deleteReadme(currentFolderId); 
+  }
+
   /** File upload **/
   startUpload(files) {
     this.setState({ 
@@ -259,7 +269,12 @@ export default class App extends Component {
               onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} 
               onRenameFolder={this.onRenameFolder.bind(this)}>
 
-              {this.state.readme && <Readme content={this.state.readme} /> }
+              {this.state.readme && 
+                <Readme
+                  content={this.state.readme} 
+                  onUpdate={this.onUpdateReadme.bind(this)} 
+                  onDelete={this.onDeleteReadme.bind(this)} /> 
+              }
             </TablePane>
             :
             <GridPane
@@ -272,7 +287,12 @@ export default class App extends Component {
               onDropFiles={this.startUpload.bind(this)}
               onDropURL={this.startRegisterRemoteSource.bind(this)} >
               
-              {this.state.readme && <Readme content={this.state.readme} /> }
+              {this.state.readme && 
+                <Readme 
+                  content={this.state.readme} 
+                  onUpdate={this.onUpdateReadme.bind(this)} 
+                  onDelete={this.onDeleteReadme.bind(this)} /> 
+              }
             </GridPane>
           }
         </div>
