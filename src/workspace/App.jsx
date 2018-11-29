@@ -259,7 +259,7 @@ export default class App extends Component {
               onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} 
               onRenameFolder={this.onRenameFolder.bind(this)}>
 
-              {this.state.readme && <Readme>{this.state.readme}</Readme> }
+              {this.state.readme && <Readme content={this.state.readme} /> }
             </TablePane>
             :
             <GridPane
@@ -272,8 +272,7 @@ export default class App extends Component {
               onDropFiles={this.startUpload.bind(this)}
               onDropURL={this.startRegisterRemoteSource.bind(this)} >
               
-              {this.state.readme && 
-                <Readme>{this.state.readme}</Readme> }
+              {this.state.readme && <Readme content={this.state.readme} /> }
             </GridPane>
           }
         </div>

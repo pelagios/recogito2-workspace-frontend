@@ -3,14 +3,45 @@
   .readme {
     padding:10px 20px 10px 24px;
 
-    .inner {
+    .wrapper {
+      position:relative;
       outline:none;
       font-size:14px;
-      padding:15px 15px 8px 15px;
-      border:1px solid $lightgrey-border-darker;
-      background-color:$blueish-white;
-      box-shadow:inset 1px 1px 4px rgba(0, 0, 0, 0.1);
+      border:1px solid darken($lightgrey-border-darker, 6%);
       @include rounded-corners(2px);
+    }
+
+    .wrapper::before {
+      content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+      box-shadow:inset 1px 1px 6px rgba(0, 0, 0, 0.12);
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .textbox {
+      padding:15px 15px 8px 15px;
+    }
+
+    button.edit {
+      position:absolute;
+      top:7px;
+      right:3px;
+      font-size:14px;
+    }
+
+    button {
+      font-size:18px;
+      color:$lightblue-type;
+      margin-left:5px;
+    }
+
+    button:hover {
+      color:rgba($standard-type, 0.8);
     }
 
     h1 {
@@ -20,9 +51,31 @@
   }
 
   .readme.editing {
-    padding:15px;
-    border-color:$ocean;
-    background-color:rgba($ocean, 0.25);
+
+    .wrapper {
+      position:relative;
+      border-color:$ocean;
+      background-color:#fff;
+    }
+
+    .textbox {
+      padding:15px;
+      background-color:#fff;   
+      outline:none;
+    }
+
+    .editbar {
+      position:relative;
+      padding:10px 5px 10px 15px;
+      background-color:$blueish-white;
+      border-top:1px solid $lightgrey-border-darker;
+
+      .buttons {
+        float:right;
+      }
+
+    }
+
   }
 
 }
