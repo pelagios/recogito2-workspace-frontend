@@ -49,11 +49,6 @@ export default class Readme extends Component {
           <span className="buttons modify">
             <button
               className="icon nostyle"
-              title="Delete"
-              onClick={this.onDelete.bind(this)}>&#xf05e;</button>  
-
-            <button
-              className="icon nostyle"
               title="Edit"
               onClick={this.onEdit.bind(this)}>&#xf040;</button>
           </span>
@@ -75,8 +70,12 @@ export default class Readme extends Component {
             onChange={this.onChange.bind(this)}/>            
 
           <div className="editbar">
-            <span className="hint">Supports <a href="#">Markdown</a></span>
+            <span className="hint">Supports styling with <a href="#">Markdown</a></span>
             <span className="buttons">
+              <button
+                className="label nostyle"
+                onClick={this.onDelete.bind(this)}>Delete description</button>
+
               <button 
                 className="icon nostyle"
                 onClick={this.onSave.bind(this)}>&#xf00c;</button>
@@ -92,7 +91,6 @@ export default class Readme extends Component {
   }
 
   render() {
-    console.log(this.props);
     const editOnOpen = typeof this.props.content === 'boolean';
     const content = editOnOpen ? '' : 
       (this.state.modifiedContent ? this.state.modifiedContent : this.props.content);
