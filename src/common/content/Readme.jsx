@@ -92,11 +92,12 @@ export default class Readme extends Component {
   }
 
   render() {
+    console.log(this.props);
     const editOnOpen = typeof this.props.content === 'boolean';
     const content = editOnOpen ? '' : 
       (this.state.modifiedContent ? this.state.modifiedContent : this.props.content);
 
-    return this.state.editing ? this.renderEdit(content) : this.renderView(content);
+    return this.state.editing || editOnOpen ? this.renderEdit(content) : this.renderView(content);
   }
 
 }
