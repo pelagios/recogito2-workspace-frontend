@@ -159,7 +159,7 @@ export default class Uploader extends Component {
         this.props.onUploadComplete();
       }
     }).catch(error => {
-      console.log('Upload contained errors');
+      // console.log('Upload contained errors');
     });
   }
 
