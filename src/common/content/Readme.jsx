@@ -59,12 +59,14 @@ export default class Readme extends Component {
             <ReactMarkdown source={content} />       
           </div>
 
-          <span className="buttons modify">
-            <button
-              className="icon nostyle"
-              title="Edit"
-              onClick={this.onEdit.bind(this)}>&#xf040;</button>
-          </span>
+          {this.props.onUpdate && this.props.onDelete &&
+            <span className="buttons modify">
+              <button
+                className="icon nostyle"
+                title="Edit"
+                onClick={this.onEdit.bind(this)}>&#xf040;</button>
+            </span>
+          }
         </div>
       </div>
     )

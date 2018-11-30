@@ -35,7 +35,8 @@ export default class App extends Component {
       table_sorting  : null,
       busy           : false,
       documents      : null, // Can be null (not loaded yet) or [] (no shared documents)
-      total_docs     : null
+      total_docs     : null,
+      readme        : null
     }
 
     Object.assign(state, StoredUIState.load());
@@ -60,6 +61,7 @@ export default class App extends Component {
     API
       .fetchAccessibleDocuments(this._profileOwner, this.getDisplayConfig())
       .then(r => this.setState({ 
+        readme: r.data.readme,
         documents: r.data.items,
         total_docs: r.data.total
       }));
@@ -98,6 +100,8 @@ export default class App extends Component {
   }
 
   render() {
+    const documents = this.state.documents || [];
+
     return (
       <React.Fragment>
         <TopBar 
@@ -116,9 +120,9 @@ export default class App extends Component {
             icon={(this.state.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
             onClick={this.onTogglePresentation.bind(this)} />
 
-          {this.state.documents && this.state.visitedAccount && (
+          {this.state.visitedAccount && (
               
-              this.state.documents.length === 0 ? 
+              documents.length === 0 ? 
                 <div className="no-public-documents">
                   {this.state.visitedAccount.username} has not shared any documents yet
                 </div> :
@@ -126,7 +130,7 @@ export default class App extends Component {
                 this.state.presentation === 'TABLE' ?
                   <TablePane
                     folders={[]}
-                    documents={this.state.documents}
+                    documents={documents}
                     columns={this.state.table_columns}
                     sorting={this.state.table_sorting}
                     busy={this.state.busy} 
@@ -135,25 +139,17 @@ export default class App extends Component {
                     onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)}> 
 
                     {this.state.readme && 
-                      <Readme
-                        content={this.state.readme} 
-                        onUpdate={this.onUpdateReadme.bind(this)} 
-                        onDelete={this.onDeleteReadme.bind(this)} /> 
-                    }
+                      <Readme content={this.state.readme} /> }
                   </TablePane>
                   :
                   <GridPane
                     folders={[]}
-                    documents={this.state.documents}
+                    documents={documents}
                     busy={this.state.busy} 
                     disableFiledrop={true}>
 
                     {this.state.readme && 
-                      <Readme
-                        content={this.state.readme} 
-                        onUpdate={this.onUpdateReadme.bind(this)} 
-                        onDelete={this.onDeleteReadme.bind(this)} /> 
-                    }
+                      <Readme content={this.state.readme} /> }
                   </GridPane>
           )}
         </div>
