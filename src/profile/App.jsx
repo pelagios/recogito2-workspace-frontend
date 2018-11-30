@@ -7,11 +7,11 @@ import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
 import Breadcrumbs from '../common/content/Breadcrumbs.jsx';
 import HeaderIcon from '../common/content/HeaderIcon.jsx';
+import Readme from '../common/content/Readme.jsx';
 import StoredUIState from '../common/StoredUIState.js';
 import Sidebar from './sidebar/Sidebar.jsx';
 import TopBar from './top/TopBar.jsx';
 import { Columns } from '../common/content/table/Columns.js';
-
 
 import '../../assets/style/profile/index.scss';
 
@@ -132,13 +132,29 @@ export default class App extends Component {
                     busy={this.state.busy} 
                     disableFiledrop={true} 
                     onSort={this.onSortTable.bind(this)} 
-                    onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} /> 
+                    onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)}> 
+
+                    {this.state.readme && 
+                      <Readme
+                        content={this.state.readme} 
+                        onUpdate={this.onUpdateReadme.bind(this)} 
+                        onDelete={this.onDeleteReadme.bind(this)} /> 
+                    }
+                  </TablePane>
                   :
                   <GridPane
                     folders={[]}
                     documents={this.state.documents}
                     busy={this.state.busy} 
-                    disableFiledrop={true} />
+                    disableFiledrop={true}>
+
+                    {this.state.readme && 
+                      <Readme
+                        content={this.state.readme} 
+                        onUpdate={this.onUpdateReadme.bind(this)} 
+                        onDelete={this.onDeleteReadme.bind(this)} /> 
+                    }
+                  </GridPane>
           )}
         </div>
       </React.Fragment>
