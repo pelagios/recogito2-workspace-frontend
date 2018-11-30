@@ -105,6 +105,10 @@ export default class Readme extends Component {
 
   render() {
     const editOnOpen = typeof this.props.content === 'boolean';
+
+    if (editOnOpen)
+      document.addEventListener('keydown', this.onKeydown, false);
+
     const content = editOnOpen ? '' : 
       (this.state.modifiedContent ? this.state.modifiedContent : this.props.content);
 
