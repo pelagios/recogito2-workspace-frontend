@@ -12,26 +12,39 @@ export default class Readme extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.onKeydown = this.onKeydown.bind(this);
+  }
+
+  onKeydown(evt) {
+    if (evt.which === 27) // Esc
+      this.onCancel(); 
+    else if (evt.ctrlKey && evt.which === 13) // Ctrl+Enter 
+      this.onSave();
   }
 
   onEdit() {
+    document.addEventListener('keydown', this.onKeydown, false);
     this.setState({ editing: true });
-  }
-
-  onDelete() {
-    this.props.onDelete && this.props.onDelete();
   }
 
   onChange(_, value) {
     this.setState({ modifiedContent: value });
   }
 
+  onDelete() {
+    document.removeEventListener('keydown', this.onKeydown, false);
+    this.props.onDelete && this.props.onDelete();
+  }
+
   onSave() {
+    document.removeEventListener('keydown', this.onKeydown, false);
     this.props.onUpdate && this.props.onUpdate(this.state.modifiedContent);
     this.setState(INITIAL_STATE);
   }
 
   onCancel() {
+    document.removeEventListener('keydown', this.onKeydown, false);
     if (typeof this.props.content === 'boolean')
       this.onDelete();
     else
@@ -95,7 +108,7 @@ export default class Readme extends Component {
     const content = editOnOpen ? '' : 
       (this.state.modifiedContent ? this.state.modifiedContent : this.props.content);
 
-    return this.state.editing || editOnOpen ? this.renderEdit(content) : this.renderView(content);
+    return (this.state.editing || editOnOpen) ? this.renderEdit(content) : this.renderView(content);
   }
 
 }
