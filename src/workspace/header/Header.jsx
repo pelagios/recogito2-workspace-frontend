@@ -64,7 +64,7 @@ export default class Header extends Component {
             path={this.props.breadcrumbs}
             count={this.props.docCount}>
 
-            {!this.props.readme &&
+            {!this.props.readme && this.props.view === 'MY_DOCUMENTS' &&
               <button 
                 className="add-abstract nostyle"
                 onClick={this.props.onCreateReadme} >
