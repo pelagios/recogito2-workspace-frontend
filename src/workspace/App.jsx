@@ -305,8 +305,6 @@ export default class App extends Component {
           }
         </div>
 
-        <NERModal/>
-
         { isUploading && 
           <Uploader
             files={this.state.fileUploads} 
