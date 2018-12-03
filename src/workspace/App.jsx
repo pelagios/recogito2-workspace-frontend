@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import NERModal from '../../common-components/src/ner/NERModal.jsx'; 
+import NERModal from '../common-components/src/ner/NERModal.jsx'; 
 
 import API from './API.js';
 import GridPane from '../common/content/grid/GridPane.jsx';
