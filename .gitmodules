@@ -1,0 +1,3 @@
+[submodule "common-components"]
+	path = common-components
+	url = git@github.com:pelagios/recogito2-ui-components.git
