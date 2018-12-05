@@ -67,6 +67,7 @@ export default class Header extends Component {
     if (option === 'NER')
       this.setState({ action: 
         <NERAction
+          selection={this.props.selection}
           onCancel={this.cancelAction.bind(this)} /> 
       });
   }
