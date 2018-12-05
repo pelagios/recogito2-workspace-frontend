@@ -15,7 +15,7 @@ export default class NERModal extends Component {
 
       selected_engine: null,
       selected_all_authorities: true,
-      selected_authorities: [] // AUTHORITIES.map(a => a.identifier)
+      selected_authorities: []
     };
 
     this.initAvailableAuthorities();
