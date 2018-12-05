@@ -6,6 +6,7 @@ import HeaderIcon from '../../common/content/HeaderIcon.jsx';
 import Breadcrumbs from '../../common/content/Breadcrumbs.jsx';
 import MenuPopup from '../../common/components/MenuPopup.jsx';
 import DeleteAction from '../actions/DeleteAction.jsx';
+import NERAction from '../actions/NERAction.jsx';
 
 export default class Header extends Component {
 
@@ -26,11 +27,20 @@ export default class Header extends Component {
 
   /** User clicked the DELETE button in the mini-menu */
   startDeleteAction() {
-    this.setState({ action: 'DELETE' });
+    const deleteAction =
+      <DeleteAction
+        view={this.props.view}
+        selection={this.props.selection}
+        onStart={this.props.onDelete}
+        onSuccess={this.onDeleteSuccess.bind(this)}
+        onError={this.onDeleteError.bind(this)}
+        onCancel={this.cancelAction.bind(this)} />
+
+    this.setState({ action: deleteAction });
   }
 
   /** User clicked CANCEL in the warning prompt **/
-  cancelDelete() {
+  cancelAction() {
     this.setState({ action: null });
   }
 
@@ -53,7 +63,12 @@ export default class Header extends Component {
 
   onSelectMenuOption(option) { 
     this.setState({ menuVisible: false });
-    // if (option === 'NER')
+    
+    if (option === 'NER')
+      this.setState({ action: 
+        <NERAction
+          onCancel={this.cancelAction.bind(this)} /> 
+      });
   }
 
   onCancelMenu() {
@@ -125,15 +140,7 @@ export default class Header extends Component {
               icon={(this.props.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
               onClick={this.props.onTogglePresentation} />
 
-            {this.state.action === 'DELETE' &&
-                <DeleteAction
-                  view={this.props.view}
-                  selection={this.props.selection}
-                  onStart={this.props.onDelete}
-                  onSuccess={this.onDeleteSuccess.bind(this)}
-                  onError={this.onDeleteError.bind(this)}
-                  onCancel={this.cancelDelete.bind(this)} />
-            }
+            {this.state.action}
           </div>
         </div>
       </div>
