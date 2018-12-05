@@ -42,7 +42,7 @@ export default class NERModal extends Component {
     this.setState({ authorities: authorities });
   }
 
-  onSave() {
+  onStart() {
     const response = { engine: this.state.engine };
 
     if (this.state.all_authorities)
@@ -50,7 +50,7 @@ export default class NERModal extends Component {
     else 
       response.authorities = this.state.authorities;
 
-    this.props.onSave(response);
+    this.props.onStart(response);
   }
 
   render() {
@@ -80,7 +80,7 @@ export default class NERModal extends Component {
         <div className="buttons">
           <button
             className="btn start"
-            onClick={this.onSave.bind(this)}>Start NER</button>
+            onClick={this.onStart.bind(this)}>Start NER</button>
 
           <button 
             className="btn outline cancel"
