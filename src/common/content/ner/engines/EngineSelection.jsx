@@ -25,7 +25,7 @@ export default class EngineSelection extends Component {
                 </td>
 
                 <td className="languages">
-                  { engine.languages.map(lang => <span>{lang}</span>) }
+                  { engine.languages.map(lang => <span key={lang}>{lang}</span>) }
                 </td>
 
                 <td className="description">

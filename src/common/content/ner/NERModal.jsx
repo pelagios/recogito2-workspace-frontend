@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Modal from '../../components/Modal.jsx';
 import AuthoritySelection from './authorities/AuthoritySelection.jsx';
 import EngineSelection from './engines/EngineSelection.jsx';
-
-const ENGINES = [
-  { identifier: 'stanford_en', name: "StanfordNER", languages: ["EN"], description: "Default Stanford NER with English language model" }
-];
 
 const AUTHORITIES = [
   { "identifier":"http://pleiades.stoa.org", "authority_type":"PLACE", "shortname":"Pleiades", "fullname":"Pleiades Gazetteer of the Ancient World", "homepage":"http://pleiades.stoa.org", "shortcode":"pleiades", "color":"#1f77b4" },
@@ -22,33 +19,64 @@ export default class NERModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      engine: 'stanford_en',
-      all_authorities: true,
-      authorities: AUTHORITIES.map(a => a.identifier)
-    }
+      available_engines: [],
+      available_authorities: [],
+
+      selected_engine: null,
+      selected_all_authorities: true,
+      selected_authorities: [] // AUTHORITIES.map(a => a.identifier)
+    };
+
+    this.initAvailableAuthorities();
+    this.initAvailableEngines();
+  }
+
+  isInitComplete() {
+    return this.state.available_engines.length > 0 &&
+      this.state.available_authorities.length > 0;
+  }
+
+  initAvailableEngines() {
+    if (this.state.available_engines.length === 0)
+      axios.get('/api/plugins/ner')
+        .then(result => {
+          const diff = { available_engines: result.data };
+
+          if (!this.state.selected_engine) // Select first as default
+            diff.selected_engine = result.data[0] && result.data[0].identifier;
+
+          this.setState(diff);
+        });
+  }
+
+  initAvailableAuthorities() {
+    axios.get('/api/authorities/gazetteers')
+      .then(result => {
+        console.log(result.data);
+      });
   }
 
   changeEngine(identifier) {
-    this.setState({ engine: identifier });
+    this.setState({ selected_engine: identifier });
   }
 
   toggleAllAuthorities() {
     this.setState(prev => {
-      return { all_authorities: !prev.all_authorities }
+      return { selected_all_authorities: !prev.selected_all_authorities }
     });
   }
 
   changeAuthorities(authorities) {
-    this.setState({ authorities: authorities });
+    this.setState({ selected_authorities: authorities });
   }
 
   onStart() {
-    const response = { engine: this.state.engine };
+    const response = { engine: this.state.selected_engine };
 
-    if (this.state.all_authorities)
+    if (this.state.selected_all_authorities)
       response.all_authorities = true;
     else 
-      response.authorities = this.state.authorities;
+      response.authorities = this.state.selected_authorities;
 
     this.props.onStart(response);
   }
@@ -66,14 +94,14 @@ export default class NERModal extends Component {
         </p>
 
         <EngineSelection 
-          engines={ENGINES} 
-          selected={this.state.engine}
+          engines={this.state.available_engines} 
+          selected={this.state.selected_engine}
           onChange={this.changeEngine.bind(this)} />
 
         <AuthoritySelection 
           authorities={AUTHORITIES} 
-          useAll={this.state.all_authorities}
-          selected={this.state.authorities}
+          useAll={this.state.selected_all_authorities}
+          selected={this.state.selected_authorities}
           onToggleAll={this.toggleAllAuthorities.bind(this)} 
           onChange={this.changeAuthorities.bind(this)} />
 
