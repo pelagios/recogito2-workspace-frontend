@@ -84,12 +84,17 @@
     .selection-actions-enter,
     .selection-actions-enter-done {
       // width:112px;
-      width:40px;
+      width:72px;
     }
         
     .selection-actions-exit, 
     .selection-actions-exit-done {
       width:0;
+    }
+
+    .modal-menu.selection-actions-menu {
+      top:46px;
+      right:35px;
     }
 
     .presentation-toggle {

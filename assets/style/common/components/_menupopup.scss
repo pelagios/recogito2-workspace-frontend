@@ -21,9 +21,13 @@
   .group {
     padding:5px 0;
     border-bottom:1px solid $lightgrey-border;
+    font-weight:bold;
+    font-size:16px;
+    font-family:Assistant;
 
     .icon {
       font-size:14px;
+      font-weight:normal;
       display:inline-block;
       width:16px;
       padding-right:4px;

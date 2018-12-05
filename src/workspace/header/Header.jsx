@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import Search from './search/Search.jsx';
 import HeaderIcon from '../../common/content/HeaderIcon.jsx';
 import Breadcrumbs from '../../common/content/Breadcrumbs.jsx';
+import MenuPopup from '../../common/components/MenuPopup.jsx';
 import DeleteAction from '../actions/DeleteAction.jsx';
 
 export default class Header extends Component {
@@ -11,7 +12,8 @@ export default class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      action: null 
+      action: null,
+      menuVisible: false
     };
 
     document.body.addEventListener('keydown', this.onKeydown.bind(this), false);
@@ -43,6 +45,19 @@ export default class Header extends Component {
     this.setState({ action: null }, () => {
       this.props.afterDelete(); // TODO error message
     });
+  }
+
+  showActionsMenu() {
+    this.setState({ menuVisible: true });
+  }
+
+  onSelectMenuOption(option) { 
+    this.setState({ menuVisible: false });
+    // if (option === 'NER')
+  }
+
+  onCancelMenu() {
+    this.setState({ menuVisible: false });
   }
 
   render() {
@@ -87,9 +102,23 @@ export default class Header extends Component {
                   className="delete icon" 
                   onClick={this.startDeleteAction.bind(this)}>&#xf014;</span>
 
-                {/* <span className="more icon">&#xf078;</span> */}
+                <span 
+                  className="more icon"
+                  onClick={this.showActionsMenu.bind(this)}>&#xf078;</span>
               </div>
             </CSSTransition>
+
+            {this.state.menuVisible &&
+              <MenuPopup
+                className="selection-actions-menu"
+                menu={[
+                  { group: 'root', options: [
+                    { icon: '\uf085', label: 'Named Entity Recognition', value: 'NER' }
+                  ]}
+                ]} 
+                onSelect={this.onSelectMenuOption.bind(this)}
+                onCancel={this.onCancelMenu.bind(this)} />
+            }
 
             <HeaderIcon
               className="presentation-toggle stroke7"
