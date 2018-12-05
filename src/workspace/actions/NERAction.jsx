@@ -18,6 +18,7 @@ export default class NERAction extends Component {
       config
     );
 
+    // TODO wait for response, get a task ID, fire up the progress monitor
     axios.post('/api/task', taskDefinition);
   }
 
