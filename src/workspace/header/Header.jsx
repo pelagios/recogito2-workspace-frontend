@@ -61,6 +61,10 @@ export default class Header extends Component {
     this.setState({ menuVisible: true });
   }
 
+  actionStarted(jobId) {
+    this.setState({ action: null });
+  }
+
   onSelectMenuOption(option) { 
     this.setState({ menuVisible: false });
     
@@ -68,6 +72,7 @@ export default class Header extends Component {
       this.setState({ action: 
         <NERAction
           selection={this.props.selection}
+          onStarted={this.actionStarted.bind(this)}
           onCancel={this.cancelAction.bind(this)} /> 
       });
   }

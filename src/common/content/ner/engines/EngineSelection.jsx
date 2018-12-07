@@ -6,7 +6,7 @@ export default class EngineSelection extends Component {
     return (
       <div className="engines">
         <h2>Recognition Engines</h2>
-        <table cellspacing="0">
+        <table cellSpacing="0">
           <tbody>
             {this.props.engines.map(engine =>
               <tr
