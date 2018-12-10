@@ -65,8 +65,14 @@ export default class JobProgress extends Component {
             onClick={this.onClose.bind(this)}>&#xe897;</button>
         </div>
 
-        <div className="progress">
-          <Meter value={0.33} />
+        <div className="body">
+          <div className="message">
+            Completing task 3 of 9
+          </div>
+
+          <div className="progress">
+            <Meter value={0.33} />
+          </div>
         </div>
       </div>
     )

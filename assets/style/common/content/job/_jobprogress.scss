@@ -3,12 +3,12 @@
   bottom:40px;
   right:40px;
   width:460px;
-  // border:1px solid darken($ocean, 10%);
+  border:1px solid darken($ocean, 10%);
   @include box-shadow(1px, 1px, 14px, 0.5);
 
   .header {
     position:relative;
-    padding:8px 15px;
+    padding:10px 15px;
     color:#fff;
     font-weight:bold;
     background-color:$ocean;
@@ -16,7 +16,7 @@
 
     button.close {
       position:absolute;
-      top:11px;
+      top:14px;
       right:12px;
       margin:0;
       padding:0;
@@ -26,5 +26,35 @@
     }
 
   }
+
+  .body {
+
+    .message {
+      padding:14px 15px;
+      font-weight:bold;
+      background-color:$blueish-white;
+      border-bottom:1px solid $lightgrey-border-darker;
+    }
+
+    .progress {
+      padding:25px 15px;
+      background-color:#fff;
+      // border-bottom:1px solid $lightgrey-border;
+      
+      .meter {
+        height:4px;
+        background-color:$lightgrey-border;
+        overflow:hidden;
+        @include rounded-corners(2px);
+
+        .bar {
+          background-color:$ocean;
+        }
+      }
+    }
+
+  }
+
+
 
 }

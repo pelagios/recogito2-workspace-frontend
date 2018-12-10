@@ -306,7 +306,7 @@ export default class App extends Component {
           }
         </div>
 
-        <JobProgress title="NER" />
+        <JobProgress title="Named Entity Recognition" />
 
         { isUploading && 
           <Uploader
