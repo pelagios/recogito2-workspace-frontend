@@ -1,0 +1,30 @@
+.job-progress {
+  position:absolute;
+  bottom:40px;
+  right:40px;
+  width:460px;
+  // border:1px solid darken($ocean, 10%);
+  @include box-shadow(1px, 1px, 14px, 0.5);
+
+  .header {
+    position:relative;
+    padding:8px 15px;
+    color:#fff;
+    font-weight:bold;
+    background-color:$ocean;
+    border-bottom:1px solid darken($ocean, 10%);
+
+    button.close {
+      position:absolute;
+      top:11px;
+      right:12px;
+      margin:0;
+      padding:0;
+      color:#fff;
+      font-family:Tonicons;
+      font-weight:bold;
+    }
+
+  }
+
+}

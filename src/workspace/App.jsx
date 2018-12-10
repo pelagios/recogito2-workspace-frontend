@@ -8,6 +8,7 @@ import Readme from '../common/content/Readme.jsx';
 import { Columns } from '../common/content/table/Columns.js';
 import StoredUIState from '../common/StoredUIState.js';
 import Uploader from '../common/content/upload/Uploader.jsx';
+import JobProgress from '../common/content/job/JobProgress.jsx';
 
 import Header from './header/Header.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
@@ -304,6 +305,8 @@ export default class App extends Component {
             </GridPane>
           }
         </div>
+
+        <JobProgress title="NER" />
 
         { isUploading && 
           <Uploader
