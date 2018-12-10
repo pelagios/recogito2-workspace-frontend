@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import Meter from '../../components/Meter.jsx';
@@ -8,46 +9,33 @@ export default class JobProgress extends Component {
   constructor(props) {
     super(props);
 
-    // Using this to track ONE JOB only!
-    // Props should have ONLY... 
-    // - job ID 
-    // - title 
-
-    // The rest is in the state, which is updated via the 
-    // API responses
-
-    /*
-    {
-      "document_id" : "ry72uwi9bw7ofl",
-      "status" : "COMPLETED",
-      "progress" : 100,
-      "subtasks" : [ {
-        "task_type" : "NER",
-        "filepart_id" : "c817840c-fe07-465f-9042-c0a109070694",
-        "status" : "COMPLETED",
-        "progress" : 100
-      } ]
-    }
-    */
-
-
     this.state = {
-      title: '',
-      errors: []
-    }
+      status: 'PENDING',
+      progress: 0, // 0 - 100
+      tasks: 0,
+      tasksCompleted: 0
+    };
+
+    this.pollProgress();
   }
 
-  pollProgress(jobId) { 
-    axios.get(`/api/job/${jobId}`)
+  pollProgress() { 
+    axios.get(`/api/job/${this.props.jobId}`)
       .then(result => {
-        /* Update status per file
-        this.state.filepartIds.map(id => this.updateStatusForFile(id, result.data));
+        this.setState({
+          status: result.data.status,
+          progress: result.data.progress,
+          tasks: result.data.subtasks.length,
+          tasksCompleted: result.data.subtasks.filter(t => t.status === 'COMPLETED').length,
+          tasksFailed: result.data.subtasks.filter(t => t.status === 'FAILED').length
+        });
+
         const isDone = result.data.status === 'COMPLETED' || result.data.status === 'FAILED';
-        if (isDone)
-          this.props.onUploadComplete()
-        else
-          setTimeout(() => this.pollTaskProgress(documentId, taskTypes), 1000);
-        */
+        if (isDone) {
+          
+        } else {
+          setTimeout(() => this.pollProgress(), 1000);
+        }
       });
   }
 
@@ -56,7 +44,7 @@ export default class JobProgress extends Component {
   }
 
   render() {
-    return (
+    return ReactDOM.createPortal(
       <div className="job-progress">
         <div className="header">
           {this.props.title}
@@ -67,14 +55,15 @@ export default class JobProgress extends Component {
 
         <div className="body">
           <div className="message">
-            Completing task 3 of 9
+            Completed {this.state.tasksCompleted} of {this.state.tasks} tasks
           </div>
 
           <div className="progress">
-            <Meter value={0.33} />
+            <Meter value={this.state.progress / 100} />
           </div>
         </div>
-      </div>
+      </div>,
+      document.body
     )
   }
 

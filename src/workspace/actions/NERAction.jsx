@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+import JobProgress from '../../common/content/job/JobProgress.jsx';
 import NERModal from '../../common/content/ner/NERModal.jsx';
 
 export default class NERAction extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { running: false };
+  }
 
   startNER(config) {
     const documents = this.props.selection.filter(d => {
@@ -20,18 +26,27 @@ export default class NERAction extends Component {
 
     axios.post('/api/job', taskDefinition)
       .then(response => {
-        console.log(response.data);
-        this.props.onStarted();
+        this.setState({
+          running: true,
+          jobId: response.data.job_id
+        });
+
+        // this.props.onStarted();
       });
   }
 
   render() {
-    return ReactDOM.createPortal(
-      <NERModal 
-         onStart={this.startNER.bind(this)}
-         onCancel={this.props.onCancel} />, 
-      document.body
-    )
+    if (this.state.running)
+      return <JobProgress 
+        title="Named Entity Recognition"
+        jobId={this.state.jobId} />
+    else
+      return ReactDOM.createPortal(
+        <NERModal 
+          onStart={this.startNER.bind(this)}
+          onCancel={this.props.onCancel} />, 
+        document.body
+      )
   }
 
 }

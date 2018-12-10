@@ -306,8 +306,6 @@ export default class App extends Component {
           }
         </div>
 
-        <JobProgress title="Named Entity Recognition" />
-
         { isUploading && 
           <Uploader
             files={this.state.fileUploads} 
