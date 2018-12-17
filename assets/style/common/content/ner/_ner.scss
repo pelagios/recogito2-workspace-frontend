@@ -29,6 +29,10 @@
         border-collapse:separate;
       }
 
+      tr.spacer {
+        height:5px;
+      }
+
       td {
         padding:2px 8px;
         background-color:$blueish-white;
@@ -48,13 +52,15 @@
         @include rounded-corners-right(3px);
       }
 
-      .name {
+      td.name {
         font-weight:bold;
       }
 
-      .languages {
+      td.languages {
+        text-align:center;
         
         span {
+          width:20px;
           background-color:rgba($ocean, 0.8);
           display:inline-block;
           font-size:14px;

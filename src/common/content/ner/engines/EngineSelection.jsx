@@ -9,29 +9,33 @@ export default class EngineSelection extends Component {
         <table cellSpacing="0">
           <tbody>
             {this.props.engines.map(engine =>
-              <tr
-                key={engine.name}>
-                <td className="name">
-                  <input 
-                    id={engine.identifier}
-                    type="radio" 
-                    group="engines" 
-                    checked={this.props.selected === engine.identifier}
-                    onChange={this.props.onChange.bind(this, engine.identifier)} />
-                  
-                  <label htmlFor={engine.identifier}>
-                    <span className="name">{engine.name}</span>
-                  </label>
-                </td>
+              <React.Fragment>
+                <tr
+                  key={engine.name}>
+                  <td className="name">
+                    <input 
+                      id={engine.identifier}
+                      type="radio" 
+                      group="engines" 
+                      checked={this.props.selected === engine.identifier}
+                      onChange={this.props.onChange.bind(this, engine.identifier)} />
+                    
+                    <label htmlFor={engine.identifier}>
+                      <span className="name">{engine.name}</span>
+                    </label>
+                  </td>
 
-                <td className="languages">
-                  { engine.languages.map(lang => <span key={lang}>{lang}</span>) }
-                </td>
+                  <td className="languages">
+                    { engine.languages.map(lang => <span key={lang}>{lang}</span>) }
+                  </td>
 
-                <td className="description">
-                  {engine.description}
-                </td>
-              </tr>
+                  <td className="description">
+                    {engine.description}
+                  </td>
+                </tr>
+                
+                <tr className="spacer"></tr>
+              </React.Fragment>
             )}
           </tbody>
         </table>
