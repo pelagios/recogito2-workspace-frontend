@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 
 import API from '../../API.js';
 import MenuPopup from '../../../common/components/MenuPopup.jsx';
+import ImportIIIFAction from '../../actions/ImportIIIFAction.jsx';
+
+import URLInput from '../../../common/components/URLInput.jsx';
 
 export default class CreateNew extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { menuVisible: false };
+    this.state = { 
+      menuVisible: false,
+      action: null
+    };
   }
 
   onShowOptions() {
@@ -22,6 +28,8 @@ export default class CreateNew extends Component {
          .then(() => this.props.onFolderCreated());
     } else if (option === 'FILE') {
       this._input.click();
+    } else if (option === 'IIIF') {
+      this.setState({ action: <ImportIIIFAction /> });
     }
   }
 
@@ -37,6 +45,7 @@ export default class CreateNew extends Component {
   render() {
     return (
       <div className="section create-new">
+        <URLInput />
         <button
           className="btn create-new"
           onClick={this.onShowOptions.bind(this)}>
@@ -61,13 +70,15 @@ export default class CreateNew extends Component {
               ]},
 
               { group: 'remote', options: [
-                { icon: '\uf0c1', label: 'From IIIF manifest', value: 'IIIF', disabled: true },
+                { icon: '\uf0c1', label: 'From IIIF manifest', value: 'IIIF' },
                 { icon: '\uf121', label: 'From CTS service', value: 'CTS', disabled: true }
               ]}
             ]}
             onSelect={this.onSelectOption.bind(this)}
             onCancel={this.onCancel.bind(this)} />
         }
+
+        {this.state.action}
       </div>
     )
   }
