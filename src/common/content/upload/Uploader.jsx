@@ -185,7 +185,7 @@ export default class Uploader extends Component {
    * Polls import task progress
    */
   pollTaskProgress(documentId, taskTypes) {    
-    axios.get(`/api/task?id=${documentId}`)
+    axios.get(`/api/job?id=${documentId}`)
       .then(result => {
         // Update status per file
         this.state.filepartIds.map(id => this.updateStatusForFile(id, result.data));
@@ -193,6 +193,11 @@ export default class Uploader extends Component {
         if (isDone)
           this.props.onUploadComplete()
         else
+          setTimeout(() => this.pollTaskProgress(documentId, taskTypes), 1000);
+      })
+      .catch(error => {
+        if (error.response.status === 404)
+          // Tasks might still be initializing
           setTimeout(() => this.pollTaskProgress(documentId, taskTypes), 1000);
       });
   }
