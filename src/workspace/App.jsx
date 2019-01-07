@@ -246,7 +246,8 @@ export default class App extends Component {
           onFolderCreated={this.refreshCurrentView.bind(this)}
           onUploadFiles={this.startUpload.bind(this)}
           currentView={this.state.view}
-          onChangeView={this.changeView.bind(this)} />
+          onChangeView={this.changeView.bind(this)} 
+          onCreateFromSource={this.startRegisterRemoteSource.bind(this)} />
 
         <div className="container">
           <Header

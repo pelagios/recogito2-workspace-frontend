@@ -10,9 +10,12 @@ import Storage   from './sections/Storage.jsx';
 
 export default class Sidebar extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { collaborators: [] };
+  state = { collaborators: [] };
+
+  handleCreateFromSource = (value) => {
+    if (value.source === 'IIIF') {
+      this.props.onCreateFromSource && this.props.onCreateFromSource(value.url);
+    }
   }
 
   render() {
@@ -23,7 +26,8 @@ export default class Sidebar extends Component {
 
         <CreateNew 
           onFolderCreated={this.props.onFolderCreated}
-          onUploadFiles={this.props.onUploadFiles} />
+          onUploadFiles={this.props.onUploadFiles} 
+          onCreateFromSource={this.handleCreateFromSource}/>
           
         <ViewList
           account={this.props.account}

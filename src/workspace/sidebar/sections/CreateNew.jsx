@@ -37,7 +37,8 @@ export default class CreateNew extends Component {
   }
 
   handleFormSubmit = (value) => {
-    
+    this.props.onCreateFromSource && this.props.onCreateFromSource(value);
+    this.setState({ externalSourceForm: null });
   }
 
   handleFormCancel = () => {
