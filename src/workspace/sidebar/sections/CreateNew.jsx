@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import API from '../../API.js';
 import MenuPopup from '../../../common/components/MenuPopup.jsx';
-import ImportIIIFAction from '../../actions/ImportIIIFAction.jsx';
-
-import URLInput from '../../../common/components/URLInput.jsx';
+import IIIFSourceForm from './sources/IIIFSourceForm.jsx';
 
 export default class CreateNew extends Component {
 
@@ -12,7 +10,7 @@ export default class CreateNew extends Component {
     super(props);
     this.state = { 
       menuVisible: false,
-      action: null
+      externalSourceForm: null // Popup form for specifying data source details
     };
   }
 
@@ -29,7 +27,7 @@ export default class CreateNew extends Component {
     } else if (option === 'FILE') {
       this._input.click();
     } else if (option === 'IIIF') {
-      this.setState({ action: <ImportIIIFAction /> });
+      this.setState({ externalSourceForm: <IIIFSourceForm /> });
     }
   }
 
@@ -45,7 +43,6 @@ export default class CreateNew extends Component {
   render() {
     return (
       <div className="section create-new">
-        <URLInput />
         <button
           className="btn create-new"
           onClick={this.onShowOptions.bind(this)}>
@@ -78,7 +75,7 @@ export default class CreateNew extends Component {
             onCancel={this.onCancel.bind(this)} />
         }
 
-        {this.state.action}
+        {this.state.externalSourceForm}
       </div>
     )
   }

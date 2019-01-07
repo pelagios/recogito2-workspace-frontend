@@ -19,6 +19,11 @@
   .icon { margin-right:4px; }
 }
 
+.btn.tiny {
+  padding:3px 15px;
+  font-size:14px;
+}
+
 .btn:hover {
   background-color:$ocean-hover;
   border-color:$ocean-hover;

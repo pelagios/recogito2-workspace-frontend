@@ -1,0 +1,28 @@
+.modal-wrapper.iiif-source {
+  width:440px;
+  min-width:440px;
+  max-width:440px;
+
+  .modal {
+    top:30%;
+  }
+
+  .modal-body {
+    padding:20px;
+  }
+
+  input.url-input {
+    width:100%;
+  }
+
+  .buttons {
+    padding-top:15px;
+    text-align:right;
+
+    button {
+      margin-left:3px;
+    }
+
+  }
+
+}
