@@ -7,7 +7,10 @@ export default class URLInput extends Component {
   }
 
   handleChange = (evt) => {
-    this.setState({ value: evt.target.value });
+    const val = evt.target.value;
+
+    this.setState({ value: val });
+    this.props.onChange && this.props.onChange(val);
   }
 
   handleDrop = (evt) => {

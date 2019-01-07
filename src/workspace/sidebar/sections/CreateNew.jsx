@@ -27,8 +27,21 @@ export default class CreateNew extends Component {
     } else if (option === 'FILE') {
       this._input.click();
     } else if (option === 'IIIF') {
-      this.setState({ externalSourceForm: <IIIFSourceForm /> });
+      this.setState({
+        externalSourceForm:
+          <IIIFSourceForm 
+            onSubmit={this.handleFormSubmit} 
+            onCancel={this.handleFormCancel} /> 
+      });
     }
+  }
+
+  handleFormSubmit = (value) => {
+    
+  }
+
+  handleFormCancel = () => {
+    this.setState({ externalSourceForm: null });
   }
 
   onUploadFiles(evt) {

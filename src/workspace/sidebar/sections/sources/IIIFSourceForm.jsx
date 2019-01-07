@@ -5,12 +5,34 @@ import URLInput from '../../../../common/components/URLInput.jsx';
 
 export default class IIIFSourceForm extends Component {
 
+  state = { sourceURL: null }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeydown, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeydown, false);
+  }
+
+  handleKeydown = (evt) => {
+    // Escape key
+    if (evt.which === 27) this.handleCancel();
+  }
+  
+  handleChange = (value) => {
+    this.setState({ sourceURL: value });
+  }
+
   handleOk = () => {
-    console.log('ok');
+    this.props.onSubmit && this.props.onSubmit({
+      source: 'IIIF',
+      url: this.state.sourceURL
+    });    
   }
 
   handleCancel = () => {
-    console.log('cancel');
+    this.props.onCancel && this.props.onCancel();    
   }
 
   render() {
@@ -20,6 +42,7 @@ export default class IIIFSourceForm extends Component {
           <div className="modal">
             <div className="modal-body">
               <URLInput 
+                onChange={this.handleChange}
                 onSubmit={this.handleOk} />
 
               <div className="buttons">
