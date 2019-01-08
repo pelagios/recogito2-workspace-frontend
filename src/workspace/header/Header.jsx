@@ -47,14 +47,18 @@ export default class Header extends Component {
   /** Delete executed successfully **/
   onDeleteSuccess() {
     this.setState({ action: null }, () => {
-      this.props.afterDelete();
+      this.props.afterAction();
     });
   }
 
   onDeleteError(error) {
     this.setState({ action: null }, () => {
-      this.props.afterDelete(); // TODO error message
+      this.props.afterAction(); // TODO error message
     });
+  }
+
+  handleNERComplete() {
+    setTimeout(() => this.props.afterAction(), 500);
   }
 
   showActionsMenu() {
@@ -73,6 +77,7 @@ export default class Header extends Component {
         <NERAction
           selection={this.props.selection}
           onStarted={this.actionStarted.bind(this)}
+          onComplete={this.handleNERComplete.bind(this)}
           onCancel={this.cancelAction.bind(this)} 
           onClose={this.cancelAction.bind(this)} /> 
       });

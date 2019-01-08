@@ -12,7 +12,7 @@ export default class NERAction extends Component {
     this.state = { running: false };
   }
 
-  startNER(config) {
+  startNER = (config) => {
     const documents = this.props.selection.filter(d => {
       const isDocument = d.type === 'DOCUMENT'
       const hasTextParts = d.filetypes.filter(t => t.startsWith('TEXT_')).length > 0;
@@ -30,9 +30,11 @@ export default class NERAction extends Component {
           running: true,
           jobId: response.data.job_id
         });
-
-        // this.props.onStarted();
       });
+  }
+
+  handleCompleted = () => {
+    this.props.onComplete && this.props.onComplete();
   }
 
   render() {
@@ -40,11 +42,14 @@ export default class NERAction extends Component {
       return <JobProgress 
         title="Named Entity Recognition"
         jobId={this.state.jobId} 
-        onClose={this.props.onClose} />
+        onComplete={this.handleCompleted}
+        onClose={this.props.onClose}
+        labelCompleted="Parsed"
+        labelTasks="files" />
     } else {
       return ReactDOM.createPortal(
         <NERModal 
-          onStart={this.startNER.bind(this)}
+          onStart={this.startNER}
           onCancel={this.props.onCancel} />, 
         document.body
       )

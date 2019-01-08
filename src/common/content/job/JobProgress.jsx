@@ -31,11 +31,15 @@ export default class JobProgress extends Component {
         });
 
         const isDone = result.data.status === 'COMPLETED' || result.data.status === 'FAILED';
-        if (isDone) {
-          
-        } else {
+        if (isDone)
+          this.props.onComplete && this.props.onComplete();
+        else
           setTimeout(() => this.pollProgress(), 1000);
-        }
+      })
+      .catch(error => {
+        if (error.response.status === 404)
+          // Tasks might still be initializing
+          setTimeout(() => this.pollProgress(), 1000);
       });
   }
 
@@ -47,6 +51,9 @@ export default class JobProgress extends Component {
     const isDone = 
       this.state.status === 'COMPLETED' || 
       this.state.status === 'FAILED';
+
+    const labelCompleted = this.props.labelCompleted || 'Completed';
+    const labelTasks = this.props.labelTasks || 'tasks';
 
     return ReactDOM.createPortal(
       <div className="job-progress">
@@ -60,7 +67,7 @@ export default class JobProgress extends Component {
 
         <div className="body">
           <div className="message">
-            Completed {this.state.tasksCompleted} of {this.state.tasks} tasks
+            {labelCompleted} {this.state.tasksCompleted} of {this.state.tasks} {labelTasks}
             <span className={`icon spinner ${this.state.status}`}></span>
           </div>
 

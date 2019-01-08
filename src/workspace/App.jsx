@@ -230,7 +230,7 @@ export default class App extends Component {
     this.setState({ busy: busy });
   }
 
-  afterDelete() {
+  afterAction() {
     this.refreshCurrentView()
       .then(() => this.setState({ busy: false, selection: []}))
       .then(this.fetchAccountData.bind(this));
@@ -258,7 +258,7 @@ export default class App extends Component {
             selection={this.state.selection}
             presentation={this.state.presentation}
             onDelete={this.setBusy.bind(this, true)}
-            afterDelete={this.afterDelete.bind(this)}
+            afterAction={this.afterAction.bind(this)}
             onTogglePresentation={this.togglePresentation.bind(this)} 
             onCreateReadme={this.createReadme.bind(this)} />
 
