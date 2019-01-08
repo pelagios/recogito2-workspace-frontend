@@ -69,16 +69,31 @@ export default class Header extends Component {
     this.setState({ action: null });
   }
 
+  isSingleSelection() {
+    return this.props.selection.length === 1;
+  }
+
+  isSingleFolderSelection() {
+    return this.isSingleSelection() && this.props.selection[0].type === 'FOLDER';
+  }
+
+  isSingleDocumentSelection() {
+    return this.isSingleSelection() && this.props.selection[0].type === 'DOCUMENT';
+  }
+
   onSelectMenuOption(option) { 
     this.setState({ menuVisible: false });
 
     const firstSelected = this.props.selection[0];
-    const isDocument = firstSelected.type === 'DOCUMENT';
-    
+
     if (option === 'OPEN') {
-      if (isDocument) window.location.href= `document/${firstSelected.id}/part/1/edit`;
+      if (this.isSingleDocumentSelection()) 
+        window.location.href= `document/${firstSelected.id}/part/1/edit`;
+      else if (this.isSingleFolderSelection())
+        window.location.hash = firstSelected.id;
     } else if (option === 'OPEN_TAB') {
-      if (isDocument) window.open(`document/${firstSelected.id}/part/1/edit`, '_blank');
+      if (this.isSingleDocumentSelection()) 
+        window.open(`document/${firstSelected.id}/part/1/edit`, '_blank');
     } else if (option === 'DELETE') {
       this.startDeleteAction();
     } else if (option === 'NER') {
@@ -145,8 +160,8 @@ export default class Header extends Component {
                 className="selection-actions-menu"
                 menu={[
                   { group: 'open', options: [
-                    { label: 'Open', value: 'OPEN', disabled: this.props.selection.length !== 1},
-                    { label: 'Open in new tab', value: 'OPEN_TAB', disabled: this.props.selection.length !== 1 }
+                    { label: 'Open', value: 'OPEN', disabled: !this.isSingleSelection() },
+                    { label: 'Open in new tab', value: 'OPEN_TAB', disabled: !this.isSingleDocumentSelection() }
                   ]},
                   { group: 'file-ops', options: [
                     { icon: '\uf114', label: 'Move to', value: 'MOVE_TO', disabled: true },
@@ -154,7 +169,7 @@ export default class Header extends Component {
                     { icon: '\uf014', label: 'Delete', value: 'DELETE' }
                   ]},
                   { group: 'jobs', options: [
-                    { icon: '\uf085', label: 'Named Entity Recognition', value: 'NER' }
+                    { icon: '\uf085', label: 'Named Entity Recognition', value: 'NER', disabled: !this.isSingleDocumentSelection() }
                   ]}
                 ]} 
                 onSelect={this.onSelectMenuOption.bind(this)}
