@@ -122,16 +122,14 @@ export default class Header extends Component {
               timeout={500} 
               classNames="selection-actions">
 
-              <div className="selection-actions">              
-                {/* <span className="share icon">&#xf234;</span> */}
-
-                <span
+              <div 
+                className="selection-actions"
+                onClick={this.showActionsMenu.bind(this)}>              
+                <span className="label">Options</span>
+                {/* <span
                   className="delete icon" 
-                  onClick={this.startDeleteAction.bind(this)}>&#xf014;</span>
-
-                <span 
-                  className="more icon"
-                  onClick={this.showActionsMenu.bind(this)}>&#xf078;</span>
+                onClick={this.startDeleteAction.bind(this)}>&#xf014;</span> */}
+                <span className="more icon">&#xf078;</span>
               </div>
             </CSSTransition>
 
@@ -139,7 +137,16 @@ export default class Header extends Component {
               <MenuPopup
                 className="selection-actions-menu"
                 menu={[
-                  { group: 'root', options: [
+                  { group: 'open', options: [
+                    { label: 'Open', value: 'OPEN' },
+                    { label: 'Open in new tab', value: 'OPEN' }
+                  ]},
+                  { group: 'file-ops', options: [
+                    { icon: '\uf114', label: 'Move to', value: 'MOVE_TO', disabled: true },
+                    { icon: '\uf0c5', label: 'Duplicate', value: 'DUPLICATE', disabled: true },
+                    { icon: '\uf014', label: 'Delete', value: 'DELETE' }
+                  ]},
+                  { group: 'jobs', options: [
                     { icon: '\uf085', label: 'Named Entity Recognition', value: 'NER' }
                   ]}
                 ]} 
