@@ -39,19 +39,18 @@ export default class GridPane extends Component {
     const isShift = evt.getModifierState("Shift");
     const isCtrl = evt.getModifierState("Control");
 
-    console.log('selecting', item);
+    const isSelectAction =
+      isShift || isCtrl || !this.props.selection.includes(item);
 
-    if (isShift)
-      this.state.selection.selectRange(idx);
-    else
-      this.state.selection.selectItem(item, isCtrl);
+    if (isSelectAction) {
+      if (isShift)
+        this.state.selection.selectRange(idx);
+      else
+        this.state.selection.selectItem(item, isCtrl);
 
-    this.props.onSelect(this.state.selection.getSelectedItems());
-    evt.preventDefault();
-  }
-
-  onDoubleClick(item) {
-    window.location.href= `document/${item.id}/part/1/edit`;
+      this.props.onSelect(this.state.selection.getSelectedItems());
+      evt.preventDefault();
+    }
   }
 
   rowRenderer(itemsPerRow, rowCount) {
@@ -84,8 +83,7 @@ export default class GridPane extends Component {
               filetypes={item.filetypes}
               fileCount={item.file_count}
               selected={this.props.selection && this.props.selection.includes(item)}
-              onClick={e => this.onClick(e, item, args.index)} 
-              onDoubleClick={this.onDoubleClick.bind(this, item)} />
+              onClick={e => this.onClick(e, item, args.index)} />
           )
       });
 

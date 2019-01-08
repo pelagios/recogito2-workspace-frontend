@@ -7,22 +7,21 @@ export default class Document extends Component {
     const isStacked = this.props.fileCount > 1;
 
     return (
-      <div
+      <a href={`document/${this.props.id}/part/1/edit`}
         className={`cell${(this.props.selected) ? ' selected' : ''}`}
-        onClick={this.props.onClick}
-        onDoubleClick={this.props.onDoubleClick} >
+        onClick={this.props.onClick} >
         
         <div className="inner">
           <div className={`item-wrapper${isStacked ? ' stacked' : ''}`}>
             { isStacked && <div className="stack" /> }
-            <a href={`document/${this.props.id}/part/1/edit`} className={`document ${type}`}>
+            <div className={`document ${type}`}>
               <div className="label">
                 {this.props.title}
               </div>
-            </a>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     )
   }
 
