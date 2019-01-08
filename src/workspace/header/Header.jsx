@@ -71,8 +71,17 @@ export default class Header extends Component {
 
   onSelectMenuOption(option) { 
     this.setState({ menuVisible: false });
+
+    const firstSelected = this.props.selection[0];
+    const isDocument = firstSelected.type === 'DOCUMENT';
     
-    if (option === 'NER')
+    if (option === 'OPEN') {
+      if (isDocument) window.location.href= `document/${firstSelected.id}/part/1/edit`;
+    } else if (option === 'OPEN_TAB') {
+      if (isDocument) window.open(`document/${firstSelected.id}/part/1/edit`, '_blank');
+    } else if (option === 'DELETE') {
+      this.startDeleteAction();
+    } else if (option === 'NER') {
       this.setState({ action: 
         <NERAction
           selection={this.props.selection}
@@ -81,6 +90,7 @@ export default class Header extends Component {
           onCancel={this.cancelAction.bind(this)} 
           onClose={this.cancelAction.bind(this)} /> 
       });
+    }
   }
 
   onCancelMenu() {
@@ -126,9 +136,6 @@ export default class Header extends Component {
                 className="selection-actions"
                 onClick={this.showActionsMenu.bind(this)}>              
                 <span className="label">Options</span>
-                {/* <span
-                  className="delete icon" 
-                onClick={this.startDeleteAction.bind(this)}>&#xf014;</span> */}
                 <span className="more icon">&#xf078;</span>
               </div>
             </CSSTransition>
@@ -138,8 +145,8 @@ export default class Header extends Component {
                 className="selection-actions-menu"
                 menu={[
                   { group: 'open', options: [
-                    { label: 'Open', value: 'OPEN' },
-                    { label: 'Open in new tab', value: 'OPEN' }
+                    { label: 'Open', value: 'OPEN', disabled: this.props.selection.length !== 1},
+                    { label: 'Open in new tab', value: 'OPEN_TAB', disabled: this.props.selection.length !== 1 }
                   ]},
                   { group: 'file-ops', options: [
                     { icon: '\uf114', label: 'Move to', value: 'MOVE_TO', disabled: true },
