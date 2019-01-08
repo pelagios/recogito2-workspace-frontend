@@ -22,7 +22,7 @@ export default class Header extends Component {
 
   onKeydown(evt) {
     if (this.props.selection.length > 0 && evt.which === 46)
-      this.setState({ action: 'DELETE' });
+      this.startDeleteAction();
   }
 
   /** User clicked the DELETE button in the mini-menu */
