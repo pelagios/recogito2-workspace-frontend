@@ -1,3 +1,4 @@
+@import "../../components/spinner";
 @import "dropzone";
 
 .upload-progress {
@@ -44,35 +45,6 @@
       position:relative;
       padding:12px 15px;
       border-bottom:1px solid $lightgrey-border-darker;
-    }
-
-    .icon.spinner {
-      position:absolute;
-      top:12px;
-      right:20px;
-      display:inline-block;
-      width:14px;
-      height:14px;
-      line-height:20px;
-    }
-
-    .icon.spinner.UPLOADING,
-    .icon.spinner.RUNNING {
-      border:2px solid rgba($ocean, 0.3);
-      border-top:2px solid $ocean;
-      border-radius:50%;
-      -webkit-animation:loadRotation 1s infinite linear;
-              animation:loadRotation 1s infinite linear;
-    }
-
-    .icon.spinner.SUCCESS::before {
-      content:'\f00c';
-      color:#008000;
-    }
-
-    .icon.spinner.FAILED::before {
-      content:'\f00d';
-      color:#800000;
     }
     
   }

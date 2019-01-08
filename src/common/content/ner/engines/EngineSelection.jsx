@@ -8,10 +8,9 @@ export default class EngineSelection extends Component {
         <h2>Recognition Engines</h2>
         <table cellSpacing="0">
           <tbody>
-            {this.props.engines.map(engine =>
-              <React.Fragment>
-                <tr
-                  key={engine.name}>
+            {this.props.engines.map((engine, idx) =>
+              <React.Fragment key={idx}>
+                <tr>
                   <td className="name">
                     <input 
                       id={engine.identifier}

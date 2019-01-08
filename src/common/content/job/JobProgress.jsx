@@ -61,6 +61,7 @@ export default class JobProgress extends Component {
         <div className="body">
           <div className="message">
             Completed {this.state.tasksCompleted} of {this.state.tasks} tasks
+            <span className={`icon spinner ${this.state.status}`}></span>
           </div>
 
           <div className="progress">

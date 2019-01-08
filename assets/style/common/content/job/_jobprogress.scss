@@ -1,3 +1,5 @@
+@import "../../components/spinner";
+
 .job-progress {
   position:absolute;
   bottom:40px;
@@ -30,10 +32,15 @@
   .body {
 
     .message {
+      position:relative;
       padding:14px 15px;
       font-weight:bold;
       background-color:$blueish-white;
       border-bottom:1px solid $lightgrey-border-darker;
+
+      .icon.spinner {
+        top:16px;
+      }
     }
 
     .progress {
