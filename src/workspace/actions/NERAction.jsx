@@ -36,17 +36,19 @@ export default class NERAction extends Component {
   }
 
   render() {
-    if (this.state.running)
+    if (this.state.running) {
       return <JobProgress 
         title="Named Entity Recognition"
-        jobId={this.state.jobId} />
-    else
+        jobId={this.state.jobId} 
+        onClose={this.props.onClose} />
+    } else {
       return ReactDOM.createPortal(
         <NERModal 
           onStart={this.startNER.bind(this)}
           onCancel={this.props.onCancel} />, 
         document.body
       )
+    }
   }
 
 }

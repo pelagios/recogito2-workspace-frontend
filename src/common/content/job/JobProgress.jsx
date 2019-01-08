@@ -39,18 +39,23 @@ export default class JobProgress extends Component {
       });
   }
 
-  onClose() {
-
+  handleClose = () => {
+    this.props.onClose && this.props.onClose();
   }
 
   render() {
+    const isDone = 
+      this.state.status === 'COMPLETED' || 
+      this.state.status === 'FAILED';
+
     return ReactDOM.createPortal(
       <div className="job-progress">
         <div className="header">
           {this.props.title}
-          <button 
+          {isDone && <button 
             className="close nostyle"
-            onClick={this.onClose.bind(this)}>&#xe897;</button>
+            onClick={this.handleClose}>&#xe897;</button>
+          }
         </div>
 
         <div className="body">

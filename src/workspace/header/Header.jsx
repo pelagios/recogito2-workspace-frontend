@@ -73,7 +73,8 @@ export default class Header extends Component {
         <NERAction
           selection={this.props.selection}
           onStarted={this.actionStarted.bind(this)}
-          onCancel={this.cancelAction.bind(this)} /> 
+          onCancel={this.cancelAction.bind(this)} 
+          onClose={this.cancelAction.bind(this)} /> 
       });
   }
 
