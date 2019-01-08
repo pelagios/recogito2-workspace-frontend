@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import API from '../../API.js';
 import MenuPopup from '../../../common/components/MenuPopup.jsx';
-import IIIFSourceForm from './sources/IIIFSourceForm.jsx';
+import CreateFolderForm from './forms/CreateFolderForm.jsx';
+import IIIFSourceForm from './forms/IIIFSourceForm.jsx';
 
 export default class CreateNew extends Component {
 
@@ -10,7 +11,7 @@ export default class CreateNew extends Component {
     super(props);
     this.state = { 
       menuVisible: false,
-      externalSourceForm: null // Popup form for specifying data source details
+      createNewForm: null // Popup form for specifying data source details
     };
   }
 
@@ -21,14 +22,21 @@ export default class CreateNew extends Component {
   onSelectOption(option) {
     this.setState({ menuVisible: false });
     if (option === 'FOLDER') {
+      this.setState({
+        createNewForm: 
+          <CreateFolderForm 
+            onCancel={this.handleFormCancel} />
+      });
+      /*
       const currentFolderId = document.location.hash.substring(1);
       API.createFolder('Unnamed Folder', currentFolderId)
          .then(() => this.props.onFolderCreated());
+      */
     } else if (option === 'FILE') {
       this._input.click();
     } else if (option === 'IIIF') {
       this.setState({
-        externalSourceForm:
+        createNewForm:
           <IIIFSourceForm 
             onSubmit={this.handleFormSubmit} 
             onCancel={this.handleFormCancel} /> 
@@ -38,11 +46,11 @@ export default class CreateNew extends Component {
 
   handleFormSubmit = (value) => {
     this.props.onCreateFromSource && this.props.onCreateFromSource(value);
-    this.setState({ externalSourceForm: null });
+    this.setState({ createNewForm: null });
   }
 
   handleFormCancel = () => {
-    this.setState({ externalSourceForm: null });
+    this.setState({ createNewForm: null });
   }
 
   onUploadFiles(evt) {
@@ -89,7 +97,7 @@ export default class CreateNew extends Component {
             onCancel={this.onCancel.bind(this)} />
         }
 
-        {this.state.externalSourceForm}
+        {this.state.createNewForm}
       </div>
     )
   }

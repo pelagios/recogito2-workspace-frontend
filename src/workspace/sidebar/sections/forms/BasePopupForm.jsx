@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import URLInput from '../../../../common/components/URLInput.jsx';
-
-export default class IIIFSourceForm extends Component {
-
-  state = { sourceURL: null }
+export default class BasePopupForm extends Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown, false);
@@ -19,16 +15,9 @@ export default class IIIFSourceForm extends Component {
     // Escape key
     if (evt.which === 27) this.handleCancel();
   }
-  
-  handleChange = (value) => {
-    this.setState({ sourceURL: value });
-  }
 
   handleOk = () => {
-    this.props.onSubmit && this.props.onSubmit({
-      source: 'IIIF',
-      url: this.state.sourceURL
-    });    
+    this.props.onOk && this.props.onOk();
   }
 
   handleCancel = () => {
@@ -36,16 +25,15 @@ export default class IIIFSourceForm extends Component {
   }
 
   render() {
-    const popup =
+    return (
       <div className={`clicktrap ${this.props.className}`}>
-        <div className="modal-wrapper iiif-source">
+        <div
+          className={`modal-wrapper popup-form ${this.props.className}`}>
           <div className="modal">
             <div className="modal-body">
-              <URLInput 
-                autofocus={true}
-                placeholder="Paste or drag IIIF manifest URL"
-                onChange={this.handleChange}
-                onSubmit={this.handleOk} />
+              <div className="form-body">
+                {this.props.children}
+              </div>
 
               <div className="buttons">
                 <button 
@@ -60,8 +48,7 @@ export default class IIIFSourceForm extends Component {
           </div>
         </div>
       </div>
-
-    return ReactDOM.createPortal(popup, document.body);
+    )
   }
 
 }

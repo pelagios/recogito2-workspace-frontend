@@ -1,4 +1,4 @@
-.modal-wrapper.iiif-source {
+.modal-wrapper.popup-form {
   width:440px;
   min-width:440px;
   max-width:440px;
@@ -12,8 +12,16 @@
     padding:20px;
   }
 
-  input.url-input {
+  input {
     width:100%;
+    padding:5px;
+    font-size:14px;
+    font-family:Assistant;
+    font-weight:bold;
+  }
+  
+  input:focus {
+    border-color:$ocean;
   }
 
   .buttons {
