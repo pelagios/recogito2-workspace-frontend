@@ -72,7 +72,7 @@ export default class GridPane extends Component {
               id={item.id}
               title={item.title} 
               selected={this.props.selection && this.props.selection.includes(item)}
-              onClick={e => this.onClick(e, item, args.index)} />
+              onClick={e => this.onClick(e, item, idx)} />
           )
         else
           return (
@@ -83,7 +83,7 @@ export default class GridPane extends Component {
               filetypes={item.filetypes}
               fileCount={item.file_count}
               selected={this.props.selection && this.props.selection.includes(item)}
-              onClick={e => this.onClick(e, item, args.index)} />
+              onClick={e => this.onClick(e, item, idx)} />
           )
       });
 
