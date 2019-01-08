@@ -20,7 +20,7 @@ export default class URLInput extends Component {
 
   handleKeyPress = (evt) => {
     if (evt.which === 13) // Enter
-      this.props.onSubmit && this.props.onSubmit(this.state.value);
+      this.props.onSubmit && this.props.onSubmit();
   }
 
   render() {

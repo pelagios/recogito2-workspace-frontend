@@ -14,7 +14,7 @@ export default class IIIFSourceForm extends Component {
 
   handleOk = () => {
     this.props.onSubmit && this.props.onSubmit({
-      source: 'IIIF',
+      type: 'IIIF_SOURCE',
       url: this.state.sourceURL
     });    
   }

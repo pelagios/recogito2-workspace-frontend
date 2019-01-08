@@ -12,12 +12,15 @@ export default class CreateFolderForm extends Component {
   }
 
   handleOk = () => {
-    /*
     this.props.onSubmit && this.props.onSubmit({
-      source: 'NEW_FOLDER',
-      url: this.state.folderName
+      type: 'NEW_FOLDER',
+      name: this.state.folderName
     });    
-    */
+  }
+
+  handleKeyPress = (evt) => {
+    if (evt.which === 13) // Enter
+      this.handleOk();
   }
 
   render() {
@@ -25,13 +28,13 @@ export default class CreateFolderForm extends Component {
       <BasePopupForm
         onOk={this.handleOk}
         onCancel={this.props.onCancel}>
-
         <input 
           type="text" 
           autoFocus={true}
           placeholder="Folder name"
           value={this.state.folderName || ''}
-          onChange={this.handleChange} />
+          onChange={this.handleChange} 
+          onKeyPress={this.handleKeyPress} />
       </BasePopupForm>
 
     return ReactDOM.createPortal(popup, document.body);

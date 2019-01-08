@@ -25,13 +25,9 @@ export default class CreateNew extends Component {
       this.setState({
         createNewForm: 
           <CreateFolderForm 
+            onSubmit={this.handleFormSubmit}
             onCancel={this.handleFormCancel} />
       });
-      /*
-      const currentFolderId = document.location.hash.substring(1);
-      API.createFolder('Unnamed Folder', currentFolderId)
-         .then(() => this.props.onFolderCreated());
-      */
     } else if (option === 'FILE') {
       this._input.click();
     } else if (option === 'IIIF') {
@@ -45,7 +41,14 @@ export default class CreateNew extends Component {
   }
 
   handleFormSubmit = (value) => {
-    this.props.onCreateFromSource && this.props.onCreateFromSource(value);
+    if (value.type === 'IIIF_SOURCE') {
+      this.props.onCreateFromSource && this.props.onCreateFromSource(value);
+    } else if (value.type === 'NEW_FOLDER') {
+      const currentFolderId = document.location.hash.substring(1);
+      API.createFolder(value.name || 'Unnamed Folder', currentFolderId)
+         .then(() => this.props.onFolderCreated());
+    }
+
     this.setState({ createNewForm: null });
   }
 
