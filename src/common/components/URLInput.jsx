@@ -29,6 +29,7 @@ export default class URLInput extends Component {
     return (
       <input 
         type="text" 
+        autoFocus={this.props.autofocus}
         className="url-input"
         value={this.state.value}
         placeholder={placeholder} 

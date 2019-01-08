@@ -42,6 +42,8 @@ export default class IIIFSourceForm extends Component {
           <div className="modal">
             <div className="modal-body">
               <URLInput 
+                autofocus={true}
+                placeholder="Paste or drag IIIF manifest URL"
                 onChange={this.handleChange}
                 onSubmit={this.handleOk} />
 

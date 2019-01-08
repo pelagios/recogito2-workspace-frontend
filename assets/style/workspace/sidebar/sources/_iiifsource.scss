@@ -5,6 +5,7 @@
 
   .modal {
     top:30%;
+    @include rounded-corners(2px);
   }
 
   .modal-body {
