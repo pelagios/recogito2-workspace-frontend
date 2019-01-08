@@ -52,11 +52,6 @@ export default class TablePane extends Component {
     }
   }
 
-  onContextMenu(evt, item, idx) {
-    // TODO
-    evt.preventDefault();
-  }
-
   rowRenderer() {
     const allItems = this.props.folders.concat(this.props.documents);
 
@@ -72,7 +67,6 @@ export default class TablePane extends Component {
             item={item} 
             selected={selected}
             onClick={e => this.onClick(e, item, args.index)} 
-            onContextMenu={e => this.onContextMenu(e, item, args.index)}
             onRename={this.props.onRenameFolder} />
         )
       else
@@ -83,8 +77,7 @@ export default class TablePane extends Component {
             columns={this.state.columns}
             item={item}
             selected={selected}
-            onClick={e => this.onClick(e, item, args.index)} 
-            onContextMenu={e => this.onContextMenu(e, item, args.index)} />
+            onClick={e => this.onClick(e, item, args.index)} />
         )
     })
   }

@@ -43,8 +43,7 @@ export default class FolderRow extends Component {
         href={`#${this.props.item.id}`} 
         style={this.props.style}
         className={`row folder${(this.props.selected) ? ' selected' : ''}`}
-        onClick={this.props.onClick}
-        onContextMenu={this.props.onContextMenu}>
+        onClick={this.props.onClick}>
 
         <span className="folder-title">
           {this.state.editable ? 

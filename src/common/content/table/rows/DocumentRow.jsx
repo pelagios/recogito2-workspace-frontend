@@ -126,8 +126,7 @@ export default class DocumentRow extends BaseRowComponent {
       <div
         className={`row${(this.props.selected) ? ' selected' : ''}`}
         style={this.props.style}
-        onClick={this.props.onClick} 
-        onContextMenu={this.props.onContextMenu}>
+        onClick={this.props.onClick} >
         
         { this.props.columns.map(field => field.startsWith('agg_') ? 
           this.createAggregateField(url, field) : this.createField(url, field)) }

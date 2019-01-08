@@ -39,6 +39,8 @@ export default class GridPane extends Component {
     const isShift = evt.getModifierState("Shift");
     const isCtrl = evt.getModifierState("Control");
 
+    console.log('selecting', item);
+
     if (isShift)
       this.state.selection.selectRange(idx);
     else
@@ -66,7 +68,12 @@ export default class GridPane extends Component {
 
         if (item.type === 'FOLDER')
           return (
-            <Folder key={idx} title={item.title} />
+            <Folder
+              key={idx} 
+              id={item.id}
+              title={item.title} 
+              selected={this.props.selection && this.props.selection.includes(item)}
+              onClick={e => this.onClick(e, item, args.index)} />
           )
         else
           return (
