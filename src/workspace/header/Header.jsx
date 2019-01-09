@@ -76,12 +76,12 @@ export default class Header extends Component {
     const firstSelected = this.props.selection[0];
 
     if (option === 'OPEN') {
-      if (this.props.selection.isSingleDocument()) 
+      if (Selection.isSingleDocument(this.props.selection)) 
         window.location.href= `document/${firstSelected.id}/part/1/edit`;
-      else if (this.props.selection.isSingleFolder())
+      else if (Selection.isSingleFolder(this.props.selection))
         window.location.hash = firstSelected.id;
     } else if (option === 'OPEN_TAB') {
-      if (this.props.selection.isSingleDocument()) 
+      if (Selection.isSingleDocument(this.props.selection)) 
         window.open(`document/${firstSelected.id}/part/1/edit`, '_blank');
     } else if (option === 'DELETE') {
       this.startDeleteAction();
