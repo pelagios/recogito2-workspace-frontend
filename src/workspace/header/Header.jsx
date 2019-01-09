@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import Search from './search/Search.jsx';
 import HeaderIcon from '../../common/content/HeaderIcon.jsx';
+import Selection from '../../common/content/Selection.js';
 import Breadcrumbs from '../../common/content/Breadcrumbs.jsx';
 import MenuPopup from '../../common/components/MenuPopup.jsx';
 import DeleteAction from '../actions/DeleteAction.jsx';
@@ -69,30 +70,18 @@ export default class Header extends Component {
     this.setState({ action: null });
   }
 
-  isSingleSelection() {
-    return this.props.selection.length === 1;
-  }
-
-  isSingleFolderSelection() {
-    return this.isSingleSelection() && this.props.selection[0].type === 'FOLDER';
-  }
-
-  isSingleDocumentSelection() {
-    return this.isSingleSelection() && this.props.selection[0].type === 'DOCUMENT';
-  }
-
   onSelectMenuOption(option) { 
     this.setState({ menuVisible: false });
 
     const firstSelected = this.props.selection[0];
 
     if (option === 'OPEN') {
-      if (this.isSingleDocumentSelection()) 
+      if (this.props.selection.isSingleDocument()) 
         window.location.href= `document/${firstSelected.id}/part/1/edit`;
-      else if (this.isSingleFolderSelection())
+      else if (this.props.selection.isSingleFolder())
         window.location.hash = firstSelected.id;
     } else if (option === 'OPEN_TAB') {
-      if (this.isSingleDocumentSelection()) 
+      if (this.props.selection.isSingleDocument()) 
         window.open(`document/${firstSelected.id}/part/1/edit`, '_blank');
     } else if (option === 'DELETE') {
       this.startDeleteAction();
@@ -160,8 +149,8 @@ export default class Header extends Component {
                 className="selection-actions-menu"
                 menu={[
                   { group: 'open', options: [
-                    { label: 'Open', value: 'OPEN', disabled: !this.isSingleSelection() },
-                    { label: 'Open in new tab', value: 'OPEN_TAB', disabled: !this.isSingleDocumentSelection() }
+                    { label: 'Open', value: 'OPEN', disabled: !Selection.isSingleSelection(this.props.selection) },
+                    { label: 'Open in new tab', value: 'OPEN_TAB', disabled: !Selection.isSingleDocument(this.props.selection) }
                   ]},
                   { group: 'file-ops', options: [
                     { icon: '\uf114', label: 'Move to', value: 'MOVE_TO', disabled: true },
@@ -169,7 +158,12 @@ export default class Header extends Component {
                     { icon: '\uf014', label: 'Delete', value: 'DELETE' }
                   ]},
                   { group: 'jobs', options: [
-                    { icon: '\uf085', label: 'Named Entity Recognition', value: 'NER', disabled: !this.isSingleDocumentSelection() }
+                    { 
+                      icon: '\uf085', 
+                      label: 'Named Entity Recognition', 
+                      value: 'NER', 
+                      disabled: !Selection.includesText(this.props.selection) 
+                    }
                   ]}
                 ]} 
                 onSelect={this.onSelectMenuOption.bind(this)}

@@ -62,4 +62,23 @@ export default class Selection {
       this._selection = slice(minIdx, toIdx);
   }
 
+  static isSingleSelection(selected) {
+    return selected.length === 1;
+  }
+
+  static isSingleFolder(selected) {
+    return selected.length === 1 && selected[0].type === 'FOLDER';
+  }
+
+  static isSingleDocument(selected) {
+    return selected.length === 1 && selected[0].type === 'DOCUMENT';
+  }
+
+  static includesText(selected) {
+    const withText = selected.filter(item => {
+      return item.filetypes && item.filetypes.find(ft => ft.startsWith("TEXT"));
+    });
+    return withText.length > 0;
+  }
+
 }
