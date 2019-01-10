@@ -51,9 +51,9 @@ export default class MenuPopup extends Component {
                         <span className="icon">{option.icon}</span> {option.label}
                       </a>
                       : 
-                      <React.Fragment>
+                      <span>
                         {option.icon && <span className="icon">{option.icon}</span>} {option.label}
-                      </React.Fragment>
+                      </span>
                     }
                   </li>
                 )}

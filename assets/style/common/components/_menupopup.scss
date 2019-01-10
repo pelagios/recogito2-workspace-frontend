@@ -41,7 +41,15 @@
 
   .option {
     cursor:pointer;
+    position:relative;
+  }
+
+  .option > * {
+    width:100%;
+    height:100%;
+    display:inline-block;
     padding:4px 12px;
+    box-sizing:border-box;
   }
 
   .option:hover {
