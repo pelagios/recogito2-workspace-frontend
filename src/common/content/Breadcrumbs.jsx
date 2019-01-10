@@ -13,7 +13,7 @@ export default class Breadcrumbs extends Component {
     return (
       <div className="breadcrumbs">
         <h2>
-          <a className="root" href="#">{title}</a>
+          <a className="root" href="# ">{title}</a>
 
           {this.props.path && this.props.path.map(b => 
             <a className="folder" href={`#${b.id}`} key={b.id}>{b.title}</a>

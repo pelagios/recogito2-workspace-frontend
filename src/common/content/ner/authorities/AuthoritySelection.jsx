@@ -43,7 +43,9 @@ export default class AuthoritySelection extends Component {
                   <td className="shortname">
                     <span style={{ backgroundColor: authority.color}}>
                       {authority.homepage ? 
-                        <a href={authority.homepage} target="_blank">{authority.shortname}</a>
+                        <a href={authority.homepage} 
+                          target="_blank"
+                          rel="noopener noreferrer">{authority.shortname}</a>
                         : 
                         authority.shortname
                       }

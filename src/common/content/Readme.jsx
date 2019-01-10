@@ -85,7 +85,7 @@ export default class Readme extends Component {
             onChange={this.onChange.bind(this)}/>            
 
           <div className="editbar">
-            <span className="hint">Supports styling with <a href="#">Markdown</a></span>
+            <span className="hint">Supports styling with <a href="# ">Markdown</a></span>
             <span className="buttons">
               <button
                 className="label nostyle"
