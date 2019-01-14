@@ -19,6 +19,11 @@ export default class API {
     return fetchDocuments('my/shared', config);
   }
 
+  // ~~~ Service announcement
+  static latestAnnouncement() {
+    return axios.get('/api/announcements/my/latest');
+  }
+
   // ~~~ Folder actions ~~~
   static createFolder(title, parentId) {
     return axios.post('/api/folder', {

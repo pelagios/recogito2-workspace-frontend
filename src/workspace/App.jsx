@@ -8,6 +8,7 @@ import Readme from '../common/content/Readme.jsx';
 import { Columns } from '../common/content/table/Columns.js';
 import StoredUIState from '../common/StoredUIState.js';
 import Uploader from '../common/content/upload/Uploader.jsx';
+import Announcement from  '../common/content/announcement/Announcement.jsx';
 
 import Header from './header/Header.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
@@ -40,7 +41,8 @@ export default class App extends Component {
       readme        : null,           // Current folder readme
       selection     : [],             // Selected items (folders and documents)
       fileUploads   : [],             // Files currently uploading
-      urlUpload     : null            // URLs currently uploading/registering
+      urlUpload     : null,           // URLs currently uploading/registering
+      announcement  : null
     };
 
     Object.assign(state, StoredUIState.load());
@@ -75,6 +77,10 @@ export default class App extends Component {
 
     this.fetchAccountData();
     this.refreshCurrentView();
+    
+    API.latestAnnouncement().then(result => {
+      this.setState({ announcement: result.data.content });
+    })
   }
 
   componentWillUnmount() {
@@ -311,6 +317,12 @@ export default class App extends Component {
             files={this.state.fileUploads} 
             url={this.state.urlUpload}
             onUploadComplete={this.onUploadComplete.bind(this)} /> 
+        }
+
+        {this.state.announcement && 
+          <Announcement
+            message={this.state.announcement} 
+            onClose={e => this.setState({ announcement: null })} />
         }
       </React.Fragment>
     )
