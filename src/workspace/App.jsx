@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
+import Announcement from  './Announcement.jsx';
 import API from './API.js';
 import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
@@ -8,8 +9,6 @@ import Readme from '../common/content/Readme.jsx';
 import { Columns } from '../common/content/table/Columns.js';
 import StoredUIState from '../common/StoredUIState.js';
 import Uploader from '../common/content/upload/Uploader.jsx';
-import Announcement from  '../common/content/announcement/Announcement.jsx';
-
 import Header from './header/Header.jsx';
 import Sidebar from './sidebar/Sidebar.jsx';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
-import ContentEditable from "react-sane-contenteditable";
+import ContentEditable from 'react-sane-contenteditable';
 
 const INITIAL_STATE = {
   editing: false,

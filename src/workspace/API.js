@@ -24,6 +24,10 @@ export default class API {
     return axios.get('/api/announcements/my/latest');
   }
 
+  static confirmAnnouncement(uuid) {
+    return axios.put(`/api/announcments/${uuid}`);
+  }
+
   // ~~~ Folder actions ~~~
   static createFolder(title, parentId) {
     return axios.post('/api/folder', {

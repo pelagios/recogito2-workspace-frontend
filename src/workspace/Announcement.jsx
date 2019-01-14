@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown';
 
-import Modal from '../../components/Modal.jsx';
+import API from './API.js';
+import Modal from '../common/components/Modal.jsx';
 
 export default class BasePopupForm extends Component {
 
   handleOk = () => {
-    this.props.onOk && this.props.onOk();
+    // TODO confirm via API
+    API.confirmAnnouncement().then(() => {
+      this.props.onClose();
+    });
   }
 
   render() {
@@ -16,11 +21,11 @@ export default class BasePopupForm extends Component {
         onClose={this.props.onClose}>
 
         <div className="content">
-          {this.props.message}
+          <ReactMarkdown source={this.props.message} />
         </div>
 
         <button
-          className="btn"
+          className="btn "
           onClick={this.handleOk}>Got it</button>
       </Modal>
     )
