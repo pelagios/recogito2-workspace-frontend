@@ -1,15 +1,20 @@
 .announcement {
 
+  .modal-wrapper {
+    max-width:540px;
+  }
+
+  .modal {
+    top:15%;
+  }
+
   .modal-body {
-    padding:40px 30px;
+    padding:40px 30px 30px 30px;
     line-height:170%;
 
     h1 {
       font-size:26px;
-    }
-
-    p {
-      padding:10px 0;
+      padding-bottom:10px;
     }
 
     p, button {
@@ -21,7 +26,7 @@
     }
 
     .buttons {
-      padding-top:10px;
+      padding-top:20px;
       text-align:right;
     }
 
