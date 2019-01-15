@@ -1,18 +1,27 @@
 .announcement {
 
   .modal-body {
-    padding:30px;
+    padding:40px 30px;
+    line-height:170%;
 
     h1 {
       font-size:26px;
+    }
+
+    p {
+      padding:10px 0;
     }
 
     p, button {
       font-size:17px;
     }
 
+    a {
+      color:$ocean;
+    }
+
     .buttons {
-      padding-top:20px;
+      padding-top:10px;
       text-align:right;
     }
 

@@ -6,20 +6,18 @@ import Modal from '../common/components/Modal.jsx';
 
 export default class BasePopupForm extends Component {
 
-  handleOk = () => {
-    // TODO confirm via API
+  confirm = () => {
     API.confirmAnnouncement(this.props.id).then(() => {
       this.props.onClose();
     });
   }
 
   render() {
-    console.log(this.props.id);
     return (
       <Modal 
         title="A Message from Recogito" 
         className="announcement"
-        onClose={this.props.onClose}>
+        onClose={this.confirm}>
 
         <div className="content">
           <ReactMarkdown source={this.props.message} />
@@ -28,7 +26,7 @@ export default class BasePopupForm extends Component {
         <div className="buttons">
           <button
             className="btn "
-            onClick={this.handleOk}>Got it, thanks!</button>
+            onClick={this.confirm}>Got it, thanks!</button>
         </div>
       </Modal>
     )
