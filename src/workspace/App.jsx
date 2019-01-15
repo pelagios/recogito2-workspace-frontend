@@ -78,7 +78,7 @@ export default class App extends Component {
     this.refreshCurrentView();
     
     API.latestAnnouncement().then(result => {
-      this.setState({ announcement: result.data.content });
+      this.setState({ announcement: result.data });
     })
   }
 
@@ -320,7 +320,8 @@ export default class App extends Component {
 
         {this.state.announcement && 
           <Announcement
-            message={this.state.announcement} 
+            id={this.state.announcement.id}
+            message={this.state.announcement.content} 
             onClose={e => this.setState({ announcement: null })} />
         }
       </React.Fragment>

@@ -8,15 +8,16 @@ export default class BasePopupForm extends Component {
 
   handleOk = () => {
     // TODO confirm via API
-    API.confirmAnnouncement().then(() => {
+    API.confirmAnnouncement(this.props.id).then(() => {
       this.props.onClose();
     });
   }
 
   render() {
+    console.log(this.props.id);
     return (
       <Modal 
-        title="Message" 
+        title="A Message from Recogito" 
         className="announcement"
         onClose={this.props.onClose}>
 
@@ -24,9 +25,11 @@ export default class BasePopupForm extends Component {
           <ReactMarkdown source={this.props.message} />
         </div>
 
-        <button
-          className="btn "
-          onClick={this.handleOk}>Got it</button>
+        <div className="buttons">
+          <button
+            className="btn "
+            onClick={this.handleOk}>Got it, thanks!</button>
+        </div>
       </Modal>
     )
   }

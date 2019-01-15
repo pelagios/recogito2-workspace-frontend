@@ -25,7 +25,7 @@ export default class API {
   }
 
   static confirmAnnouncement(uuid) {
-    return axios.put(`/api/announcments/${uuid}`);
+    return axios.put(`/api/announcements/${uuid}`);
   }
 
   // ~~~ Folder actions ~~~
