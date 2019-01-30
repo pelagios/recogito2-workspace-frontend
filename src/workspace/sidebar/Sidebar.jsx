@@ -13,7 +13,7 @@ export default class Sidebar extends Component {
   state = { collaborators: [] };
 
   handleCreateFromSource = (value) => {
-    if (value.source === 'IIIF') {
+    if (value.type === 'IIIF_SOURCE') {
       this.props.onCreateFromSource && this.props.onCreateFromSource(value.url);
     }
   }
