@@ -15,7 +15,7 @@ export default class Storage extends Component {
         <span className="icon">&#xf1c0;</span> Storage
         <div className="used-diskspace">
           <Meter
-            value={(quota > 0) ? used / quota : 0} />
+            value={(quota > 0) ? Math.min(1, used / quota) : 0} />
 
           <div className="label">
             <NumberFormat 
