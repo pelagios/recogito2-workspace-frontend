@@ -3,11 +3,11 @@
 npm run build
 
 echo "Removing JS and view templates from previous build"
-rm -rf ../recogito2/public/javascripts/static/
+rm -rf ../recogito2/public/javascripts/ui/static/
 rm ../recogito2/app/views/my/profile.scala.html
 rm ../recogito2/app/views/my/workspace.scala.html
 
 echo "Copying files from /build folder"
-cp -a ./build/static/ ../recogito2/public/javascripts/.
+cp -a ./build/static/ ../recogito2/public/javascripts/ui/.
 cp ./build/profile.scala.html ../recogito2/app/views/my/.
 cp ./build/workspace.scala.html ../recogito2/app/views/my/.
