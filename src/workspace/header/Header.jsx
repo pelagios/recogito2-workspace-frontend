@@ -9,6 +9,8 @@ import MenuPopup from '../../common/components/MenuPopup.jsx';
 import DeleteAction from '../actions/DeleteAction.jsx';
 import NERAction from '../actions/NERAction.jsx';
 
+import ShareModal from '../../common/content/share/ShareModal.jsx';
+
 export default class Header extends Component {
 
   constructor(props) {
@@ -85,6 +87,8 @@ export default class Header extends Component {
         window.open(`document/${firstSelected.id}/part/1/edit`, '_blank');
     } else if (option === 'DELETE') {
       this.startDeleteAction();
+    } else if (option === 'SHARE') {
+      this.setState({ action: <ShareModal /> })
     } else if (option === 'NER') {
       this.setState({ action: 
         <NERAction
@@ -110,8 +114,6 @@ export default class Header extends Component {
           <Search/>
           <div className="header-icons">
             <HeaderIcon icon="&#xe64a;" className="help stroke7" link="/help" />
-            {/* <HeaderIcon icon="&#xe8ae;" className="stats" />
-            <HeaderIcon icon="&#xe8c1;" className="notifications" /> */}
           </div>
         </div>
         <div className="subheader">
@@ -156,6 +158,14 @@ export default class Header extends Component {
                     { icon: '\uf114', label: 'Move to', value: 'MOVE_TO', disabled: true },
                     { icon: '\uf0c5', label: 'Duplicate', value: 'DUPLICATE', disabled: true },
                     { icon: '\uf014', label: 'Delete', value: 'DELETE' }
+                  ]},
+                  { group: 'share', options: [
+                    { 
+                      icon: '\uf234', 
+                      label: 'Share', 
+                      value: 'SHARE', 
+                      disabled: !Selection.isSingleFolder(this.props.selection)
+                    }
                   ]},
                   { group: 'jobs', options: [
                     { 
