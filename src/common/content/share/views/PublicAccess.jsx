@@ -8,7 +8,7 @@ export default class PublicAccess extends Component {
         <div className="settings-section">
           <h3>Enable Public Access</h3>
           <div>
-            <input type="radio" name="public-access" id="pa-off" />
+            <input type="radio" name="public-access" id="pa-off" checked/>
             <label htmlFor="pa-off">Off</label>
             <p>
               Only people you explicitly add as collaborators have access.

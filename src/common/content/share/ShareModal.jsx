@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../../components/Modal.jsx';
 import PublicAccess from './views/PublicAccess.jsx';
+import Collaborators from './views/Collaborators.jsx';
 
 export default class ShareModal extends Component {
 
@@ -17,10 +18,15 @@ export default class ShareModal extends Component {
     return <PublicAccess />
   }
 
+  renderCollaborators = () => {
+    return <Collaborators />
+  }
+
   getView = () => {
-    if (this.state.view === 'PUBLIC_ACCESS') {
+    if (this.state.view === 'PUBLIC_ACCESS')
       return this.renderPublicAccess();
-    }
+    else if (this.state.view === 'COLLABORATORS')
+      return this.renderCollaborators();
   }
 
   render() {
