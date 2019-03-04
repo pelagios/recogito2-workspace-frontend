@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Modal from '../../components/Modal.jsx';
-import Collaborators from './views/Collaborators.jsx';
+import PublicAccess from './views/PublicAccess.jsx';
 
 export default class ShareModal extends Component {
 
@@ -10,6 +10,17 @@ export default class ShareModal extends Component {
 
   setView = (name) => {
     this.setState({ view: name });
+  }
+
+
+  renderPublicAccess = () => {
+    return <PublicAccess />
+  }
+
+  getView = () => {
+    if (this.state.view === 'PUBLIC_ACCESS') {
+      return this.renderPublicAccess();
+    }
   }
 
   render() {
@@ -42,7 +53,7 @@ export default class ShareModal extends Component {
           </div>
 
           <div className="share-options-settings">
-            <Collaborators />
+            { this.getView() }            
           </div>
         </div>
       </Modal>

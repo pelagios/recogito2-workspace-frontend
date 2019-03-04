@@ -5,7 +5,8 @@ export default class Collaborators extends Component {
   render() {
     return (
       <div className="share-settings collaborators">
-        Collaborators
+        <div className="settings-section">
+        </div>
       </div>
     )
   }
