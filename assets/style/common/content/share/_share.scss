@@ -1,79 +1,82 @@
 @import '../../components/modal';
+@import 'collaborators/collaborators';
 
-.share-options {
+.multi-share {
+  display:grid;
+  grid-template-columns:200px auto;
 
-  .share-options-body {
-    display:grid;
-    grid-template-columns:200px auto;
+  .multi-share-tabs {
+    background-color:$blueish-white;
+    border-right:1px solid $lightgrey-border-darker;
 
-    .share-options-sidemenu {
-      background-color:$blueish-white;
-      border-right:1px solid $lightgrey-border-darker;
-
-      ul {
-        margin:0;
-        padding:0;
-        list-style-type:none;
-      }
-
-      li {
-        margin:0;
-        padding:20px;
-        border-bottom:1px solid $lightgrey-border-darker;
-        cursor:pointer;
-      }
-
-      li.active {
-        background-color:#fff;
-      }
+    ul {
+      margin:0;
+      padding:0;
+      list-style-type:none;
     }
 
-    .share-options-settings {
+    li {
+      margin:0;
+      padding:20px;
+      border-bottom:1px solid $lightgrey-border-darker;
+      cursor:pointer;
+    }
+
+    li.active {
       background-color:#fff;
-      font-size:14px;
-      padding:0;
+    }
 
-      h3 {
-        margin:0;
-        padding-bottom:15px;
-        font-size:16px;
-      }
+    li.disabled {
+      color:$lightblue-type;
+    }
 
-      label {
-        font-weight:bold;
-        cursor:pointer;
-      }
+  }
 
-      label:before {
-        font-weight:normal;
-      }
+  .multi-share-body {
+    background-color:#fff;
+    font-size:14px;
+    padding:0;
 
-      p {
-        margin:0;
-        padding:5px 0 20px 0;
-        line-height:150%;
-      }
+    h3 {
+      margin:0;
+      padding-bottom:15px;
+      font-size:16px;
+    }
 
-      select {
-        margin:5px 0 10px 10px;
-        font-size:15px;
-      }
+    label {
+      font-weight:bold;
+      cursor:pointer;
+    }
 
-      option {
-        font-size:15px;
-      }
+    label:before {
+      font-weight:normal;
+    }
 
-      .settings-section {
-        padding:20px;
-        border-bottom:1px solid $lightgrey-border;
-      }
+    p {
+      margin:0;
+      padding:5px 0 20px 0;
+      line-height:150%;
+    }
 
-      .settings-section:last-child {
-        border-bottom:none;
-      }
+    select {
+      margin:5px 0 10px 10px;
+      font-size:15px;
+    }
 
+    option {
+      font-size:15px;
+    }
+
+    .multi-share-section {
+      padding:20px;
+      border-bottom:1px solid $lightgrey-border;
+    }
+
+    .multi-share-section:last-child {
+      border-bottom:none;
     }
 
   }
 
 }
+

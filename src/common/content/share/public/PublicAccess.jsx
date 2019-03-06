@@ -4,11 +4,11 @@ export default class PublicAccess extends Component {
 
   render() {
     return (
-      <div className="share-settings public-access">
-        <div className="settings-section">
+      <div className="public-access">
+        <div className="multi-share-section">
           <h3>Enable Public Access</h3>
           <div>
-            <input type="radio" name="public-access" id="pa-off" checked/>
+            <input type="radio" name="public-access" id="pa-off"/>
             <label htmlFor="pa-off">Off</label>
             <p>
               Only people you explicitly add as collaborators have access.
@@ -32,7 +32,7 @@ export default class PublicAccess extends Component {
           </div>
         </div>
 
-        <div className="settings-section">
+        <div className="multi-share-section">
           <strong>Access:</strong> anyone can
           
           <select>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../../components/Modal.jsx';
-import PublicAccess from './views/PublicAccess.jsx';
-import Collaborators from './views/Collaborators.jsx';
+import PublicAccess from './public/PublicAccess.jsx';
+import Collaborators from './collaborators/Collaborators.jsx';
 
 export default class ShareModal extends Component {
 
@@ -12,7 +12,6 @@ export default class ShareModal extends Component {
   setView = (name) => {
     this.setState({ view: name });
   }
-
 
   renderPublicAccess = () => {
     return <PublicAccess />
@@ -32,11 +31,11 @@ export default class ShareModal extends Component {
   render() {
     return (
       <Modal
-        className="share-options" 
+        className="multi-share-modal" 
         title="Share"
         onClose={this.props.onCancel}>
-        <div className="share-options-body">
-          <div className="share-options-sidemenu">
+        <div className="multi-share">
+          <div className="multi-share-tabs">
             <ul>
               <li 
                 className={this.state.view === 'PUBLIC_ACCESS' ? 'active': ''}
@@ -50,15 +49,13 @@ export default class ShareModal extends Component {
                 Collaborators
               </li>
 
-              <li
-                className={this.state.view === 'DISTRIBUTE_COPIES' ? 'active': ''}
-                onClick={() => this.setView('DISTRIBUTE_COPIES')} >
+              <li className="disabled">
                 Distribute Copies
               </li>
             </ul>
           </div>
 
-          <div className="share-options-settings">
+          <div className="multi-share-body">
             { this.getView() }            
           </div>
         </div>
