@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { openSelector } from './PermissionSelector.js';
+import Autocomplete from './Autocomplete.jsx';
 
 export default class Collaborators extends Component {
 
@@ -63,7 +64,7 @@ export default class Collaborators extends Component {
           </table>
         </div>
         <div className="multi-share-section add-collaborator">
-          <input type="text" name="collaborator" placeholder="Enter unsername" />
+          <Autocomplete placeholder="Enter unsername" query={'foo'} />
         </div>
       </div>
     )
