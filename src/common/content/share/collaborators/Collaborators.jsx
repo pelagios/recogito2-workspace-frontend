@@ -33,6 +33,14 @@ export default class Collaborators extends Component {
     });
   }
 
+  addCollaborator = (username) => {
+    this.setState(prev => {
+      return { 
+        collaborators:  [ ...prev.collaborators, { username: username, access_level: 'READ'} ]
+      }
+    });
+  }
+
   render() {
     const collaborators = this.state.collaborators.map(c => 
       <tr key={c.username}>
@@ -64,7 +72,9 @@ export default class Collaborators extends Component {
           </table>
         </div>
         <div className="multi-share-section add-collaborator">
-          <Autocomplete placeholder="Enter unsername" query={'foo'} />
+          <Autocomplete 
+            exclude={this.state.collaborators.map(c => c.username)} 
+            onSelect={this.addCollaborator} />
         </div>
       </div>
     )
