@@ -4,7 +4,7 @@
 
     table {
       width:100%;
-      margin:10px 0 20px 0;
+      margin:0 0 10px 0;
     }
     
     td {
@@ -130,6 +130,13 @@
 
     }
 
+  }
+
+  .add-collaborator {
+    input { 
+      width:100%;
+      padding:5px;
+    }
   }
 
 }

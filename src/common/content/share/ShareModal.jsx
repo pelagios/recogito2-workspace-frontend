@@ -9,6 +9,19 @@ export default class ShareModal extends Component {
     view: 'PUBLIC_ACCESS'
   };
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.onKeydown, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeydown, false);
+  }
+
+  onKeydown = (evt) => {
+    evt.stopPropagation();
+    if (evt.which === 27) this.props.onCancel();
+  }
+
   setView = (name) => {
     this.setState({ view: name });
   }

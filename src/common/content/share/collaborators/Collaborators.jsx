@@ -9,7 +9,7 @@ export default class Collaborators extends Component {
       { username: 'elton', access_level: 'READ'}
     ],
   }
-
+  
   openPermissionsSelector = (evt, collaborator) => {
     const button = evt.target.nodeName === 'BUTTON' ? evt.target : evt.target.parentNode;
     openSelector({
@@ -61,6 +61,8 @@ export default class Collaborators extends Component {
               {collaborators}
             </tbody>
           </table>
+        </div>
+        <div className="multi-share-section add-collaborator">
           <input type="text" name="collaborator" placeholder="Enter unsername" />
         </div>
       </div>

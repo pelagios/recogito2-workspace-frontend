@@ -88,7 +88,10 @@ export default class Header extends Component {
     } else if (option === 'DELETE') {
       this.startDeleteAction();
     } else if (option === 'SHARE') {
-      this.setState({ action: <ShareModal /> })
+      this.setState({ action: 
+        <ShareModal 
+          onCancel={this.cancelAction.bind(this)} /> 
+      });
     } else if (option === 'NER') {
       this.setState({ action: 
         <NERAction
