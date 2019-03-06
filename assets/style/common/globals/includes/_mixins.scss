@@ -38,6 +38,17 @@
           border-top-left-radius:$radius;
 }
 
+@mixin rounded-corners-bottom($radius) {
+  -webkit-border-bottom-right-radius:$radius;
+  -webkit-border-bottom-left-radius:$radius;
+   -khtml-border-radius-bottomright:$radius;
+   -khtml-border-radius-bottomleft:$radius;
+     -moz-border-radius-bottomright:$radius;
+     -moz-border-radius-bottomleft:$radius;
+          border-bottom-right-radius:$radius;
+          border-bottom-left-radius:$radius;
+}
+
 @mixin box-shadow($x, $y, $radius, $opacity) {
   -webkit-box-shadow:$x $y $radius rgba(0, 0, 0, $opacity);
      -moz-box-shadow:$x $y $radius rgba(0, 0, 0, $opacity);

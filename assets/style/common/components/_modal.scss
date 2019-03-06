@@ -26,13 +26,13 @@
   margin:auto;
   border-radius:4px;
   box-shadow:2px 2px 42px rgba(0, 0, 0, 0.4);
-  // overflow:hidden;
   display:flex;
   flex-direction:column;
 }
 
 .modal-header {
   background-color:$ocean;
+  @include rounded-corners-top(4px);
 
   h1 {
     color:#fff;
@@ -58,4 +58,5 @@
 
 .modal-body {
   background-color:#fff;
+  @include rounded-corners-bottom(4px);
 }

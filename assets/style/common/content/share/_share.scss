@@ -8,6 +8,10 @@
   .multi-share-tabs {
     background-color:$blueish-white;
     border-right:1px solid $lightgrey-border-darker;
+    -webkit-border-bottom-left-radius:4px;
+     -khtml-border-radius-bottomleft:4px;
+       -moz-border-radius-bottomleft:4px;
+            border-bottom-left-radius:4px;
 
     ul {
       margin:0;
@@ -33,7 +37,6 @@
   }
 
   .multi-share-body {
-    background-color:#fff;
     font-size:14px;
     padding:0;
 
