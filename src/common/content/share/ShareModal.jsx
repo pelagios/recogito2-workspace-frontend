@@ -27,11 +27,11 @@ export default class ShareModal extends Component {
   }
 
   renderPublicAccess = () => {
-    return <PublicAccess />
+    return <PublicAccess item={this.props.selection[0]} />
   }
 
   renderCollaborators = () => {
-    return <Collaborators />
+    return <Collaborators item={this.props.selection[0]} />
   }
 
   getView = () => {

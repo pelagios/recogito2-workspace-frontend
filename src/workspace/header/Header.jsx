@@ -90,6 +90,7 @@ export default class Header extends Component {
     } else if (option === 'SHARE') {
       this.setState({ action: 
         <ShareModal 
+          selection={this.props.selection}
           onCancel={this.cancelAction.bind(this)} /> 
       });
     } else if (option === 'NER') {
