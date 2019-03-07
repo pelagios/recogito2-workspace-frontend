@@ -13,7 +13,7 @@ export default class AutoComplete extends Component {
 
   fetchSuggestions = query => {
     this.setState({isLoading: true});
-    axios.get(`/document/random/settings/collaborator/search?q=${query}`)
+    axios.get(`/api/sharing/search?q=${query}`)
       .then(result => this.setState({
         isLoading: false,
         options: result.data.filter(username => !this.props.exclude.includes(username))
