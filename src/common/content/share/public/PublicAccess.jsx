@@ -8,6 +8,14 @@ export default class PublicAccess extends Component {
     access_level: 'READ_ALL'
   }
 
+  componentDidMount() {
+    axios.get(`/api/sharing/folders/${this.props.item.id}/visibility`)
+      .then(result => {
+        const { visibility, access_level } = result.data;
+        this.setState({ visibility: visibility, access_level: access_level });
+      });
+  }
+
   updateSetting = (update) => {
     this.setState(update);
     axios.post('/api/sharing/folders/visibility', {
