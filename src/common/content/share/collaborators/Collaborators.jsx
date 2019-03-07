@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { openSelector } from './PermissionSelector.js';
 import Autocomplete from './Autocomplete.jsx';
 
 export default class Collaborators extends Component {
 
   state = {
-    collaborators: [
-      { username: 'rainer', access_level: 'WRITE' },
-      { username: 'elton', access_level: 'READ'}
-    ],
+    collaborators: []
+  }
+
+  componentDidMount() {
+    /*
+    axios.get(`/api/sharing/folders/${this.props.item.id}/collaborators`)
+    .then(result => {
+      this.setState({ collaborators: result.data.collborators });
+    });
+    */
   }
   
   openPermissionsSelector = (evt, collaborator) => {
@@ -34,9 +41,18 @@ export default class Collaborators extends Component {
   }
 
   addCollaborator = (username) => {
+    console.log('adding', username);
+    const update = { username: username, access_level: 'READ' }
+
+    axios.post('/api/sharing/folders/collaborator', {
+        ...update, ids: [ this.props.item.id ]
+      }).catch(error => {
+        // TODO 
+      });
+
     this.setState(prev => {
       return { 
-        collaborators:  [ ...prev.collaborators, { username: username, access_level: 'READ'} ]
+        collaborators:  [ ...prev.collaborators, update ]
       }
     });
   }

@@ -12,16 +12,16 @@ export default class PublicAccess extends Component {
     axios.get(`/api/sharing/folders/${this.props.item.id}/visibility`)
       .then(result => {
         const { visibility, access_level } = result.data;
-        this.setState({ visibility: visibility, access_level: access_level });
+        this.setState({ visibility: visibility, access_level: access_level || 'READ_ALL' });
       });
   }
 
   updateSetting = (update) => {
     this.setState(update);
+
     axios.post('/api/sharing/folders/visibility', {
       ...update, ids: [ this.props.item.id ]
-    })
-    .catch(error => {
+    }).catch(error => {
       // TODO 
     });
   }
