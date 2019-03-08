@@ -41,14 +41,13 @@ export default class Collaborators extends Component {
   }
 
   addCollaborator = (username) => {
-    console.log('adding', username);
     const update = { username: username, access_level: 'READ' }
-
+    
     axios.post('/api/sharing/folders/collaborator', {
-        ...update, ids: [ this.props.item.id ]
-      }).catch(error => {
-        // TODO 
-      });
+      ...update, ids: [ this.props.item.id ]
+    }).catch(error => {
+      // TODO 
+    });
 
     this.setState(prev => {
       return { 
