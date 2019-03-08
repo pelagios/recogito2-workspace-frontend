@@ -17,20 +17,33 @@ export default class Collaborators extends Component {
     });
     */
   }
+
+  storeCollaborator = (setting) => {
+    axios.post('/api/sharing/folders/collaborator', {
+      ...setting, ids: [ this.props.item.id ]
+    }).catch(error => {
+      // TODO 
+    });
+  }
   
   openPermissionsSelector = (evt, collaborator) => {
     const button = evt.target.nodeName === 'BUTTON' ? evt.target : evt.target.parentNode;
+
     openSelector({
       parent: button.parentNode,
       accessLevel: collaborator.access_level,
-      onChangeLevel: level => this.setState(prev => {
-        return {
-          collaborators: prev.collaborators.map(c => {
-            return (c.username === collaborator.username) ?
-              { username: c.username, access_level: level } : c;
-          })
-        }
-      })
+
+      onChangeLevel: level => { 
+        const update= { username: collaborator.username, access_level: level } 
+        this.storeCollaborator(update);
+        this.setState(prev => {
+          return {
+            collaborators: prev.collaborators.map(c => {
+              return (c.username === collaborator.username) ? update : c;
+            })
+          }
+        }) 
+      }
     });
   }
 
@@ -42,13 +55,7 @@ export default class Collaborators extends Component {
 
   addCollaborator = (username) => {
     const update = { username: username, access_level: 'READ' }
-    
-    axios.post('/api/sharing/folders/collaborator', {
-      ...update, ids: [ this.props.item.id ]
-    }).catch(error => {
-      // TODO 
-    });
-
+    this.storeCollaborator(update);
     this.setState(prev => {
       return { 
         collaborators:  [ ...prev.collaborators, update ]
