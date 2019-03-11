@@ -10,12 +10,10 @@ export default class Collaborators extends Component {
   }
 
   componentDidMount() {
-    /*
     axios.get(`/api/sharing/folders/${this.props.item.id}/collaborators`)
     .then(result => {
-      this.setState({ collaborators: result.data.collborators });
+      this.setState({ collaborators: result.data.collaborators });
     });
-    */
   }
 
   storeCollaborator = (setting) => {
@@ -30,7 +28,7 @@ export default class Collaborators extends Component {
     const button = evt.target.nodeName === 'BUTTON' ? evt.target : evt.target.parentNode;
 
     openSelector({
-      parent: button.parentNode,
+      parent: button.parentNode, 
       accessLevel: collaborator.access_level,
 
       onChangeLevel: level => { 
