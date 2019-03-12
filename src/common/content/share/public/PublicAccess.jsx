@@ -17,12 +17,12 @@ export default class PublicAccess extends Component {
   }
 
   updateSetting = (update) => {
-    this.setState(update);
-
-    axios.post('/api/sharing/folders/visibility', {
-      ...update, ids: [ this.props.item.id ]
-    }).catch(error => {
-      // TODO 
+    this.setState(update, () => {
+      axios.post('/api/sharing/folders/visibility', {
+        ...this.state, ids: [ this.props.item.id ]
+      }).catch(error => {
+        // TODO 
+      });
     });
   }
 
