@@ -49,6 +49,13 @@ export default class Collaborators extends Component {
     this.setState(prev => {
       return { collaborators: prev.collaborators.filter(c => c.username !== collaborator.username) }
     });
+
+    axios.delete('/api/sharing/folders/collaborator', { data: {
+      ids: [ this.props.item.id ],
+      username: collaborator.username
+    }}).catch(error => {
+      // TODO
+    })
   }
 
   addCollaborator = (username) => {
