@@ -95,7 +95,7 @@ export default class Collaborators extends Component {
           <table className="collaborators">
             <tbody>
               {collaborators.length > 0 ? 
-                  {collaborators} : <p className="no-collaborators">There are no collaborators yet. Enter a username below to add one.</p>
+                  collaborators : <p className="no-collaborators">There are no collaborators yet. Enter a username below to add one.</p>
               }
             </tbody>
           </table>

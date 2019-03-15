@@ -76,11 +76,7 @@ export default class ShareModal extends Component {
             <div className="footer">
               <button
                 className="btn"
-                onClick={null}>Save</button>
-
-              <button 
-                className="btn outline"
-                onClick={this.props.onCancel}>Cancel</button>
+                onClick={this.props.onCancel}>Done</button>
             </div>
           </div>
         </div>
