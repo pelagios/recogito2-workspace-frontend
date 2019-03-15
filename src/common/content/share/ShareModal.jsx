@@ -69,7 +69,19 @@ export default class ShareModal extends Component {
           </div>
 
           <div className="multi-share-body">
-            { this.getView() }            
+            <div className="view-container">
+              { this.getView() }     
+            </div>     
+
+            <div className="footer">
+              <button
+                className="btn"
+                onClick={null}>Save</button>
+
+              <button 
+                className="btn outline"
+                onClick={this.props.onCancel}>Cancel</button>
+            </div>
           </div>
         </div>
       </Modal>
