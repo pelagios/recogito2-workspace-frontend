@@ -117,7 +117,8 @@ export default class App extends Component {
 
   fetchSharedWithMe() {
     this.setState({ busy: true });
-    return API.sharedWithMe(this.getDisplayConfig()).then(result => { 
+    const currentFolderId = document.location.hash.substring(1);
+    return API.sharedWithMe(this.getDisplayConfig(), currentFolderId).then(result => { 
       this.setState({
         breadcrumbs: [],
         documents: result.data.items, 

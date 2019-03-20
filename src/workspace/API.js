@@ -15,8 +15,9 @@ export default class API {
       fetchDocuments(`my/${opt_folder}`, config) : fetchDocuments('my', config);
   }
 
-  static sharedWithMe(config) {
-    return fetchDocuments('my/shared', config);
+  static sharedWithMe(config, opt_folder) {
+    return opt_folder ? 
+      fetchDocuments(`my/shared/${opt_folder}`, config) : fetchDocuments('my/shared', config);
   }
 
   // ~~~ Service announcement
