@@ -168,7 +168,11 @@ export default class Header extends Component {
                       icon: '\uf234', 
                       label: 'Share', 
                       value: 'SHARE', 
-                      disabled: !Selection.isSingleFolder(this.props.selection)
+                      disabled: !(
+                        Selection.isSingleFolder(this.props.selection) && 
+                        this.props.view === 'MY_DOCUMENTS' && 
+                        this.props.folderSharing
+                      )
                     }
                   ]},
                   { group: 'jobs', options: [
