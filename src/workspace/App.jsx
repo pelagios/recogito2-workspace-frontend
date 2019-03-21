@@ -120,7 +120,7 @@ export default class App extends Component {
     const currentFolderId = document.location.hash.substring(1);
     return API.sharedWithMe(this.getDisplayConfig(), currentFolderId).then(result => { 
       this.setState({
-        breadcrumbs: [],
+        breadcrumbs: result.data.breadcrumbs,
         documents: result.data.items, 
         total_docs: result.data.total,
         busy: false 
