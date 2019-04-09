@@ -10,8 +10,11 @@ export default class API {
     return axios.get(`/api/account/${username}`);
   }
 
-  static fetchAccessibleDocuments(owner, config) {
-    return axios.post(`/api/directory/${owner}`, config);
+  static fetchAccessibleDocuments(owner, config, opt_folderId) {
+    if (opt_folderId) // Avoid sending an empty string
+      return axios.post(`/api/directory/${owner}/${opt_folderId}`, config);
+    else 
+      return axios.post(`/api/directory/${owner}`, config);
   }
 
 }

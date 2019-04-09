@@ -36,10 +36,10 @@ export default class TablePane extends Component {
   onClick(evt, item, idx) {
     const isShift = evt.getModifierState("Shift");
     const isCtrl = evt.getModifierState("Control");
-
+    
     // Is this a selection or deselection?
-    const isSelectAction = 
-      isShift || isCtrl || !this.props.selection.includes(item);
+    const isSelectAction = this.props.selection && 
+      (isShift || isCtrl || !this.props.selection.includes(item));
 
     if (isSelectAction) {
       if (isShift)

@@ -43,6 +43,8 @@ export default class App extends Component {
     this.state = state;
 
     this._profileOwner = (process.env.NODE_ENV === 'development') ? 'rainer' : window.location.pathname.substring(1);
+
+    window.onhashchange = this.reloadDocuments.bind(this);
   }
 
   componentDidMount() {
@@ -58,12 +60,16 @@ export default class App extends Component {
   }
 
   reloadDocuments() {
+    this.setState({ busy: true });
+    const currentFolderId = document.location.hash.substring(1);
+
     API
-      .fetchAccessibleDocuments(this._profileOwner, this.getDisplayConfig())
+      .fetchAccessibleDocuments(this._profileOwner, this.getDisplayConfig(), currentFolderId)
       .then(r => this.setState({ 
         readme: r.data.readme,
         documents: r.data.items,
-        total_docs: r.data.total
+        total_docs: r.data.total,
+        busy: false
       }));
   }
 
