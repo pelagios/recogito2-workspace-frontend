@@ -23,6 +23,7 @@ export default class App extends Component {
     const state = {
       me             : null, // Login identity
       visitedAccount : null,
+      breadcrumbs   : [],
       presentation   : 'TABLE',
       table_columns  : [
         "author",
@@ -66,6 +67,7 @@ export default class App extends Component {
     API
       .fetchAccessibleDocuments(this._profileOwner, this.getDisplayConfig(), currentFolderId)
       .then(r => this.setState({ 
+        breadcrumbs: r.data.breadcrumbs,
         readme: r.data.readme,
         documents: r.data.items,
         total_docs: r.data.total,
@@ -117,8 +119,9 @@ export default class App extends Component {
           account={this.state.visitedAccount}/>
 
         <div className="container">
-          <Breadcrumbs
-            label="Public Documents" 
+          <Breadcrumbs 
+            label="Public Documents"
+            path={this.state.breadcrumbs}
             count={this.state.total_docs} />
 
           <HeaderIcon
