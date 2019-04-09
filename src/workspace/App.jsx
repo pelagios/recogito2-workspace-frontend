@@ -264,11 +264,6 @@ export default class App extends Component {
             presentation={this.state.presentation}
             onDelete={this.setBusy.bind(this, true)}
             afterAction={this.afterAction.bind(this)}
-            folderSharing={
-              this.state.account && 
-              this.state.account.feature_toggles && 
-              this.state.account.feature_toggles.includes('folder-sharing')
-            }
             onTogglePresentation={this.togglePresentation.bind(this)} 
             onCreateReadme={this.createReadme.bind(this)} />
 

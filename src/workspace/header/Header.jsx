@@ -170,8 +170,7 @@ export default class Header extends Component {
                       value: 'SHARE', 
                       disabled: !(
                         Selection.isSingleFolder(this.props.selection) && 
-                        this.props.view === 'MY_DOCUMENTS' && 
-                        this.props.folderSharing
+                        this.props.view === 'MY_DOCUMENTS'
                       )
                     }
                   ]},
