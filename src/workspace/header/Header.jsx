@@ -87,6 +87,7 @@ export default class Header extends Component {
       if (Selection.isSingleDocument(this.props.selection)) 
         window.open(`document/${firstSelected.id}/part/1/edit`, '_blank');
     } else if (option === 'DUPLICATE') {
+      this.props.onDelete(); // Hack...
       API.duplicateDocument(firstSelected.id).then(() => {
         this.props.afterAction();
       });
