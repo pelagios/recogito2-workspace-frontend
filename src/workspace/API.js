@@ -55,6 +55,11 @@ export default class API {
     return axios.delete(`/api/document/${id}`);
   }
 
+  // Duplicates the given document
+  static duplicateDocument(id) {
+    return axios.post(`/api/duplicate/document/${id}`);
+  }
+
   // Deletes multiple documents in one go via the bulk API
   static bulkDeleteDocuments(ids) {
     return axios.delete('/api/document/bulk', { data: ids });

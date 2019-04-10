@@ -8,6 +8,7 @@ import Breadcrumbs from '../../common/content/Breadcrumbs.jsx';
 import MenuPopup from '../../common/components/MenuPopup.jsx';
 import DeleteAction from '../actions/DeleteAction.jsx';
 import NERAction from '../actions/NERAction.jsx';
+import API from '../API';
 
 import ShareModal from '../../common/content/share/ShareModal.jsx';
 
@@ -85,6 +86,10 @@ export default class Header extends Component {
     } else if (option === 'OPEN_TAB') {
       if (Selection.isSingleDocument(this.props.selection)) 
         window.open(`document/${firstSelected.id}/part/1/edit`, '_blank');
+    } else if (option === 'DUPLICATE') {
+      API.duplicateDocument(firstSelected.id).then(() => {
+        this.props.afterAction();
+      });
     } else if (option === 'DELETE') {
       this.startDeleteAction();
     } else if (option === 'SHARE') {
@@ -160,7 +165,7 @@ export default class Header extends Component {
                   ]},
                   { group: 'file-ops', options: [
                     { icon: '\uf114', label: 'Move to', value: 'MOVE_TO', disabled: true },
-                    { icon: '\uf0c5', label: 'Duplicate', value: 'DUPLICATE', disabled: true },
+                    { icon: '\uf0c5', label: 'Duplicate', value: 'DUPLICATE', disabled: !Selection.isSingleDocument(this.props.selection) },
                     { icon: '\uf014', label: 'Delete', value: 'DELETE' }
                   ]},
                   { group: 'share', options: [
