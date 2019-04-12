@@ -121,7 +121,10 @@ export default class Header extends Component {
     return (
       <div className={this.props.readme ? "header" : "header no-readme"}>
         <div className="top-row">
-          <Search/>
+          <Search
+            displayConfig={this.props.displayConfig} 
+            onResponse={this.props.onSearchResponse} />
+
           <div className="header-icons">
             <HeaderIcon icon="&#xe64a;" className="help stroke7" link="/help" />
           </div>

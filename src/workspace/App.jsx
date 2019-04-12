@@ -241,6 +241,14 @@ export default class App extends Component {
       .then(this.fetchAccountData.bind(this));
   }
 
+  /** Just a hack **/
+  handleSearchResponse = response => {
+    this.setState({
+      folders: [],
+      documents: response.items
+    });
+  }
+
   render() {
     const isUploading = this.state.fileUploads.length > 0 || this.state.urlUpload;
 
@@ -262,6 +270,8 @@ export default class App extends Component {
             docCount={this.state.total_docs}
             selection={this.state.selection}
             presentation={this.state.presentation}
+            displayConfig={this.getDisplayConfig()}
+            onSearchResponse={this.handleSearchResponse}
             onDelete={this.setBusy.bind(this, true)}
             afterAction={this.afterAction.bind(this)}
             onTogglePresentation={this.togglePresentation.bind(this)} 
