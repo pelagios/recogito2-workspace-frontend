@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import axios from 'axios';
 
 import activities from './activities';
+import Columns from '../common/table/Columns';
 import initialState from './initialState';
 import Workspace from './Workspace';
 
@@ -22,7 +23,7 @@ export default class App extends Component {
   /** Init: add deselect listeners and load contents */
   componentDidMount() {
     this._rootEl.addEventListener('keydown', this.onKeydown, false);
-    this._rootEl.addEventListener('mousedown', this.onMousedown, false);
+    this._rootEl.addEventListener(', though.mousedown', this.onMousedown, false);
 
     // Init account data
     axios.get('/api/account/my').then(result => { 
@@ -61,21 +62,41 @@ export default class App extends Component {
     */
   }
 
+  /** 
+   * Refreshes the current page.
+   * 
+   * Note that this doesn't work if the view is currently SEARCH.
+   */
+  refreshPage = () => {
+    this.setState({ busy: true });
+
+    const folderId = document.location.hash.substring(1);
+
+    const path = (this.state.view === 'MY_DOCUMENTS') ?
+       (folderId) ? `my/${folderId}` : 'my' :
+       (folderId) ? `my/shared/${folderId}` : 'my/shared';
+
+    const config = (this.state.presentation === 'GRID') ? null :
+      {
+        columns: Columns.expandAggregatedColumns(this.state.table_config.columns),
+        sort: this.state.table_config.sorting
+      };
+
+    return axios.post(`/api/directory/${path}`, config).then(result => {
+      this.setState({
+        breadcrumbs: result.data.breadcrumbs,
+        readme: result.data.readme,
+        documents: result.data.items, 
+        total_docs: result.data.total,
+        busy: false 
+      });
+    });
+  }
+
   handleChangeView = (view) => {
     this.setState({ view: view });
   }
 
-  handleCreateFolder = (view) => {
-
-  }
-
-  handleUploadFiles = (view) => {
-
-  }
-
-  handleImportSource = (view) => {
-
-  }
 
   changeFolder = () => {
     // this.setState({ selection: [] });
@@ -88,7 +109,7 @@ export default class App extends Component {
         account={this.state.account}
         view={this.state.view}
         onChangeView={this.handleChangeView}
-        onCreateFolder={activities.createFolder}
+        onCreateFolder={() => activities.createFolder().then(refreshPage)}
         onUploadFiles={activities.uploadFiles}
         onImportSource={activities.importSource}
       />
@@ -96,47 +117,6 @@ export default class App extends Component {
   }
 
   /*
-  getDisplayConfig() {
-    if (this.state.presentation === 'GRID')
-      return; // No configs for grid view
-
-    return {
-      columns: Columns.expandAggregatedColumns(this.state.table_columns),
-      sort: this.state.table_sorting
-    };
-  }
-
-  fetchAccountData() {
-    return API.accountData().then(result => { this.setState({ account: result.data }) });
-  }
-
-  fetchMyDocuments() {
-    this.setState({ busy: true });
-    const currentFolderId = document.location.hash.substring(1);
-    return API.myDocuments(this.getDisplayConfig(), currentFolderId).then(result => {
-      this.setState({
-        breadcrumbs: result.data.breadcrumbs,
-        readme: result.data.readme,
-        documents: result.data.items, 
-        total_docs: result.data.total,
-        busy: false 
-      });
-    });
-  }
-
-  fetchSharedWithMe() {
-    this.setState({ busy: true });
-    const currentFolderId = document.location.hash.substring(1);
-    return API.sharedWithMe(this.getDisplayConfig(), currentFolderId).then(result => { 
-      this.setState({
-        breadcrumbs: result.data.breadcrumbs,
-        documents: result.data.items, 
-        total_docs: result.data.total,
-        busy: false 
-      }) 
-    });
-  }
-
   /** Switch between different document views (currently: 'my' vs. 'shared') **
   changeView(view) {
     if (this.state.view !== view) {
@@ -149,14 +129,6 @@ export default class App extends Component {
         (view === 'MY_DOCUMENTS') ? this.fetchMyDocuments() : this.fetchSharedWithMe();
       });
     }
-  }
-
-  /** Reloads the current view from the API *
-  refreshCurrentView() {
-    if (this.state.view === 'MY_DOCUMENTS')
-      return this.fetchMyDocuments();
-    else 
-      return this.fetchSharedWithMe();
   }
 
   /** Toggles the view presentation (table vs. grid) **
