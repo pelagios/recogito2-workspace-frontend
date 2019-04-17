@@ -21,6 +21,15 @@ export default class CreateNew extends Component {
 
   onSelectOption(option) {
     this.setState({ menuVisible: false });
+  
+    if (option === 'CREATE_FOLDER')
+      this.props.onCreateFolder();
+    else if (option === 'UPLOAD_FILES')
+      this.props.onUploadFiles();
+    else if (option === 'IMPORT_IIIF')
+      this.props.onImportSource('IIIF');
+
+    /*
     if (option === 'FOLDER') {
       this.setState({
         createNewForm: 
@@ -38,6 +47,7 @@ export default class CreateNew extends Component {
             onCancel={this.handleFormCancel} /> 
       });
     }
+    */
   }
 
   handleFormSubmit = (value) => {
@@ -87,13 +97,13 @@ export default class CreateNew extends Component {
             className="create-new"
             menu={[
               { group: 'local', options: [
-                { icon: '\uf07b', label: 'Folder', value: 'FOLDER' },
-                { icon: '\uf15b', label: 'File upload', value: 'FILE' }
+                { icon: '\uf07b', label: 'Folder', value: 'CREATE_FOLDER' },
+                { icon: '\uf15b', label: 'File upload', value: 'UPLOAD_FILES' }
               ]},
 
               { group: 'remote', options: [
-                { icon: '\uf0c1', label: 'From IIIF manifest', value: 'IIIF' },
-                { icon: '\uf121', label: 'From CTS service', value: 'CTS', disabled: true }
+                { icon: '\uf0c1', label: 'From IIIF manifest', value: 'IMPORT_IIIF' },
+                { icon: '\uf121', label: 'From CTS service', value: 'IMPORT_CTS', disabled: true }
               ]}
             ]}
             onSelect={this.onSelectOption.bind(this)}

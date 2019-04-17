@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import axios from 'axios';
 
-import Announcement from  './Announcement.jsx';
-import API from './API.js';
-import GridPane from '../common/content/grid/GridPane.jsx';
-import TablePane from '../common/content/table/TablePane.jsx';
-import Readme from '../common/content/Readme.jsx';
-import { Columns } from '../common/content/table/Columns.js';
-import StoredUIState from '../common/StoredUIState.js';
-import Uploader from '../common/content/upload/Uploader.jsx';
-import Header from './header/Header.jsx';
-import Sidebar from './sidebar/Sidebar.jsx';
+import activities from './activities';
+import initialState from './initialState';
+import Workspace from './Workspace';
 
 import '../../assets/style/workspace/index.scss';
 
@@ -19,74 +13,89 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    const state = {
-      account       : null,           // account info
-      view          : 'MY_DOCUMENTS', // view, as selected in sidebar (My Documents, Shared, Recent)
-      breadcrumbs   : [],             // the current folder (and parent folders) we are in
-      presentation  : 'TABLE',        // presentation mode TABLE or GRID
-      table_columns : [               // current table view columns configuration
-        "author",
-        "title",
-        "language",
-        "date_freeform",
-        "uploaded_at",
-        "last_edit_at"
-      ],
-      table_sorting : null,          // current table sorting (if any)
-      busy          : false,          // Document pane in 'busy' state? (Docs loading, action onging, etc.)
-      folders       : [],             // Folders
-      documents     : [],             // Documents in view
-      total_docs    : null,           // Total number of documents
-      readme        : null,           // Current folder readme
-      selection     : [],             // Selected items (folders and documents)
-      fileUploads   : [],             // Files currently uploading
-      urlUpload     : null,           // URLs currently uploading/registering
-      announcement  : null
-    };
+    this.state = initialState;
 
-    Object.assign(state, StoredUIState.load());
-    this.state = state;
+    this._rootEl = document.getElementById('app');
+    window.onhashchange = this.changeFolder;
+  }
 
-    this._root = document.getElementById('app');
+  /** Init: add deselect listeners and load contents */
+  componentDidMount() {
+    this._rootEl.addEventListener('keydown', this.onKeydown, false);
+    this._rootEl.addEventListener('mousedown', this.onMousedown, false);
 
-    this.onKeydown = this.onKeydown.bind(this);
-    this.onMousedown = this.onMousedown.bind(this);
+    // Init account data
+    axios.get('/api/account/my').then(result => { 
+      this.setState({ account: result.data }) 
+    });
 
-    window.onhashchange = this.changeFolder.bind(this);
+    // this.refreshCurrentView();
+    
+    /*
+    API.latestAnnouncement().then(result => {
+      this.setState({ announcement: result.data });
+    })
+    */
+  }
+
+  /** Remveo deselect listeners **/
+  componentWillUnmount() {
+    this._rootEl.removeEventListener('keydown', this.onKeydown, false);
+    this._rootEl.removeEventListener('mousedown', this.onMousedown, false);
   }
 
   /** Clear selection on ESC key **/
-  onKeydown(evt) {
-    if (evt.which === 27) this.setState({ selection: [] });
+  onKeydown = (evt) => {
+    // if (evt.which === 27) this.setState({ selection: [] });
   }
 
   /** Clear selection on click ouside the document pane **/
   onMousedown(evt) {
+    /*
     const isClickOutside = !(
       document.querySelector('.documents-pane').contains(evt.target) ||
       document.querySelector('.subheader-icons').contains(evt.target)
     );
 
     if (isClickOutside) this.setState({ selection: [] });
+    */
   }
 
-  componentDidMount() {
-    this._root.addEventListener('keydown', this.onKeydown, false);
-    this._root.addEventListener('mousedown', this.onMousedown, false);
-
-    this.fetchAccountData();
-    this.refreshCurrentView();
-    
-    API.latestAnnouncement().then(result => {
-      this.setState({ announcement: result.data });
-    })
+  handleChangeView = (view) => {
+    this.setState({ view: view });
   }
 
-  componentWillUnmount() {
-    this._root.removeEventListener('keydown', this.onKeydown, false);
-    this._root.removeEventListener('mousedown', this.onMousedown, false);
+  handleCreateFolder = (view) => {
+
   }
 
+  handleUploadFiles = (view) => {
+
+  }
+
+  handleImportSource = (view) => {
+
+  }
+
+  changeFolder = () => {
+    // this.setState({ selection: [] });
+    // this.refreshCurrentView();
+  }
+
+  render() {
+    return(
+      <Workspace 
+        account={this.state.account}
+        view={this.state.view}
+        onChangeView={this.handleChangeView}
+        onCreateFolder={activities.createFolder}
+        onUploadFiles={activities.uploadFiles}
+        onImportSource={activities.importSource}
+      />
+    )
+  }
+
+  /*
   getDisplayConfig() {
     if (this.state.presentation === 'GRID')
       return; // No configs for grid view
@@ -128,7 +137,7 @@ export default class App extends Component {
     });
   }
 
-  /** Switch between different document views (currently: 'my' vs. 'shared') **/
+  /** Switch between different document views (currently: 'my' vs. 'shared') **
   changeView(view) {
     if (this.state.view !== view) {
       StoredUIState.save('view', view);
@@ -142,7 +151,7 @@ export default class App extends Component {
     }
   }
 
-  /** Reloads the current view from the API */
+  /** Reloads the current view from the API *
   refreshCurrentView() {
     if (this.state.view === 'MY_DOCUMENTS')
       return this.fetchMyDocuments();
@@ -150,12 +159,7 @@ export default class App extends Component {
       return this.fetchSharedWithMe();
   }
 
-  changeFolder() {
-    this.setState({ selection: [] });
-    this.refreshCurrentView();
-  }
-
-  /** Toggles the view presentation (table vs. grid) **/
+  /** Toggles the view presentation (table vs. grid) **
   togglePresentation() {
     this.setState(before => { 
       const p = (before.presentation === 'TABLE') ? 'GRID' : 'TABLE';
@@ -178,7 +182,7 @@ export default class App extends Component {
     });
   }
 
-  /** File selection **/
+  /** File selection **
   onSelect(selection) {
     this.setState({ selection: selection });
   }
@@ -204,7 +208,7 @@ export default class App extends Component {
        .then(this.setState({ readme: null })); 
   }
 
-  /** File upload **/
+  /** File upload **
   startUpload(files) {
     this.setState({ 
       fileUploads: files, 
@@ -212,7 +216,7 @@ export default class App extends Component {
     });
   }
 
-  /** Remote file registration (IIIF, CTS) **/
+  /** Remote file registration (IIIF, CTS) **
   startRegisterRemoteSource(url) {
     this.setState({ 
       fileUploads: [],
@@ -241,103 +245,13 @@ export default class App extends Component {
       .then(this.fetchAccountData.bind(this));
   }
 
-  /** Just a hack **/
+  /** Just a hack **
   handleSearchResponse = response => {
     this.setState({
       folders: [],
       documents: response.items
     });
-  }
-
-  render() {
-    const isUploading = this.state.fileUploads.length > 0 || this.state.urlUpload;
-
-    return(
-      <React.Fragment>
-        <Sidebar
-          account={this.state.account}
-          onFolderCreated={this.refreshCurrentView.bind(this)}
-          onUploadFiles={this.startUpload.bind(this)}
-          currentView={this.state.view}
-          onChangeView={this.changeView.bind(this)} 
-          onCreateFromSource={this.startRegisterRemoteSource.bind(this)} />
-
-        <div className="container">
-          <Header
-            view={this.state.view}
-            breadcrumbs={this.state.breadcrumbs}
-            readme={this.state.readme}
-            docCount={this.state.total_docs}
-            selection={this.state.selection}
-            presentation={this.state.presentation}
-            displayConfig={this.getDisplayConfig()}
-            onSearchResponse={this.handleSearchResponse}
-            onDelete={this.setBusy.bind(this, true)}
-            afterAction={this.afterAction.bind(this)}
-            onTogglePresentation={this.togglePresentation.bind(this)} 
-            onCreateReadme={this.createReadme.bind(this)} />
-
-          {this.state.presentation === 'TABLE' ?
-            <TablePane
-              view={this.state.view}
-              folders={this.state.folders}
-              documents={this.state.documents}
-              columns={this.state.table_columns}
-              sorting={this.state.table_sorting}
-              busy={this.state.busy}
-              selection={this.state.selection}
-              disableFiledrop={this.state.view !== 'MY_DOCUMENTS'}
-              onSort={this.onSortTable.bind(this)}
-              onSelect={this.onSelect.bind(this)} 
-              onDropFiles={this.startUpload.bind(this)} 
-              onDropURL={this.startRegisterRemoteSource.bind(this)} 
-              onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} 
-              onRenameFolder={this.onRenameFolder.bind(this)}>
-
-              {this.state.readme && 
-                <Readme
-                  content={this.state.readme} 
-                  onUpdate={this.onUpdateReadme.bind(this)} 
-                  onDelete={this.onDeleteReadme.bind(this)} /> 
-              }
-            </TablePane>
-            :
-            <GridPane
-              folders={this.state.folders}
-              documents={this.state.documents}
-              busy={this.state.busy}
-              selection={this.state.selection}
-              onSelect={this.onSelect.bind(this)} 
-              disableFiledrop={this.state.view !== 'MY_DOCUMENTS'}
-              onDropFiles={this.startUpload.bind(this)}
-              onDropURL={this.startRegisterRemoteSource.bind(this)} >
-              
-              {this.state.readme && 
-                <Readme 
-                  content={this.state.readme} 
-                  onUpdate={this.onUpdateReadme.bind(this)} 
-                  onDelete={this.onDeleteReadme.bind(this)} /> 
-              }
-            </GridPane>
-          }
-        </div>
-
-        { isUploading && 
-          <Uploader
-            files={this.state.fileUploads} 
-            url={this.state.urlUpload}
-            onUploadComplete={this.onUploadComplete.bind(this)} /> 
-        }
-
-        {this.state.announcement && 
-          <Announcement
-            id={this.state.announcement.id}
-            message={this.state.announcement.content} 
-            onClose={e => this.setState({ announcement: null })} />
-        }
-      </React.Fragment>
-    )
-  }
+  } */
 
 }
 

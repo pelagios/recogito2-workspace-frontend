@@ -17,31 +17,24 @@ class ViewListItem extends Component {
 }
 
 export default class ViewList extends Component {
-
+  
   render() {
     return (
       <div className="section views">
         <ul>
           <ViewListItem
             icon="&#xf2be;"
-            current={this.props.currentView === 'MY_DOCUMENTS'}
+            current={this.props.view === 'MY_DOCUMENTS'}
             onClick={this.props.onChangeView.bind(this, 'MY_DOCUMENTS')}>
             My Documents
           </ViewListItem>
 
           <ViewListItem
             icon="&#xf064;"
-            current={this.props.currentView === 'SHARED_WITH_ME'}
+            current={this.props.view === 'SHARED_WITH_ME'}
             onClick={this.props.onChangeView.bind(this, 'SHARED_WITH_ME')}>
             Shared with me
           </ViewListItem>
-
-          {/* <ViewListItem
-            icon="&#xf017;"
-            current={this.props.currentView == 'RECENT'}
-            onClick={this.props.onChangeView.bind(this, 'RECENT')}>
-            Recent
-          </ViewListItem> */}
         </ul>
       </div>
     )

@@ -1,3 +1,7 @@
+import React from 'react';
+
+import Sidebar from './sidebar/Sidebar';
+
 const Workspace = (props) => {
 
   return (
@@ -10,6 +14,7 @@ const Workspace = (props) => {
         onUploadFiles={props.onUploadFiles}
         onImportSource={props.onImportSource} />
 
+      {/*
       <div className="container">
         <Header
           account={props.account}
@@ -85,8 +90,10 @@ const Workspace = (props) => {
         message={this.state.announcement.content} 
         onClose={e => this.setState({ announcement: null })} />
     }
-  </React.Fragment>
-
+  */}
+    </React.Fragment>
   );
 
 }
+
+export default Workspace;
