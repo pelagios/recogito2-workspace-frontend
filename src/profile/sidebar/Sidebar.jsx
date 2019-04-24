@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-import ActivityWidget from '../../common/content/activity/ActivityWidget.jsx';
-import CollaboratorList from '../../common/content/profile/CollaboratorList.jsx';
-import ProfileInfo from '../../common/content/profile/ProfileInfo.jsx';
+// import ActivityWidget from '../../common/content/activity/ActivityWidget.jsx';
+// import CollaboratorList from '../../common/content/profile/CollaboratorList.jsx';
+// import ProfileInfo from '../../common/content/profile/ProfileInfo.jsx';
 
 export default class Sidebar extends Component {
 
   render() {
     return (
-      <div className="sidebar">
+      <div className="sidebar"> {/*
         <div className="section">
           <ProfileInfo account={this.props.account} />
         </div>
@@ -23,7 +23,7 @@ export default class Sidebar extends Component {
         <CollaboratorList 
           className="section"
           title="Top collaborators"
-          username={this.props.account && this.props.account.username} />
+      username={this.props.account && this.props.account.username} /> */}
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Sidebar from './sidebar/Sidebar';
 
-const Workspace = (props) => {
+const Workspace = props => {
 
   return (
     <React.Fragment>

@@ -1,29 +1,19 @@
 import React, { Component } from 'react';
 
-import ProfileInfo from '../../../common/content/profile/ProfileInfo.jsx';
-import MenuPopup from '../../../common/components/MenuPopup.jsx';
+import Menu from '../../../common/Menu';
+import IdentityInfo from '../../../common/account/IdentityInfo';
 
 export default class Account extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { menuVisible: false };
-  }
+  state = {
+    menuVisible: false 
+  };
 
-  onSelectMenuOption(option) {
-    if (option === 'SETTINGS')
-      window.location.href= '/settings/account';
-    else if (option === 'SIGNOUT')
-      window.location.href= '/logout';
-    else if (option === 'HELP');
-      window.location.href= '/help';
-  }
-
-  showMenu() {
+  openMenu = () => {
     this.setState({ menuVisible: true });
   }
 
-  closeMenu() {
+  closeMenu = () => {
     this.setState({ menuVisible: false });
   }
 
@@ -31,24 +21,25 @@ export default class Account extends Component {
     return (
       <div
         className="section account"
-        onClick={this.showMenu.bind(this)} >
+        onClick={this.openMenu} >
 
-        <ProfileInfo account={this.props.account} />
+        <IdentityInfo 
+          account={this.props.account} />
 
         { this.state.menuVisible &&
-          <MenuPopup
+          <Menu 
             className="account-menu"
-            menu={[
-              { group: 'settings', options: [
-                { icon: '\uf0ad', label: 'Account settings', link: '/settings/account' }
-              ]},
-              { group: 'general', options: [
-                { icon: '\uf128', label: 'Help', link: '/help' },
-                { icon: '\uf011', label: 'Sign out', link: '/logout' }
-              ]}
-            ]}
-            onSelect={this.onSelectMenuOption.bind(this)}
-            onCancel={this.closeMenu.bind(this)} />
+            onCancel={this.closeMenu}>
+
+            <Menu.Group name="settings">
+              <Menu.Item icon={'\uf0ad'} label="Account settings" link="/settings/account" />
+            </Menu.Group>
+            
+            <Menu.Group name ="general">
+              <Menu.Item icon={'\uf128'} label="Help" link="/help" />
+              <Menu.Item icon={'\uf011'} label="Sign out" link="/logout" />
+            </Menu.Group>
+          </Menu>
         }
       </div>
     )

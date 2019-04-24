@@ -3,9 +3,10 @@ import { render } from 'react-dom';
 import axios from 'axios';
 
 import activities from './activities';
-import Columns from '../common/table/Columns';
 import initialState from './initialState';
 import Workspace from './Workspace';
+
+import { Columns } from '../common/content/table/Columns';
 
 import '../../assets/style/workspace/index.scss';
 
@@ -109,9 +110,9 @@ export default class App extends Component {
         account={this.state.account}
         view={this.state.view}
         onChangeView={this.handleChangeView}
-        onCreateFolder={() => activities.createFolder().then(refreshPage)}
-        onUploadFiles={activities.uploadFiles}
-        onImportSource={activities.importSource}
+        onCreateFolder={() => activities.createFolder().then(this.refreshPage)}
+        onUploadFiles={() => activities.uploadFiles().then(this.refreshPage)}
+        onImportSource={() => activities.importSource().then(this.refreshPage)}
       />
     )
   }

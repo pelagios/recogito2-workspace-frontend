@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 
-import API from '../../API.js';
-import MenuPopup from '../../../common/components/MenuPopup.jsx';
-import CreateFolderForm from './forms/CreateFolderForm.jsx';
-import IIIFSourceForm from './forms/IIIFSourceForm.jsx';
+import Menu from '../../../common/Menu';
 
-export default class CreateNew extends Component {
+export default class NewContent extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { 
-      menuVisible: false,
-      createNewForm: null // Popup form for specifying data source details
-    };
-  }
+  state = { 
+    menuVisible: false,
+    createNewForm: null // Popup form for specifying data source details
+  };
 
   onShowOptions() {
     this.setState({ menuVisible: true });
@@ -50,6 +44,7 @@ export default class CreateNew extends Component {
     */
   }
 
+  /*
   handleFormSubmit = (value) => {
     if (value.type === 'IIIF_SOURCE') {
       this.props.onCreateFromSource && this.props.onCreateFromSource(value);
@@ -74,6 +69,7 @@ export default class CreateNew extends Component {
   onCancel() {
     this.setState({ menuVisible: false });
   }
+  */
 
   render() {
     return (
@@ -93,21 +89,17 @@ export default class CreateNew extends Component {
           style={{ display: 'none' }} />
 
         {this.state.menuVisible &&
-          <MenuPopup
-            className="create-new"
-            menu={[
-              { group: 'local', options: [
-                { icon: '\uf07b', label: 'Folder', value: 'CREATE_FOLDER' },
-                { icon: '\uf15b', label: 'File upload', value: 'UPLOAD_FILES' }
-              ]},
+          <Menu className="create-new">
+            <Menu.Group name="local">
+              <Menu.Option icon={'\uf07b'} label="Folder" />
+              <Menu.Option icon={'\uf15b'} label="File upload" />
+            </Menu.Group>
 
-              { group: 'remote', options: [
-                { icon: '\uf0c1', label: 'From IIIF manifest', value: 'IMPORT_IIIF' },
-                { icon: '\uf121', label: 'From CTS service', value: 'IMPORT_CTS', disabled: true }
-              ]}
-            ]}
-            onSelect={this.onSelectOption.bind(this)}
-            onCancel={this.onCancel.bind(this)} />
+            <Menu.Group>
+              <Menu.Option icon={'\uf0c1'} label="From IIIF manifest" />
+              <Menu.Option icon={'\uf121'} label="From CTS service" disabled/>
+            </Menu.Group>
+          </Menu>
         }
 
         {this.state.createNewForm}

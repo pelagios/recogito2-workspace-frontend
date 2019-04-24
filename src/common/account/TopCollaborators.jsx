@@ -3,22 +3,20 @@ import axios from 'axios';
 
 import Avatar from './Avatar.jsx';
 
-export default class CollaboratorList extends Component {
+export default class TopCollaborators extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { collaborators: [] };
-    this.fetchCollaborators(props);
+  state = {
+    collaborators: []
   }
 
-  componentWillReceiveProps(props) {
-    this.fetchCollaborators(props);
+  componentWillMount() {
+    this.fetchCollaborators();
   }
 
-  fetchCollaborators(props) {
-    if (props.username)
+  fetchCollaborators() {
+    if (this.props.username)
       axios
-        .get(`/api/account/${props.username}/collaborators`)
+        .get(`/api/account/${this.props.username}/collaborators`)
         .then(result => this.setState({ collaborators: result.data }));
   }
 

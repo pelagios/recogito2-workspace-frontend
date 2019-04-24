@@ -1,53 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import ActivityWidget from '../../common/content/activity/ActivityWidget.jsx';
-import CollaboratorList from '../../common/content/profile/CollaboratorList.jsx';
+import Account from './sections/Account';
+import NewContent from './sections/NewContent';
+import Views from './sections/Views';
+import Storage from './sections/Storage';
+import MyActivity from './sections/MyActivity';
 
-import Account   from './sections/Account.jsx';
-import CreateNew from './sections/CreateNew.jsx';
-import ViewList  from './sections/Views.jsx';
-import Storage   from './sections/Storage.jsx';
+const Sidebar = props => {
 
-export default class Sidebar extends Component {
+  return (
+    <div className="sidebar">
+      <Account 
+        account={props.account} />
 
-  handleCreateFromSource = (value) => {
-    if (value.type === 'IIIF_SOURCE') {
-      this.props.onCreateFromSource && this.props.onCreateFromSource(value.url);
-    }
-  }
+      {/*
+      <NewContent 
+        onCreateFolder={props.onCreateFolder} 
+        onUploadFiles={props.onUploadFiles} 
+        onImportSource={props.onImportSource} />
 
-  render() {
-    return (
-      <div className="sidebar">
-        <Account
-          account={this.props.account} />
+      <Views
+        currentView={props.view} 
+        onChangeView={props.onChangeView} />
 
-        <CreateNew 
-          onCreateFolder={this.props.onCreateFolder}
-          onUploadFiles={this.props.onUploadFiles} 
-          onImportSource={this.props.onImportSource} />
-          
-        <ViewList
-          account={this.props.account}
-          view={this.props.view}
-          onChangeView={this.props.onChangeView} />
+      <Storage
+        account={props.account} />
 
-        <Storage 
-          account={this.props.account} /> 
-
-        <ActivityWidget 
-          className="section" 
-          width={237}
-          height={55}
-          fill="#4483c4"
-          stats={this.props.account && this.props.account.stats} />
-
-        <CollaboratorList 
-          className="section collaborators"
-          title="My top collaborators"
-          username={this.props.account && this.props.account.username} />
-      </div>
-    )
-  }
+      <MyActivity 
+        account={props.account} /> */}
+    </div>
+  );
 
 }
+
+export default Sidebar;

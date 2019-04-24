@@ -18,7 +18,7 @@ const tickFormatter = (tick) => new Intl.DateTimeFormat('en-GB', {
   month: 'short'
 }).format(new Date(tick));
 
-export default class ActivityWidget extends Component {
+export default class ActivityHistory extends Component {
 
   /** Helper that generates an empty time series of N buckets with value 0 */
   createEmptySeries(n, toTimestamp) {

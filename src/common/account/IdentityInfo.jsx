@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Avatar from './Avatar.jsx';
 
-export default class Identity extends Component {
+export default class IdentityInfo extends Component {
 
   formatURL(url) {
     return url.replace(/^https?:\/\//i, '');
