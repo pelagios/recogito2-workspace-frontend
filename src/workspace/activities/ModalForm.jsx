@@ -11,7 +11,7 @@ export default class ModalForm extends Component {
   }
 
   handleKeydown = (evt) => {
-    if (evt.which === 27) this.handleCancel(); // Escape
+    if (evt.which === 27) this.props.onCancel(); // Escape
   }
 
   render() {

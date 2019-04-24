@@ -5,104 +5,74 @@ import Menu from '../../../common/Menu';
 export default class NewContent extends Component {
 
   state = { 
-    menuVisible: false,
-    createNewForm: null // Popup form for specifying data source details
+    menuVisible: false
   };
 
-  onShowOptions() {
+  onOpenMenu = () => {
     this.setState({ menuVisible: true });
   }
 
-  onSelectOption(option) {
-    this.setState({ menuVisible: false });
-  
-    if (option === 'CREATE_FOLDER')
-      this.props.onCreateFolder();
-    else if (option === 'UPLOAD_FILES')
-      this.props.onUploadFiles();
-    else if (option === 'IMPORT_IIIF')
-      this.props.onImportSource('IIIF');
-
-    /*
-    if (option === 'FOLDER') {
-      this.setState({
-        createNewForm: 
-          <CreateFolderForm 
-            onSubmit={this.handleFormSubmit}
-            onCancel={this.handleFormCancel} />
-      });
-    } else if (option === 'FILE') {
-      this._input.click();
-    } else if (option === 'IIIF') {
-      this.setState({
-        createNewForm:
-          <IIIFSourceForm 
-            onSubmit={this.handleFormSubmit} 
-            onCancel={this.handleFormCancel} /> 
-      });
-    }
-    */
-  }
-
-  /*
-  handleFormSubmit = (value) => {
-    if (value.type === 'IIIF_SOURCE') {
-      this.props.onCreateFromSource && this.props.onCreateFromSource(value);
-    } else if (value.type === 'NEW_FOLDER') {
-      const currentFolderId = document.location.hash.substring(1);
-      API.createFolder(value.name || 'Unnamed Folder', currentFolderId)
-         .then(() => this.props.onFolderCreated());
-    }
-
-    this.setState({ createNewForm: null });
-  }
-
-  handleFormCancel = () => {
-    this.setState({ createNewForm: null });
-  }
-
-  onUploadFiles(evt) {
-    const files = Array.from(evt.target.files);
-    this.props.onUploadFiles(files);
-  }
-
-  onCancel() {
+  onCloseMenu = () => {
     this.setState({ menuVisible: false });
   }
-  */
+
+  /** Helper to execute a function after closing the menu **/
+  select = (fn) => {
+    return () => {
+      this.setState({ menuVisible: false });
+      fn();
+    }
+  } 
 
   render() {
     return (
       <div className="section create-new">
         <button
           className="btn create-new"
-          onClick={this.onShowOptions.bind(this)}>
+          onClick={this.onOpenMenu}>
           <span className="icon">&#xf067;</span>
           <span className="label">New</span>
         </button>
+
         <input
           ref={c => this._input = c}
           type="file"
           name="file"
           multiple
-          onChange={this.onUploadFiles.bind(this)}
+          onChange={this.props.onUploadFiles}
           style={{ display: 'none' }} />
 
         {this.state.menuVisible &&
-          <Menu className="create-new">
+          <Menu 
+            className="create-new"
+            onCancel={this.onCloseMenu}>
+            
             <Menu.Group name="local">
-              <Menu.Option icon={'\uf07b'} label="Folder" />
-              <Menu.Option icon={'\uf15b'} label="File upload" />
+              <Menu.Item 
+                icon={'\uf07b'} 
+                label="Folder" 
+                onSelect={this.select(this.props.onCreateFolder)} />
+
+              <Menu.Item 
+                icon={'\uf15b'} 
+                label="File upload" 
+                onSelect={this.select(this.props.onUploadFiles)} />
             </Menu.Group>
 
             <Menu.Group>
-              <Menu.Option icon={'\uf0c1'} label="From IIIF manifest" />
-              <Menu.Option icon={'\uf121'} label="From CTS service" disabled/>
+              <Menu.Item 
+                icon={'\uf0c1'} 
+                label="From IIIF manifest" 
+                onSelect={this.select(() => this.props.onImportSource('IIIF'))} />
+
+              <Menu.Item 
+                disabled
+                icon={'\uf121'} 
+                label="From CTS service" 
+                onSelect={this.select(() => this.props.onImportSource('CTS'))} />
             </Menu.Group>
           </Menu>
         }
-
-        {this.state.createNewForm}
       </div>
     )
   }

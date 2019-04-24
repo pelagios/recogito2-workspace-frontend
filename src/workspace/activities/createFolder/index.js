@@ -23,7 +23,7 @@ const createFolder = () => {
 
     const onCancel = () => {
       container.remove();
-      reject();
+      resolve();
     }
 
     render(

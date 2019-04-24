@@ -13,11 +13,10 @@ const Sidebar = props => {
       <Account 
         account={props.account} />
 
-      {/*
       <NewContent 
         onCreateFolder={props.onCreateFolder} 
         onUploadFiles={props.onUploadFiles} 
-        onImportSource={props.onImportSource} /> */}
+        onImportSource={props.onImportSource} /> 
 
       <Views
         currentView={props.view} 
@@ -26,9 +25,8 @@ const Sidebar = props => {
       <Storage
         account={props.account} />
 
-        {/*
       <MyActivity 
-        account={props.account} /> */}
+        account={props.account} />
     </div>
   );
 

@@ -18,9 +18,9 @@ const MenuItem = props => {
 
   return (
     <li
-      key={props.value || props.link}
+      key={props.label}
       className={`option${props.disabled ? ' disabled' : '' }`}
-      onClick={(props.disabled || !props.value) ? null : props.onSelect}>
+      onClick={(props.disabled || !props.onSelect) ? null : props.onSelect}>
 
       {props.link ? 
         <a href={props.link}>
