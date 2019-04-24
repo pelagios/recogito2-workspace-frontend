@@ -33,23 +33,24 @@ export default class Selection {
 
   /** Immutable - returns a new selection object **/
   select = (item, isCtrlPressed) => {
-    const nextSelection = this._selection.slice(0);
-
-    const thisIdx = nextSelection.indexOf(item);
-    const isSelected = thisIdx > -1;
-
     if (isCtrlPressed) {
+      const thisIdx = this._selection.indexOf(item);
+      const isSelected = thisIdx > -1;
+    
+      let cloned = this._selection.slice(0);
+
       // Toggle this item, leave the rest of the selection unchanged
-      if (isSelected)
-        nextSelection.splice(thisIdx, 1);
-      else
-        nextSelection.push(item);      
+      if (isSelected) {
+        cloned.splice(thisIdx, 1);
+      } else {
+        cloned.push(item);
+      }      
+
+      return new Selection(cloned);
     } else {
       // Select just this item
-      nextSelection = [ item ];
+      return new Selection([ item ]);
     }
-
-    return new Selection(nextSelection);
   }
 
   /**
