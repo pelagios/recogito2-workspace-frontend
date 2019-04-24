@@ -5,7 +5,7 @@ import API from './API.js';
 
 import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
-import Breadcrumbs from '../common/content/Breadcrumbs.jsx';
+import Breadcrumbs from '../workspace/header/Breadcrumbs.jsx';
 import HeaderIcon from '../workspace/header/HeaderIcon.jsx';
 import Readme from '../common/content/Readme.jsx';
 import StoredUIState from '../common/StoredUIState.js';
