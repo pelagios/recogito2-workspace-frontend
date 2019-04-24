@@ -94,10 +94,25 @@ export default class App extends Component {
     });
   }
 
-  handleChangeView = (view) => {
+  changeView = (view) => {
     this.setState({ view: view });
   }
 
+  onTogglePresentation = () => {
+    this.setState(prev => { 
+      const presentation = (prev.presentation === 'TABLE') ? 'GRID' : 'TABLE';
+      // StoredUIState.save('presentation', p);
+      return { presentation: presentation };
+    });
+  }
+
+  createReadme = () => {
+    this.setState(prev => {
+      return {
+         page: {...prev.page, ...{ readme: true }} 
+      }
+    });
+  }
 
   changeFolder = () => {
     // this.setState({ selection: [] });
@@ -109,7 +124,11 @@ export default class App extends Component {
       <Workspace 
         account={this.state.account}
         view={this.state.view}
-        onChangeView={this.handleChangeView}
+        presentation={this.state.presentation}
+        page={this.state.page}
+        onChangeView={this.changeView}
+        onTogglePresentation={this.onTogglePresentation}
+        onCreateReadme={this.createReadme}
         onCreateFolder={() => activities.createFolder().then(this.refreshPage)}
         onUploadFiles={() => activities.uploadFiles().then(this.refreshPage)}
         onImportSource={() => activities.importSource().then(this.refreshPage)}
@@ -130,15 +149,6 @@ export default class App extends Component {
         (view === 'MY_DOCUMENTS') ? this.fetchMyDocuments() : this.fetchSharedWithMe();
       });
     }
-  }
-
-  /** Toggles the view presentation (table vs. grid) **
-  togglePresentation() {
-    this.setState(before => { 
-      const p = (before.presentation === 'TABLE') ? 'GRID' : 'TABLE';
-      StoredUIState.save('presentation', p);
-      return { presentation: p };
-    });
   }
 
   onChangeColumnPrefs(columns) {
@@ -163,10 +173,6 @@ export default class App extends Component {
   onRenameFolder(folder, title) {
     API.renameFolder(folder.id, title)
        .then(() => this.refreshCurrentView());
-  }
-
-  createReadme() {
-    this.setState({ readme: true });
   }
 
   onUpdateReadme(readme) {

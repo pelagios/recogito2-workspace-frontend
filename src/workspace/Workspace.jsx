@@ -20,13 +20,12 @@ const Workspace = props => {
         <Header
           account={props.account}
           view={props.view}
-          readme={props.readme}
-          breadcrumbs={props.breadcrumbs}
-          docCount={props.total_docs}
-          selection={props.selection}
           presentation={props.presentation}
-          onTogglePresentation={props.togglePresentation} 
-          onSaveReadme={props.createReadme} />
+          readme={props.page.readme}
+          breadcrumbs={props.page.breadcrumbs}
+          docCount={props.page.total_docs}
+          onTogglePresentation={props.onTogglePresentation} 
+          onCreateReadme={props.createReadme} />
       
       {/*
 

@@ -38,6 +38,13 @@ export default class Header extends Component {
               </button>
             }
           </Breadcrumbs>
+
+          <div className="main-header-icons">
+            <HeaderIcon
+              className="presentation-toggle stroke7"
+              icon={this.props.presentation === 'TABLE' ? '\ue645' : '\ue636'} 
+              onClick={this.props.onTogglePresentation} />
+          </div>
         </div>
       </div>
     )
