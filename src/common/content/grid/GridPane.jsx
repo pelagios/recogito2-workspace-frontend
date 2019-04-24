@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone'
-
 import { AutoSizer, List } from 'react-virtualized';
 
-import Selection from '../Selection.js';
-import Folder from './Folder.jsx';
 import Document from './Document.jsx';
+import Folder from './Folder.jsx';
 import Readme from '../Readme.jsx';
 
 import DropzoneDecoration from '../upload/DropzoneDecoration.jsx';

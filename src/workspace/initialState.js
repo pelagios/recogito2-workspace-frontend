@@ -1,3 +1,5 @@
+import Selection from './Selection';
+
 export default {
   account: null,         // Null if not loaded
   
@@ -11,7 +13,7 @@ export default {
     items: []             // Folders and documents
   },
 
-  selection: [],        
+  selection: new Selection([]),        
   
   table_config: {
     columns: [

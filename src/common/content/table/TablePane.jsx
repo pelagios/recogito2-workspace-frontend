@@ -5,8 +5,6 @@ import Dropzone from 'react-dropzone'
 import { Columns } from './Columns.js';
 import DropzoneDecoration from '../upload/DropzoneDecoration.jsx';
 import Readme from '../Readme.jsx';
-import Selection from '../Selection.js';
-
 import HeaderRow from './rows/HeaderRow.jsx';
 import DocumentRow from './rows/DocumentRow.jsx';
 import FolderRow from './rows/FolderRow.jsx';
