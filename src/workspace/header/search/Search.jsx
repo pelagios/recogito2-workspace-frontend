@@ -5,9 +5,8 @@ import AdvancedSearch from './AdvancedSearch.jsx';
 
 export default class Search extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { advancedSearchOpen: false }
+  state = { 
+    advancedSearchOpen: false 
   }
 
   toggleAdvancedSearch() {

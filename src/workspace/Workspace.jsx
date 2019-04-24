@@ -1,6 +1,8 @@
 import React from 'react';
 
+import Header from './header/Header';
 import Sidebar from './sidebar/Sidebar';
+
 
 const Workspace = props => {
 
@@ -14,23 +16,19 @@ const Workspace = props => {
         onUploadFiles={props.onUploadFiles}
         onImportSource={props.onImportSource} />
 
-      {/*
-      <div className="container">
+      <div className="main-content">
         <Header
           account={props.account}
           view={props.view}
           readme={props.readme}
-
-          breadcrumbs={this.state.breadcrumbs}
-          docCount={this.state.total_docs}
-          selection={this.state.selection}
-          presentation={this.state.presentation}
-          displayConfig={this.getDisplayConfig()}
-          onSearchResponse={this.handleSearchResponse}
-          onDelete={this.setBusy.bind(this, true)}
-          afterAction={this.afterAction.bind(this)}
-          onTogglePresentation={this.togglePresentation.bind(this)} 
-          onCreateReadme={this.createReadme.bind(this)} />
+          breadcrumbs={props.breadcrumbs}
+          docCount={props.total_docs}
+          selection={props.selection}
+          presentation={props.presentation}
+          onTogglePresentation={props.togglePresentation} 
+          onSaveReadme={props.createReadme} />
+      
+      {/*
 
       {this.state.presentation === 'TABLE' ?
         <TablePane
@@ -75,9 +73,11 @@ const Workspace = props => {
           }
         </GridPane>
       }
+    */}
+
     </div>
 
-    { isUploading && 
+    {/* isUploading && 
       <Uploader
         files={this.state.fileUploads} 
         url={this.state.urlUpload}

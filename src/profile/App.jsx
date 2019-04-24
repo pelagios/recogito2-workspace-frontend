@@ -6,7 +6,7 @@ import API from './API.js';
 import GridPane from '../common/content/grid/GridPane.jsx';
 import TablePane from '../common/content/table/TablePane.jsx';
 import Breadcrumbs from '../common/content/Breadcrumbs.jsx';
-import HeaderIcon from '../common/content/HeaderIcon.jsx';
+import HeaderIcon from '../workspace/header/HeaderIcon.jsx';
 import Readme from '../common/content/Readme.jsx';
 import StoredUIState from '../common/StoredUIState.js';
 import Sidebar from './sidebar/Sidebar.jsx';
@@ -118,7 +118,7 @@ export default class App extends Component {
         <Sidebar 
           account={this.state.visitedAccount}/>
 
-        <div className="container">
+        <div className="main-content">
           <Breadcrumbs 
             label="Public Documents"
             path={this.state.breadcrumbs}

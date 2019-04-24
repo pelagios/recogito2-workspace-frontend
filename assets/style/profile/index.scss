@@ -3,7 +3,7 @@
 @import "../common/content/headericon";
 
 @import "../common/layout/sidebar";
-@import "../common/layout/container";
+@import "../common/layout/main";
 
 @import "topbar/topbar";
 @import "sidebar/sidebar";
@@ -13,7 +13,7 @@
   flex-direction:column;
 }
 
-.container {
+.main-content {
   padding-top:8px;
   flex:1;
   overflow:hidden;
