@@ -46,7 +46,7 @@
     top:-4px;
     right:20px;
 
-    .selection-actions {
+    .selection-options {
       vertical-align:middle;
       background-color:$ocean;
       color:#fff;
@@ -77,21 +77,21 @@
       }
     }
 
-    .selection-actions:hover {
+    .selection-options:hover {
       background-color:lighten($ocean, 10%);
     }
 
-    .selection-actions-enter,
-    .selection-actions-enter-done {
+    .selection-options-enter,
+    .selection-options-enter-done {
       width:88px;
     }
         
-    .selection-actions-exit, 
-    .selection-actions-exit-done {
+    .selection-options-exit, 
+    .selection-options-exit-done {
       width:0;
     }
 
-    .modal-menu.selection-actions-menu {
+    .modal-menu.selection-options-menu {
       top:46px;
       right:35px;
     }

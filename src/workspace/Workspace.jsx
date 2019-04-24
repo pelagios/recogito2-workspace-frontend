@@ -24,6 +24,7 @@ const Workspace = props => {
           readme={props.page.readme}
           breadcrumbs={props.page.breadcrumbs}
           docCount={props.page.total_docs}
+          selection={props.selection}
           onTogglePresentation={props.onTogglePresentation} 
           onCreateReadme={props.createReadme} />
       
