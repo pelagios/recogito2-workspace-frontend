@@ -23,10 +23,10 @@ const Sidebar = props => {
         currentView={props.view} 
         onChangeView={props.onChangeView} />
       
-      {/*
       <Storage
         account={props.account} />
 
+        {/*
       <MyActivity 
         account={props.account} /> */}
     </div>
