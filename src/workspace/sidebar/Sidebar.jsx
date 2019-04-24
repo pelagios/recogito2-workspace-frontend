@@ -17,12 +17,13 @@ const Sidebar = props => {
       <NewContent 
         onCreateFolder={props.onCreateFolder} 
         onUploadFiles={props.onUploadFiles} 
-        onImportSource={props.onImportSource} />
+        onImportSource={props.onImportSource} /> */}
 
       <Views
         currentView={props.view} 
         onChangeView={props.onChangeView} />
-
+      
+      {/*
       <Storage
         account={props.account} />
 

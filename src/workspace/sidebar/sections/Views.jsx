@@ -1,43 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ViewListItem extends Component {
+const ViewListItem = props => {
 
-  render() {
-    return (
-      <li
-        className={this.props.current ? 'current' : null}
-        onClick={this.props.onClick}>
-        <span className="icon">{this.props.icon}</span> {
-          this.props.children
-        }
-      </li>
-    )
-  }
+  return (
+    <li
+      className={props.current ? 'current' : null}
+      onClick={props.onClick}>
+      <span className="icon">{props.icon}</span> {
+        props.children
+      }
+    </li>
+  );
 
 }
 
-export default class ViewList extends Component {
+const Views = props => {
   
-  render() {
-    return (
-      <div className="section views">
-        <ul>
-          <ViewListItem
-            icon="&#xf2be;"
-            current={this.props.view === 'MY_DOCUMENTS'}
-            onClick={this.props.onChangeView.bind(this, 'MY_DOCUMENTS')}>
-            My Documents
-          </ViewListItem>
+  return (
+    <div className="section views">
+      <ul>
+        <ViewListItem
+          icon="&#xf2be;"
+          current={props.view === 'MY_DOCUMENTS'}
+          onClick={() => props.onChangeView('MY_DOCUMENTS')}>
+          My Documents
+        </ViewListItem>
 
-          <ViewListItem
-            icon="&#xf064;"
-            current={this.props.view === 'SHARED_WITH_ME'}
-            onClick={this.props.onChangeView.bind(this, 'SHARED_WITH_ME')}>
-            Shared with me
-          </ViewListItem>
-        </ul>
-      </div>
-    )
-  }
+        <ViewListItem
+          icon="&#xf064;"
+          current={props.view === 'SHARED_WITH_ME'}
+          onClick={() => props.onChangeView('SHARED_WITH_ME')}>
+          Shared with me
+        </ViewListItem>
+      </ul>
+    </div>
+  );
 
 }
+
+export default Views;
