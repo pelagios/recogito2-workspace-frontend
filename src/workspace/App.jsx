@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 
-import activities from './activities';
+import operations from './operations';
 import initialState from './initialState';
 import Workspace from './Workspace';
 
@@ -151,9 +151,9 @@ export default class App extends Component {
         onSelect={this.onSelect}
         onChangeColumnConfig={this.changeColumConfig}
         onCreateReadme={this.createReadme}
-        onCreateFolder={() => activities.createFolder().then(this.refreshPage)}
-        onUploadFiles={() => activities.uploadFiles().then(this.refreshPage)}
-        onImportSource={() => activities.importSource().then(this.refreshPage)}
+        onCreateFolder={() => operations.createFolder().then(this.refreshPage)}
+        onUploadFiles={() => operations.uploadFiles().then(this.refreshPage)}
+        onImportSource={() => operations.importSource().then(this.refreshPage)}
       />
     )
   }
