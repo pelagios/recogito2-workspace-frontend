@@ -4,7 +4,7 @@ export default {
   account: null,         // Null if not loaded
   
   view: 'MY_DOCUMENTS',  // MY_DOCUMENTS, SHARED_WITH_ME, SEARCH
-  presentation: 'GRID', // 'TABLE' or 'GRID'
+  presentation: 'TABLE', // 'TABLE' or 'GRID'
   
   page: {
     breadcrumbs: null,

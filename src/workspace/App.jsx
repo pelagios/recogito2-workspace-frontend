@@ -134,6 +134,7 @@ export default class App extends Component {
         view={this.state.view}
         presentation={this.state.presentation}
         page={this.state.page}
+        tableConfig={this.state.table_config}
         selection={this.state.selection}
         onChangeView={this.changeView}
         onTogglePresentation={this.onTogglePresentation}

@@ -29,18 +29,16 @@ const Workspace = props => {
           onTogglePresentation={props.onTogglePresentation} 
           onCreateReadme={props.createReadme} />
 
-        {/* props.presentation === 'TABLE' &&
-        
+        { props.presentation === 'TABLE' &&
           <TablePane
             items={props.page.items}
             config={props.tableConfig}
             selection={props.selection}
             busy={props.busy}
             enableFiledrop={props.view === 'MY_DOCUMENTS'} />
-        */}
+        }
 
         { props.presentation === 'GRID' &&
-        
           <GridPane
             items={props.page.items}
             selection={props.selection}

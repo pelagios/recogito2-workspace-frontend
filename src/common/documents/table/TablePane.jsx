@@ -12,25 +12,15 @@ import PreferencesModal from  './preferences/PreferencesModal';
 
 export default class TablePane extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      prefsOpen: false,
-      columns: Columns.filterByView(props.columns, props.view)
-      // selection: new Selection(props.folders.concat(props.documents), props.selection)
-    }
+  state = {
+    tablePreferencesOpen: false,
   }
 
-  /** Set derived state **/
-  componentWillReceiveProps(next) {
-    this.setState({ 
-      columns: Columns.filterByView(next.columns, next.view)
-      // selection: new Selection(next.folders.concat(next.documents), next.selection)
-    });
-  }
-
-  /** Handle click/SHIFT+click/CTRL+click selection via Selection helper class */
+  /** 
+   * Handle click/SHIFT+click/CTRL+click selection via Selection helper class 
+   * 
+   * TODO is this identical to the select code in GridPane?
+   */
   onClick(evt, item, idx) {
     const isShift = evt.getModifierState("Shift");
     const isCtrl = evt.getModifierState("Control");
@@ -51,33 +41,27 @@ export default class TablePane extends Component {
   }
 
   rowRenderer() {
-    const allItems = this.props.folders.concat(this.props.documents);
-
     return ((args) => {
-      const item = allItems[args.index];
-      const selected = this.props.selection && this.props.selection.includes(item);
+      const item = this.props.items[args.index];
+      const selected = this.props.selection.includes(item);
 
-      if (item.type === 'FOLDER')
-        return (
-          <FolderRow 
-            key={args.key} 
-            style={args.style} 
-            item={item} 
-            selected={selected}
-            onClick={e => this.onClick(e, item, args.index)} 
-            onRename={this.props.onRenameFolder} />
-        )
-      else
-        return (
-          <DocumentRow
-            key={args.key}
-            style={args.style}
-            columns={this.state.columns}
-            item={item}
-            selected={selected}
-            onClick={e => this.onClick(e, item, args.index)} />
-        )
-    })
+      return (item.type === 'FOLDER') ?
+        <FolderRow 
+          key={args.key} 
+          style={args.style} 
+          item={item} 
+          selected={selected}
+          onClick={e => this.onClick(e, item, args.index)} 
+          onRename={this.props.onRenameFolder} /> :
+
+        <DocumentRow
+          key={args.key}
+          style={args.style}
+          columns={this.props.config.columns}
+          item={item}
+          selected={selected}
+          onClick={e => this.onClick(e, item, args.index)} />
+    });
   }
 
   showPreferences(visible) {
@@ -133,7 +117,7 @@ export default class TablePane extends Component {
               className="virtualized-list"
               width={width}
               height={height}
-              rowCount={this.props.folders.length + this.props.documents.length}
+              rowCount={this.props.items.length}
               rowHeight={47}
               rowRenderer={this.rowRenderer()} />
           )}
@@ -149,7 +133,7 @@ export default class TablePane extends Component {
 
         <div className="documents-table-header">
           <HeaderRow 
-            columns={this.state.columns} 
+            columns={this.props.config.columns} 
             onSort={this.sortBy.bind(this)}
             sortColumn={this.props.sorting ? this.props.sorting.by : null} 
             sortAsc={this.props.sorting ? this.props.sorting.asc : null} />
@@ -172,7 +156,7 @@ export default class TablePane extends Component {
           </Dropzone>
         }
 
-        {this.state.prefsOpen &&
+        { this.state.prefsOpen &&
           <PreferencesModal
             columns={this.props.columns}
             onCancel={this.showPreferences.bind(this, false)} 

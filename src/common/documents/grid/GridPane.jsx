@@ -65,7 +65,7 @@ export default class GridPane extends Component {
               title={item.title}
               filetypes={item.filetypes}
               fileCount={item.file_count}
-              selected={this.props.selection && this.props.selection.includes(item)}
+              selected={this.props.selection.includes(item)}
               onClick={e => this.onClick(e, item, idx)} />
       });
 
@@ -86,11 +86,11 @@ export default class GridPane extends Component {
     });
   }
 
-  onDrag(active) {
+  onDrag = (active) => {
     this.setState({ drag: active });
   }
 
-  onDrop(files, _, evt) {
+  onDrop = (files, _, evt) => {
     const url = evt.dataTransfer.getData('URL');
 
     this.setState({ drag: false });
@@ -132,9 +132,9 @@ export default class GridPane extends Component {
             <Dropzone
               className="dropzone"
               disableClick={true}
-              onDragEnter={this.onDrag.bind(this, true)}
-              onDragLeave={this.onDrag.bind(this, false)}
-              onDrop={this.onDrop.bind(this)}>
+              onDragEnter={() => this.onDrag(true)}
+              onDragLeave={() => this.onDrag(false)}
+              onDrop={this.onDrop}>
 
               {gridPane}
 
