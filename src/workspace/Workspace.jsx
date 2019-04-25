@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Header from './header/Header';
+import Readme from '../common/documents/Readme';
 import Sidebar from './sidebar/Sidebar';
 import GridPane from '../common/documents/grid/GridPane';
 import TablePane from '../common/documents/table/TablePane';
@@ -27,7 +28,14 @@ const Workspace = props => {
           docCount={props.page.total_docs}
           selection={props.selection}
           onTogglePresentation={props.onTogglePresentation} 
-          onCreateReadme={props.createReadme} />
+          onCreateReadme={props.onCreateReadme} />
+
+        { props.page.readme && 
+          <Readme
+            content={props.page.readme} 
+            onUpdate={props.onUpdateReadme} 
+            onDelete={props.onDeleteReadme} />
+        }
 
         { props.presentation === 'TABLE' &&
           <TablePane

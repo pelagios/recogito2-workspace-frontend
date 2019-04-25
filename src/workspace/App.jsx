@@ -126,9 +126,7 @@ export default class App extends Component {
 
   createReadme = () => {
     this.setState(prev => {
-      return {
-         page: {...prev.page, ...{ readme: true }} 
-      }
+      return { page: {...prev.page, ...{ readme: true }} }
     });
   }
 
