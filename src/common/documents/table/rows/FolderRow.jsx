@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 
 export default class FolderRow extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { 
-      editable: false,
-      title: this.props.item.title 
-    }
+  state = { 
+    editable: false,
+    title: this.props.item.title 
   }
 
   componentWillReceiveProps(next) {

@@ -35,7 +35,8 @@ const Workspace = props => {
             config={props.tableConfig}
             selection={props.selection}
             busy={props.busy}
-            enableFiledrop={props.view === 'MY_DOCUMENTS'} />
+            enableFiledrop={props.view === 'MY_DOCUMENTS'} 
+            onSelect={props.onSelect} />
         }
 
         { props.presentation === 'GRID' &&
@@ -43,7 +44,8 @@ const Workspace = props => {
             items={props.page.items}
             selection={props.selection}
             busy={props.busy}
-            enableFiledrop={props.view !== 'MY_DOCUMENTS'} />            
+            enableFiledrop={props.view !== 'MY_DOCUMENTS'} 
+            onSelect={props.onSelect} />            
         }
     </div>
 

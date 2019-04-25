@@ -114,6 +114,10 @@ export default class App extends Component {
     });
   }
 
+  handleSelect = selection => {
+    this.setState({ selection: selection });
+  }
+
   createReadme = () => {
     this.setState(prev => {
       return {
@@ -138,6 +142,7 @@ export default class App extends Component {
         selection={this.state.selection}
         onChangeView={this.changeView}
         onTogglePresentation={this.onTogglePresentation}
+        onSelect={this.handleSelect}
         onCreateReadme={this.createReadme}
         onCreateFolder={() => activities.createFolder().then(this.refreshPage)}
         onUploadFiles={() => activities.uploadFiles().then(this.refreshPage)}

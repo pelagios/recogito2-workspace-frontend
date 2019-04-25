@@ -36,7 +36,7 @@ export default class Selection {
   }
 
   /** Immutable - returns a new selection object **/
-  select = (item, isCtrlPressed) => {
+  selectItem = (item, isCtrlPressed) => {
     if (isCtrlPressed) {
       const thisIdx = this._selection.indexOf(item);
       const isSelected = thisIdx > -1;

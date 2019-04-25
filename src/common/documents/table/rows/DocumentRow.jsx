@@ -2,7 +2,7 @@ import React from 'react';
 import NumberFormat from 'react-number-format';
 import TimeAgo from 'react-timeago';
 
-import BaseRowComponent from './BaseRowComponent.jsx';
+import BaseRowComponent from './BaseRowComponent';
 
 /** Icons for possible content type values **/
 const ICONS = {

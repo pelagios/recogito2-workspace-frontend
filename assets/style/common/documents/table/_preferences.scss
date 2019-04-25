@@ -18,6 +18,7 @@
 }
 
 .preferences .modal-body {
+  background-color:transparent;
   position:absolute;
   top:0;
   left:0;
@@ -81,9 +82,11 @@
 }
 
 .preferences .buttons {
+  background-color:#fff;
   flex:0;
   padding:15px 25px;
   border-top:1px solid $lightgrey-border-darker;
+  @include rounded-corners-bottom(4px);
 
   .btn {
     padding:4px 20px;

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import { Columns } from '../Columns.js';
+import { Columns } from '../Columns';
 
 export default class BaseRowComponent extends Component {
 

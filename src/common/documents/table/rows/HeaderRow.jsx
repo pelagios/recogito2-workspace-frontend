@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BaseRowComponent from './BaseRowComponent.jsx';
-import { HEADER_NAMES } from '../Columns.js';
+import BaseRowComponent from './BaseRowComponent';
+import { HEADER_NAMES } from '../Columns';
 
 export default class HeaderRow extends BaseRowComponent {
 

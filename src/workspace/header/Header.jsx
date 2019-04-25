@@ -12,7 +12,7 @@ const OptionsMenu = props => {
     props.selection.isSingleDocument() && props.view === 'MY_DOCUMENTS';
 
   const canShare = // Single folder in my workspace
-    props.selection.iSingleFolder() && props.view === 'MY_DOCUMENTS';
+    props.selection.isSingleFolder() && props.view === 'MY_DOCUMENTS';
 
   return (
     <Menu className="selection-actions-menu">
@@ -51,7 +51,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const hasSelection = this.props.selection.length > 0;
+    const hasSelection = !this.props.selection.isEmpty();
 
     return (
       <div className={this.props.readme ? "header" : "header no-readme"}>
