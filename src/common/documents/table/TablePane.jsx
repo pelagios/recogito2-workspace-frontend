@@ -17,16 +17,16 @@ export default class TablePane extends Component {
 
     this.state = {
       prefsOpen: false,
-      columns: Columns.filterByView(props.columns, props.view),
-      selection: new Selection(props.folders.concat(props.documents), props.selection)
+      columns: Columns.filterByView(props.columns, props.view)
+      // selection: new Selection(props.folders.concat(props.documents), props.selection)
     }
   }
 
   /** Set derived state **/
   componentWillReceiveProps(next) {
     this.setState({ 
-      columns: Columns.filterByView(next.columns, next.view),
-      selection: new Selection(next.folders.concat(next.documents), next.selection)
+      columns: Columns.filterByView(next.columns, next.view)
+      // selection: new Selection(next.folders.concat(next.documents), next.selection)
     });
   }
 

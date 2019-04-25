@@ -14,10 +14,9 @@ const AnimatedDiv = posed.div({
 
 export default class FiledropHint extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { visible: false };
-  }
+  state = { 
+    visible: false 
+  };
 
   componentDidMount() {
     this.setState({ visible: true });

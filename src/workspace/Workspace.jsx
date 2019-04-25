@@ -2,7 +2,8 @@ import React from 'react';
 
 import Header from './header/Header';
 import Sidebar from './sidebar/Sidebar';
-
+import GridPane from '../common/documents/grid/GridPane';
+import TablePane from '../common/documents/table/TablePane';
 
 const Workspace = props => {
 
@@ -27,54 +28,25 @@ const Workspace = props => {
           selection={props.selection}
           onTogglePresentation={props.onTogglePresentation} 
           onCreateReadme={props.createReadme} />
-      
-      {/*
 
-      {this.state.presentation === 'TABLE' ?
-        <TablePane
-          view={this.state.view}
-          folders={this.state.folders}
-          documents={this.state.documents}
-          columns={this.state.table_columns}
-          sorting={this.state.table_sorting}
-          busy={this.state.busy}
-          selection={this.state.selection}
-          disableFiledrop={this.state.view !== 'MY_DOCUMENTS'}
-          onSort={this.onSortTable.bind(this)}
-          onSelect={this.onSelect.bind(this)} 
-          onDropFiles={this.startUpload.bind(this)} 
-          onDropURL={this.startRegisterRemoteSource.bind(this)} 
-          onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)} 
-          onRenameFolder={this.onRenameFolder.bind(this)}>
+        {/* props.presentation === 'TABLE' &&
+        
+          <TablePane
+            items={props.page.items}
+            config={props.tableConfig}
+            selection={props.selection}
+            busy={props.busy}
+            enableFiledrop={props.view === 'MY_DOCUMENTS'} />
+        */}
 
-          {this.state.readme && 
-            <Readme
-              content={this.state.readme} 
-              onUpdate={this.onUpdateReadme.bind(this)} 
-              onDelete={this.onDeleteReadme.bind(this)} /> 
-          }
-        </TablePane>
-        :
-        <GridPane
-          folders={this.state.folders}
-          documents={this.state.documents}
-          busy={this.state.busy}
-          selection={this.state.selection}
-          onSelect={this.onSelect.bind(this)} 
-          disableFiledrop={this.state.view !== 'MY_DOCUMENTS'}
-          onDropFiles={this.startUpload.bind(this)}
-          onDropURL={this.startRegisterRemoteSource.bind(this)} >
-          
-          {this.state.readme && 
-            <Readme 
-              content={this.state.readme} 
-              onUpdate={this.onUpdateReadme.bind(this)} 
-              onDelete={this.onDeleteReadme.bind(this)} /> 
-          }
-        </GridPane>
-      }
-    */}
-
+        { props.presentation === 'GRID' &&
+        
+          <GridPane
+            items={props.page.items}
+            selection={props.selection}
+            busy={props.busy}
+            enableFiledrop={props.view !== 'MY_DOCUMENTS'} />            
+        }
     </div>
 
     {/* isUploading && 

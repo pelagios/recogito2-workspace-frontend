@@ -19,7 +19,7 @@ const Sidebar = props => {
         onImportSource={props.onImportSource} /> 
 
       <Views
-        currentView={props.view} 
+        view={props.view} 
         onChangeView={props.onChangeView} />
       
       <Storage

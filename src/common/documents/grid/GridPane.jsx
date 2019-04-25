@@ -8,7 +8,7 @@ import FiledropHint from '../FiledropHint';
 
 // import Readme from '../Readme.jsx';
 
-const ITEM_SIZE = 192;
+const TILE_SIZE = 192;
 
 /**
  * Using the following example:
@@ -17,6 +17,10 @@ const ITEM_SIZE = 192;
  * http://plnkr.co/edit/zjCwNeRZ7XtmFp1PDBsc?p=preview
  */
 export default class GridPane extends Component {
+
+  state = {
+    drag: false
+  }
 
   /** Handle click/SHIFT+click/CTRL+click selection via Selection helper class */
   onClick(evt, item, idx) {
@@ -37,29 +41,24 @@ export default class GridPane extends Component {
     }
   }
 
-  rowRenderer(itemsPerRow, rowCount) {
-    const allItems = this.props.folders.concat(this.props.documents);
-
-    return ((args) => {
+  rowRenderer(itemsPerRow) {
+    return (args => {
       const fromIndex = args.index * itemsPerRow;
-      const toIndex = Math.min(fromIndex + itemsPerRow, allItems.length);
+      const toIndex = Math.min(fromIndex + itemsPerRow, this.props.items.length);
       const itemsInRow = toIndex - fromIndex;
 
       const renderedItems = new Array(itemsInRow).fill(undefined).map((_, rowIdx) => {
         const idx = rowIdx + fromIndex;
-        const item = allItems[idx];
+        const item = this.props.items[idx];
 
-        if (item.type === 'FOLDER')
-          return (
+        return (item.type === 'FOLDER') ?
             <Folder
               key={idx} 
               id={item.id}
               title={item.title} 
               selected={this.props.selection && this.props.selection.includes(item)}
-              onClick={e => this.onClick(e, item, idx)} />
-          )
-        else
-          return (
+              onClick={e => this.onClick(e, item, idx)} /> :
+            
             <Document
               key={idx}
               id={item.id}
@@ -68,13 +67,13 @@ export default class GridPane extends Component {
               fileCount={item.file_count}
               selected={this.props.selection && this.props.selection.includes(item)}
               onClick={e => this.onClick(e, item, idx)} />
-          )
       });
 
-      if (itemsInRow < itemsPerRow) // Add dummies to preserve grid layout
+      if (itemsInRow < itemsPerRow) { // Add dummies to preserve grid layout
         renderedItems.push(new Array(itemsPerRow - itemsInRow).fill(undefined).map((_, idx) =>
           <div className="cell dummy" key={`dummy-${idx}`} />
         ))
+      }
 
       return (
         <div
@@ -110,9 +109,8 @@ export default class GridPane extends Component {
     const gridPane =
       <AutoSizer>
         {({ height, width }) => {
-          const itemCount = this.props.folders.length + this.props.documents.length;
-          const itemsPerRow = Math.floor(width / ITEM_SIZE);
-          const rowCount = Math.ceil(itemCount / itemsPerRow);
+          const itemsPerRow = Math.floor(width / TILE_SIZE);
+          const rowCount = Math.ceil(this.props.items.length / itemsPerRow);
 
           return (
             <List
@@ -120,8 +118,8 @@ export default class GridPane extends Component {
               width={width}
               height={height}
               rowCount={rowCount}
-              rowHeight={ITEM_SIZE}
-              rowRenderer={this.rowRenderer(itemsPerRow, rowCount)} />
+              rowHeight={TILE_SIZE}
+              rowRenderer={this.rowRenderer(itemsPerRow)} />
           )
         }}
       </AutoSizer>
@@ -143,7 +141,7 @@ export default class GridPane extends Component {
             </Dropzone>
           }
 
-          { this.state.drag && <FiledropHint /> }
+          {/* this.state.drag && <FiledropHint /> */}
         </div>
       </React.Fragment>
     )
