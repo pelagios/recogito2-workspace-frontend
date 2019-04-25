@@ -1,7 +1,10 @@
 export default class Selection {
     
   constructor(selectedItems) {
-    this._selection = selectedItems;
+    if (selectedItems)
+      this._selection = selectedItems;
+    else 
+      this._selection = [];
   }
 
   isEmpty() {

@@ -13,7 +13,7 @@ export default {
     items: []             // Folders and documents
   },
 
-  selection: new Selection([]),        
+  selection: new Selection(),        
   
   table_config: {
     columns: [

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 
-import operations from './operations';
-import initialState from './initialState';
-import Workspace from './Workspace';
-
 import { Columns } from '../common/documents/table/Columns';
+import initialState from './initialState';
+import operations from './operations';
+import Selection from '../common/documents/Selection';
+import Workspace from './Workspace';
 
 import '../../assets/style/workspace/index.scss';
 
@@ -133,8 +133,9 @@ export default class App extends Component {
   }
 
   changeFolder = () => {
-    // this.setState({ selection: [] });
-    // this.refreshCurrentView();
+    this.setState({ selection: new Selection() }, () => {
+      this.refreshPage();
+    });
   }
 
   render() {
