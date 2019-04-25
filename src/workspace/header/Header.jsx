@@ -15,23 +15,23 @@ const OptionsMenu = props => {
     props.selection.isSingleFolder() && props.view === 'MY_DOCUMENTS';
 
   return (
-    <Menu className="selection-actions-menu">
-      <Menu.Group name="open">
+    <Menu className="selection-options-menu">
+      <Menu.Group>
         <Menu.Item label="Open" disabled={!props.selection.isSingleSelection()} />
         <Menu.Item label="Open in new tab" disabled={!props.selection.isSingleDocument()} />
       </Menu.Group>
       
-      <Menu.Group name="file-ops">
+      <Menu.Group>
         <Menu.Item icon={'\uf114'} label="Move to" disabled/>
         <Menu.Item icon={'\uf0c5'} label="Duplicate" disabled={!canDuplicate} />
         <Menu.Item icon={'\uf014'} label="Delete"/> 
       </Menu.Group>
 
-      <Menu.Group name="share">
+      <Menu.Group>
         <Menu.Item icon={'\uf234'} label="Share" disabled={!canShare} />
       </Menu.Group>
 
-      <Menu.Group name="jobs">
+      <Menu.Group>
         <Menu.Item icon={'\uf085'} label="Named Entity Recognition" disabled={!props.selection.includesText()} />
       </Menu.Group>
     </Menu>

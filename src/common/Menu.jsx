@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 
 const MenuGroup = props => {
 
+  const classNames = props.className ? 
+    [ 'group', props.className ] : [ 'group']
+
   return (
     <li
-      key={props.group}
-      className={`group ${props.group}`}>
+      className={classNames.join(' ')}>
       <ul>
         {props.children}
       </ul>

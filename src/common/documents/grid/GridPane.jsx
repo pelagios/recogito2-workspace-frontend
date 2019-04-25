@@ -100,12 +100,6 @@ export default class GridPane extends Component {
   }
 
   render() {
-    /*
-    const readme = React.Children.toArray(this.props.children)
-      .filter(c => c.type === Readme)
-      .shift(); // First readme or undefined
-    */
-
     const gridPane =
       <AutoSizer>
         {({ height, width }) => {
@@ -126,7 +120,6 @@ export default class GridPane extends Component {
 
     return (
       <React.Fragment>
-        {/* readme */}
         <div className="documents-pane grid-pane">
           {this.props.disableFiledrop ? gridPane :
             <Dropzone
@@ -141,7 +134,7 @@ export default class GridPane extends Component {
             </Dropzone>
           }
 
-          {/* this.state.drag && <FiledropHint /> */}
+          { this.state.drag && <FiledropHint /> }
         </div>
       </React.Fragment>
     )

@@ -31,11 +31,11 @@ export default class Account extends Component {
             className="account-menu"
             onCancel={this.closeMenu}>
 
-            <Menu.Group name="settings">
+            <Menu.Group >
               <Menu.Item icon={'\uf0ad'} label="Account settings" link="/settings/account" />
             </Menu.Group>
             
-            <Menu.Group name ="general">
+            <Menu.Group>
               <Menu.Item icon={'\uf128'} label="Help" link="/help" />
               <Menu.Item icon={'\uf011'} label="Sign out" link="/logout" />
             </Menu.Group>

@@ -47,7 +47,7 @@ export default class NewContent extends Component {
             className="create-new"
             onCancel={this.onCloseMenu}>
             
-            <Menu.Group name="local">
+            <Menu.Group>
               <Menu.Item 
                 icon={'\uf07b'} 
                 label="Folder" 
