@@ -15,7 +15,10 @@ const OptionsMenu = props => {
     props.selection.isSingleFolder() && props.view === 'MY_DOCUMENTS';
 
   return (
-    <Menu className="selection-options-menu">
+    <Menu 
+      className="selection-options-menu"
+      onCancel={props.onCancel}>
+
       <Menu.Group>
         <Menu.Item label="Open" disabled={!props.selection.isSingleSelection()} />
         <Menu.Item label="Open in new tab" disabled={!props.selection.isSingleDocument()} />
@@ -48,6 +51,10 @@ export default class Header extends Component {
 
   showOptionsMenu = () => {
     this.setState({ optionsMenuVisible: true });
+  }
+
+  closeOptionsMenu = () => {
+    this.setState({ optionsMenuVisible: false });
   }
 
   render() {
@@ -96,7 +103,10 @@ export default class Header extends Component {
             </CSSTransition>
 
             { this.state.optionsMenuVisible &&
-              <OptionsMenu view={this.props.view} selection={this.props.selection} /> }
+              <OptionsMenu 
+                view={this.props.view} 
+                selection={this.props.selection} 
+                onCancel={this.closeOptionsMenu} /> }
 
             <HeaderIcon
               className="presentation-toggle stroke7"
