@@ -29,10 +29,10 @@ export default class App extends Component {
     // Init account data
     axios.get('/api/account/my').then(result => { 
       this.setState({ account: result.data }) 
+    }).then(() => {
+      this.refreshPage();
     });
 
-    // this.refreshCurrentView();
-    
     /*
     API.latestAnnouncement().then(result => {
       this.setState({ announcement: result.data });
@@ -84,18 +84,26 @@ export default class App extends Component {
       };
 
     return axios.post(`/api/directory/${path}`, config).then(result => {
-      this.setState({
-        breadcrumbs: result.data.breadcrumbs,
-        readme: result.data.readme,
-        documents: result.data.items, 
-        total_docs: result.data.total,
-        busy: false 
+      this.setState(prev => {
+        const { breadcrumbs, readme, total_count, items } = result.data;
+        return {
+          page : {
+            ...prev.page,
+            ...{
+              breadcrumbs,
+              readme,
+              total_count,
+              items
+            }
+          },
+          busy: false
+        } 
       });
     });
   }
 
   changeView = (view) => {
-    this.setState({ view: view });
+    this.setState({ view: view }, this.refreshPage);
   }
 
   onTogglePresentation = () => {

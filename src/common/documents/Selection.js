@@ -8,6 +8,10 @@ export default class Selection {
     return this._selection.length === 0;
   }
 
+  includes(item) {
+    return this._selection.includes(item);
+  }
+
   isSingleSelection() {
     return this._selection.length === 1;
   }

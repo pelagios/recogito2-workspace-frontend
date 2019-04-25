@@ -56,7 +56,7 @@ export default class GridPane extends Component {
               key={idx} 
               id={item.id}
               title={item.title} 
-              selected={this.props.selection && this.props.selection.includes(item)}
+              selected={this.props.selection.includes(item)}
               onClick={e => this.onClick(e, item, idx)} /> :
             
             <Document
