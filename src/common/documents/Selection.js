@@ -90,5 +90,27 @@ export default class Selection {
       // Fill from topmost
       return new Selection(slice(minIdx, toIdx));
   }
+
+  /** 
+   * Helper function that handles click/SHIFT+click/CTRL+click selection 
+   * on an item and returns a new selection, if valid.
+   */
+  handleClick(evt, item, idx, allItems) {
+    const isShift = evt.getModifierState("Shift");
+    const isCtrl = evt.getModifierState("Control");
+    
+    // Is this a selection or deselection?
+    const isSelectAction = 
+      (isShift || isCtrl || ! this.includes(item));
+
+    if (isSelectAction) {
+      const newSelection = isShift ?
+        this.selectRange(allItems, idx) :
+        this.selectItem(item, isCtrl);
+
+      evt.preventDefault();
+      return newSelection;
+    }
+  }
   
 }

@@ -39,27 +39,10 @@ export default class TablePane extends Component {
     });
   }
 
-  /** 
-   * Handle click/SHIFT+click/CTRL+click selection via Selection helper class 
-   * 
-   * TODO is this identical to the select code in GridPane?
-   */
   onRowClick(evt, item, idx) {
-    const isShift = evt.getModifierState("Shift");
-    const isCtrl = evt.getModifierState("Control");
-    
-    // Is this a selection or deselection?
-    const isSelectAction = 
-      (isShift || isCtrl || !this.props.selection.includes(item));
-
-    if (isSelectAction) {
-      const newSelection = isShift ?
-        this.props.selection.selectRange(this.props.items, idx) :
-        this.props.selection.selectItem(item, isCtrl);
-
-      this.props.onSelect(newSelection);
-      evt.preventDefault();
-    }
+    const selection = this.props.selection.handleClick(evt, item, idx, this.props.items);    
+    if (selection)
+      this.props.onSelect(selection);
   }
 
   showPreferences = visible => {

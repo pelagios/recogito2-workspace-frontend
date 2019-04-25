@@ -6,8 +6,6 @@ import Document from './Document';
 import Folder from './Folder';
 import FiledropHint from '../FiledropHint';
 
-// import Readme from '../Readme.jsx';
-
 const TILE_SIZE = 192;
 
 /**
@@ -22,23 +20,10 @@ export default class GridPane extends Component {
     drag: false
   }
 
-  /** Handle click/SHIFT+click/CTRL+click selection via Selection helper class */
-  onClick(evt, item, idx) {
-    const isShift = evt.getModifierState("Shift");
-    const isCtrl = evt.getModifierState("Control");
-
-    const isSelectAction =
-      isShift || isCtrl || !this.props.selection.includes(item);
-
-    if (isSelectAction) {
-      if (isShift)
-        this.state.selection.selectRange(idx);
-      else
-        this.state.selection.selectItem(item, isCtrl);
-
-      this.props.onSelect(this.state.selection.getSelectedItems());
-      evt.preventDefault();
-    }
+  onTileClick(evt, item, idx) {
+    const selection = this.props.selection.handleClick(evt, item, idx, this.props.items);    
+    if (selection)
+      this.props.onSelect(selection);
   }
 
   rowRenderer(itemsPerRow) {
@@ -57,7 +42,7 @@ export default class GridPane extends Component {
               id={item.id}
               title={item.title} 
               selected={this.props.selection.includes(item)}
-              onClick={e => this.onClick(e, item, idx)} /> :
+              onClick={e => this.onTileClick(e, item, idx)} /> :
             
             <Document
               key={idx}
@@ -66,7 +51,7 @@ export default class GridPane extends Component {
               filetypes={item.filetypes}
               fileCount={item.file_count}
               selected={this.props.selection.includes(item)}
-              onClick={e => this.onClick(e, item, idx)} />
+              onClick={e => this.onTileClick(e, item, idx)} />
       });
 
       if (itemsInRow < itemsPerRow) { // Add dummies to preserve grid layout
