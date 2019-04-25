@@ -114,8 +114,14 @@ export default class App extends Component {
     });
   }
 
-  handleSelect = selection => {
+  onSelect = selection => {
     this.setState({ selection: selection });
+  }
+
+  changeColumConfig = columns => {
+    this.setState(prev => { 
+      return { table_config: {...prev.table_config, ...{ columns: columns } }}
+    });
   }
 
   createReadme = () => {
@@ -142,7 +148,8 @@ export default class App extends Component {
         selection={this.state.selection}
         onChangeView={this.changeView}
         onTogglePresentation={this.onTogglePresentation}
-        onSelect={this.handleSelect}
+        onSelect={this.onSelect}
+        onChangeColumnConfig={this.changeColumConfig}
         onCreateReadme={this.createReadme}
         onCreateFolder={() => activities.createFolder().then(this.refreshPage)}
         onUploadFiles={() => activities.uploadFiles().then(this.refreshPage)}

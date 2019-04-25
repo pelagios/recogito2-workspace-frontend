@@ -68,7 +68,7 @@ export default class TablePane extends Component {
 
   onSavePreferences = columns => {
     this.setState({ tablePreferencesOpen: false });
-    this.props.onChangeColumnPrefs(columns);
+    this.props.onChangeColumnConfig(columns);
   }
 
   sortBy = field => {
