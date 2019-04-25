@@ -12,7 +12,7 @@ const AnimatedDiv = posed.div({
   closed: { bottom: '-140px' }
 });
 
-export default class DropzoneDecoration extends Component {
+export default class FiledropHint extends Component {
 
   constructor(props) {
     super(props);
@@ -25,7 +25,7 @@ export default class DropzoneDecoration extends Component {
 
   render() {
     return (
-      <div className="dropzone-decoration">
+      <div className="filedrop-hint">
         <AnimatedDiv className="inner" pose={this.state.visible ? 'open' : 'closed'}>
           <span className="icon">&#xf0ee;</span>
           <p className="instructions">

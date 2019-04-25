@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone'
 import { AutoSizer, List } from 'react-virtualized';
 
-import Document from './Document.jsx';
-import Folder from './Folder.jsx';
-import Readme from '../Readme.jsx';
+import Document from './Document';
+import Folder from './Folder';
+import FiledropHint from '../FiledropHint';
 
-import DropzoneDecoration from '../upload/DropzoneDecoration.jsx';
+// import Readme from '../Readme.jsx';
 
 const ITEM_SIZE = 192;
 
@@ -17,20 +17,6 @@ const ITEM_SIZE = 192;
  * http://plnkr.co/edit/zjCwNeRZ7XtmFp1PDBsc?p=preview
  */
 export default class GridPane extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      selection: new Selection(props.folders.concat(props.documents), props.selection) 
-    };
-  }
-
-  /** Set derived state **/
-  componentWillReceiveProps(next) {
-    this.setState({ 
-      selection: new Selection(next.folders.concat(next.documents), next.selection)
-    });
-  }
 
   /** Handle click/SHIFT+click/CTRL+click selection via Selection helper class */
   onClick(evt, item, idx) {
@@ -115,9 +101,11 @@ export default class GridPane extends Component {
   }
 
   render() {
+    /*
     const readme = React.Children.toArray(this.props.children)
       .filter(c => c.type === Readme)
       .shift(); // First readme or undefined
+    */
 
     const gridPane =
       <AutoSizer>
@@ -140,7 +128,7 @@ export default class GridPane extends Component {
 
     return (
       <React.Fragment>
-        {readme}
+        {/* readme */}
         <div className="documents-pane grid-pane">
           {this.props.disableFiledrop ? gridPane :
             <Dropzone
@@ -155,7 +143,7 @@ export default class GridPane extends Component {
             </Dropzone>
           }
 
-          { this.state.drag && <DropzoneDecoration /> }
+          { this.state.drag && <FiledropHint /> }
         </div>
       </React.Fragment>
     )

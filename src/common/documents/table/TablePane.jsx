@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { AutoSizer, List } from 'react-virtualized';
 import Dropzone from 'react-dropzone'
 
-import { Columns } from './Columns.js';
-import DropzoneDecoration from '../upload/DropzoneDecoration.jsx';
-import Readme from '../Readme.jsx';
-import HeaderRow from './rows/HeaderRow.jsx';
-import DocumentRow from './rows/DocumentRow.jsx';
-import FolderRow from './rows/FolderRow.jsx';
-import PreferencesModal from  './preferences/PreferencesModal.jsx';
+import { Columns } from './Columns';
+import FiledropHint from '../FiledropHint';
+// import Readme from '../Readme.jsx';
+import HeaderRow from './rows/HeaderRow';
+import DocumentRow from './rows/DocumentRow';
+import FolderRow from './rows/FolderRow';
+import PreferencesModal from  './preferences/PreferencesModal';
 
 export default class TablePane extends Component {
 
@@ -119,9 +119,11 @@ export default class TablePane extends Component {
   }
 
   render() {
+    /*
     const readme = React.Children.toArray(this.props.children)
       .filter(c => c.type === Readme)
       .shift(); // First readme or undefined
+    */
 
     const tablePane =
       <div className="documents-pane table-pane">
@@ -137,13 +139,13 @@ export default class TablePane extends Component {
           )}
         </AutoSizer>
 
-        { this.state.drag && <DropzoneDecoration /> }
+        { this.state.drag && <FiledropHint /> }
         { this.props.busy && <div className="busy-mask" /> }
       </div>
 
     return (
       <React.Fragment>
-        {readme}
+        {/* readme */}
 
         <div className="documents-table-header">
           <HeaderRow 

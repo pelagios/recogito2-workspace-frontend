@@ -6,7 +6,7 @@ import activities from './activities';
 import initialState from './initialState';
 import Workspace from './Workspace';
 
-import { Columns } from '../common/content/table/Columns';
+import { Columns } from '../common/documents/table/Columns';
 
 import '../../assets/style/workspace/index.scss';
 

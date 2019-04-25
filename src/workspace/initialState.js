@@ -1,4 +1,4 @@
-import Selection from './Selection';
+import Selection from '../common/documents/Selection';
 
 export default {
   account: null,         // Null if not loaded
