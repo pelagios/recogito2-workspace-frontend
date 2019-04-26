@@ -24,7 +24,7 @@ export default class App extends Component {
   /** Init: add deselect listeners and load contents */
   componentDidMount() {
     this._rootEl.addEventListener('keydown', this.onKeydown, false);
-    this._rootEl.addEventListener(', though.mousedown', this.onMousedown, false);
+    this._rootEl.addEventListener('mousedown', this.onMousedown, false);
 
     // Init account data
     axios.get('/api/account/my').then(result => { 
@@ -33,11 +33,10 @@ export default class App extends Component {
       this.refreshPage();
     });
 
-    /*
-    API.latestAnnouncement().then(result => {
-      this.setState({ announcement: result.data });
-    })
-    */
+    // TODO clean up
+    // API.latestAnnouncement().then(result => {
+    //  this.setState({ announcement: result.data });
+    // })
   }
 
   /** Remveo deselect listeners **/
@@ -48,19 +47,17 @@ export default class App extends Component {
 
   /** Clear selection on ESC key **/
   onKeydown = (evt) => {
-    // if (evt.which === 27) this.setState({ selection: [] });
+    if (evt.which === 27) this.setState({ selection: new Selection() });
   }
 
   /** Clear selection on click ouside the document pane **/
-  onMousedown(evt) {
-    /*
+  onMousedown = (evt) => {
     const isClickOutside = !(
       document.querySelector('.documents-pane').contains(evt.target) ||
-      document.querySelector('.subheader-icons').contains(evt.target)
+      document.querySelector('.main-header-icons').contains(evt.target)
     );
 
-    if (isClickOutside) this.setState({ selection: [] });
-    */
+    if (isClickOutside) this.setState({ selection: new Selection() });
   }
 
   /** 
@@ -160,40 +157,7 @@ export default class App extends Component {
     )
   }
 
-  /*
-  /** Switch between different document views (currently: 'my' vs. 'shared') **
-  changeView(view) {
-    if (this.state.view !== view) {
-      StoredUIState.save('view', view);
-
-      this.setState({
-        view: view,
-        documents:[]
-      }, () => {
-        (view === 'MY_DOCUMENTS') ? this.fetchMyDocuments() : this.fetchSharedWithMe();
-      });
-    }
-  }
-
-  onChangeColumnPrefs(columns) {
-    StoredUIState.save('table_columns', columns);
-    this.setState({ table_columns: columns }, () => {
-      this.refreshCurrentView();
-    });
-  }
-  
-  onSortTable(sorting) {
-    StoredUIState.save('table_sorting', sorting);
-    this.setState({ table_sorting: sorting }, () => {
-      this.refreshCurrentView();
-    });
-  }
-
-  /** File selection **
-  onSelect(selection) {
-    this.setState({ selection: selection });
-  }
-
+  /*  
   onRenameFolder(folder, title) {
     API.renameFolder(folder.id, title)
        .then(() => this.refreshCurrentView());
@@ -209,6 +173,13 @@ export default class App extends Component {
     const currentFolderId = document.location.hash.substring(1);
     API.deleteReadme(currentFolderId)
        .then(this.setState({ readme: null })); 
+  }
+
+  onSortTable(sorting) {
+    StoredUIState.save('table_sorting', sorting);
+    this.setState({ table_sorting: sorting }, () => {
+      this.refreshCurrentView();
+    });
   }
 
   /** File upload **
@@ -247,14 +218,7 @@ export default class App extends Component {
       .then(() => this.setState({ busy: false, selection: []}))
       .then(this.fetchAccountData.bind(this));
   }
-
-  /** Just a hack **
-  handleSearchResponse = response => {
-    this.setState({
-      folders: [],
-      documents: response.items
-    });
-  } */
+  */
 
 }
 
