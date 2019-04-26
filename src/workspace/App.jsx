@@ -130,6 +130,32 @@ export default class App extends Component {
     });
   }
 
+  onUpdateReadme = (readme) => {
+    const currentFolderId = document.location.hash.substring(1);
+    const url = currentFolderId ?
+      `/api/folder/${currentFolderId}/readme` : '/api/directory/my/readme';
+
+    axios.post(url, { data: readme }).then(() => {
+      this.setState(prev => { 
+        const page = { ...prev.page, ...{ readme: readme } }; 
+        return { page: page }
+      });
+    });
+  }
+
+  onDeleteReadme = () => {
+    const currentFolderId = document.location.hash.substring(1);
+    const url = currentFolderId ?
+      `/api/folder/${currentFolderId}/readme` : '/api/directory/my/readme';
+
+    axios.delete(url).then(() => {
+      this.setState(prev => {
+        const page = { ...prev.page, ...{ readme: null } };
+        return { page: page }
+      });
+    }); 
+  }
+
   changeFolder = () => {
     this.setState({ selection: new Selection() }, () => {
       this.refreshPage();
@@ -150,6 +176,8 @@ export default class App extends Component {
         onSelect={this.onSelect}
         onChangeColumnConfig={this.changeColumConfig}
         onCreateReadme={this.createReadme}
+        onUpdateReadme={this.onUpdateReadme}
+        onDeleteReadme={this.onDeleteReadme}
         onCreateFolder={() => operations.createFolder().then(this.refreshPage)}
         onUploadFiles={() => operations.uploadFiles().then(this.refreshPage)}
         onImportSource={() => operations.importSource().then(this.refreshPage)}
@@ -161,18 +189,6 @@ export default class App extends Component {
   onRenameFolder(folder, title) {
     API.renameFolder(folder.id, title)
        .then(() => this.refreshCurrentView());
-  }
-
-  onUpdateReadme(readme) {
-    const currentFolderId = document.location.hash.substring(1);
-    API.updateReadme(readme, currentFolderId)
-       .then(this.setState({ readme: readme }));
-  }
-
-  onDeleteReadme() {
-    const currentFolderId = document.location.hash.substring(1);
-    API.deleteReadme(currentFolderId)
-       .then(this.setState({ readme: null })); 
   }
 
   onSortTable(sorting) {
