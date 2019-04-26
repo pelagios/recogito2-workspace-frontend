@@ -45,7 +45,8 @@ const Workspace = props => {
             busy={props.busy}
             enableFiledrop={props.view === 'MY_DOCUMENTS'} 
             onSelect={props.onSelect} 
-            onChangeColumnConfig={props.onChangeColumnConfig} />
+            onChangeColumnConfig={props.onChangeColumnConfig} 
+            onRenameFolder={props.onRenameFolder} />
         }
 
         { props.presentation === 'GRID' &&

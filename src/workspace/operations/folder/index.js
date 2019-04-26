@@ -4,35 +4,6 @@ import axios from 'axios';
 
 import ModalForm from '../ModalForm';
 
-const createFolder = () => {
-  return new Promise((resolve, reject) => {
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-
-    const onOk = (folderName) => { 
-      const currentFolderId = document.location.hash.substring(1);
-
-      axios.post('/api/folder', {
-        title: folderName || 'Unnamed Folder',
-        parent: currentFolderId
-      }).then(() => {
-        container.remove();
-        resolve();
-      });
-    }
-
-    const onCancel = () => {
-      container.remove();
-      resolve();
-    }
-
-    render(
-      <CreateFolderForm 
-        onOk={onOk}
-        onCancel={onCancel} />, container);
-  });
-};
-
 class CreateFolderForm extends Component {
 
   state = {
@@ -71,4 +42,35 @@ class CreateFolderForm extends Component {
 
 } 
 
-export default createFolder;
+export const createFolder = () => {
+  return new Promise((resolve, reject) => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    const onOk = (folderName) => { 
+      const currentFolderId = document.location.hash.substring(1);
+
+      axios.post('/api/folder', {
+        title: folderName || 'Unnamed Folder',
+        parent: currentFolderId
+      }).then(() => {
+        container.remove();
+        resolve();
+      });
+    }
+
+    const onCancel = () => {
+      container.remove();
+      resolve();
+    }
+
+    render(
+      <CreateFolderForm 
+        onOk={onOk}
+        onCancel={onCancel} />, container);
+  });
+};
+
+export const renameFolder = (folder, title) => {
+  return axios.put(`/api/folder/${folder.id}?title=${title}`);
+}

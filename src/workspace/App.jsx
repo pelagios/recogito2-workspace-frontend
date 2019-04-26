@@ -165,6 +165,7 @@ export default class App extends Component {
         onUpdateReadme={this.updateReadme}
         onDeleteReadme={this.deleteReadme}
         onCreateFolder={() => operations.createFolder().then(this.refreshPage)}
+        onRenameFolder={(folder, title) => operations.renameFolder(folder, title).then(this.refreshPage)}
         onUploadFiles={() => operations.uploadFiles().then(this.refreshPage)}
         onImportSource={() => operations.importSource().then(this.refreshPage)}
       />
@@ -172,11 +173,6 @@ export default class App extends Component {
   }
 
   /*  
-  onRenameFolder(folder, title) {
-    API.renameFolder(folder.id, title)
-       .then(() => this.refreshCurrentView());
-  }
-
   onSortTable(sorting) {
     StoredUIState.save('table_sorting', sorting);
     this.setState({ table_sorting: sorting }, () => {

@@ -1,5 +1,5 @@
 import { updateReadme, deleteReadme } from './readme';
-import createFolder from './createFolder';
+import { createFolder, renameFolder } from './folder';
 import importSource from './importSource';
 import uploadFiles from './uploadFiles';
 
@@ -11,6 +11,7 @@ export default {
   updateReadme,
   deleteReadme,
   createFolder,
+  renameFolder,
   importSource,
   uploadFiles
 };

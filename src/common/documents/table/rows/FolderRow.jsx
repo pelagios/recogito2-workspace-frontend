@@ -3,34 +3,33 @@ import React, { Component } from 'react';
 export default class FolderRow extends Component {
 
   state = { 
-    editable: false,
-    title: this.props.item.title 
+    title: this.props.item.title,
+    editable: false
   }
 
   componentWillReceiveProps(next) {
     this.setState({ 
-      editable: false,
-      title: next.item.title 
+      title: next.item.title,
+      editable: false
     });
   }
 
-  makeEditable(evt) {
-    this.setState({
-      editable: true 
-    },() => this._input.select());
+  makeEditable = (evt) => {
+    this.setState({ editable: true },
+      () => this._input.select());
+
     evt.preventDefault();
     evt.stopPropagation();
   }
 
-  onChange(evt) {
+  onChange = (evt) => {
     this.setState({ title: evt.target.value });
   }
 
-  onKeyPress(evt) {
+  onKeyPress = (evt) => {
     if (evt.which === 13) {
-      this.setState({ 
-        editable: false
-      }, () => this.props.onRename(this.props.item, this.state.title));
+      this.setState({ editable: false}, 
+        () => this.props.onRename(this.props.item, this.state.title));
     }
   }
 
@@ -43,16 +42,16 @@ export default class FolderRow extends Component {
         onClick={this.props.onClick}>
 
         <span className="folder-title">
-          {this.state.editable ? 
+          { this.state.editable ? 
             <input 
               ref={i => this._input = i}
               value={this.state.title}
-              onClick={this.makeEditable.bind(this)}
-              onChange={this.onChange.bind(this)}
-              onKeyDown={this.onKeyPress.bind(this)} />
+              onClick={this.makeEditable}
+              onChange={this.onChange}
+              onKeyDown={this.onKeyPress} />
           : <span
               className="editable" 
-              onClick={this.makeEditable.bind(this)} >{this.state.title}</span> }
+              onClick={this.makeEditable} >{this.state.title}</span> }
         </span>
 
         <span className="type icon">&#xf07b;</span>
