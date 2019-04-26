@@ -99,12 +99,18 @@ export default class App extends Component {
     });
   }
 
+  changeFolder = () => {
+    this.setState({ selection: new Selection() }, () => {
+      this.refreshPage();
+    });
+  }
+  
   changeView = (view) => {
     persistState('view', view);
     this.setState({ view: view }, this.refreshPage);
   }
 
-  onTogglePresentation = () => {
+  togglePresentation = () => {
     this.setState(prev => { 
       const presentation = (prev.presentation === 'TABLE') ? 'GRID' : 'TABLE';
       persistState('presentation', presentation);
@@ -112,7 +118,7 @@ export default class App extends Component {
     });
   }
 
-  onSelect = selection => {
+  select = selection => {
     this.setState({ selection: selection });
   }
 
@@ -130,35 +136,15 @@ export default class App extends Component {
     });
   }
 
-  onUpdateReadme = (readme) => {
-    const currentFolderId = document.location.hash.substring(1);
-    const url = currentFolderId ?
-      `/api/folder/${currentFolderId}/readme` : '/api/directory/my/readme';
-
-    axios.post(url, { data: readme }).then(() => {
-      this.setState(prev => { 
-        const page = { ...prev.page, ...{ readme: readme } }; 
-        return { page: page }
-      });
+  updateReadme = (readme) => {
+    operations.updateReadme(readme, this.state.page).then(page => {
+      this.setState({ page: page });
     });
   }
 
-  onDeleteReadme = () => {
-    const currentFolderId = document.location.hash.substring(1);
-    const url = currentFolderId ?
-      `/api/folder/${currentFolderId}/readme` : '/api/directory/my/readme';
-
-    axios.delete(url).then(() => {
-      this.setState(prev => {
-        const page = { ...prev.page, ...{ readme: null } };
-        return { page: page }
-      });
-    }); 
-  }
-
-  changeFolder = () => {
-    this.setState({ selection: new Selection() }, () => {
-      this.refreshPage();
+  deleteReadme = () => {
+    operations.deleteReadme(this.state.page).then(page => {
+      this.setState({ page: page });
     });
   }
 
@@ -172,12 +158,12 @@ export default class App extends Component {
         tableConfig={this.state.table_config}
         selection={this.state.selection}
         onChangeView={this.changeView}
-        onTogglePresentation={this.onTogglePresentation}
-        onSelect={this.onSelect}
+        onTogglePresentation={this.togglePresentation}
+        onSelect={this.select}
         onChangeColumnConfig={this.changeColumConfig}
         onCreateReadme={this.createReadme}
-        onUpdateReadme={this.onUpdateReadme}
-        onDeleteReadme={this.onDeleteReadme}
+        onUpdateReadme={this.updateReadme}
+        onDeleteReadme={this.deleteReadme}
         onCreateFolder={() => operations.createFolder().then(this.refreshPage)}
         onUploadFiles={() => operations.uploadFiles().then(this.refreshPage)}
         onImportSource={() => operations.importSource().then(this.refreshPage)}

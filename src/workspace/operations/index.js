@@ -1,3 +1,4 @@
+import { updateReadme, deleteReadme } from './readme';
 import createFolder from './createFolder';
 import importSource from './importSource';
 import uploadFiles from './uploadFiles';
@@ -7,6 +8,8 @@ import uploadFiles from './uploadFiles';
  * we can import them in one go.
  */
 export default {
+  updateReadme,
+  deleteReadme,
   createFolder,
   importSource,
   uploadFiles
