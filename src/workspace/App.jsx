@@ -32,11 +32,6 @@ export default class App extends Component {
     }).then(() => {
       this.refreshPage();
     });
-
-    // TODO clean up
-    // API.latestAnnouncement().then(result => {
-    //  this.setState({ announcement: result.data });
-    // })
   }
 
   /** Remveo deselect listeners **/
@@ -122,9 +117,20 @@ export default class App extends Component {
     this.setState({ selection: selection });
   }
 
+  sortTable = (sorting) => {
+    // StoredUIState.save('table_sorting', sorting);
+    this.setState(prev => {
+      const config = { ...prev.table_config, ...{ sorting: sorting } };
+      persistState('table_config', config);
+      return { table_config: config };
+    }, () => {
+      this.refreshPage();
+    });      
+  }
+
   changeColumConfig = columns => {
     this.setState(prev => { 
-      const config = {...prev.table_config, ...{ columns: columns } } 
+      const config = {...prev.table_config, ...{ columns: columns } };
       persistState('table_config', config);
       return { table_config: config };
     });
@@ -160,6 +166,7 @@ export default class App extends Component {
         onChangeView={this.changeView}
         onTogglePresentation={this.togglePresentation}
         onSelect={this.select}
+        onSortTable={this.sortTable}
         onChangeColumnConfig={this.changeColumConfig}
         onCreateReadme={this.createReadme}
         onUpdateReadme={this.updateReadme}
@@ -173,13 +180,6 @@ export default class App extends Component {
   }
 
   /*  
-  onSortTable(sorting) {
-    StoredUIState.save('table_sorting', sorting);
-    this.setState({ table_sorting: sorting }, () => {
-      this.refreshCurrentView();
-    });
-  }
-
   /** File upload **
   startUpload(files) {
     this.setState({ 

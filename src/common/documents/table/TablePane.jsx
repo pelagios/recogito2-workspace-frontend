@@ -55,9 +55,8 @@ export default class TablePane extends Component {
   }
 
   sortBy = field => {
-    const asc = this.props.sorting.by === field ? 
-      ! this.props.sorting.asc : true;
-
+    const asc = this.props.config.sorting.by === field ? 
+      ! this.props.config.sorting.asc : true;
     this.props.onSort({ by: field, asc: asc });
   }
 
@@ -109,9 +108,9 @@ export default class TablePane extends Component {
         <div className="documents-table-header">
           <HeaderRow 
             columns={this.props.config.columns} 
-            onSort={this.sortBy}
             sortColumn={this.props.config.sorting.by} 
-            sortAsc={this.props.config.sorting.asc} />
+            sortAsc={this.props.config.sorting.asc} 
+            onSort={this.sortBy} />
 
           <button
             className="column-options-btn nostyle icon"

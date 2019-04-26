@@ -45,6 +45,7 @@ const Workspace = props => {
             busy={props.busy}
             enableFiledrop={props.view === 'MY_DOCUMENTS'} 
             onSelect={props.onSelect} 
+            onSort={props.onSortTable}
             onChangeColumnConfig={props.onChangeColumnConfig} 
             onRenameFolder={props.onRenameFolder} />
         }
