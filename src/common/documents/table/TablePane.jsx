@@ -126,7 +126,7 @@ export default class TablePane extends Component {
             onDragLeave={() => this.onDrag(false)}
             onDrop={this.onDrop}>
             { tablePane }
-          </Dropzone> : { tablePane }
+          </Dropzone> : tablePane
         }
 
         { this.state.tablePreferencesOpen &&

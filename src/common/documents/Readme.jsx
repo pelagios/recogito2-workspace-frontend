@@ -9,14 +9,9 @@ const INITIAL_STATE = {
 
 export default class Readme extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {};
+  state = {};
 
-    this.onKeydown = this.onKeydown.bind(this);
-  }
-
-  onKeydown(evt) {
+  onKeydown = (evt) => {
     if (evt.which === 27) // Esc
       this.onCancel(); 
     else if (evt.ctrlKey && evt.which === 13) // Ctrl+Enter 

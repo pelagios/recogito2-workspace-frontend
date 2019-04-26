@@ -1,10 +1,10 @@
 import Selection from '../common/documents/Selection';
 
-export default {
+const DEFAULT_STATE = {
   account: null,         // Null if not loaded
   
   view: 'MY_DOCUMENTS',  // MY_DOCUMENTS, SHARED_WITH_ME, SEARCH
-  presentation: 'GRID', // 'TABLE' or 'GRID'
+  presentation: 'TABLE', // 'TABLE' or 'GRID'
   
   page: {
     breadcrumbs: null,
@@ -31,3 +31,24 @@ export default {
 
   runningTasks: []
 };
+
+export const initialState = () => {
+
+  const stored = {};
+
+  // Helper
+  const addIfDefined = (key) => {
+    const value = localStorage.getItem(`recogito.workspace.${key}`);
+    if (value) stored[key] = JSON.parse(value);
+  }
+
+  ['view', 'presentation', 'table_config'].map(addIfDefined)
+
+  return { ...DEFAULT_STATE, ...stored };
+}
+
+export const persistState = (key, value) => {
+  const prefixed = `recogito.workspace.${key}`
+  localStorage.setItem(prefixed, JSON.stringify(value));
+}
+

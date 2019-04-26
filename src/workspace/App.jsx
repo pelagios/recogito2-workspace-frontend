@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import axios from 'axios';
 
 import { Columns } from '../common/documents/table/Columns';
-import initialState from './initialState';
+import { initialState, persistState } from './initialState';
 import operations from './operations';
 import Selection from '../common/documents/Selection';
 import Workspace from './Workspace';
@@ -15,7 +15,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = initialState;
+    this.state = initialState();
 
     this._rootEl = document.getElementById('app');
     window.onhashchange = this.changeFolder;
@@ -103,13 +103,14 @@ export default class App extends Component {
   }
 
   changeView = (view) => {
+    persistState('view', view);
     this.setState({ view: view }, this.refreshPage);
   }
 
   onTogglePresentation = () => {
     this.setState(prev => { 
       const presentation = (prev.presentation === 'TABLE') ? 'GRID' : 'TABLE';
-      // StoredUIState.save('presentation', p);
+      persistState('presentation', presentation);
       return { presentation: presentation };
     });
   }
@@ -120,7 +121,9 @@ export default class App extends Component {
 
   changeColumConfig = columns => {
     this.setState(prev => { 
-      return { table_config: {...prev.table_config, ...{ columns: columns } }}
+      const config = {...prev.table_config, ...{ columns: columns } } 
+      persistState('table_config', config);
+      return { table_config: config };
     });
   }
 
