@@ -1,20 +1,38 @@
 import React from 'react';
-import axios from 'axios';
+import { render } from 'react-dom';
 
-const uploadFiles = files => {
+import Uploader from './Uploader';
+import { promises } from 'fs';
+
+export const uploadFiles = files => {
+  return new Promise((resolve) => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    const onComplete = result => {
+      container.remove();
+      resolve(result);
+    }
+
+    render(<Uploader 
+      files={files}
+      onComplete={onComplete} />, container);
+  });
 }
 
 const importSource = (url, type) => {
 
 }
 
+/*
 const foo = (files) => {
-
+  
+  
   let phase = 'Uploading';
 
   const totalSize = files.reduce((total, f) => total + f.size, 0);
 
-  const uploadItems = files.map(f => {
+  const uploads = files.map(f => {
     return {
       file: f,
       status: 'UPLOADING', 
@@ -23,7 +41,7 @@ const foo = (files) => {
     }
   });
 
-  /*
+  //
       remoteSource: props.url,
       phase: 'Uploading',
       totalSize: props.files.reduce((total, f) => total + f.size, 0),
@@ -52,7 +70,7 @@ const foo = (files) => {
    * - then, all files are uploaded to this document
    * - finally, a finalization requests closes the document, and waits for any
    *   processing (image tiling, TEI conversion) to finish
-   */
+   *
   start() {
     this.initNewDocument()
       .then((result) => { 
@@ -77,7 +95,7 @@ const foo = (files) => {
   /**
    * Initializes a new document, using the filename as title,
    * or a 'New document' placeholder in case there are multiple files.
-   */
+   *
   initNewDocument() {
     const title = (this.state.files.length === 1) ? this.state.files[0].name : 'New document';
     const formdata = new FormData();
@@ -96,80 +114,6 @@ const foo = (files) => {
 
     return axios.post(`/my/upload/${this.state.uploadId}/file`, formdata, {
       headers: { 'X-Requested-With': 'XMLHttpRequest' }
-    });
-  }
-
-  /**
-   * Uploads the files in parallel.
-   */
-  uploadFiles() {
-    // Helper: handles upload for one file
-    const uploadOne = (file, idx) => {
-      const formdata = new FormData();
-      formdata.append('file', file);
-
-      const onUploadProgress = (evt) => {
-        const progress = this.state.progress.slice(0); // Clone progress array
-        progress[idx] = evt.loaded;
-        this.setState({ progress: progress });
-      }
-
-      return axios.post(`/my/upload/${this.state.uploadId}/file`, formdata, {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        onUploadProgress: onUploadProgress
-      }).then(result => {
-        this.setState(prev => {
-          const filepartIds = prev.filepartIds.slice(0);
-          filepartIds[idx] = result.data.uuid;
-          return { filepartIds: filepartIds };
-        });
-
-        return result;
-      }).catch(error => {
-        this.setState(prev => {
-          const uploadStatus = prev.uploadStatus.slice(0);
-          uploadStatus[idx] = 'FAILED';
-
-          const errors = prev.errors.slice(0);
-          errors.push(error.response.data);
-
-          return { 
-            uploadStatus: uploadStatus,
-            errors: errors 
-          };
-        });
-      });
-    }
-    
-    // The list of request promises...
-    const requests = this.state.files.map((file, idx) => uploadOne(file, idx));
-
-    // ... rolled into a promise of the list of request results
-    return Promise.all(requests);
-  }
-
-  /**
-   * Finalizes the upload, creating the document and starting processing tasks (if any)
-   */
-  finalizeDocument()  {
-    const currentFolder = document.location.hash.substring(1);
-
-    const url = currentFolder ?
-      `/my/upload/${this.state.uploadId}/finalize?folder=${currentFolder}` :
-      `/my/upload/${this.state.uploadId}/finalize`;
-
-    return axios.post(url, {
-      headers: { 'X-Requested-With': 'XMLHttpRequest' }
-    }).then(result => {
-      const tasks = result.data.running_tasks;
-      if (tasks.length > 0) {
-        this.setState({ phase: 'Importing...' });
-        this.pollTaskProgress(result.data.document_id, tasks);
-      } else {
-        this.props.onUploadComplete();
-      }
-    }).catch(error => {
-      // console.log('Upload contained errors');
     });
   }
 
@@ -193,7 +137,7 @@ const foo = (files) => {
 
   /**
    * Polls import task progress
-   */
+   *
   pollTaskProgress(documentId, taskTypes) {    
     axios.get(`/api/job?id=${documentId}`)
       .then(result => {
@@ -260,4 +204,4 @@ const foo = (files) => {
     )
   }
 
-}
+} */

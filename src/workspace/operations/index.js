@@ -1,7 +1,7 @@
 import { updateReadme, deleteReadme } from './readme';
 import { createFolder, renameFolder } from './folder';
 import importSource from './importSource';
-import uploadFiles from './uploadFiles';
+import { uploadFiles } from './uploadFiles';
 
 /** 
  * Wraps all operations into one object so that 

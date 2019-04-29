@@ -47,7 +47,8 @@ const Workspace = props => {
             onSelect={props.onSelect} 
             onSort={props.onSortTable}
             onChangeColumnConfig={props.onChangeColumnConfig} 
-            onRenameFolder={props.onRenameFolder} />
+            onRenameFolder={props.onRenameFolder}
+            onDropFiles={props.onUploadFiles} />
         }
 
         { props.presentation === 'GRID' &&
@@ -56,7 +57,8 @@ const Workspace = props => {
             selection={props.selection}
             busy={props.busy}
             enableFiledrop={props.view !== 'MY_DOCUMENTS'} 
-            onSelect={props.onSelect} />            
+            onSelect={props.onSelect} 
+            onDropFiles={props.onUploadFiles} />            
         }
     </div>
 

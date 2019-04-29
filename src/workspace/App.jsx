@@ -173,8 +173,8 @@ export default class App extends Component {
         onDeleteReadme={this.deleteReadme}
         onCreateFolder={() => operations.createFolder().then(this.refreshPage)}
         onRenameFolder={(folder, title) => operations.renameFolder(folder, title).then(this.refreshPage)}
-        onUploadFiles={() => operations.uploadFiles().then(this.refreshPage)}
-        onImportSource={() => operations.importSource().then(this.refreshPage)}
+        onUploadFiles={files => operations.uploadFiles(files).then(this.refreshPage)}
+        onImportSource={source => operations.importSource(source).then(this.refreshPage)}
       />
     )
   }
