@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import Uploader from './Uploader';
-import { promises } from 'fs';
 
 export const uploadFiles = files => {
   return new Promise((resolve) => {
@@ -20,9 +19,9 @@ export const uploadFiles = files => {
   });
 }
 
-const importSource = (url, type) => {
-
-}
+// const importSource = (url, type) => {
+//
+// }
 
 /*
 const foo = (files) => {

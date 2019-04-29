@@ -12,6 +12,7 @@ export default class Uploader extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(props);
+    this.start();
   }
 
   initialState(props) {
@@ -108,9 +109,10 @@ export default class Uploader extends Component {
         this.setState({ phase: 'Importing...' });
         this.pollTaskProgress(result.data.document_id, tasks);
       } else {
-        this.props.onUploadComplete();
+        this.props.onComplete();
       }
     }).catch(error => {
+      console.log(error);
       this.setState({ error: error.response.data });
     });
   }
