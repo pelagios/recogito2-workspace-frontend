@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ActivityHistory from '../../../common/account/ActivityHistory';
 import TopCollaborators from '../../../common/account/TopCollaborators';
 

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Account from './sections/Account';
 import NewContent from './sections/NewContent';
 import Views from './sections/Views';

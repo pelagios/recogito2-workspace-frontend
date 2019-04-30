@@ -1,6 +1,5 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
-
 import Meter from '../../../common/Meter.jsx';
 
 const Storage = props => {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Menu from '../../../common/Menu';
 import IdentityInfo from '../../../common/account/IdentityInfo';
 

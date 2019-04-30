@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
-
 import { Columns } from '../common/documents/table/Columns';
 import { initialState, persistState } from './initialState';
 import operations from './operations';

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
-
 import Breadcrumbs from './Breadcrumbs';
 import HeaderIcon from './HeaderIcon';
 import Menu from  '../../common/Menu';
@@ -18,6 +17,8 @@ const OptionsMenu = props => {
     window.open(`document/${props.selection.get(0).id}/part/1/edit`, '_blank');
   }
 
+  // TODO probably worth splitting this up into a separate source file, or
+  // perhaps two (one OptionsMenu container & one presentational component)
   return (
     <Menu 
       className="selection-options-menu"
