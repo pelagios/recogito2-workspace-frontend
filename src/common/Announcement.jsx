@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
-
 import API from './API.js';
 import Modal from '../common/components/Modal.jsx';
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-
 import { HEADER_NAMES } from '../Columns.js';
 
 const SortableItem = SortableElement(({ label }) =>

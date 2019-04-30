@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
-
-import Modal from '../../../Modal.jsx';
-import ColumnOrder from './ColumnOrder.jsx';
-
-import { COLUMNS, HEADER_NAMES } from '../Columns.js';
+import Modal from '../../../Modal';
+import ColumnOrder from './ColumnOrder';
+import { COLUMNS, HEADER_NAMES } from '../Columns';
 
 export default class PreferencesModal extends Component {
 

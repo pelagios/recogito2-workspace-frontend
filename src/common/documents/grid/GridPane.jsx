@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone'
 import { AutoSizer, List } from 'react-virtualized';
-
 import Document from './Document';
 import Folder from './Folder';
 import FiledropHint from '../FiledropHint';
