@@ -76,8 +76,7 @@ export default class Uploader extends Component {
         onUploadProgress: onUploadProgress
       }).then(result => {
         this.updateUploadState(upload, { 
-          filepartId: result.data.uuid,
-          status: 'SUCCESS'
+          filepartId: result.data.uuid
         });
         return result;
       }).catch(error => {
@@ -106,15 +105,48 @@ export default class Uploader extends Component {
       headers: { 'X-Requested-With': 'XMLHttpRequest' }
     }).then(result => {
       const tasks = result.data.running_tasks;
-      if (tasks.length > 0) {
+
+      if (tasks && tasks.length > 0) {
         this.setState({ phase: 'Importing...' });
         this.pollTaskProgress(result.data.document_id, tasks);
       } else {
+        this.setState({ phase: 'Completed' });
+        this.state.uploads.forEach(u => {
+          if (u.status !== 'FAILED') this.updateUploadState(u, { status: 'COMPLETED' });
+        });
         this.props.onComplete();
       }
     }).catch(error => {
-      // this.setState({ error: error });
+      console.log(error);
     });
+  }
+
+  pollTaskProgress = (documentId, taskTypes) => {    
+    axios.get(`/api/job?id=${documentId}`)
+      .then(result => {
+        this.state.uploads.forEach(u => {
+          const progress = result.data.subtasks.find(t => t.filepart_id === u.filepartId);
+          if (progress)
+            this.updateUploadState(u, { status: progress.status });
+          else // No progress status - complete
+            this.updateUploadState(u, { status: 'COMPLETED' });
+        });
+
+        const isComplete = this.state.uploads.reduce((isComplete, u) => {
+          return isComplete && u.status === 'COMPLETED';
+        }, true);
+
+        if (isComplete) {
+          this.setState({ phase: 'Completed' });
+          this.props.onComplete();
+        } else {
+          setTimeout(() => this.pollTaskProgress(documentId, taskTypes), 1000);
+        }
+      }).catch(error => {
+        if (error.response.status === 404)
+          // Tasks might still be initializing
+          setTimeout(() => this.pollTaskProgress(documentId, taskTypes), 1000);
+      });
   }
 
   /** 

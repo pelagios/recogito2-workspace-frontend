@@ -8,13 +8,17 @@ export const uploadFiles = files => {
     const container = document.createElement('div');
     document.body.appendChild(container);
 
+    const onComplete = () => {
+      resolve();
+    }
+
     const onClose = result => {
       container.remove();
-      resolve(result);
     }
 
     render(<Uploader 
       files={files}
+      onComplete={onComplete}
       onClose={onClose} />, container);
   });
 }
