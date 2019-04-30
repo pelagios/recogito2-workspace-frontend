@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom';
 import Draggable from 'react-draggable';
 
-export default class Prompt extends Component {
-
-  constructor(props) {
-    super(props);
-    this.onKeydown = this.onKeydown.bind(this);
-  }
-
-  /** Clear selection on ESC **/
-  onKeydown(evt) {
-    if (evt.which === 27) this.props.onNo();
-  }
+class Prompt extends Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.onKeydown, false);
@@ -19,6 +10,10 @@ export default class Prompt extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onKeydown, false);
+  }
+
+  onKeydown = (evt) => {
+    if (evt.which === 27) this.props.onNo();
   }
 
   render() {
@@ -45,4 +40,28 @@ export default class Prompt extends Component {
     )
   }
 
+}
+
+export const confirm = props => {
+  const promptRoot = document.createElement('div');
+  promptRoot.setAttribute('id', 'confirm-prompt-root');
+  document.body.append(promptRoot);
+
+  const onYes = () => {
+    promptRoot.remove();
+    props.onConfirm();
+  }
+
+  const onNo = () => {
+    promptRoot.remove();
+    props.onCancel();
+  }
+
+  render(
+    <Prompt 
+      title={props.title}
+      type={props.type}
+      message={props.message}
+      onYes={onYes}
+      onNo={onNo} />, promptRoot);
 }

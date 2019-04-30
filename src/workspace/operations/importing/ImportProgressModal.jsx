@@ -1,5 +1,5 @@
 import React from 'react';
-import Meter from '../../../common/components/Meter.jsx';
+import Meter from '../../../common/Meter.jsx';
 
 const FileProgress = props => {
 
@@ -12,7 +12,7 @@ const FileProgress = props => {
 
 }
 
-const UploadProgressModal = props => {
+const ImportProgressModal = props => {
   const totalLoaded = props.uploads.reduce((total, u) => total + u.progress, 0);
     
   const errors = props.uploads.reduce((errors, u) => { 
@@ -55,4 +55,4 @@ const UploadProgressModal = props => {
 
 }
 
-export default UploadProgressModal;
+export default ImportProgressModal;

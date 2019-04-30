@@ -1,17 +1,18 @@
-import { updateReadme, deleteReadme } from './readme';
 import { createFolder, renameFolder } from './folder';
-import importSource from './importSource';
-import { uploadFiles } from './uploadFiles';
+import { uploadFiles, importSource } from './importing';
+import { updateReadme, deleteReadme } from './readme';
+import { deleteSelection } from './selection';
 
 /** 
  * Wraps all operations into one object so that 
  * we can import them in one go.
  */
 export default {
-  updateReadme,
-  deleteReadme,
   createFolder,
   renameFolder,
+  uploadFiles,
   importSource,
-  uploadFiles
+  updateReadme,
+  deleteReadme,
+  deleteSelection
 };

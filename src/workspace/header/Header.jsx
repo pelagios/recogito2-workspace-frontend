@@ -38,7 +38,11 @@ const OptionsMenu = props => {
       <Menu.Group>
         <Menu.Item icon={'\uf114'} label="Move to" disabled/>
         <Menu.Item icon={'\uf0c5'} label="Duplicate" disabled={!canDuplicate} />
-        <Menu.Item icon={'\uf014'} label="Delete"/> 
+
+        <Menu.Item 
+          icon={'\uf014'} 
+          label="Delete"
+          onSelect={props.onDeleteSelection} /> 
       </Menu.Group>
 
       <Menu.Group>
@@ -116,7 +120,8 @@ export default class Header extends Component {
               <OptionsMenu 
                 view={this.props.view} 
                 selection={this.props.selection} 
-                onCancel={this.closeOptionsMenu} /> }
+                onCancel={this.closeOptionsMenu} 
+                onDeleteSelection={this.props.onDeleteSelection} /> }
 
             <HeaderIcon
               className="presentation-toggle stroke7"

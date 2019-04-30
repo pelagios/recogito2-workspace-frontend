@@ -28,7 +28,8 @@ const Workspace = props => {
           docCount={props.page.total_docs}
           selection={props.selection}
           onTogglePresentation={props.onTogglePresentation} 
-          onCreateReadme={props.onCreateReadme} />
+          onCreateReadme={props.onCreateReadme} 
+          onDeleteSelection={props.onDeleteSelection} />
 
         { props.page.readme && 
           <Readme

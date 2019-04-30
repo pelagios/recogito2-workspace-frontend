@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import UploadProgressModal from './UploadProgressModal';
+import ImportProgressModal from './ImportProgressModal';
 
 /** 
  * A stateful container component to manage the
@@ -173,7 +173,7 @@ export default class Uploader extends Component {
 
   render() {
     return (
-      <UploadProgressModal
+      <ImportProgressModal
         phase={this.state.phase}
         totalSize={this.state.totalSize}
         uploads={this.state.uploads}

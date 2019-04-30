@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import Uploader from './Uploader';
+import Importer from './Importer';
 
 export const uploadFiles = files => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const container = document.createElement('div');
     document.body.appendChild(container);
 
@@ -16,13 +16,13 @@ export const uploadFiles = files => {
       container.remove();
     }
 
-    render(<Uploader 
+    render(<Importer 
       files={files}
       onComplete={onComplete}
       onClose={onClose} />, container);
   });
 }
 
-// const importSource = (url, type) => {
-//
-// }
+export const importSource = (url, type) => {
+
+}

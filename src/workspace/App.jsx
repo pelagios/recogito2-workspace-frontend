@@ -154,6 +154,17 @@ export default class App extends Component {
     });
   }
 
+  deleteSelection = () => {
+    operations.deleteSelection({
+      selection: this.state.selection,
+      view: this.state.view,
+      onStart: () => this.setState({ busy: true }),
+      onSuccess: this.refreshPage,
+      onError:   this.refreshPage, 
+      onCancel:  this.refreshPage 
+    });
+  }
+
   render() {
     return(
       <Workspace 
@@ -163,6 +174,7 @@ export default class App extends Component {
         page={this.state.page}
         tableConfig={this.state.table_config}
         selection={this.state.selection}
+        busy={this.state.busy}
         onChangeView={this.changeView}
         onTogglePresentation={this.togglePresentation}
         onSelect={this.select}
@@ -173,24 +185,11 @@ export default class App extends Component {
         onDeleteReadme={this.deleteReadme}
         onCreateFolder={() => operations.createFolder().then(this.refreshPage)}
         onRenameFolder={(folder, title) => operations.renameFolder(folder, title).then(this.refreshPage)}
+        onDeleteSelection={this.deleteSelection}
         onUploadFiles={files => operations.uploadFiles(files).then(this.refreshPage)}
-        onImportSource={source => operations.importSource(source).then(this.refreshPage)}
-      />
+        onImportSource={source => operations.importSource(source).then(this.refreshPage)} />
     )
   }
-
-  /*
-  startRegisterRemoteSource(url) {
-    this.setState({ 
-      fileUploads: [],
-      urlUpload: url
-    });
-  } 
-
-  setBusy(busy) {
-    this.setState({ busy: busy });
-  }
-  */
 
 }
 
