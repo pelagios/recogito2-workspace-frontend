@@ -61,22 +61,7 @@ const Workspace = props => {
             onSelect={props.onSelect} 
             onDropFiles={props.onUploadFiles} />            
         }
-    </div>
-
-    {/* isUploading && 
-      <Uploader
-        files={this.state.fileUploads} 
-        url={this.state.urlUpload}
-        onUploadComplete={this.onUploadComplete.bind(this)} /> 
-    }
-
-    {this.state.announcement && 
-      <Announcement
-        id={this.state.announcement.id}
-        message={this.state.announcement.content} 
-        onClose={e => this.setState({ announcement: null })} />
-    }
-  */}
+      </div>
     </React.Fragment>
   );
 
