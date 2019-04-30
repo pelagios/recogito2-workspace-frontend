@@ -27,7 +27,7 @@ const OptionsMenu = props => {
         <Menu.Item 
           label="Open" 
           disabled={!props.selection.isSingleSelection()} 
-          link={`document/${props.selection.get(0).id}/part/1/edit`} />
+          link={props.selection.isSingleSelection() && `document/${props.selection.get(0).id}/part/1/edit`} />
 
         <Menu.Item 
           label="Open in new tab" 
