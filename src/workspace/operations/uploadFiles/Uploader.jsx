@@ -18,6 +18,7 @@ export default class Uploader extends Component {
   initialState(props) {
     return {
       phase: 'Uploading',
+      totalSize: props.files.reduce((total, f) => f.size + total, 0),
       uploadId: null,
       uploads: props.files.map(f => {
         return {
@@ -37,15 +38,12 @@ export default class Uploader extends Component {
   }
 
   /** Helper to update a specific upload in the state array **/
-  updateUploadState = (upload) => {
-    // Clone uploads list
-    const newUploads = [ ...this.state.uploads ];
-
-    // Replace the specific upload
-    newUploads[newUploads.indexOf(upload)] = upload; 
-
-    // Update state
-    this.setState({ uploads: newUploads });
+  updateUploadState = (upload, diff) => {
+    this.setState(prev => { 
+      return { 
+        uploads: prev.uploads.map(u => u.file === upload.file ? { ...u, ...diff } : u) 
+      }
+    });
   }
 
   /**
@@ -70,20 +68,23 @@ export default class Uploader extends Component {
       formdata.append('file', upload.file);
 
       const onUploadProgress = (evt) => {
-        this.updateUploadState({ ...upload, ...{ progress: evt.loaded } });
+        this.updateUploadState(upload, { progress: evt.loaded });
       }
 
       return axios.post(`/my/upload/${this.state.uploadId}/file`, formdata, {
         headers: { 'X-Requested-With': 'XMLHttpRequest' },
         onUploadProgress: onUploadProgress
       }).then(result => {
-        this.updateUploadState({ ...upload, ...{ filepartId: result.data.uuid } });
+        this.updateUploadState(upload, { 
+          filepartId: result.data.uuid,
+          status: 'SUCCESS'
+        });
         return result;
       }).catch(error => {
-        this.updateUploadState({ ...upload, ...{
+        this.updateUploadState(upload, {
           status: 'FAILED',
           error: error.response.data
-        }});
+        });
       });
     }
 
@@ -112,8 +113,7 @@ export default class Uploader extends Component {
         this.props.onComplete();
       }
     }).catch(error => {
-      console.log(error);
-      this.setState({ error: error.response.data });
+      // this.setState({ error: error });
     });
   }
 
@@ -135,7 +135,7 @@ export default class Uploader extends Component {
       return this.state.remoteSource ?
         this.importSource() : this.uploadFiles();
     }).catch(error => {
-      this.setState({ error: error.response.data });
+      this.setState({ error: error });
     }).then(this.finalizeDocument);
   }
 
@@ -143,8 +143,10 @@ export default class Uploader extends Component {
     return (
       <UploadProgressModal
         phase={this.state.phase}
+        totalSize={this.state.totalSize}
         uploads={this.state.uploads}
-        onCancel={this.props.onCancel} />
+        error={this.state.error}
+        onClose={this.props.onClose} />
     )
   }
 

@@ -67,9 +67,20 @@
   }
 
   .progress {
-    padding:22px 15px;
+    padding:25px 15px;
     background-color:#fff;
     border-bottom:1px solid $lightgrey-border;
+
+    .meter {
+      height:4px;
+      background-color:$lightgrey-border;
+      overflow:hidden;
+      @include rounded-corners(2px);
+
+      .bar {
+        background-color:$ocean;
+      }
+    }
   }
 
 }

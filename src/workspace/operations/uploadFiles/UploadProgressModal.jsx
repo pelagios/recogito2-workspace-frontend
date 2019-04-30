@@ -2,7 +2,7 @@ import React from 'react';
 import Meter from '../../../common/components/Meter.jsx';
 
 const FileProgress = props => {
-  
+
   return (
     <li>
       {props.upload.file.name}
@@ -13,13 +13,8 @@ const FileProgress = props => {
 }
 
 const UploadProgressModal = props => {
-
-  // files, fileStatusList, isRemoteSource, phase, errors
-
-  // onCancel
-
   const totalLoaded = props.uploads.reduce((total, u) => total + u.progress, 0);
-  
+    
   const errors = props.uploads.reduce((errors, u) => { 
     if (u.error) errors.push(u.error);
     return errors;
@@ -32,7 +27,7 @@ const UploadProgressModal = props => {
 
         <button 
           className="close nostyle"
-          onClick={props.onCancel}>&#xe897;</button>
+          onClick={props.onClose}>&#xe897;</button>
       </div>
 
       <ul className={`files${(errors.length > 0) ? ' has-errors' : ''}`}>
@@ -48,8 +43,8 @@ const UploadProgressModal = props => {
 
       { errors.length > 0 && 
         <ul className="errors">
-          { errors.map((message, idx) => <li key={idx}>{message}</li>) }
-        </ul>
+          <li>{errors.join()}</li>
+        </ul> 
       }
 
       <div className="progress">
