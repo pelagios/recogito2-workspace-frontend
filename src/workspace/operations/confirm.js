@@ -54,7 +54,7 @@ export const confirm = props => {
 
   const onNo = () => {
     promptRoot.remove();
-    props.onCancel();
+    props.onCancel && props.onCancel();
   }
 
   render(

@@ -160,8 +160,7 @@ export default class App extends Component {
       view: this.state.view,
       onStart: () => this.setState({ busy: true }),
       onSuccess: this.refreshPage,
-      onError:   this.refreshPage, 
-      onCancel:  this.refreshPage 
+      onError:   this.refreshPage
     });
   }
 

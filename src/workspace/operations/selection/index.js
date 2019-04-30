@@ -59,7 +59,7 @@ export const deleteSelection = args => {
           onError(error);
         });
     } else {
-      onCancel();
+      onCancel && onCancel();
     }
   }
 
