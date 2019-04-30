@@ -14,14 +14,25 @@ const OptionsMenu = props => {
   const canShare = // Single folder in my workspace
     props.selection.isSingleFolder() && props.view === 'MY_DOCUMENTS';
 
+  const openInNewTab = () => {
+    window.open(`document/${props.selection.get(0).id}/part/1/edit`, '_blank');
+  }
+
   return (
     <Menu 
       className="selection-options-menu"
       onCancel={props.onCancel}>
 
       <Menu.Group>
-        <Menu.Item label="Open" disabled={!props.selection.isSingleSelection()} />
-        <Menu.Item label="Open in new tab" disabled={!props.selection.isSingleDocument()} />
+        <Menu.Item 
+          label="Open" 
+          disabled={!props.selection.isSingleSelection()} 
+          link={`document/${props.selection.get(0).id}/part/1/edit`} />
+
+        <Menu.Item 
+          label="Open in new tab" 
+          disabled={!props.selection.isSingleDocument()} 
+          onSelect={openInNewTab} />
       </Menu.Group>
       
       <Menu.Group>
@@ -41,7 +52,6 @@ const OptionsMenu = props => {
   );
 
 }
-
 
 export default class Header extends Component {
 

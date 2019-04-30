@@ -34,6 +34,10 @@ export default class Selection {
     return withText.length > 0;
   }
 
+  get(idx) {
+    return this._selection[idx];
+  }
+
   getItems() {
     return this._selection;
   }

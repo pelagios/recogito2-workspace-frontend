@@ -26,7 +26,7 @@ const MenuItem = props => {
 
       {props.link ? 
         <a href={props.link}>
-          <span className="icon">{props.icon}</span> {props.label}
+          {props.icon && <span className="icon">{props.icon}</span> } {props.label}
         </a>
         : 
         <span>
