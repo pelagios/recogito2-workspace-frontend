@@ -179,16 +179,7 @@ export default class App extends Component {
     )
   }
 
-  /*  
-  /** File upload **
-  startUpload(files) {
-    this.setState({ 
-      fileUploads: files, 
-      urlUpload: null
-    });
-  }
-
-  /** Remote file registration (IIIF, CTS) **
+  /*
   startRegisterRemoteSource(url) {
     this.setState({ 
       fileUploads: [],
@@ -196,25 +187,8 @@ export default class App extends Component {
     });
   } 
 
-  onUploadComplete() {
-    this.setState({ 
-      view: 'MY_DOCUMENTS', // Force view back to 'My Documents'
-      fileUploads: [], 
-      urlUpload: null 
-    }, () => {
-      this.refreshCurrentView()
-        .then(this.fetchAccountData.bind(this));
-    });
-  }
-
   setBusy(busy) {
     this.setState({ busy: busy });
-  }
-
-  afterAction() {
-    this.refreshCurrentView()
-      .then(() => this.setState({ busy: false, selection: []}))
-      .then(this.fetchAccountData.bind(this));
   }
   */
 
