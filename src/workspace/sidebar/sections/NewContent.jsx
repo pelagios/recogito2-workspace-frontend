@@ -15,6 +15,15 @@ export default class NewContent extends Component {
     this.setState({ menuVisible: false });
   }
 
+  onOpenFileExplorer = () => {
+    this._input.click(); // Trigger the hidden file input field
+  }
+
+  onUploadFiles = (evt) => {
+    const files = Array.from(evt.target.files);
+    this.props.onUploadFiles(files);
+  }
+
   /** Helper to execute a function after closing the menu **/
   select = (fn) => {
     return () => {
@@ -38,7 +47,7 @@ export default class NewContent extends Component {
           type="file"
           name="file"
           multiple
-          onChange={this.props.onUploadFiles}
+          onChange={this.onUploadFiles}
           style={{ display: 'none' }} />
 
         {this.state.menuVisible &&
@@ -55,7 +64,7 @@ export default class NewContent extends Component {
               <Menu.Item 
                 icon={'\uf15b'} 
                 label="File upload" 
-                onSelect={this.select(this.props.onUploadFiles)} />
+                onSelect={this.select(this.onOpenFileExplorer)} />
             </Menu.Group>
 
             <Menu.Group>
