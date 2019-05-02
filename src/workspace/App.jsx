@@ -43,7 +43,7 @@ export default class App extends Component {
   onKeydown = (evt) => {
     if (evt.which === 27) 
       this.setState({ selection: new Selection() });
-    else if (evt.which === 46)
+    else if (evt.which === 46 && !this.state.selection.isEmpty())
       this.deleteSelection();
   }
 
