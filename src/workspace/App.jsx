@@ -41,7 +41,10 @@ export default class App extends Component {
 
   /** Clear selection on ESC key **/
   onKeydown = (evt) => {
-    if (evt.which === 27) this.setState({ selection: new Selection() });
+    if (evt.which === 27) 
+      this.setState({ selection: new Selection() });
+    else if (evt.which === 46)
+      this.deleteSelection();
   }
 
   /** Clear selection on click ouside the document pane **/
