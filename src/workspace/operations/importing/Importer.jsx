@@ -93,6 +93,18 @@ export default class Uploader extends Component {
     return Promise.all(requests);
   }
 
+  importRemoteSource() {
+    this.setState({ phase: 'Importing' });
+
+    const formdata = new FormData();
+    formdata.append('url', this.props.remoteSource.url);
+    formdata.append('type', this.props.remoteSource.sourceType);
+
+    return axios.post(`/my/upload/${this.state.uploadId}/file`, formdata, {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    });
+  }
+
   finalizeDocument = () => {
     const currentFolder = document.location.hash.substring(1);
 
@@ -163,8 +175,8 @@ export default class Uploader extends Component {
     this.initNewDocument().then((result) => {
       this.setState({ uploadId: result.data.id });
       // Branch based on files vs. remote URL
-      return this.state.remoteSource ?
-        this.importSource() : this.uploadFiles();
+      return this.props.remoteSource ?
+        this.importRemoteSource() : this.uploadFiles();
     }).catch(error => {
       this.setState({ error: error });
     }).then(this.finalizeDocument);

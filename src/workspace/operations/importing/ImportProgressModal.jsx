@@ -33,7 +33,7 @@ const ImportProgressModal = props => {
       <ul className={`files${(errors.length > 0) ? ' has-errors' : ''}`}>
         { props.uploads.map(u => <FileProgress key={u.file.name} upload={u} />) }
 
-        { props.isRemoteSource &&
+        { props.uploads.length === 0 &&
           <li>
             Fetching content from remote source...
             <span className="icon spinner RUNNING"></span>

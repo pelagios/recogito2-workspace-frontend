@@ -49,7 +49,8 @@ const Workspace = props => {
             onSort={props.onSortTable}
             onChangeColumnConfig={props.onChangeColumnConfig} 
             onRenameFolder={props.onRenameFolder}
-            onDropFiles={props.onUploadFiles} />
+            onDropFiles={props.onUploadFiles} 
+            onDropSourceURL={props.onImportSource} />
         }
 
         { props.presentation === 'GRID' &&
@@ -59,7 +60,8 @@ const Workspace = props => {
             busy={props.busy}
             enableFiledrop={props.view !== 'MY_DOCUMENTS'} 
             onSelect={props.onSelect} 
-            onDropFiles={props.onUploadFiles} />            
+            onDropFiles={props.onUploadFiles} 
+            onDropSourceURL={props.onImportSource} />            
         }
       </div>
     </React.Fragment>

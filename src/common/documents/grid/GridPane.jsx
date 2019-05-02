@@ -80,7 +80,7 @@ export default class GridPane extends Component {
     this.setState({ drag: false });
 
     if (files.length > 0) this.props.onDropFiles(files);
-    else if (url) this.props.onDropURL(url);
+    else if (url) this.props.onDropSourceURL(url);
   }
 
   render() {

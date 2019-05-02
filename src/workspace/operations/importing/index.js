@@ -3,12 +3,13 @@ import { render } from 'react-dom';
 
 import Importer from './Importer';
 
-export const uploadFiles = files => {
+const importContent = (files, remoteSource) => {
   return new Promise(resolve => {
     const container = document.createElement('div');
     document.body.appendChild(container);
 
     const onComplete = () => {
+      container.remove();
       resolve();
     }
 
@@ -18,11 +19,16 @@ export const uploadFiles = files => {
 
     render(<Importer 
       files={files}
+      remoteSource={remoteSource}
       onComplete={onComplete}
       onClose={onClose} />, container);
   });
 }
 
-export const importSource = (url, type) => {
+export const uploadFiles = files => {
+  return importContent(files);
+}
 
+export const importSource = (url, sourceType) => {
+  return importContent([], { url: url, sourceType: sourceType });
 }

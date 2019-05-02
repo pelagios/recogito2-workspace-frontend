@@ -77,7 +77,7 @@ export default class TablePane extends Component {
     if (files.length > 0)
       this.props.onDropFiles(files);
     else if (url && hostname !== window.location.hostname) // Require external link
-      this.props.onDropURL(url);
+      this.props.onDropSourceURL(url);
   }
 
   render() {
