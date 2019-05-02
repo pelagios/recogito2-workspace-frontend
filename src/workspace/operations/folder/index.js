@@ -10,11 +10,11 @@ class CreateFolderForm extends Component {
     folderName : ''
   }
 
-  onChange = (evt) => {
+  onChange = evt => {
     this.setState({ folderName: evt.target.value });
   }
 
-  onKeyPress = (evt) => {
+  onKeyPress = evt => {
     if (evt.which === 13) // Enter
       this.onOk();
   }
@@ -43,11 +43,11 @@ class CreateFolderForm extends Component {
 } 
 
 export const createFolder = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const container = document.createElement('div');
     document.body.appendChild(container);
 
-    const onOk = (folderName) => { 
+    const onOk = folderName => { 
       const currentFolderId = document.location.hash.substring(1);
 
       axios.post('/api/folder', {
