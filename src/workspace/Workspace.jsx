@@ -31,7 +31,8 @@ const Workspace = props => {
           onCreateReadme={props.onCreateReadme} 
           onDuplicateSelection={props.onDuplicateSelection}
           onDeleteSelection={props.onDeleteSelection} 
-          onShareSelection={props.onShareSelection} />
+          onShareSelection={props.onShareSelection} 
+          onNER={props.onNER} />
 
         { props.page.readme && 
           <Readme

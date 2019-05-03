@@ -195,6 +195,7 @@ export default class App extends Component {
         onDuplicateSelection={this.duplicateSelection}
         onDeleteSelection={this.deleteSelection}
         onShareSelection={() => operations.shareSelection(this.state.selection)}
+        onNER={() => operations.entityRecognition(this.state.selection).then(this.refreshPage)}
         onUploadFiles={files => operations.uploadFiles(files).then(this.refreshPage)}
         onImportSource={(sourceType, url) => operations.importSource(sourceType, url).then(this.refreshPage)} />
     )

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Meter from '../../../../common/Meter.jsx';
 
-import Meter from '../../components/Meter.jsx';
-
-export default class JobProgress extends Component {
+export default class NERProgressModal extends Component {
 
   constructor(props) {
     super(props);
@@ -43,31 +42,23 @@ export default class JobProgress extends Component {
       });
   }
 
-  handleClose = () => {
-    this.props.onClose && this.props.onClose();
-  }
-
   render() {
     const isDone = 
       this.state.status === 'COMPLETED' || 
       this.state.status === 'FAILED';
 
-    const labelCompleted = this.props.labelCompleted || 'Completed';
-    const labelTasks = this.props.labelTasks || 'tasks';
-
-    return ReactDOM.createPortal(
+    return (
       <div className="job-progress">
         <div className="header">
-          {this.props.title}
-          {isDone && <button 
+          Named Entity Recognition { isDone && <button 
             className="close nostyle"
-            onClick={this.handleClose}>&#xe897;</button>
+            onClick={this.props.onClose}>&#xe897;</button>
           }
         </div>
 
         <div className="body">
           <div className="message">
-            {labelCompleted} {this.state.tasksCompleted} of {this.state.tasks} {labelTasks}
+            Parsed {this.state.tasksCompleted} of {this.state.tasks} files
             <span className={`icon spinner ${this.state.status}`}></span>
           </div>
 
@@ -75,8 +66,7 @@ export default class JobProgress extends Component {
             <Meter value={this.state.progress / 100} />
           </div>
         </div>
-      </div>,
-      document.body
+      </div>
     )
   }
 

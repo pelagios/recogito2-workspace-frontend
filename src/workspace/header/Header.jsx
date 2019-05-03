@@ -64,7 +64,11 @@ const OptionsMenu = props => {
       </Menu.Group>
 
       <Menu.Group>
-        <Menu.Item icon={'\uf085'} label="Named Entity Recognition" disabled={!props.selection.includesText()} />
+        <Menu.Item 
+          icon={'\uf085'} 
+          label="Named Entity Recognition" 
+          disabled={!props.selection.includesText()} 
+          onSelect={props.onNER} />
       </Menu.Group>
     </Menu>
   );
@@ -145,6 +149,7 @@ export default class Header extends Component {
                 onDuplicateSelection={this.closeAndThen(this.props.onDuplicateSelection)}
                 onDeleteSelection={this.closeAndThen(this.props.onDeleteSelection)} 
                 onShareSelection={this.closeAndThen(this.props.onShareSelection)}
+                onNER={this.closeAndThen(this.props.onNER)}
                 onCancel={this.closeOptionsMenu} /> }
 
             <HeaderIcon

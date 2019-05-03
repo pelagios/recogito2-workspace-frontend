@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-import Modal from '../../components/Modal.jsx';
-import AuthoritySelection from './authorities/AuthoritySelection.jsx';
-import EngineSelection from './engines/EngineSelection.jsx';
+import Modal from '../../../../common/Modal';
+import AuthoritySelection from './authorities/AuthoritySelection';
+import EngineSelection from './engines/EngineSelection';
 
 export default class NERModal extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       available_engines: [],
       available_authorities: [],
