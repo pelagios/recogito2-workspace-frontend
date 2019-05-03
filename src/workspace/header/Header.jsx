@@ -37,8 +37,16 @@ const OptionsMenu = props => {
       </Menu.Group>
       
       <Menu.Group>
-        <Menu.Item icon={'\uf114'} label="Move to" disabled/>
-        <Menu.Item icon={'\uf0c5'} label="Duplicate" disabled={!canDuplicate} />
+        <Menu.Item
+          icon={'\uf114'}
+          label="Move to"
+          disabled />
+
+        <Menu.Item
+          icon={'\uf0c5'}
+          label="Duplicate"
+          disabled={!canDuplicate}
+          onSelect={props.onDuplicateSelection} />
 
         <Menu.Item 
           icon={'\uf014'} 
@@ -74,6 +82,14 @@ export default class Header extends Component {
 
   closeOptionsMenu = () => {
     this.setState({ optionsMenuVisible: false });
+  }
+
+  /** Helper that closes the menu and executes a select action **/
+  closeAndThen = fn => {
+    return args => {
+      this.setState({ optionsMenuVisible: false });
+      fn(args);
+    }
   }
 
   render() {
@@ -125,8 +141,9 @@ export default class Header extends Component {
               <OptionsMenu 
                 view={this.props.view} 
                 selection={this.props.selection} 
-                onDeleteSelection={this.props.onDeleteSelection} 
-                onShareSelection={this.props.onShareSelection}
+                onDuplicateSelection={this.closeAndThen(this.props.onDuplicateSelection)}
+                onDeleteSelection={this.closeAndThen(this.props.onDeleteSelection)} 
+                onShareSelection={this.closeAndThen(this.props.onShareSelection)}
                 onCancel={this.closeOptionsMenu} /> }
 
             <HeaderIcon

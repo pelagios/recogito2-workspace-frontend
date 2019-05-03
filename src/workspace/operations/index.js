@@ -1,7 +1,7 @@
 import { createFolder, renameFolder } from './folder';
 import { uploadFiles, importSource } from './importing';
 import { updateReadme, deleteReadme } from './readme';
-import { deleteSelection } from './selection';
+import { deleteSelection, duplicateSelection } from './selection';
 import { shareSelection } from './sharing';
 
 /** 
@@ -16,5 +16,6 @@ export default {
   updateReadme,
   deleteReadme,
   deleteSelection,
+  duplicateSelection,
   shareSelection
 };

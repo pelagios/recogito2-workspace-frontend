@@ -29,6 +29,7 @@ const Workspace = props => {
           selection={props.selection}
           onTogglePresentation={props.onTogglePresentation} 
           onCreateReadme={props.onCreateReadme} 
+          onDuplicateSelection={props.onDuplicateSelection}
           onDeleteSelection={props.onDeleteSelection} 
           onShareSelection={props.onShareSelection} />
 

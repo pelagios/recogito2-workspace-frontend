@@ -72,3 +72,13 @@ export const deleteSelection = args => {
   });
 
 }
+
+/** Only supports single documents at them moment **/
+export const duplicateSelection = selection => {
+  if (selection.isSingleDocument()) {
+    const doc = selection.get(0);
+    return axios.post(`/api/duplicate/document/${doc.id}`);
+  } else {
+    return new Promise((resolve) => { resolve(); });
+  }
+}
