@@ -15,6 +15,7 @@ const OptionsMenu = props => {
 
   const openInNewTab = () => {
     window.open(`document/${props.selection.get(0).id}/part/1/edit`, '_blank');
+    props.onCancel();
   }
 
   // TODO probably worth splitting this up into a separate source file, or
