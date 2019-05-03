@@ -4,11 +4,6 @@
 
   .collaborators {
 
-    .no-collaborators {
-      padding: 25px 0 10px 0;
-      font-size: 15px;
-    }
-
     table {
       width:100%;
       margin:0 0 10px 0;
@@ -37,6 +32,12 @@
         right:8px;
       }
 
+    }
+
+    .no-collaborators td {
+      padding: 25px 0 10px 0;
+      font-size: 15px;
+      text-align:center; 
     }
 
   }

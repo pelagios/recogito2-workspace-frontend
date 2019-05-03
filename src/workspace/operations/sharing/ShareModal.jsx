@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Modal from '../../components/Modal.jsx';
-import PublicAccess from './public/PublicAccess.jsx';
-import Collaborators from './collaborators/Collaborators.jsx';
+import Modal from '../../../common/Modal';
+import PublicAccess from './public/PublicAccess';
+import Collaborators from './collaborators/Collaborators';
 
 export default class ShareModal extends Component {
 
@@ -19,7 +19,7 @@ export default class ShareModal extends Component {
 
   onKeydown = (evt) => {
     evt.stopPropagation();
-    if (evt.which === 27) this.props.onCancel();
+    if (evt.which === 27) this.props.onClose();
   }
 
   setView = (name) => {
@@ -27,11 +27,11 @@ export default class ShareModal extends Component {
   }
 
   renderPublicAccess = () => {
-    return <PublicAccess item={this.props.selection[0]} />
+    return <PublicAccess item={this.props.selection.get(0)} />
   }
 
   renderCollaborators = () => {
-    return <Collaborators item={this.props.selection[0]} />
+    return <Collaborators item={this.props.selection.get(0)} />
   }
 
   getView = () => {
@@ -46,7 +46,7 @@ export default class ShareModal extends Component {
       <Modal
         className="multi-share-modal" 
         title="Share"
-        onClose={this.props.onCancel}>
+        onClose={this.props.onClose}>
         <div className="multi-share">
           <div className="multi-share-tabs">
             <ul>
@@ -76,7 +76,7 @@ export default class ShareModal extends Component {
             <div className="footer">
               <button
                 className="btn"
-                onClick={this.props.onCancel}>Done</button>
+                onClick={this.props.onClose}>Done</button>
             </div>
           </div>
         </div>

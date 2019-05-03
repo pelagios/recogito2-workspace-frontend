@@ -47,7 +47,11 @@ const OptionsMenu = props => {
       </Menu.Group>
 
       <Menu.Group>
-        <Menu.Item icon={'\uf234'} label="Share" disabled={!canShare} />
+        <Menu.Item 
+          icon={'\uf234'}
+          label="Share" 
+          disabled={!canShare} 
+          onSelect={props.onShareSelection} />
       </Menu.Group>
 
       <Menu.Group>
@@ -121,8 +125,9 @@ export default class Header extends Component {
               <OptionsMenu 
                 view={this.props.view} 
                 selection={this.props.selection} 
-                onCancel={this.closeOptionsMenu} 
-                onDeleteSelection={this.props.onDeleteSelection} /> }
+                onDeleteSelection={this.props.onDeleteSelection} 
+                onShareSelection={this.props.onShareSelection}
+                onCancel={this.closeOptionsMenu} /> }
 
             <HeaderIcon
               className="presentation-toggle stroke7"
