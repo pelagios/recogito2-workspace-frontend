@@ -20,7 +20,9 @@ export default class GridPane extends Component {
   }
 
   onTileClick(evt, item, idx) {
-    const selection = this.props.selection.handleClick(evt, item, idx, this.props.items);    
+    const selection = 
+      this.props.selection && this.props.selection.handleClick(evt, item, idx, this.props.items);    
+
     if (selection)
       this.props.onSelect(selection);
   }
@@ -34,13 +36,14 @@ export default class GridPane extends Component {
       const renderedItems = new Array(itemsInRow).fill(undefined).map((_, rowIdx) => {
         const idx = rowIdx + fromIndex;
         const item = this.props.items[idx];
+        const selected = this.props.selection && this.props.selection.includes(item);
 
         return (item.type === 'FOLDER') ?
             <Folder
               key={idx} 
               id={item.id}
               title={item.title} 
-              selected={this.props.selection.includes(item)}
+              selected={selected}
               onClick={e => this.onTileClick(e, item, idx)} /> :
             
             <Document
@@ -49,7 +52,7 @@ export default class GridPane extends Component {
               title={item.title}
               filetypes={item.filetypes}
               fileCount={item.file_count}
-              selected={this.props.selection.includes(item)}
+              selected={selected}
               onClick={e => this.onTileClick(e, item, idx)} />
       });
 

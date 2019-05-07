@@ -17,7 +17,8 @@ export default class TablePane extends Component {
   rowRenderer() {
     return ((args) => {
       const item = this.props.items[args.index];
-      const selected = this.props.selection.includes(item);
+      const selected = this.props.selection && 
+        this.props.selection.includes(item);
 
       return (item.type === 'FOLDER') ?
         <FolderRow 
@@ -39,7 +40,9 @@ export default class TablePane extends Component {
   }
 
   onRowClick(evt, item, idx) {
-    const selection = this.props.selection.handleClick(evt, item, idx, this.props.items);    
+    const selection = this.props.selection && 
+      this.props.selection.handleClick(evt, item, idx, this.props.items);    
+      
     if (selection)
       this.props.onSelect(selection);
   }

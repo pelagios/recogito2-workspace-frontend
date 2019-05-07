@@ -3,7 +3,6 @@ import Breadcrumbs from '../common/header/Breadcrumbs';
 import GridPane from '../common/documents/grid/GridPane';
 import HeaderIcon from '../common/header/HeaderIcon';
 import Readme from '../common/documents/Readme';
-import Selection from '../common/documents/Selection';
 import Sidebar from './sidebar/Sidebar';
 import TablePane from '../common/documents/table/TablePane';
 import TopBar from './top/TopBar';
@@ -41,7 +40,6 @@ const Profile = props => {
           <TablePane
             items={props.page.items}
             config={props.tableConfig}
-            selection={new Selection()}
             busy={props.busy}
             enableFiledrop={false} 
             onSort={props.onSortTable}
@@ -51,7 +49,6 @@ const Profile = props => {
         { props.visitedAccount && props.page.items.length > 0 && props.presentation === 'GRID' &&
           <GridPane
             items={props.page.items}
-            selection={new Selection()}
             busy={props.busy}
             enableFiledrop={false} />         
         }
