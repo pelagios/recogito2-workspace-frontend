@@ -95,7 +95,14 @@ export default class App extends Component {
     return (
       <Profile 
         me={this.state.me} 
-        visitedAccount={this.state.visitedAccount} />
+        visitedAccount={this.state.visitedAccount} 
+        presentation={this.state.presentation}
+        page={this.state.page} 
+        tableConfig={this.state.table_config}
+        busy={this.state.busy} 
+        onTogglePresentation={this.togglePresentation} 
+        onSort={this.sortTable}
+        onChangeColumnConfig={this.changeColumnConfig} />
     );
   }
 }

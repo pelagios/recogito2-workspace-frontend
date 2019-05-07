@@ -1,31 +1,30 @@
 import React, { Component } from 'react';
+import ActivityHistory from '../../common/account/ActivityHistory';
+import IdentityInfo from '../../common/account/IdentityInfo';
+import TopCollaborators from '../../common/account/TopCollaborators';
 
-// import ActivityWidget from '../../common/content/activity/ActivityWidget.jsx';
-// import CollaboratorList from '../../common/content/profile/CollaboratorList.jsx';
-// import ProfileInfo from '../../common/content/profile/ProfileInfo.jsx';
+const Sidebar = props => {
 
-export default class Sidebar extends Component {
-
-  render() {
-    return (
-      <div className="sidebar"> {/*
-        <div className="section">
-          <ProfileInfo account={this.props.account} />
-        </div>
-
-        <ActivityWidget 
-          className="section" 
-          width={237}
-          height={55}
-          fill="#4483c4"
-          stats={this.props.account && this.props.account.stats} />
-
-        <CollaboratorList 
-          className="section"
-          title="Top collaborators"
-      username={this.props.account && this.props.account.username} /> */}
+  return (
+    <div className="sidebar"> 
+      <div className="section identity">
+        <IdentityInfo account={props.account} />
       </div>
-    );
-  }
+
+      <ActivityHistory 
+        className="section" 
+        width={237}
+        height={55}
+        fill="#4483c4"
+        stats={props.account && props.account.stats} />
+
+      <TopCollaborators 
+        className="section collaborators"
+        title="Top collaborators"
+        username={props.account && props.account.username} />
+    </div>
+  );
 
 }
+
+export default Sidebar;

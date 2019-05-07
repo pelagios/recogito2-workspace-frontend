@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import Breadcrumbs from './Breadcrumbs';
-import HeaderIcon from './HeaderIcon';
+import Breadcrumbs from '../../common/header/Breadcrumbs';
+import HeaderIcon from '../../common/header/HeaderIcon';
 import Menu from  '../../common/Menu';
 import Search from './search/Search';
 

@@ -1,6 +1,12 @@
 import React from 'react';
-import TopBar from './top/TopBar';
+import Breadcrumbs from '../common/header/Breadcrumbs';
+import GridPane from '../common/documents/grid/GridPane';
+import HeaderIcon from '../common/header/HeaderIcon';
+import Readme from '../common/documents/Readme';
+import Selection from '../common/documents/Selection';
 import Sidebar from './sidebar/Sidebar';
+import TablePane from '../common/documents/table/TablePane';
+import TopBar from './top/TopBar';
 
 const Profile = props => {
 
@@ -11,52 +17,44 @@ const Profile = props => {
       <Sidebar account={props.visitedAccount}/>
 
       <div className="main-content">
-      {/*
         <Breadcrumbs 
           label="Public Documents"
           path={props.page.breadcrumbs}
           docCount={props.page.total_docs} />
 
-        
-
         <HeaderIcon
           className="presentation-toggle stroke7"
-          icon={(this.state.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
-          onClick={this.onTogglePresentation.bind(this)} />
+          icon={(props.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
+          onClick={props.onTogglePresentation} />
 
-        {this.state.visitedAccount && (
-            
-            documents.length === 0 ? 
-              <div className="no-public-documents">
-                {this.state.visitedAccount.username} has not shared any documents yet
-              </div> :
+        { props.visitedAccount && props.page.readme && 
+          <Readme content={props.page.readme} />
+        }
 
-              this.state.presentation === 'TABLE' ?
-                <TablePane
-                  folders={[]}
-                  documents={documents}
-                  columns={this.state.table_columns}
-                  sorting={this.state.table_sorting}
-                  busy={this.state.busy} 
-                  disableFiledrop={true} 
-                  onSort={this.onSortTable.bind(this)} 
-                  onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)}> 
+        { props.visitedAccount && props.page.items.length === 0 &&
+          <div className="no-public-documents">
+            {props.visitedAccount.username} has not shared any documents yet
+          </div>
+        }
 
-                  {this.state.readme && 
-                    <Readme content={this.state.readme} /> }
-                </TablePane>
-                :
-                <GridPane
-                  folders={[]}
-                  documents={documents}
-                  busy={this.state.busy} 
-                  disableFiledrop={true}>
+        { props.visitedAccount && props.page.items.length > 0 && props.presentation === 'TABLE' &&
+          <TablePane
+            items={props.page.items}
+            config={props.tableConfig}
+            selection={new Selection()}
+            busy={props.busy}
+            enableFiledrop={false} 
+            onSort={props.onSortTable}
+            onChangeColumnConfig={props.onChangeColumnConfig} />
+        }
 
-                  {this.state.readme && 
-                    <Readme content={this.state.readme} /> }
-                </GridPane>
-        )}
-                  */}
+        { props.visitedAccount && props.page.items.length > 0 && props.presentation === 'GRID' &&
+          <GridPane
+            items={props.page.items}
+            selection={new Selection()}
+            busy={props.busy}
+            enableFiledrop={false} />         
+        }
       </div>
     </React.Fragment>
   );
