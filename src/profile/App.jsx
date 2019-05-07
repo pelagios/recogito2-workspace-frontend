@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-
-import API from './API.js';
-
-import GridPane from '../common/documents/grid/GridPane.jsx';
-import TablePane from '../common/documents/table/TablePane.jsx';
-import Breadcrumbs from '../workspace/header/Breadcrumbs.jsx';
-import HeaderIcon from '../workspace/header/HeaderIcon.jsx';
-import Readme from '../common/documents/Readme.jsx';
-import Sidebar from './sidebar/Sidebar.jsx';
-import TopBar from './top/TopBar.jsx';
-import { Columns } from '../common/documents/table/Columns.js';
+import { render } from 'react-dom';
+import axios from 'axios';
+import { Columns } from '../common/documents/table/Columns';
+import { initialState, persistState } from './initialState';
+import Profile from './Profile';
 
 import '../../assets/style/profile/index.scss';
 
@@ -18,152 +11,93 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
-
-    const state = {
-      me             : null, // Login identity
-      visitedAccount : null,
-      breadcrumbs   : [],
-      presentation   : 'TABLE',
-      table_columns  : [
-        "author",
-        "title",
-        "language",
-        "date_freeform",
-        "uploaded_at",
-        "last_edit_at"
-      ],
-      table_sorting  : null,
-      busy           : false,
-      documents      : null, // Can be null (not loaded yet) or [] (no shared documents)
-      total_docs     : null,
-      readme        : null
-    }
-
-    // Object.assign(state, StoredUIState.load());
-    this.state = state;
+    
+    this.state = initialState();
 
     this._profileOwner = (process.env.NODE_ENV === 'development') ? 'rainer' : window.location.pathname.substring(1);
 
-    window.onhashchange = this.reloadDocuments.bind(this);
+    window.onhashchange = this.refreshPage;
   }
 
   componentDidMount() {
-    API
-      .fetchPublicAccountInfo(this._profileOwner)
-      .then(r => this.setState({ visitedAccount: r.data }));
+    const a = axios.get(`/api/account/${this._profileOwner}`).then(r => {
+      this.setState({ visitedAccount: r.data });
+    });
 
-    API
-      .fetchLoginStatus()
-      .then(r => this.setState({ me: r.data })); 
+    const b = axios.get('/api/me').then(r => {
+      this.setState({ me: r.data });
+    });
 
-    this.reloadDocuments();
+    Promise.all([a, b]).then(() => this.refreshPage());
   }
 
-  reloadDocuments() {
+  refreshPage = () => {
     this.setState({ busy: true });
-    const currentFolderId = document.location.hash.substring(1);
 
-    API
-      .fetchAccessibleDocuments(this._profileOwner, this.getDisplayConfig(), currentFolderId)
-      .then(r => this.setState({ 
-        breadcrumbs: r.data.breadcrumbs,
-        readme: r.data.readme,
-        documents: r.data.items,
-        total_docs: r.data.total,
-        busy: false
-      }));
-  }
+    const folderId = document.location.hash.substring(1);
 
-  getDisplayConfig() {
-    if (this.state.presentation === 'GRID')
-      return; // No configs for grid view
+    const path = folderId ? 
+      `${this._profileOwner}/${folderId}` :
+      `${this._profileOwner}`;
 
-    return {
-      columns: Columns.expandAggregatedColumns(this.state.table_columns),
-      sort: this.state.table_sorting
-    };
-  }
+    const config = this.state.presentation === 'GRID' ? null :
+      {
+        columns: Columns.expandAggregatedColumns(this.state.table_config.columns),
+        sort: this.state.table_config.sorting
+      }
 
-  onTogglePresentation(presentation) {
-    this.setState(before => { 
-      const p = (before.presentation === 'TABLE') ? 'GRID' : 'TABLE';
-      // StoredUIState.save('presentation', p);
-      return { presentation: p };
+    return axios.post(`/api/directory/${path}`, config).then(r => {
+      const { breadcrumbs, readme, total_count, items } = r.data;
+      this.setState(prev => {
+        return { 
+          page: {
+            ...prev.page,
+            ...{
+              breadcrumbs,
+              readme,
+              total_count,
+              items
+            }
+          },
+          busy: false
+        }
+      })
     });
   }
 
-  onChangeColumnPrefs(columns) {
-    // StoredUIState.save('table_columns', columns);
-    this.setState({ table_columns: columns }, () => {
-      this.reloadDocuments();
+  togglePresentation = () => {
+    this.setState(prev => { 
+      const presentation = (prev.presentation === 'TABLE') ? 'GRID' : 'TABLE';
+      persistState('presentation', presentation);
+      return { presentation: presentation };
     });
   }
-  
-  onSortTable(sorting) {
-    // StoredUIState.save('table_sorting', sorting);
-    this.setState({ table_sorting: sorting }, () => {
-      this.reloadDocuments();
+
+  sortTable = (sorting) => {
+    this.setState(prev => {
+      const config = { ...prev.table_config, ...{ sorting: sorting } };
+      persistState('table_config', config);
+      return { table_config: config };
+    }, () => {
+      this.refreshPage();
+    });      
+  }
+
+  changeColumConfig = columns => {
+    this.setState(prev => { 
+      const config = {...prev.table_config, ...{ columns: columns } };
+      persistState('table_config', config);
+      return { table_config: config };
     });
   }
 
   render() {
-    const documents = this.state.documents || [];
-
     return (
-      <React.Fragment>
-        <TopBar 
-          me={this.state.me} />
-
-        <Sidebar 
-          account={this.state.visitedAccount}/>
-
-        <div className="main-content">
-          <Breadcrumbs 
-            label="Public Documents"
-            path={this.state.breadcrumbs}
-            count={this.state.total_docs} />
-
-          <HeaderIcon
-            className="presentation-toggle stroke7"
-            icon={(this.state.presentation === 'TABLE') ? '\ue645' : '\ue636'} 
-            onClick={this.onTogglePresentation.bind(this)} />
-
-          {this.state.visitedAccount && (
-              
-              documents.length === 0 ? 
-                <div className="no-public-documents">
-                  {this.state.visitedAccount.username} has not shared any documents yet
-                </div> :
-
-                this.state.presentation === 'TABLE' ?
-                  <TablePane
-                    folders={[]}
-                    documents={documents}
-                    columns={this.state.table_columns}
-                    sorting={this.state.table_sorting}
-                    busy={this.state.busy} 
-                    disableFiledrop={true} 
-                    onSort={this.onSortTable.bind(this)} 
-                    onChangeColumnPrefs={this.onChangeColumnPrefs.bind(this)}> 
-
-                    {this.state.readme && 
-                      <Readme content={this.state.readme} /> }
-                  </TablePane>
-                  :
-                  <GridPane
-                    folders={[]}
-                    documents={documents}
-                    busy={this.state.busy} 
-                    disableFiledrop={true}>
-
-                    {this.state.readme && 
-                      <Readme content={this.state.readme} /> }
-                  </GridPane>
-          )}
-        </div>
-      </React.Fragment>
+      <Profile 
+        me={this.state.me} 
+        visitedAccount={this.state.visitedAccount} />
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));

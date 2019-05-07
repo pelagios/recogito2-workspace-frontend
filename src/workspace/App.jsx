@@ -71,7 +71,7 @@ export default class App extends Component {
        (folderId) ? `my/${folderId}` : 'my' :
        (folderId) ? `my/shared/${folderId}` : 'my/shared';
 
-    const config = (this.state.presentation === 'GRID') ? null :
+    const config = this.state.presentation === 'GRID' ? null :
       {
         columns: Columns.expandAggregatedColumns(this.state.table_config.columns),
         sort: this.state.table_config.sorting
@@ -120,7 +120,6 @@ export default class App extends Component {
   }
 
   sortTable = (sorting) => {
-    // StoredUIState.save('table_sorting', sorting);
     this.setState(prev => {
       const config = { ...prev.table_config, ...{ sorting: sorting } };
       persistState('table_config', config);
