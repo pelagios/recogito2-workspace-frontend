@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ActivityHistory from '../../common/account/ActivityHistory';
 import IdentityInfo from '../../common/account/IdentityInfo';
 import TopCollaborators from '../../common/account/TopCollaborators';

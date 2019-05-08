@@ -1,7 +1,7 @@
 $sidebar-border:darken($lightgrey-border, 7.5%);
 
-@import "../content/profile/identity";
-@import "../content/activity";
+@import "../account/identity";
+@import "../account/activity";
 
 .sidebar {
   position:absolute;

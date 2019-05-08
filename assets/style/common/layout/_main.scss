@@ -1,10 +1,10 @@
 @import '../documents/grid/grid';
 @import '../documents/table/table';
 
-@import '../content/breadcrumbs';
-@import '../content/readme';
+@import '../documents/breadcrumbs';
+@import '../documents/readme';
 
-@import "../components/modal";
+@import "../modal";
 
 .main-content {
   height:100%;

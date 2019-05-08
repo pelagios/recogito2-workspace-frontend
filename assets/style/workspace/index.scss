@@ -2,16 +2,16 @@
 @import "../common/layout/sidebar";
 @import "../common/layout/main";
 
-@import "../common/components/menupopup";
-@import "../common/components/prompt";
+@import "../common/menu";
 
-@import "../common/content/upload/upload";
-@import "../common/content/job/jobprogress";
-@import "../common/content/share/share";
-@import "../common/content/ner/ner";
-
-@import "operations/modal-form";
 @import "header/header";
 @import "sidebar/sidebar";
+
+@import "operations/modal";
+@import "operations/prompt";
+@import "operations/importing/importer";
+@import "operations/ner/ner";
+@import "operations/ner/jobprogress";
+@import "operations/sharing/share";
 
 @import "announcement";

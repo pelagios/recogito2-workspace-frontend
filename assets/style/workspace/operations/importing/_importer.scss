@@ -1,5 +1,5 @@
-@import "../../components/spinner";
-@import "dropzone";
+@import "../spinner";
+@import "../../../common/documents/filedrop";
 
 .upload-progress {
   position:absolute;

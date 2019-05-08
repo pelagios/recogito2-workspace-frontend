@@ -16,7 +16,7 @@ export default class EntityRecognition extends Component {
 
   start = config => {
     const textDocuments = this.props.selection.getItems().filter(item => {
-      const isDocument = item.type == 'DOCUMENT';
+      const isDocument = item.type === 'DOCUMENT';
       const hasTextParts = item.filetypes.filter(t => t.startsWith('TEXT')).length > 0;
       return isDocument && hasTextParts;
     });
