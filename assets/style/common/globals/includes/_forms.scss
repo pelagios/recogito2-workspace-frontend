@@ -24,6 +24,11 @@ input[type=radio] {
   display:none; 
 }
 
+#shinemodal input[type=checkbox]{
+  display: inline;
+  -webkit-appearance: checkbox;
+}
+
 input[type=checkbox] + label:before,
 input[type=radio] + label:before {
   cursor:pointer;
