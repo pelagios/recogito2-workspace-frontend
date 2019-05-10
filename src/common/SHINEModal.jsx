@@ -7,16 +7,10 @@ class SHINEModal extends Component {
     let convertedFiles = [];
     // convert strings to file
     files.forEach(file => {
-      // let blobfile = new Blob([file.content], {type: 'text/plain;charset=utf-8'});
-      // var newFile = new File([file], file.name);
-      
       var newFile = new File([file.content], `${file.name || 'rise_file'}.txt`, {
         type: "text/plain",
       });
       convertedFiles.push(newFile);
-      // blobfile.lastModifiedDate = new Date();
-      // blobfile.name = 'rise_'+file.name+'.txt';
-      // convertedFiles.push(blobfile);
     });
     // fake the same structure as html event object so its compatible with current upload function
     let fakeEvent = {target: {}};
