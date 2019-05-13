@@ -16,14 +16,12 @@ export default class Search extends Component {
   }
 
   search = (evt) => {
-    /*
     const query = evt.target.value;
     if (query.length > 1) {
       axios.post(`/api/search/all?q=${query}`, this.props.displayConfig).then(result => {
         this.props.onResponse(result.data);
       });
     }
-    */
   }
 
   render() {

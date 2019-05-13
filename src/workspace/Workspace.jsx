@@ -25,14 +25,15 @@ const Workspace = props => {
           presentation={props.presentation}
           readme={props.page.readme}
           breadcrumbs={props.page.breadcrumbs}
-          docCount={props.page.total_docs}
+          docCount={props.page.total_count}
           selection={props.selection}
           onTogglePresentation={props.onTogglePresentation} 
           onCreateReadme={props.onCreateReadme} 
           onDuplicateSelection={props.onDuplicateSelection}
           onDeleteSelection={props.onDeleteSelection} 
           onShareSelection={props.onShareSelection} 
-          onNER={props.onNER} />
+          onNER={props.onNER} 
+          onSearchResponse={props.onSearchResponse} />
 
         { props.page.readme && 
           <Readme

@@ -171,6 +171,20 @@ export default class App extends Component {
     });
   }
 
+  onSearchResponse = response => {
+    this.setState(prev => {
+      return { 
+        view: 'SEARCH',
+        page: {
+          breadcrumbs: null,
+          readme: null,
+          total_count: response.total,
+          items: response.items
+        }
+      }
+    });
+  }
+
   render() {
     return(
       <Workspace 
@@ -195,6 +209,7 @@ export default class App extends Component {
         onDeleteSelection={this.deleteSelection}
         onShareSelection={() => operations.shareSelection(this.state.selection)}
         onNER={() => operations.entityRecognition(this.state.selection).then(this.refreshPage)}
+        onSearchResponse={this.onSearchResponse}
         onUploadFiles={files => operations.uploadFiles(files).then(this.refreshPage)}
         onImportSource={(sourceType, url) => operations.importSource(sourceType, url).then(this.refreshPage)} />
     )

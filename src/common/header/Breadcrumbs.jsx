@@ -2,11 +2,11 @@ import React from 'react';
 
 const VIEW_LABELS = {
   MY_DOCUMENTS: 'My Documents',
-  SHARED_WITH_ME: 'Shared with me'
+  SHARED_WITH_ME: 'Shared with me',
+  SEARCH: 'Search results'
 }
 
 const Breadcrumbs = props => {
-
   const title = props.view ? VIEW_LABELS[props.view] : props.label;
 
   return (
@@ -18,7 +18,7 @@ const Breadcrumbs = props => {
         )}
       </h2>
       
-      { props.docCount &&
+      { props.docCount !== null && props.docCount !== undefined &&
         <span className="count">{`(${props.docCount})`}</span> }
 
       { props.children }
