@@ -104,7 +104,7 @@ export const uploadFiles = files => {
 }
 
 /** 
- * Import content from a remote source #
+ * Import content from a remote source
  * 
  * Note that one argument (either type or URL) may be undefined. 
  * 

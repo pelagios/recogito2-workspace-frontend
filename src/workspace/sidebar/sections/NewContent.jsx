@@ -74,7 +74,6 @@ export default class NewContent extends Component {
                 onSelect={this.select(() => this.props.onImportSource('IIIF'))} />
 
               <Menu.Item 
-                disabled
                 icon={'\uf121'} 
                 label="From CTS service" 
                 onSelect={this.select(() => this.props.onImportSource('CTS'))} />
