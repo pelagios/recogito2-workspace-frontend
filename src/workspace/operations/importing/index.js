@@ -72,8 +72,10 @@ const promptForUrl = () => {
 }
 
 const identifySource = url => {
-  // TODO to be extended later - right now, IIIF is the only thing we support, anyway
-  return 'IIIF';
+  if (url.includes('request=GetPassage'))
+    return 'CTS'
+  else // to be extended later
+    return 'IIIF';
 }
 
 const importContent = (files, remoteSource) => {
