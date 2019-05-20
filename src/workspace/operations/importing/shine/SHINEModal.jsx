@@ -3,8 +3,9 @@ import ShineBrowser from "react-shine-api";
 
 class SHINEModal extends Component {
 
-  SHINEFileUpload(files){
+  SHINEFileUpload = files => {
     let convertedFiles = [];
+
     // convert strings to file
     files.forEach(file => {
       var newFile = new File([file.content], `${file.name || 'rise_file'}.txt`, {
@@ -12,27 +13,22 @@ class SHINEModal extends Component {
       });
       convertedFiles.push(newFile);
     });
-    // fake the same structure as html event object so its compatible with current upload function
-    let fakeEvent = {target: {}};
-    fakeEvent.target.files = convertedFiles;
-    this.props.onUploadFiles(fakeEvent);
-    this.props.setVisibility(false);
+
+    this.props.onUploadFiles(convertedFiles);
   }
 
   handleSHINEModalClick = (e) => {
-    if(e.target.id!=='shinemodal') return;
-    this.props.setVisibility(false);
-  }
-
-  closeSHINEModal = () => {
-    this.props.setVisibility(false);
+    if(e.target.id !== 'shinemodal') return;
+    this.props.onClose();
   }
 
   render() {
-    if(!this.props.visible) return null;
-
     return(
-      <div style={styles.shineModal} id='shinemodal' onClick={this.handleSHINEModalClick}>
+      <div 
+        style={styles.shineModal} 
+        id="shinemodal" 
+        onClick={this.handleSHINEModalClick}>
+
         <div style={styles.shineBrowserContainer}>
           <ShineBrowser
             styles={{
@@ -41,8 +37,8 @@ class SHINEModal extends Component {
               fontFamily: 'Assistant',
               text: '#3f3f3f'
             }}
-            close={this.closeSHINEModal.bind(this)}
-            handleFileUpload={this.SHINEFileUpload.bind(this)}
+            close={this.props.onClose}
+            handleFileUpload={this.SHINEFileUpload}
           />
         </div>
       </div>

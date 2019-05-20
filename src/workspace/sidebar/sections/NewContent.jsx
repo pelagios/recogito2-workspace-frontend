@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Menu from '../../../common/Menu';
-import SHINEModal from '../../../common/SHINEModal';
 
 export default class NewContent extends Component {
 
   state = { 
     menuVisible: false,
-    SHINEModalVisible: false
+
   };
 
   onOpenMenu = () => {
@@ -21,7 +20,7 @@ export default class NewContent extends Component {
     this._input.click(); // Trigger the hidden file input field
   }
 
-  onUploadFiles = (evt) => {
+  onUploadFiles = evt => {
     const files = Array.from(evt.target.files);
     this.props.onUploadFiles(files);
   }
@@ -34,10 +33,6 @@ export default class NewContent extends Component {
     }
   } 
 
-  onSHINEClick = () => {
-    this.setState({SHINEModalVisible: true})
-  }
-
   render() {
     return (
       <div className="section create-new">
@@ -47,13 +42,7 @@ export default class NewContent extends Component {
           <span className="icon">&#xf067;</span>
           <span className="label">New</span>
         </button>
-
-        <SHINEModal 
-          visible={this.state.SHINEModalVisible} 
-          setVisibility={val => this.setState({SHINEModalVisible: val})}
-          onUploadFiles={this.onUploadFiles}
-        />
-
+        
         <input
           ref={c => this._input = c}
           type="file"
@@ -90,11 +79,10 @@ export default class NewContent extends Component {
                 label="From CTS service" 
                 onSelect={this.select(() => this.props.onImportSource('CTS'))} />
 
-
               <Menu.Item 
                 icon={'\uf0f6'} 
                 label="From SHINE repository" 
-                onSelect={this.select(this.onSHINEClick)} />
+                onSelect={this.select(() => this.props.onImportSource('SHINE'))} />
             </Menu.Group>
           </Menu>
         }

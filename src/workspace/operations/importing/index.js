@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Importer from './Importer';
 import ModalForm from '../ModalForm';
+import { importFromShine } from './shine';
 
 /**
  * Basically a simple popup box with a text input field,
@@ -120,8 +121,13 @@ export const uploadFiles = files => {
  */
 export const importSource = (typ, url) => {
   const sourceType = typ || identifySource(url);
-  
-  if (url) {
+
+  if (typ === 'SHINE') {
+    return importFromShine().then(files => { 
+      if (files)
+        return uploadFiles(files);
+    });
+  } else if (url) {
     return importContent([], { url: url, sourceType: sourceType });
   } else {
     return promptForUrl().then(url => {
