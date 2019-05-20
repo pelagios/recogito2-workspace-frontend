@@ -104,6 +104,7 @@ export default class Header extends Component {
       <div className={this.props.readme ? "header" : "header no-readme"}>
         <div className="top-row">
           <Search
+            account={this.props.account}
             tableConfig={this.props.tableConfig} 
             onResponse={this.props.onSearchResponse} />
 

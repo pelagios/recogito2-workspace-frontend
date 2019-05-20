@@ -39,7 +39,9 @@ export default class Search extends Component {
           <span className="icon hand-lens">&#xf002;</span>
         </div>
         {this.state.advancedSearchOpen &&
-          <AdvancedSearch onClose={this.toggleAdvancedSearch.bind(this)}/>
+          <AdvancedSearch 
+            account={this.props.account}
+            onClose={this.toggleAdvancedSearch.bind(this)}/>
         }
       </div>
     )
