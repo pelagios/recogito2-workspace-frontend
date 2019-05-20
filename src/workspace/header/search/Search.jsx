@@ -9,19 +9,23 @@ export default class Search extends Component {
     advancedSearchOpen: false 
   }
 
-  toggleAdvancedSearch() {
+  toggleAdvancedSearch = () => {
     this.setState(prev => (
       { advancedSearchOpen: !prev.advancedSearchOpen }
     ));
   }
 
-  search = (evt) => {
+  search = evt => {
     const query = evt.target.value;
     if (query.length > 1) {
       axios.post(`/api/search/all?q=${query}`, this.props.displayConfig).then(result => {
         this.props.onResponse(result.data);
       });
     }
+  }
+
+  advancedSearch = settings => {
+    console.log(settings);
   }
 
   render() {
@@ -41,7 +45,8 @@ export default class Search extends Component {
         {this.state.advancedSearchOpen &&
           <AdvancedSearch 
             account={this.props.account}
-            onClose={this.toggleAdvancedSearch.bind(this)}/>
+            onSearch={this.advancedSearch}
+            onClose={this.toggleAdvancedSearch}/>
         }
       </div>
     )

@@ -54,8 +54,7 @@ export default class AdvancedSearch extends Component {
 
   onSearch = evt => {
     evt.preventDefault();
-
-    // TODO
+    this.props.onSearch(this.state);
   }
 
   render() {
@@ -75,7 +74,7 @@ export default class AdvancedSearch extends Component {
                 value={this.state.searchIn}
                 onChange={this.onChangeSearchIn}>
                 <option value="ALL">All of Recogito</option>
-                <option vale="MY">My documents</option>
+                <option value="MY">My documents</option>
                 <option value="SHARED">Shared with me</option>
               </select>
               <span className="hint" />
