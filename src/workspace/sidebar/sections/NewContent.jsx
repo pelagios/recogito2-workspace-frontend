@@ -79,10 +79,12 @@ export default class NewContent extends Component {
                 label="From CTS service" 
                 onSelect={this.select(() => this.props.onImportSource('CTS'))} />
 
-              <Menu.Item 
-                icon={'\uf0f6'} 
-                label="From SHINE repository" 
-                onSelect={this.select(() => this.props.onImportSource('SHINE'))} />
+              {this.props.account.feature_toggles.includes("rise") &&
+                <Menu.Item 
+                  icon={'\uf0f6'} 
+                  label="From SHINE repository" 
+                  onSelect={this.select(() => this.props.onImportSource('SHINE'))} />
+              }
             </Menu.Group>
           </Menu>
         }

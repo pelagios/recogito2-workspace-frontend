@@ -13,6 +13,7 @@ const Sidebar = props => {
         account={props.account} />
 
       <NewContent 
+        account={props.account}
         onCreateFolder={props.onCreateFolder} 
         onUploadFiles={props.onUploadFiles} 
         onImportSource={props.onImportSource} /> 
