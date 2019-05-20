@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Menu from '../../../common/Menu';
+import SHINEModal from '../../../common/SHINEModal';
 
 export default class NewContent extends Component {
 
   state = { 
-    menuVisible: false
+    menuVisible: false,
+    SHINEModalVisible: false
   };
 
   onOpenMenu = () => {
@@ -32,6 +34,10 @@ export default class NewContent extends Component {
     }
   } 
 
+  onSHINEClick = () => {
+    this.setState({SHINEModalVisible: true})
+  }
+
   render() {
     return (
       <div className="section create-new">
@@ -41,6 +47,12 @@ export default class NewContent extends Component {
           <span className="icon">&#xf067;</span>
           <span className="label">New</span>
         </button>
+
+        <SHINEModal 
+          visible={this.state.SHINEModalVisible} 
+          setVisibility={val => this.setState({SHINEModalVisible: val})}
+          onUploadFiles={this.onUploadFiles}
+        />
 
         <input
           ref={c => this._input = c}
@@ -65,6 +77,11 @@ export default class NewContent extends Component {
                 icon={'\uf15b'} 
                 label="File upload" 
                 onSelect={this.select(this.onOpenFileExplorer)} />
+
+              <Menu.Item 
+                icon={'\uf15b'} 
+                label="Import from SHINE" 
+                onSelect={this.select(this.onSHINEClick)} />
             </Menu.Group>
 
             <Menu.Group>
