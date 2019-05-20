@@ -77,11 +77,6 @@ export default class NewContent extends Component {
                 icon={'\uf15b'} 
                 label="File upload" 
                 onSelect={this.select(this.onOpenFileExplorer)} />
-
-              <Menu.Item 
-                icon={'\uf15b'} 
-                label="Import from SHINE" 
-                onSelect={this.select(this.onSHINEClick)} />
             </Menu.Group>
 
             <Menu.Group>
@@ -94,6 +89,12 @@ export default class NewContent extends Component {
                 icon={'\uf121'} 
                 label="From CTS service" 
                 onSelect={this.select(() => this.props.onImportSource('CTS'))} />
+
+
+              <Menu.Item 
+                icon={'\uf0f6'} 
+                label="From SHINE repository" 
+                onSelect={this.select(this.onSHINEClick)} />
             </Menu.Group>
           </Menu>
         }
