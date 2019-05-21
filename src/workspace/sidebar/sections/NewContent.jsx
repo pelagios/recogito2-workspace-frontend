@@ -31,7 +31,11 @@ export default class NewContent extends Component {
       this.setState({ menuVisible: false });
       fn();
     }
-  } 
+  }
+  
+  hasFeature = name => {
+    return this.props.account.feature_toggles && this.props.account.feature_toggles.includes(name);
+  }
 
   render() {
     return (
@@ -79,7 +83,7 @@ export default class NewContent extends Component {
                 label="From CTS service" 
                 onSelect={this.select(() => this.props.onImportSource('CTS'))} />
 
-              {this.props.account.feature_toggles.includes("rise") &&
+              { this.hasFeature("rise") &&
                 <Menu.Item 
                   icon={'\uf0f6'} 
                   label="From SHINE repository" 
