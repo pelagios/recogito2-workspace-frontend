@@ -21,6 +21,7 @@
   .documents-pane {
     margin:0 0 0 22px;
     position:relative;
+    overflow:hidden;
     flex:1;
 
     .busy-mask {
