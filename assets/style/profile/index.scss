@@ -18,10 +18,56 @@
   flex:1;
   overflow:hidden;
 
-  .header-icon {
+  .main-header-icons {
     position:absolute;
     top:7px;
     right:20px;
+
+    .fork-button {
+      position:relative;
+      top:3px;
+      background-color:$ocean;
+      color:#fff;
+      display:inline-block;
+      margin-right:4px;
+      width:0;
+      height:34px;
+      transition:200ms;
+      white-space:nowrap;
+      overflow:hidden;
+      cursor:pointer;
+      text-align:center;
+
+      @include rounded-corners(3px);
+
+      .label {
+        display:inline-block;
+        padding:8px;
+        font-size:14px;
+        font-weight:bold;
+      }
+
+      .icon {
+        vertical-align:middle;
+        padding-left:8px;
+      }
+    }
+
+    .fork-button:hover {
+      background-color:lighten($ocean, 10%);
+    }
+
+    .fork-button-enter,
+    .fork-button-enter-done {
+      width:190px;
+    }
+        
+    .fork-button-exit, 
+    .fork-button-exit-done {
+      width:0;
+    }
+
+
   }
 
   .no-public-documents {

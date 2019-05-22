@@ -1,3 +1,5 @@
+import Selection from '../common/documents/Selection';
+
 const DEFAULT_STATE = {
   me             : null, // Login identity
   visitedAccount : null, // Visited profile
@@ -10,6 +12,8 @@ const DEFAULT_STATE = {
     total_count: 0,
     items: []
   },
+
+  selection: new Selection(),
 
   table_config  : {
     columns: [

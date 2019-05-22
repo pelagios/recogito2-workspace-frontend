@@ -40,7 +40,7 @@ export default class App extends Component {
   }
 
   /** Clear selection on ESC key **/
-  onKeydown = (evt) => {
+  onKeydown = evt => {
     if (evt.which === 27) 
       this.setState({ selection: new Selection() });
     else if (evt.which === 46 && !this.state.selection.isEmpty())
@@ -48,7 +48,7 @@ export default class App extends Component {
   }
 
   /** Clear selection on click ouside the document pane **/
-  onMousedown = (evt) => {
+  onMousedown = evt => {
     const isClickOutside = !(
       document.querySelector('.documents-pane').contains(evt.target) ||
       document.querySelector('.main-header-icons').contains(evt.target)
