@@ -77,7 +77,7 @@ export const deleteSelection = args => {
 export const duplicateSelection = selection => {
   if (selection.isSingleDocument()) {
     const doc = selection.get(0);
-    return axios.post(`/api/duplicate/document/${doc.id}`);
+    return axios.post(`/api/clone/document/${doc.id}`);
   } else {
     return new Promise((resolve) => { resolve(); });
   }
