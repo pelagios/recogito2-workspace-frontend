@@ -10,7 +10,7 @@ import TopBar from './top/TopBar';
 
 const Profile = props => {
 
-  const canFork = props.selection.isSingleDocument();
+  const canFork = props.selection.isSingleDocument() && props.me.feature_toggles && props.feature_toggles.includes("forking");
 
   return (
     <React.Fragment>
