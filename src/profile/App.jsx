@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 import { Columns } from '../common/documents/table/Columns';
+import { forkDocument } from './operations';
 import { initialState, persistState } from './initialState';
 import Profile from './Profile';
 import Selection from '../common/documents/Selection';
@@ -132,8 +133,7 @@ export default class App extends Component {
     // Currently called *ONLY* with single document selections, but just in case
     if (selection.isSingleDocument()) {
       const doc = selection.get(0);
-      return axios.post(`/api/clone/document/${doc.id}`)
-        .then(() => this.setState({ busy: false }));
+      forkDocument(doc.id).then(() => this.setState({ busy: false }));        
     }
   }
 

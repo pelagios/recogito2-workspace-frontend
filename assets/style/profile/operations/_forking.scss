@@ -1,0 +1,44 @@
+.now-forking {
+
+  .modal {
+    top:15%;
+  }
+
+  .modal-body {
+    border-radius:4px;
+    padding:30px;
+    text-align:center;
+  }
+
+  h2 {
+    font-size:22px;
+  }
+
+  .wait-spinner {
+    margin:30px auto;
+    width:20px;
+    height:20px;
+    line-height:20px;  
+    border:3px solid rgba($ocean, 0.3);
+    border-top:3px solid $ocean;
+    border-radius:50%;
+    -webkit-animation:loadRotation 1s infinite linear;
+            animation:loadRotation 1s infinite linear;
+  }
+  
+  p {
+    margin:0;
+    padding:0 0 5px 0;
+  }
+
+}
+
+@-webkit-keyframes loadRotation {
+  from { -webkit-transform: rotate(0deg); }
+  to   { -webkit-transform: rotate(359deg); }
+}
+
+@keyframes loadRotation {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(359deg); }
+}
