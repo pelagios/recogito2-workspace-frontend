@@ -42,7 +42,7 @@ class Prompt extends Component {
 
 }
 
-export const confirm = props => {
+export const prompt = props => {
   const promptRoot = document.createElement('div');
   promptRoot.setAttribute('id', 'confirm-prompt-root');
   document.body.append(promptRoot);

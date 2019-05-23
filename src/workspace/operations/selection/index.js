@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { confirm } from '../confirm';
+import { prompt } from '../prompt';
+import { alert } from '../alert';
 
 const deleteFolders = folders => {
   const ids = folders.map(f => f.id);
@@ -63,7 +64,7 @@ export const deleteSelection = args => {
     }
   }
 
-  confirm({
+  prompt({
     title: 'Delete',
     message: message,
     type: 'WARNING',
@@ -77,7 +78,17 @@ export const deleteSelection = args => {
 export const duplicateSelection = selection => {
   if (selection.isSingleDocument()) {
     const doc = selection.get(0);
-    return axios.post(`/api/clone/document/${doc.id}`);
+    return axios.post(`/api/clone/document/${doc.id}`).catch(error => {
+      const message = error.response.status === 409 ? 
+        'Oops. Could not duplicate - storage quota exceeded.' :
+        'Oops. Something went wrong.';
+
+      alert({
+        title: 'Error',
+        type: 'WARNING',
+        message: message
+      });
+    });
   } else {
     return new Promise((resolve) => { resolve(); });
   }
