@@ -9,7 +9,7 @@ export default class TopCollaborators extends Component {
     collaborators: []
   }
 
-  componentWillMount() {
+  componentWillReceiveProps() {
     this.fetchCollaborators();
   }
 
