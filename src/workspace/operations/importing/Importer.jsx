@@ -83,6 +83,7 @@ export default class Uploader extends Component {
           status: 'FAILED',
           error: error.response.data
         });
+        throw error;
       });
     }
 
@@ -105,7 +106,7 @@ export default class Uploader extends Component {
     });
   }
 
-  finalizeDocument = () => {
+  finalizeDocument = (withError) => {
     const currentFolder = document.location.hash.substring(1);
 
     const url = currentFolder ?
@@ -125,10 +126,9 @@ export default class Uploader extends Component {
         this.state.uploads.forEach(u => {
           if (u.status !== 'FAILED') this.updateUploadState(u, { status: 'COMPLETED' });
         });
-        this.props.onComplete();
+        if (!withError)
+          this.props.onComplete();
       }
-    }).catch(error => {
-      console.log(error);
     });
   }
 
@@ -177,9 +177,11 @@ export default class Uploader extends Component {
       // Branch based on files vs. remote URL
       return this.props.remoteSource ?
         this.importRemoteSource() : this.uploadFiles();
-    }).catch(error => {
+    }).then(this.finalizeDocument).catch(error => {
       this.setState({ error: error });
-    }).then(this.finalizeDocument);
+      this.finalizeDocument(true);
+      throw error;
+    });
   }
 
   render() {
