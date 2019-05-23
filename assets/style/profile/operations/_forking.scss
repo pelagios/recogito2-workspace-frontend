@@ -25,10 +25,30 @@
     -webkit-animation:loadRotation 1s infinite linear;
             animation:loadRotation 1s infinite linear;
   }
+
+  .error-icon {
+    margin:30px auto;
+    color:$error-msg-type;
+  }
+
+  .error-icon:before {
+    font-family:FontAwesome;
+    content:'\f071';
+    font-size:28px;
+  }
+
+  button {
+    margin-top:20px;
+  }
   
   p {
     margin:0;
     padding:0 0 5px 0;
+  }
+
+  p.error {
+    color:$error-msg-type;
+    font-weight:bold;
   }
 
 }

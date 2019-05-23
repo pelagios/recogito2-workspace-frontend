@@ -1,32 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { render } from 'react-dom';
 import Modal from '../../common/Modal';
 
-const ForkingModal = props => {
+class ForkingModal extends Component {
 
-  return (
-    <Modal className="now-forking">
-      <h2>Cloning Document</h2>
-      <div className="wait-spinner" />
-      <p>Please wait while I'm creating a copy in your workspace.</p>
-    </Modal>
-  );
+  state = {
+    errorMessage: null
+  }
+
+  componentDidMount() {
+    const minWait = new Promise(resolve => {
+      // Wait at least a few seconds, so the user can read the popup
+      setTimeout(() => resolve(), this.props.minWait);
+    });
+  
+    const op = 
+      axios.post(`/api/clone/document/${this.props.documentId}`).catch(error => {
+        if (error.response.status === 409) // HTTP conflict - per convention, quota exceeded
+          this.setState({ errorMessage: 'Oops. Could not create copy - the document exceeds your storage quota.' })
+        else
+          this.setState({ errorMessage: 'Ooops. Something went wrong.' });
+  
+        throw error;
+      }).then(() => {
+        this.props.onComplete();
+      });
+  }
+
+  render() {
+    return (
+      <Modal className="now-forking">
+        <h2>Cloning Document</h2>
+        <div className={ this.state.errorMessage ? "error-icon" : "wait-spinner"} />
+        { this.state.errorMessage ? 
+          <div>
+            <p className="error">{this.state.errorMessage}</p> 
+            <button className="btn red" onClick={this.props.onComplete}>Close</button>
+          </div> :
+
+          <p>Please wait while I'm creating a copy in your workspace.</p>
+        }
+      </Modal>
+    );
+  }
 
 }
 
 export const forkDocument = id => {
-  const container = document.createElement('div');
-  document.body.appendChild(container);
-  
-  const minWait = new Promise(resolve => {
-    // Wait at least a few seconds, so the user can read the popup
-    setTimeout(() => resolve(), 3000);
+  return new Promise(resolve => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    const onComplete = () => {
+      container.remove();
+      resolve();
+    }
+
+    render(
+      <ForkingModal documentId={id} onComplete={onComplete} />
+    , container);
   });
-
-  const op = axios.post(`/api/clone/document/${id}`);
-
-  render(<ForkingModal />, container);
-
-  return Promise.all([ minWait, op ]).then(() => container.remove());
-}
+} 
