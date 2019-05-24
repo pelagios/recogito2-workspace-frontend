@@ -80,9 +80,9 @@ export default class Search extends Component {
               placeholder={placeholder}
               value={this.state.query}
               onChange={this.onSearch} />
-            <button
+            {/* <button
               className="icon nostyle advanced"
-            onClick={this.toggleAdvancedSearch.bind(this)}>{'\ue688'}</button>
+            onClick={this.toggleAdvancedSearch.bind(this)}>{'\ue688'}</button> */}
           </div>
           <span className="icon hand-lens">&#xf002;</span>
         </div>
