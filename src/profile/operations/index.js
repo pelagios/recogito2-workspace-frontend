@@ -23,9 +23,11 @@ class ForkingModal extends Component {
           this.setState({ errorMessage: 'Ooops. Something went wrong.' });
   
         throw error;
-      }).then(() => {
-        this.props.onComplete();
       });
+
+    Promise.all([minWait, op]).then(() => {
+      this.props.onComplete();
+    });
   }
 
   render() {
@@ -58,7 +60,9 @@ export const forkDocument = id => {
     }
 
     render(
-      <ForkingModal documentId={id} onComplete={onComplete} />
-    , container);
+      <ForkingModal 
+        documentId={id} 
+        minWait={3000}
+        onComplete={onComplete} />, container);
   });
 } 
