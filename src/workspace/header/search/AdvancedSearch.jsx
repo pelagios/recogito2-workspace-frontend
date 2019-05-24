@@ -45,6 +45,8 @@ export default class AdvancedSearch extends Component {
 
   onChangeOwner = evt => this.setState({ owner: evt.target.value });
 
+  onChangeQuery = evt => this.setState({ query: evt.target.value });
+
   onChangeLastModified = evt => this.setState({ lastModified: evt.target.value });
 
   onClear = evt => { 
@@ -106,7 +108,10 @@ export default class AdvancedSearch extends Component {
 
             <p>
               <label>Metadata contains</label>
-              <input type="text" />
+              <input 
+                type="text" 
+                value={this.state.query} 
+                onChange={this.onChangeQuery} />
               <span className="hint" />
             </p>
 
