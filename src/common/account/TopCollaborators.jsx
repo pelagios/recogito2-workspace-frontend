@@ -6,7 +6,7 @@ import Avatar from './Avatar.jsx';
 export default class TopCollaborators extends Component {
 
   state = {
-    collaborators: []
+    collaborators: null
   }
 
   componentWillReceiveProps() {
@@ -14,16 +14,17 @@ export default class TopCollaborators extends Component {
   }
 
   fetchCollaborators() {
-    if (this.props.username)
+    if (this.props.username && !this.state.collaborators)
       axios
         .get(`/api/account/${this.props.username}/collaborators`)
         .then(result => this.setState({ collaborators: result.data }));
   }
 
   render() {
+    const { collaborators } = this.state;
     return (
       <React.Fragment>
-        {this.state.collaborators.length > 0 &&
+        {collaborators && collaborators.length > 0 &&
           <div className={this.props.className ? `collaborator-list ${this.props.className}` : 'collaborator-list'}>
             <h2>{this.props.title}</h2>
             <ul>

@@ -5,6 +5,8 @@ const DEFAULT_STATE = {
   
   view: 'MY_DOCUMENTS',  // MY_DOCUMENTS, SHARED_WITH_ME, SEARCH
   presentation: 'TABLE', // 'TABLE' or 'GRID'
+
+  search_scope: null,    // If view is SEARCH
   
   page: {
     breadcrumbs: null,
@@ -27,9 +29,7 @@ const DEFAULT_STATE = {
     sorting: { by: null, asc: true } 
   },
 
-  busy: true,            // If loading is in progress
-
-  runningTasks: []
+  busy: true             // If loading is in progress
 };
 
 export const initialState = () => {

@@ -23,6 +23,7 @@ const Workspace = props => {
           account={props.account}
           view={props.view}
           presentation={props.presentation}
+          tableConfig={props.tableConfig}
           readme={props.page.readme}
           breadcrumbs={props.page.breadcrumbs}
           docCount={props.page.total_count}

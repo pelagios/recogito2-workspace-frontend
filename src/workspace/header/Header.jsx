@@ -105,6 +105,8 @@ export default class Header extends Component {
         <div className="top-row">
           <Search
             account={this.props.account}
+            view={this.props.view}
+            presentation={this.props.presentation}
             tableConfig={this.props.tableConfig} 
             onResponse={this.props.onSearchResponse} />
 

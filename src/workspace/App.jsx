@@ -33,18 +33,20 @@ export default class App extends Component {
     });
   }
 
-  /** Remveo deselect listeners **/
+  /** Remove deselect listeners **/
   componentWillUnmount() {
     this._rootEl.removeEventListener('keydown', this.onKeydown, false);
     this._rootEl.removeEventListener('mousedown', this.onMousedown, false);
   }
 
-  /** Clear selection on ESC key **/
   onKeydown = evt => {
-    if (evt.which === 27) 
+    if (evt.which === 27) {
+      // Escape clears selection and quits search
       this.setState({ selection: new Selection() });
-    else if (evt.which === 46 && !this.state.selection.isEmpty())
+    } else if (evt.which === 46 && !this.state.selection.isEmpty()) {
+      // Delete key
       this.deleteSelection();
+    }
   }
 
   /** Clear selection on click ouside the document pane **/
@@ -102,9 +104,12 @@ export default class App extends Component {
     });
   }
   
-  changeView = (view) => {
+  changeView = view => {
     persistState('view', view);
-    this.setState({ view: view }, this.refreshPage);
+    this.setState({ 
+      view: view,
+      search_scope: null
+    }, this.refreshPage);
   }
 
   togglePresentation = () => {
@@ -175,6 +180,7 @@ export default class App extends Component {
     this.setState(prev => {
       return { 
         view: 'SEARCH',
+        search_scope: prev.search_scope ? prev.search_scope : prev.view,
         page: {
           breadcrumbs: null,
           readme: null,
@@ -183,6 +189,10 @@ export default class App extends Component {
         }
       }
     });
+  }
+
+  onQuitSearch = () => {
+    this.changeView(this.state.search_scope);
   }
 
   render() {
