@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 const INITIAL_STATE = {
-  searchIn: 'ALL', // 'MY', 'SHARED'
-  docType: 'ANY', // 'TEXT', 'IMAGE', 'TABLE'
-  owner: '', // or username
-  metadataContains: null,
-  lastModified: 'ANYTIME', // 'WEEK' 
+  query        : '',
+  in           : 'ALL',     // 'MY', 'SHARED'
+  type         : 'ANY',     // 'TEXT', 'IMAGE', 'TABLE'
+  owner        : '',        // or username
+  lastModified : 'ANYTIME', // 'WEEK' 
 };
 
 export default class AdvancedSearch extends Component {
@@ -39,9 +39,9 @@ export default class AdvancedSearch extends Component {
     if (evt.which === 27) this.props.onClose();
   }
 
-  onChangeSearchIn = evt => this.setState({ searchIn: evt.target.value });
+  onChangeSearchIn = evt => this.setState({ in: evt.target.value });
 
-  onChangeDocType = evt => this.setState({ docType: evt.target.value });
+  onChangeDocType = evt => this.setState({ type: evt.target.value });
 
   onChangeOwner = evt => this.setState({ owner: evt.target.value });
 

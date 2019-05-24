@@ -36,9 +36,21 @@ export default class Search extends Component {
   }
 
   toggleAdvancedSearch = () => {
-    this.setState(prev => (
-      { advancedSearchOpen: !prev.advancedSearchOpen }
-    ));
+    this.setState(prev => ({ 
+      advancedSearchOpen: !prev.advancedSearchOpen,
+      query: ''
+    }));
+  }
+
+  executeSearch = args => {
+    const data = {
+      ...args,
+      ...this.props.tableConfig
+    };
+
+    axios.post('/api/search', data).then(result => {
+      this.props.onResponse(result.data);
+    });
   }
 
   onSearch = evt => {
@@ -51,14 +63,9 @@ export default class Search extends Component {
       const scope = this.props.searchScope ? 
         this.props.searchScope : this.props.view;
 
-      const data = {
+      this.executeSearch({
         q: query,
-        in: SCOPE_NAMES[scope],
-        ...this.props.tableConfig
-      }
-
-      axios.post(`/api/search`, data).then(result => {
-        this.props.onResponse(result.data);
+        in: SCOPE_NAMES[scope]
       });
     }
   }
@@ -80,9 +87,9 @@ export default class Search extends Component {
               placeholder={placeholder}
               value={this.state.query}
               onChange={this.onSearch} />
-            {/* <button
+            <button
               className="icon nostyle advanced"
-            onClick={this.toggleAdvancedSearch.bind(this)}>{'\ue688'}</button> */}
+              onClick={this.toggleAdvancedSearch.bind(this)}>{'\ue688'}</button>
           </div>
           <span className="icon hand-lens">&#xf002;</span>
         </div>
