@@ -107,8 +107,10 @@ export default class Header extends Component {
             account={this.props.account}
             view={this.props.view}
             presentation={this.props.presentation}
+            searchScope={this.props.searchScope}
             tableConfig={this.props.tableConfig} 
-            onResponse={this.props.onSearchResponse} />
+            onResponse={this.props.onSearchResponse} 
+            onQuit={this.props.onQuitSearch} />
 
           <div className="header-icons">
             <HeaderIcon icon="&#xe64a;" className="help stroke7" link="/help" />

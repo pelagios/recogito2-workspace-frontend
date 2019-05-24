@@ -7,7 +7,10 @@ export default class Search extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { advancedSearchOpen: false };
+    this.state = { 
+      query: '',
+      advancedSearchOpen: false 
+    };
     this._rootEl = document.getElementById('app');
   }
 
@@ -21,8 +24,9 @@ export default class Search extends Component {
   }
 
   onKeydown = evt => {
-    if (evt.which === 27) {
-      // TODO
+    if (evt.which === 27 && this.props.searchScope) {
+      this.setState({ query: '' });
+      this.props.onQuit();
     }
   }
 
@@ -32,8 +36,11 @@ export default class Search extends Component {
     ));
   }
 
-  search = evt => {
+  onSearch = evt => {
     const query = evt.target.value;
+
+    this.setState({ query: query });
+
     const data = {
       q: query,
       ...this.props.tableConfig
@@ -61,7 +68,8 @@ export default class Search extends Component {
           <div className="wrapper">
             <input
               placeholder={placeholder}
-              onChange={this.search} />
+              value={this.state.query}
+              onChange={this.onSearch} />
             <button
               className="icon nostyle advanced"
             onClick={this.toggleAdvancedSearch.bind(this)}>{'\ue688'}</button>

@@ -23,6 +23,7 @@ const Workspace = props => {
           account={props.account}
           view={props.view}
           presentation={props.presentation}
+          searchScope={props.searchScope}
           tableConfig={props.tableConfig}
           readme={props.page.readme}
           breadcrumbs={props.page.breadcrumbs}
@@ -34,7 +35,8 @@ const Workspace = props => {
           onDeleteSelection={props.onDeleteSelection} 
           onShareSelection={props.onShareSelection} 
           onNER={props.onNER} 
-          onSearchResponse={props.onSearchResponse} />
+          onSearchResponse={props.onSearchResponse}
+          onQuitSearch={props.onQuitSearch} />
 
         { props.page.readme && 
           <Readme

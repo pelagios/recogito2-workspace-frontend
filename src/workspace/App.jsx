@@ -201,6 +201,7 @@ export default class App extends Component {
         account={this.state.account}
         view={this.state.view}
         presentation={this.state.presentation}
+        searchScope={this.state.search_scope}
         page={this.state.page}
         tableConfig={this.state.table_config}
         selection={this.state.selection}
@@ -220,6 +221,7 @@ export default class App extends Component {
         onShareSelection={() => operations.shareSelection(this.state.selection)}
         onNER={() => operations.entityRecognition(this.state.selection).then(this.refreshPage)}
         onSearchResponse={this.onSearchResponse}
+        onQuitSearch={this.onQuitSearch}
         onUploadFiles={files => operations.uploadFiles(files).then(this.refreshPage)}
         onImportSource={(sourceType, url) => operations.importSource(sourceType, url).then(this.refreshPage)} />
     )
