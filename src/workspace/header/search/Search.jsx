@@ -3,6 +3,11 @@ import axios from 'axios';
 
 import AdvancedSearch from './AdvancedSearch.jsx';
 
+const SCOPE_NAMES = {
+  MY_DOCUMENTS   : 'my',
+  SHARED_WITH_ME : 'shared'
+} 
+
 export default class Search extends Component {
 
   constructor(props) {
@@ -38,15 +43,20 @@ export default class Search extends Component {
 
   onSearch = evt => {
     const query = evt.target.value;
-
     this.setState({ query: query });
 
-    const data = {
-      q: query,
-      ...this.props.tableConfig
-    }
+    if (query.length == 0) {
+      this.props.onQuit();
+    } else if (query.length > 1) {
+      const scope = this.props.searchScope ? 
+        this.props.searchScope : this.props.view;
 
-    if (query.length > 1) {
+      const data = {
+        q: query,
+        in: SCOPE_NAMES[scope],
+        ...this.props.tableConfig
+      }
+
       axios.post(`/api/search`, data).then(result => {
         this.props.onResponse(result.data);
       });
