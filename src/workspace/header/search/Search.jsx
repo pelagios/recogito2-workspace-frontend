@@ -45,7 +45,7 @@ export default class Search extends Component {
     const query = evt.target.value;
     this.setState({ query: query });
 
-    if (query.length == 0) {
+    if (query.length === 0) {
       this.props.onQuit();
     } else if (query.length > 1) {
       const scope = this.props.searchScope ? 
