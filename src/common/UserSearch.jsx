@@ -13,15 +13,15 @@ export default class UserSearch extends Component {
 
   fetchSuggestions = query => {
     this.setState({isLoading: true});
+    const exclude = this.props.exclude ? this.props.exclude : [];
     axios.get(`/api/sharing/search?q=${query}`)
       .then(result => this.setState({
         isLoading: false,
-        options: result.data.filter(username => !this.props.exclude.includes(username))
+        options: result.data.filter(username => !exclude.includes(username))
       }));
   }
 
   onChange = (selected) => {
-    // this.props.onSelect(selected[0]);
     this.setState({ selected: selected });
   }
 
@@ -53,6 +53,7 @@ export default class UserSearch extends Component {
   render() {
     return (
       <AsyncTypeahead
+        id="typeahead"
         ref={r => this._input = r}
         className="user-search"
         placeholder="Enter username"

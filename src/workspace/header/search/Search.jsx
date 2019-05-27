@@ -72,9 +72,10 @@ export default class Search extends Component {
 
   advancedSearch = settings => {
     const args = {
-      q    : settings.query ? settings.query : null, // Discard empty strings
-      in   : settings.in,
-      type : settings.type
+      q     : settings.query ? settings.query : null, // Discard empty strings
+      in    : settings.in,
+      type  : settings.type,
+      owner : settings.owner ? settings.owner : null, // same
     }
 
     this.setState({ advancedSearchOpen: false}, 

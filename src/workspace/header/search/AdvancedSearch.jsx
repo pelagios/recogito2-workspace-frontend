@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import UserSearch from '../../../common/UserSearch';
 
 const INITIAL_STATE = {
   query        : '',
   in           : 'ALL',     // 'MY', 'SHARED'
   type         : 'ANY',     // 'TEXT', 'IMAGE', 'TABLE'
-  owner        : '',        // or username
+  owner        : 'elton',        // or username
   lastModified : 'ANYTIME', // 'WEEK' 
 };
 
@@ -43,7 +44,7 @@ export default class AdvancedSearch extends Component {
 
   onChangeDocType = evt => this.setState({ type: evt.target.value });
 
-  onChangeOwner = evt => this.setState({ owner: evt.target.value });
+  onChangeOwner = owner => this.setState({ owner: owner });
 
   onChangeQuery = evt => this.setState({ query: evt.target.value });
 
@@ -70,7 +71,7 @@ export default class AdvancedSearch extends Component {
 
         <form>
           <fieldset>
-            <p>
+            <div className="field">
               <label>Search in</label>
               <select
                 value={this.state.searchIn}
@@ -80,9 +81,9 @@ export default class AdvancedSearch extends Component {
                 <option value="SHARED">Shared with me</option>
               </select>
               <span className="hint" />
-            </p>
+            </div>
 
-            <p>
+            <div className="field">
               <label>Document type</label>
               <select
                 value={this.state.docType}
@@ -93,29 +94,26 @@ export default class AdvancedSearch extends Component {
                 <option value="TABLE">Table</option>
               </select>
               <span className="hint" />
-            </p>
+            </div>
 
-            <p>
+            <div className="field">
               <label>Owner</label>
-              <select 
+              <UserSearch 
                 value={this.state.owner}
-                onChange={this.onChangeOwner}>
-                <option value="">Anyone</option>
-                <option value={this.props.account.username}>me</option>
-              </select>
+                onSelect={this.onChangeOwner} />
               <span className="hint" />
-            </p>
+            </div>
 
-            <p>
+            <div className="field">
               <label>Metadata contains</label>
               <input 
                 type="text" 
                 value={this.state.query} 
                 onChange={this.onChangeQuery} />
               <span className="hint" />
-            </p>
+            </div>
 
-            <p>
+            <div className="field">
               <label>Last modified</label>
               <select 
                 value={this.state.lastModified}
@@ -124,8 +122,9 @@ export default class AdvancedSearch extends Component {
                 <option value="WEEK">this week</option>
               </select>
               <span className="hint" />
-            </p>
+            </div>
           </fieldset>
+
           <fieldset className="buttons">
             <button className="nostyle clear" onClick={this.onClear}>Clear</button>
             <button className="btn" onClick={this.onSearch}>Search</button>
