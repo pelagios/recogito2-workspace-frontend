@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   query        : '',
   in           : 'ALL',     // 'MY', 'SHARED'
   type         : 'ANY',     // 'TEXT', 'IMAGE', 'TABLE'
-  owner        : 'elton',        // or username
+  owner        : '',
   lastModified : 'ANYTIME', // 'WEEK' 
 };
 
@@ -98,8 +98,7 @@ export default class AdvancedSearch extends Component {
 
             <div className="field">
               <label>Owner</label>
-              <UserSearch 
-                value={this.state.owner}
+              <UserSearch
                 onSelect={this.onChangeOwner} />
               <span className="hint" />
             </div>
@@ -126,8 +125,8 @@ export default class AdvancedSearch extends Component {
           </fieldset>
 
           <fieldset className="buttons">
-            <button className="nostyle clear" onClick={this.onClear}>Clear</button>
-            <button className="btn" onClick={this.onSearch}>Search</button>
+            <button type="button" className="nostyle clear" onClick={this.onClear}>Clear</button>
+            <button type="button" className="btn" onClick={this.onSearch}>Search</button>
           </fieldset>
         </form>
       </div>
