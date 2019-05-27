@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { openSelector } from './PermissionSelector.js';
-import Autocomplete from './Autocomplete.jsx';
+import { openSelector } from './PermissionSelector';
+import UserSearch from '../../../../common/UserSearch';
 
 export default class Collaborators extends Component {
 
@@ -101,7 +101,7 @@ export default class Collaborators extends Component {
           </table>
         </div>
         <div className="multi-share-section add-collaborator">
-          <Autocomplete 
+          <UserSearch 
             exclude={this.state.collaborators.map(c => c.username)} 
             onSelect={this.addCollaborator} />
         </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'; 
 import axios from 'axios';
 
-export default class AutoComplete extends Component {
+export default class UserSearch extends Component {
 
   state = {
     isLoading: false,
@@ -53,9 +53,8 @@ export default class AutoComplete extends Component {
   render() {
     return (
       <AsyncTypeahead
-        id="add-collaborator-input"
         ref={r => this._input = r}
-        className="autocomplete"
+        className="user-search"
         placeholder="Enter username"
         selected={this.state.selected}
         onChange={this.onChange}
