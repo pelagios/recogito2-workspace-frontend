@@ -40,13 +40,10 @@ export default class UserSearch extends Component {
   onKeyDown = (evt) => {
     const { selected, inputValue, options } = this.state;
     if (evt.which === 13) { // Enter
-      if (selected && selected.length === 1) {
+      if (selected && selected.length === 1)
         this.props.onSelect(selected[0]);
-        this.clear();
-      } else if (inputValue && options.includes(inputValue)) {
+      else if (inputValue && options.includes(inputValue))
         this.props.onSelect(inputValue);
-        this.clear();
-      }
     }
   }
 
