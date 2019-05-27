@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Search from './Search';
 
 export default class TopBar extends Component {
 
@@ -32,8 +31,6 @@ export default class TopBar extends Component {
             { this.props.me && this.props.me.logged_in && <a href="/my">My Workspace</a> }
             <a href="/help">Help</a>
             <a href="/help/about">About</a>
-
-            <Search></Search>
           </div>
 
           <div className="top-right">
