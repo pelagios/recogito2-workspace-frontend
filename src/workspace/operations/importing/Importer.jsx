@@ -106,7 +106,7 @@ export default class Uploader extends Component {
     });
   }
 
-  finalizeDocument = (withError) => {
+  finalizeDocument = withError => {
     const currentFolder = document.location.hash.substring(1);
 
     const url = currentFolder ?
@@ -177,7 +177,9 @@ export default class Uploader extends Component {
       // Branch based on files vs. remote URL
       return this.props.remoteSource ?
         this.importRemoteSource() : this.uploadFiles();
-    }).then(this.finalizeDocument).catch(error => {
+    })
+    .then(() => this.finalizeDocument(false))
+    .catch(error => {
       this.setState({ error: error });
       this.finalizeDocument(true);
       throw error;
