@@ -74,7 +74,11 @@ const promptForUrl = () => {
 
 const identifySource = url => {
   if (url.includes('request=GetPassage'))
-    return 'CTS'
+    return 'CTS';
+  else if (url.endsWith('.xml'))
+    return 'TEI_XML';
+  else if (url.includes('textgridlab.org') && url.includes('teicorpus'))
+    return 'TEI_XML'; // Textgrid doesn't end links with .xml...
   else // to be extended later
     return 'IIIF';
 }
