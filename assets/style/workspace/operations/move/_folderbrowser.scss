@@ -1,0 +1,46 @@
+.folder-browser {
+  background-color:#fff;
+  width:400px;
+
+  .header {
+    background-color:lighten($blueish-white, 2.5%);
+    padding:5px;
+    border-bottom:1px solid $lightgrey-border;
+    @include rounded-corners-top(3px);
+
+    .icon {
+      margin:0;
+      padding:0;
+      font-family:Stroke7;
+      font-size:28px;
+      color:rgba(0, 0, 0, 0.3);  
+    }
+
+    .icon:hover {
+      color:rgba(0, 0, 0, 0.5);
+    }
+
+    .cancel {
+      float:right;
+    }
+
+  }
+
+  .body {
+    height:200px;
+    overflow-y:scroll;
+  }
+
+  .footer{
+    padding:10px;
+    text-align:right;
+    border-top:1px solid $lightgrey-border;
+
+    .btn {
+      padding:3px 10px;
+      font-weight:bold;
+    }
+
+  }
+  
+}
