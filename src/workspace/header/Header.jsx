@@ -41,7 +41,7 @@ const OptionsMenu = props => {
         <Menu.Item
           icon={'\uf114'}
           label="Move to"
-          disabled />
+          onSelect={props.onMoveSelection} />
 
         <Menu.Item
           icon={'\uf0c5'}
@@ -151,6 +151,7 @@ export default class Header extends Component {
               <OptionsMenu 
                 view={this.props.view} 
                 selection={this.props.selection} 
+                onMoveSelection={this.closeAndThen(this.props.onMoveSelection)}
                 onDuplicateSelection={this.closeAndThen(this.props.onDuplicateSelection)}
                 onDeleteSelection={this.closeAndThen(this.props.onDeleteSelection)} 
                 onShareSelection={this.closeAndThen(this.props.onShareSelection)}

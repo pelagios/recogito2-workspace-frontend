@@ -2,6 +2,7 @@ import { createFolder, renameFolder } from './folder';
 import { uploadFiles, importSource } from './importing';
 import { entityRecognition } from './ner';
 import { updateReadme, deleteReadme } from './readme';
+import { moveSelection } from './move';
 import { deleteSelection, duplicateSelection } from './selection';
 import { shareSelection } from './sharing';
 
@@ -17,6 +18,7 @@ export default {
   updateReadme,
   deleteReadme,
   deleteSelection,
+  moveSelection,
   duplicateSelection,
   shareSelection,
   entityRecognition

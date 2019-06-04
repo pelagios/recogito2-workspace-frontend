@@ -160,6 +160,12 @@ export default class App extends Component {
     });
   }
 
+  moveSelection = () => {
+    operations.moveSelection({
+      selection: this.state.selection // TODO implement
+    });
+  }
+
   duplicateSelection = () => {
     this.setState({ busy: true });
     operations.duplicateSelection(this.state.selection)
@@ -216,6 +222,7 @@ export default class App extends Component {
         onDeleteReadme={this.deleteReadme}
         onCreateFolder={() => operations.createFolder().then(this.refreshPage)}
         onRenameFolder={(folder, title) => operations.renameFolder(folder, title).then(this.refreshPage)}
+        onMoveSelection={this.moveSelection}
         onDuplicateSelection={this.duplicateSelection}
         onDeleteSelection={this.deleteSelection}
         onShareSelection={() => operations.shareSelection(this.state.selection)}
