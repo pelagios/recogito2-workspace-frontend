@@ -29,6 +29,33 @@
   .body {
     height:200px;
     overflow-y:scroll;
+    font-size:14px;
+
+    ul {
+      list-style-type:none;
+      padding:0;
+      margin:0;
+    }
+
+    li {
+      padding:10px 15px;
+    }
+
+    li:before {
+      content:'\f07b';
+      font-family:FontAwesome;
+      margin-right:8px;
+      color:darken($lightblue-type, 10%);
+    }
+
+    li:hover {
+      background-color:rgba(0, 0, 0, 0.05);
+    }
+
+    li.selected {
+      background-color:rgba($ocean, 0.2);
+    }
+
   }
 
   .footer{
@@ -40,7 +67,7 @@
       padding:3px 10px;
       font-weight:bold;
     }
-
+    
   }
   
 }

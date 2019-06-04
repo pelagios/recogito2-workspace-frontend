@@ -6,17 +6,25 @@ export default class FolderBrowser extends Component {
   state = {
     currentFolder: 'Lorem ipsum',
     subfolders: [
-      { title: 'Folder A' },
-      { title: 'Folder B'}
+      { id: 'foo', title: 'Folder A', hasSubfolders: true },
+      { id: 'bar', title: 'Folder B', hasSubfolders: false }
     ],
     selected: null
   }
+
+  select = id => this.setState({ selected: id });
 
   navigateUp = () => {
 
   }
 
   render() {
+    const folders = this.state.subfolders.map(f => 
+      <li 
+        className={this.state.selected === f.id && 'selected'}
+        onClick={() => this.select(f.id)}>{f.title}</li>
+    );
+
     return (
       <div className="clicktrap">
         <div className="modal-wrapper">
@@ -33,11 +41,13 @@ export default class FolderBrowser extends Component {
               </div>
 
               <div className="body">
-
+                <ul>{folders}</ul>
               </div>
 
               <div className="footer">
-                <button className="btn">Move</button>
+                <button 
+                  className="btn"
+                  disabled={this.state.selected === null}>Move here</button>
               </div>
             </div>
           </Draggable>

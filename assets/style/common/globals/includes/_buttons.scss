@@ -19,6 +19,12 @@
   .icon { margin-right:4px; }
 }
 
+.btn:disabled {
+  border-color:$ocean-disabled !important;
+  background-color:$ocean-disabled !important;
+}
+
+
 .btn.tiny {
   padding:3px 15px;
   font-size:14px;
