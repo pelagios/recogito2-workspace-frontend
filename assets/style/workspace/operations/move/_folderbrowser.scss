@@ -11,13 +11,14 @@
   }
 
   .header {
-    background-color:lighten($blueish-white, 2.5%);
+    background-color:$ocean; // lighten($blueish-white, 2.5%);
     padding:5px;
     border-bottom:1px solid $lightgrey-border;
+    color:#fff;
     @include rounded-corners-top(3px);
 
-    .icon:hover {
-      color:rgba(0, 0, 0, 0.5);
+    .icon {
+      color:#fff;
     }
 
     .cancel {
@@ -63,7 +64,7 @@
     }
 
     li:hover {
-      background-color:rgba(0, 0, 0, 0.05);
+      background-color:rgba(0, 0, 0, 0.03);
     }
 
     li.selected {
