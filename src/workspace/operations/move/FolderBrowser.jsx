@@ -22,7 +22,9 @@ export default class FolderBrowser extends Component {
     const folders = this.state.subfolders.map(f => 
       <li 
         className={this.state.selected === f.id && 'selected'}
-        onClick={() => this.select(f.id)}>{f.title}</li>
+        onClick={() => this.select(f.id)}>{f.title}
+        { f.hasSubfolders && <button className="nostyle icon">&#xe684;</button> }
+      </li>
     );
 
     return (
