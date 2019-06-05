@@ -18,7 +18,8 @@ export default class FolderBrowser extends Component {
       FOLDERS[1], 
       FOLDERS[2]
     ],
-    selected: null
+    selected: null,
+    transition: null
   }
 
   select = id => this.setState({ selected: id });
@@ -26,17 +27,26 @@ export default class FolderBrowser extends Component {
   goToFolder = id => {
     const currentFolder = FOLDERS.find(f => f.id === id);
     const subfolders = FOLDERS.filter(f => f.parent === id);
-    this.setState({ currentFolder, subfolders });
+    this.setState({ 
+      currentFolder: currentFolder, 
+      subfolders: subfolders,
+      selected: null,
+      transition: null 
+    });
   }
 
   navigateUp = () => {
     // TODO just a hack
-    if (this.state.currentFolder.parent)    
-      this.goToFolder(this.state.currentFolder.parent);
+    this.setState({ transition: 'UP'}, () => {
+      if (this.state.currentFolder.parent)    
+        this.goToFolder(this.state.currentFolder.parent)
+    });
   }
 
   navigateInto = folderId => {
-    this.goToFolder(folderId);
+    this.setState({ transition: 'INTO'}, () => {
+      this.goToFolder(folderId);
+    });
   }
 
   render() {
@@ -71,7 +81,7 @@ export default class FolderBrowser extends Component {
                   transitionName="wipe"
                   transitionEnterTimeout={200}
                   transitionLeaveTimeout={200}>
-                  <ul key={this.state.currentFolder.id}>{folders}</ul>
+                  <ul className={this.state.transition === 'UP' ? 'up' : 'into'} key={this.state.currentFolder.id}>{folders}</ul>
                 </ReactCSSTransitionReplace>
               </div>
 

@@ -72,25 +72,39 @@
     }
 
     .wipe-leave {
-      opacity: 1;
+      transition: transform 0.2s ease-in-out;
+      transform: translate(0, 0);
     }
 
-    .wipe-leave.wipe-leave-active {
-      opacity: 0;
-      transition: opacity 0.2s ease-in;
+    .wipe-leave.up {
+      transition: transform 0.2s ease-in-out;
+      transform: translate(0, 0);
     }
     
-    .wipe-enter {
-      opacity: 0;
+    .wipe-leave-active.into {
+      transform: translate(-100%, 0);
+    }
+    
+    .wipe-enter.into {
+      transition: transform 0.2s ease-in-out;
+      transform: translate(100%, 0);
     }
 
-    .wipe-enter.wipe-enter-active {
-      opacity: 1;
-      transition: opacity 0.2s ease-in;
+    .wipe-leave-active.up {
+      transform: translate(100%, 0);
+    }
+    
+    .wipe-enter.up {
+      transition: transform 0.2s ease-in-out;
+      transform: translate(-100%, 0);
+    }
+
+    .wipe-enter-active {
+      transform: translate(0, 0);
     }
     
     .wipe-height {
-      transition: height 0.2s ease-in-out;
+      transition: height 0.4s ease-in-out;
     }
 
   }
