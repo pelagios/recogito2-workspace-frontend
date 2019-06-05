@@ -65,9 +65,11 @@ export default class FolderBrowser extends Component {
           <Draggable handle=".header">
             <div className="modal folder-browser">
               <div className="header">
-                <button
-                  className="nostyle icon"
-                  onClick={this.navigateUp}>&#xe686;</button>
+                { this.state.currentFolder.parent && 
+                  <button
+                    className="nostyle icon up"
+                    onClick={this.navigateUp}>&#xe686;</button>
+                }
 
                 <span className="title">{this.state.currentFolder.title}</span>
 
