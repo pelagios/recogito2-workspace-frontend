@@ -55,7 +55,10 @@ export default class FolderBrowser extends Component {
         key={f.id}
         className={this.state.selected === f.id ? 'selected' : undefined}
         onClick={() => this.select(f.id)}>{f.title}
-        { f.hasSubfolders && <button className="nostyle icon" onClick={() => this.navigateInto(f.id)}>&#xe684;</button> }
+        { f.hasSubfolders && 
+          <button 
+            className="nostyle icon" 
+            onClick={() => this.navigateInto(f.id)}>&#xe684;</button> }
       </li>
     );
 
@@ -83,7 +86,10 @@ export default class FolderBrowser extends Component {
                   transitionName="wipe"
                   transitionEnterTimeout={200}
                   transitionLeaveTimeout={200}>
-                  <ul className={this.state.transition === 'UP' ? 'up' : 'into'} key={this.state.currentFolder.id}>{folders}</ul>
+
+                  <ul className={this.state.transition === 'UP' ? 'up' : 'into'}
+                      key={this.state.currentFolder.id}>{folders}</ul>
+
                 </ReactCSSTransitionReplace>
               </div>
 
