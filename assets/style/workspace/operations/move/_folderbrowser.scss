@@ -71,6 +71,28 @@
       background-color:rgba($ocean, 0.2);
     }
 
+    .wipe-leave {
+      opacity: 1;
+    }
+
+    .wipe-leave.wipe-leave-active {
+      opacity: 0;
+      transition: opacity 0.2s ease-in;
+    }
+    
+    .wipe-enter {
+      opacity: 0;
+    }
+
+    .wipe-enter.wipe-enter-active {
+      opacity: 1;
+      transition: opacity 0.2s ease-in;
+    }
+    
+    .wipe-height {
+      transition: height 0.2s ease-in-out;
+    }
+
   }
 
   .footer{
