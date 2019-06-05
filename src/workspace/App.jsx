@@ -162,7 +162,9 @@ export default class App extends Component {
 
   moveSelection = () => {
     operations.moveSelection({
-      selection: this.state.selection // TODO implement
+      view: this.state.view,
+      page: this.state.page,
+      selection: this.state.selection
     });
   }
 

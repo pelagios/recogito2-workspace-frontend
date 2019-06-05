@@ -4,12 +4,6 @@ import FolderBrowser from './FolderBrowser';
 
 export const moveSelection = args => {
 
-  // TODO implement
-
-  const { 
-    selection
-  } = args;
-
   const container = document.createElement('div');
   document.body.appendChild(container);
 
@@ -19,7 +13,9 @@ export const moveSelection = args => {
 
   render(
     <FolderBrowser
-      selection={selection} 
+      view={args.view}
+      page={args.page}
+      selection={args.selection} 
       onCancel={onCancel} />, container);
 
 }
