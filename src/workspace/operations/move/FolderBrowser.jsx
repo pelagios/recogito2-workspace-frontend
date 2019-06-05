@@ -3,14 +3,6 @@ import axios from 'axios';
 import Draggable from 'react-draggable';
 import ReactCSSTransitionReplace from 'react-css-transition-replace';
 
-// Just a hack
-const FOLDERS = [
-  { id: 'root', title: 'Root folder', hasSubfolders: true },
-  { id: 'level1-1', parent: 'root', title: 'Folder A', hasSubfolders: true },
-  { id: 'level1-2', parent: 'root', title: 'Folder B', hasSubfolders: false },
-  { id: 'level2-1', parent: 'level1-1', title: 'Folder C', hasSubfolders: false }
-];
-
 const VIEW_LABELS = {
   MY_DOCUMENTS: 'My Documents',
   SHARED_WITH_ME: 'Shared with me'
@@ -38,7 +30,9 @@ export default class FolderBrowser extends Component {
 
   select = id => this.setState({ selected: id });
 
+  /** TODO **/
   goToFolder = id => {
+    /*
     const currentFolder = FOLDERS.find(f => f.id === id);
     const subfolders = FOLDERS.filter(f => f.parent === id);
     this.setState({ 
@@ -47,20 +41,25 @@ export default class FolderBrowser extends Component {
       selected: null,
       transition: null 
     });
+    */
   }
 
   navigateUp = () => {
-    // TODO just a hack
-    this.setState({ transition: 'UP'}, () => {
-      if (this.state.currentFolder.parent)    
-        this.goToFolder(this.state.currentFolder.parent)
-    });
+    const goUp = () => {
+      const { currentFolder } = this.state;
+      if (currentFolder.parent)
+        this.goToFolder(currentFolder.parent);
+    }
+
+    this.setState({ transition: 'UP'}, goUp);
   }
 
   navigateInto = folderId => {
-    this.setState({ transition: 'INTO'}, () => {
+    const goInto = () => {
       this.goToFolder(folderId);
-    });
+    }
+
+    this.setState({ transition: 'INTO'}, goInto);
   }
 
   render() {
