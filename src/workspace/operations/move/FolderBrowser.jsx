@@ -54,7 +54,7 @@ export default class FolderBrowser extends Component {
   navigateUp = () => {
     const goUp = () => {
       const { currentFolder } = this.state;
-      if (this.currentFolder)
+      if (currentFolder)
         this.goToFolder(currentFolder.parent);      
       else
         this.goToFolder(); // Root  
@@ -89,10 +89,10 @@ export default class FolderBrowser extends Component {
 
     /* TODO move folders
     const fFolders = folders.length > 0 ? 
-      axios.put('/api/document/bulk', {
+      axios.put('/api/folder/bulk', {
         action: 'MOVE_TO', 
         destination,
-        documents: this.props.selection.getDocuments().map(d => d.id)
+        folders: this.props.selection.getFolders().map(d => d.id)
       }) : Promise.resolve();
     */
 
