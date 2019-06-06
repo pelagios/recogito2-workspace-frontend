@@ -12,49 +12,60 @@ export default class FolderBrowser extends Component {
   
   constructor(props) {
     super(props);
-
-    const b = this.props.page.breadcrumbs;
+    this.state = this.pageToState(props.page);
+  }
+  
+  /** 
+   * Reads a page object and converst the info to the state's
+   * expected { currentFolder, subfolders } format.
+   */
+  pageToState = page => {
+    const b = page.breadcrumbs;
+    
+    // Build currentFolder from breadcrumbs
     const currentFolder = b.length > 1 ? 
       { ...b[b.length - 1], parent: b[b.length - 2].id } : // has parent folder
       b.length > 0 ? b[b.length - 1] : null;
 
-    const subfolders = props.page.items.filter(item => item.type === 'FOLDER');
+    // Filter items to folders only
+    const subfolders = page.items.filter(item => item.type === 'FOLDER');
 
-    this.state = {
+    return { 
       currentFolder,
       subfolders,
       selected: null,
       transition: null
-    }
+    };
   }
 
   select = id => this.setState({ selected: id });
 
-  /** TODO **/
   goToFolder = id => {
-    /*
-    const currentFolder = FOLDERS.find(f => f.id === id);
-    const subfolders = FOLDERS.filter(f => f.parent === id);
-    this.setState({ 
-      currentFolder: currentFolder, 
-      subfolders: subfolders,
-      selected: null,
-      transition: null 
+    const url = 
+      this.props.view === 'MY_DOCUMENTS' ? 
+        ( id ? `/api/directory/my/${id}` : '/api/directory/my' ) :
+        ( id ? `/api/directory/my/shared/${id}` : '/api/directory/my/shared');
+
+    axios.get(url).then(result => {
+      this.setState(this.pageToState(result.data));
     });
-    */
   }
 
   navigateUp = () => {
     const goUp = () => {
       const { currentFolder } = this.state;
-      if (currentFolder.parent)
-        this.goToFolder(currentFolder.parent);
+      if (this.currentFolder)
+        this.goToFolder(currentFolder.parent);      
+      else
+        this.goToFolder(); // Root  
     }
 
     this.setState({ transition: 'UP'}, goUp);
   }
 
-  navigateInto = folderId => {
+  navigateInto = (folderId, evt) => {
+    evt.stopPropagation(); // Avoid select
+
     const goInto = () => {
       this.goToFolder(folderId);
     }
@@ -71,7 +82,7 @@ export default class FolderBrowser extends Component {
         { f.has_subfolders && 
           <button 
             className="nostyle icon" 
-            onClick={() => this.navigateInto(f.id)}>&#xe684;</button> }
+            onClick={evt => this.navigateInto(f.id, evt)}>&#xe684;</button> }
       </li>
     );
 
