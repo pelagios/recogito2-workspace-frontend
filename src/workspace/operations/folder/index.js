@@ -72,5 +72,8 @@ export const createFolder = () => {
 };
 
 export const renameFolder = (folder, title) => {
-  return axios.put(`/api/folder/${folder.id}?title=${title}`);
+  return axios.put(`/api/folder/${folder.id}`, {
+    action: 'RENAME',
+    title: title
+  });
 }
