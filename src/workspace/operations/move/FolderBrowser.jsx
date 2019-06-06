@@ -73,6 +73,32 @@ export default class FolderBrowser extends Component {
     this.setState({ transition: 'INTO'}, goInto);
   }
 
+  move = () => {
+    const { selection } = this.props;
+    const destination = this.state.selected;
+
+    const documents = selection.getDocuments();
+    const folders = selection.getFolders();
+
+    const fDocs = documents.length > 0 ?
+      axios.put('/api/document/bulk', {
+        action: 'MOVE_TO', 
+        destination,
+        documents: this.props.selection.getDocuments().map(d => d.id)
+      }) : Promise.resolve();
+
+    /* TODO move folders
+    const fFolders = folders.length > 0 ? 
+      axios.put('/api/document/bulk', {
+        action: 'MOVE_TO', 
+        destination,
+        documents: this.props.selection.getDocuments().map(d => d.id)
+      }) : Promise.resolve();
+    */
+
+    fDocs.then(() => this.props.onComplete());
+  }
+
   render() {
     const folders = this.state.subfolders.map(f => 
       <li 
@@ -122,7 +148,8 @@ export default class FolderBrowser extends Component {
               <div className="footer">
                 <button 
                   className="btn"
-                  disabled={this.state.selected === null}>Move here</button>
+                  disabled={this.state.selected === null}
+                  onClick={this.move}>Move here</button>
               </div>
             </div>
           </Draggable>

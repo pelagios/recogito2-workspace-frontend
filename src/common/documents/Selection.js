@@ -42,6 +42,14 @@ export default class Selection {
     return this._selection;
   }
 
+  getFolders() {
+    return this._selection.filter(i => i.type === 'FOLDER');
+  }
+
+  getDocuments() {
+    return this._selection.filter(i => i.type === 'DOCUMENT');
+  }
+
   /** Immutable - returns a new selection object **/
   selectItem = (item, isCtrlPressed) => {
     if (isCtrlPressed) {

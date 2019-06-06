@@ -164,7 +164,8 @@ export default class App extends Component {
     operations.moveSelection({
       view: this.state.view,
       page: this.state.page,
-      selection: this.state.selection
+      selection: this.state.selection,
+      onComplete: this.refreshPage
     });
   }
 

@@ -7,6 +7,11 @@ export const moveSelection = args => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
+  const onComplete = () => {
+    container.remove();
+    args.onComplete();
+  }
+
   const onCancel = () => {
     container.remove();
   }
@@ -16,6 +21,7 @@ export const moveSelection = args => {
       view={args.view}
       page={args.page}
       selection={args.selection} 
+      onComplete={onComplete}
       onCancel={onCancel} />, container);
 
 }
