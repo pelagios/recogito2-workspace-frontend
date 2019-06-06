@@ -3,7 +3,7 @@ import axios from 'axios';
 import Draggable from 'react-draggable';
 import ReactCSSTransitionReplace from 'react-css-transition-replace';
 
-const VIEW_LABELS = {
+const TITLES = {
   MY_DOCUMENTS: 'My Documents',
   SHARED_WITH_ME: 'Shared with me'
 }
@@ -17,21 +17,21 @@ export default class FolderBrowser extends Component {
   
   /** 
    * Reads a page object and converst the info to the state's
-   * expected { currentFolder, subfolders } format.
+   * expected { location, subfolders } format.
    */
   pageToState = page => {
     const b = page.breadcrumbs;
     
-    // Build currentFolder from breadcrumbs
-    const currentFolder = b.length > 1 ? 
+    // Build location from breadcrumbs
+    const location = b.length > 1 ? 
       { ...b[b.length - 1], parent: b[b.length - 2].id } : // has parent folder
-      b.length > 0 ? b[b.length - 1] : null;
+      b.length > 0 ? b[b.length - 1] : 'ROOT';
 
     // Filter items to folders only
     const subfolders = page.items.filter(item => item.type === 'FOLDER');
 
     return { 
-      currentFolder,
+      location, // 'VIEWS', 'ROOT' or folder object
       subfolders,
       selected: null,
       transition: null
@@ -51,13 +51,24 @@ export default class FolderBrowser extends Component {
     });
   }
 
+  goToViewsOverview = () => {
+    this.setState({
+      location: 'VIEWS',
+      subfolders: [
+        { title: 'My Documents' }
+      ],
+      selected: null,
+      transition: null
+    });
+  }
+
   navigateUp = () => {
     const goUp = () => {
-      const { currentFolder } = this.state;
-      if (currentFolder)
-        this.goToFolder(currentFolder.parent);      
+      const { location } = this.state;
+      if (location === 'ROOT') // root level of current view
+        this.goToViewsOverview();        
       else
-        this.goToFolder(); // Root  
+        this.goToFolder(location.parent);      
     }
 
     this.setState({ transition: 'UP'}, goUp);
@@ -65,11 +76,7 @@ export default class FolderBrowser extends Component {
 
   navigateInto = (folderId, evt) => {
     evt.stopPropagation(); // Avoid select
-
-    const goInto = () => {
-      this.goToFolder(folderId);
-    }
-
+    const goInto = () => this.goToFolder(folderId);
     this.setState({ transition: 'INTO'}, goInto);
   }
 
@@ -87,22 +94,27 @@ export default class FolderBrowser extends Component {
         documents: this.props.selection.getDocuments().map(d => d.id)
       }) : Promise.resolve();
 
-    /* TODO move folders
     const fFolders = folders.length > 0 ? 
       axios.put('/api/folder/bulk', {
         action: 'MOVE_TO', 
         destination,
         folders: this.props.selection.getFolders().map(d => d.id)
       }) : Promise.resolve();
-    */
 
-    fDocs.then(() => this.props.onComplete());
+    Promise.all([ fDocs, fFolders ]).then(() => this.props.onComplete());
   }
 
   render() {
+    const title = 
+      this.state.location === 'VIEWS' ? 'Workspace' :
+        this.state.location === 'ROOT' ? TITLES[this.props.view] : this.state.location.title;
+
+    const key = 
+      this.state.location.id ? this.state.location.id : this.state.location;
+
     const folders = this.state.subfolders.map(f => 
       <li 
-        key={f.id}
+        key={f.id ? f.id : f.title}
         className={this.state.selected === f.id ? 'selected' : undefined}
         onClick={() => this.select(f.id)}>{f.title}
         { f.has_subfolders && 
@@ -118,15 +130,13 @@ export default class FolderBrowser extends Component {
           <Draggable handle=".header">
             <div className="modal folder-browser">
               <div className="header">
-                { this.state.currentFolder && 
+                { this.state.location !== 'VIEWS' && 
                   <button
                     className="nostyle icon up"
                     onClick={this.navigateUp}>&#xe686;</button>
                 }
 
-                <span className="title">
-                  { this.state.currentFolder ? this.state.currentFolder.title : VIEW_LABELS[this.props.view] }
-                </span>
+                <span className="title">{title}</span>
 
                 <button
                   className="nostyle icon cancel"
@@ -140,7 +150,7 @@ export default class FolderBrowser extends Component {
                   transitionLeaveTimeout={200}>
 
                   <ul className={this.state.transition === 'UP' ? 'up' : 'into'}
-                      key={this.state.currentFolder ? this.state.currentFolder.id : this.props.view}>{folders}</ul>
+                      key={key}>{folders}</ul>
 
                 </ReactCSSTransitionReplace>
               </div>
