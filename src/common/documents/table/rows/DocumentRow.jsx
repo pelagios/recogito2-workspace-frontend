@@ -1,16 +1,8 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
 import TimeAgo from 'react-timeago';
+import Icons from './TypeIcons';
 import BaseRowComponent from './BaseRowComponent';
-
-/** Icons for possible content type values **/
-const ICONS = {
-  TEXT_PLAIN   : 'icon_text.png',
-  TEXT_TEIXML  : 'icon_tei.png',
-  IMAGE_UPLOAD : 'icon_image.png',
-  IMAGE_IIIF   : 'icon_iiif.png',
-  DATA_CSV     : 'icon_csv.png'
-};
 
 /** Formatting rules for possible field types **/
 const FORMATTERS = {
@@ -131,7 +123,7 @@ export default class DocumentRow extends BaseRowComponent {
           this.createAggregateField(url, field) : this.createField(url, field)) }
 
         <span className={`type icon ${type}`}>
-          <img src={`/assets/images/${ICONS[type]}`} alt={`icon type ${type}`} />
+          <img src={`/assets/images/${Icons.get(type)}`} alt={`icon type ${type}`} />
         </span>
       </div>
     )

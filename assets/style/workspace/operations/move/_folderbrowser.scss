@@ -53,6 +53,7 @@
     li {
       padding:10px 15px;
       position:relative;
+      cursor:default;
 
       .icon {
         padding:0;
@@ -68,18 +69,33 @@
 
     }
 
-    li:before {
+    li.folder:before {
       content:'\f07b';
       font-family:FontAwesome;
       margin-right:8px;
       color:darken($lightblue-type, 10%);
     }
 
-    li:hover {
+    li.folder:hover {
       background-color:rgba(0, 0, 0, 0.03);
     }
 
-    li.selected {
+    li.document {
+      color:rgba(0, 0, 0, 0.3);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+
+      img {
+        position:relative;
+        top:-1px;
+        vertical-align:middle;
+        padding-right:6px;
+        opacity:0.3;
+      }
+    }
+
+    li.folder.selected {
       background-color:rgba($ocean, 0.2);
     }
 

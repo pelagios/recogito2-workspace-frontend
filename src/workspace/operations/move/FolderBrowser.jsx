@@ -2,10 +2,35 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Draggable from 'react-draggable';
 import ReactCSSTransitionReplace from 'react-css-transition-replace';
+import Icons from '../../../common/documents/table/rows/TypeIcons';
 
 const TITLES = {
   MY_DOCUMENTS: 'My Documents',
   SHARED_WITH_ME: 'Shared with me'
+}
+
+const FolderItem = props => (
+  <li
+    className={props.selected ? 'folder selected' : 'folder'}
+    onClick={() => props.onSelect(props.item.id)}>{props.item.title}
+    { props.item.has_subfolders && 
+      <button 
+        className="nostyle icon" 
+        onClick={evt => props.onNavigateInto(props.item.id, evt)}>&#xe684;</button> }
+  </li>
+)
+
+
+const DisabledDocumentItem = props =>  {
+
+  const docType = props.item.filetypes[0];
+
+  return (
+    <li className="document">
+      <img src={`/assets/images/${Icons.get(docType)}`} alt={`icon type ${docType}`} />
+      {props.item.title}
+    </li>
+  )
 }
 
 export default class FolderBrowser extends Component {
@@ -27,12 +52,9 @@ export default class FolderBrowser extends Component {
       { ...b[b.length - 1], parent: b[b.length - 2].id } : // has parent folder
       b.length > 0 ? b[b.length - 1] : 'ROOT';
 
-    // Filter items to folders only
-    const subfolders = page.items.filter(item => item.type === 'FOLDER');
-
     return { 
       location, // 'VIEWS', 'ROOT' or folder object
-      subfolders,
+      items: page.items,
       selected: null,
       transition: null
     };
@@ -54,8 +76,8 @@ export default class FolderBrowser extends Component {
   goToViewsOverview = () => {
     this.setState({
       location: 'VIEWS',
-      subfolders: [
-        { title: 'My Documents' }
+      items: [
+        { title: 'My Documents', has_subfolders: true }
       ],
       selected: null,
       transition: null
@@ -112,16 +134,17 @@ export default class FolderBrowser extends Component {
     const key = 
       this.state.location.id ? this.state.location.id : this.state.location;
 
-    const folders = this.state.subfolders.map(f => 
-      <li 
+    const items = this.state.items.map(f => f.type === 'DOCUMENT' ?
+      <DisabledDocumentItem
         key={f.id ? f.id : f.title}
-        className={this.state.selected === f.id ? 'selected' : undefined}
-        onClick={() => this.select(f.id)}>{f.title}
-        { f.has_subfolders && 
-          <button 
-            className="nostyle icon" 
-            onClick={evt => this.navigateInto(f.id, evt)}>&#xe684;</button> }
-      </li>
+        item={f} /> :
+
+      <FolderItem 
+        key={f.id ? f.id : f.title}
+        item={f}
+        selected={this.state.selected === f.id}
+        onSelect={this.select}
+        onNavigateInto={this.navigateInto} />
     );
 
     return (
@@ -150,7 +173,7 @@ export default class FolderBrowser extends Component {
                   transitionLeaveTimeout={200}>
 
                   <ul className={this.state.transition === 'UP' ? 'up' : 'into'}
-                      key={key}>{folders}</ul>
+                      key={key}>{items}</ul>
 
                 </ReactCSSTransitionReplace>
               </div>
@@ -169,3 +192,4 @@ export default class FolderBrowser extends Component {
   }
 
 }
+
