@@ -45,7 +45,7 @@ export default class Collaborators extends Component {
     });
   }
 
-  removeCollaborator = (collaborator) => {
+  removeCollaborator = collaborator => {
     this.setState(prev => {
       return { collaborators: prev.collaborators.filter(c => c.username !== collaborator.username) }
     });
@@ -55,10 +55,10 @@ export default class Collaborators extends Component {
       username: collaborator.username
     }}).catch(error => {
       // TODO
-    })
+    });
   }
 
-  addCollaborator = (username) => {
+  addCollaborator = username => {
     const update = { username: username, access_level: 'READ' }
     this.storeCollaborator(update);
     this.setState(prev => {

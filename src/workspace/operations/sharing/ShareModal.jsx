@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Modal from '../../../common/Modal';
 import PublicAccess from './public/PublicAccess';
 import Collaborators from './collaborators/Collaborators';
+import DistributeCopies from './copies/DistributeCopies';
 
 export default class ShareModal extends Component {
 
@@ -26,19 +27,13 @@ export default class ShareModal extends Component {
     this.setState({ view: name });
   }
 
-  renderPublicAccess = () => {
-    return <PublicAccess item={this.props.selection.get(0)} />
-  }
-
-  renderCollaborators = () => {
-    return <Collaborators item={this.props.selection.get(0)} />
-  }
-
   getView = () => {
     if (this.state.view === 'PUBLIC_ACCESS')
-      return this.renderPublicAccess();
+      return <PublicAccess item={this.props.selection.get(0)} />
     else if (this.state.view === 'COLLABORATORS')
-      return this.renderCollaborators();
+      return <Collaborators item={this.props.selection.get(0)} />
+    else if (this.state.view === 'DISTRIBUTE_COPIES')
+      return <DistributeCopies item={this.props.selection.get(0)} />
   }
 
   render() {
@@ -51,18 +46,20 @@ export default class ShareModal extends Component {
           <div className="multi-share-tabs">
             <ul>
               <li 
-                className={this.state.view === 'PUBLIC_ACCESS' ? 'active': ''}
+                className={this.state.view === 'PUBLIC_ACCESS' ? 'active' : ''}
                 onClick={() => this.setView('PUBLIC_ACCESS')} >
                 Public Access
               </li>
 
               <li 
-                className={this.state.view === 'COLLABORATORS' ? 'active': ''}
+                className={this.state.view === 'COLLABORATORS' ? 'active' : ''}
                 onClick={() => this.setView('COLLABORATORS')} >
                 Collaborators
               </li>
 
-              <li className="disabled">
+              <li 
+                className={this.state.view === 'DISTRIBUTE_COPIES' ? 'active' : ''}
+                onClick={() => this.setView('DISTRIBUTE_COPIES')}>
                 Distribute Copies
               </li>
             </ul>
@@ -76,7 +73,7 @@ export default class ShareModal extends Component {
             <div className="footer">
               <button
                 className="btn"
-                onClick={this.props.onClose}>Done</button>
+                onClick={this.props.onClose}>Close</button>
             </div>
           </div>
         </div>
