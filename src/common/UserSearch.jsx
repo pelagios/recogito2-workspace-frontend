@@ -53,7 +53,7 @@ export default class UserSearch extends Component {
         id="typeahead"
         ref={r => this._input = r}
         className="user-search"
-        placeholder="Enter username"
+        placeholder={this.props.placeholder || 'Enter username'}
         selected={this.state.selected}
         onChange={this.onChange}
         onInputChange={this.onInputChange}

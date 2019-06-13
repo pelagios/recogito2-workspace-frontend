@@ -18,6 +18,10 @@ export default class DistributeCopies extends Component {
       return { recipients:  [ ...prev.recipients, recipient ] }
     });
   }
+  
+  sendCopies = () => {
+    // TODO 
+  }
 
   render() {
     const recipients = this.state.recipients.map(r => 
@@ -28,18 +32,23 @@ export default class DistributeCopies extends Component {
 
     return (
       <div className="distribute-copies">
-        <h3>Send copy to</h3>
+        <h3>Send copies to</h3>
+        
         <table className="recipients">
           <tbody>
-            { recipients.length > 0 ? 
-              recipients : <tr className="no-recipients"><td>Enter a username below to add a recipient.</td></tr>
-            }
+            { recipients }
           </tbody>
         </table>
 
         <UserSearch 
+          placeholder="Add a recipient"
           exclude={this.state.recipients.map(c => c.username)} 
           onSelect={this.addRecipient} />
+
+        <button
+          className="btn" 
+          disabled={recipients.length === 0}
+          onClick={this.sendCopies}>Send now</button>
       </div>
     )
   }
