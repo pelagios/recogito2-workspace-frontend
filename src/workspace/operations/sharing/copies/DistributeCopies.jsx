@@ -26,7 +26,12 @@ export default class DistributeCopies extends Component {
   render() {
     const recipients = this.state.recipients.map(r => 
       <tr key={r}>
-        <td>{r}</td>
+        <td>
+          {r} 
+          <button 
+            className="nostyle icon remove"
+            onClick={() => this.removeRecipient(r)}>&#xf00d;</button>
+        </td>
       </tr>
     );
 
