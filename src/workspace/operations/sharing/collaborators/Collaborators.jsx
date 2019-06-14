@@ -100,10 +100,15 @@ export default class Collaborators extends Component {
             </tbody>
           </table>
         </div>
+
         <div className="multi-share-section add-collaborator">
           <UserSearch 
             exclude={this.state.collaborators.map(c => c.username)} 
             onSelect={this.addCollaborator} />
+
+          <div className="footer">
+            <button className="btn" onClick={this.props.onClose}>Close</button>
+          </div>
         </div>
       </div>
     )

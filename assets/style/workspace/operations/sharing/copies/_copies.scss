@@ -1,9 +1,25 @@
 .distribute-copies {
   padding:20px;
 
+  table {
+    margin:0 0 25px 0;
+    width:100%;
+  }
+
+  .add-recipients {
+    text-align:center;  
+    font-size:15px; 
+    padding:25px 0 5px 0;
+  }
+
   input { 
     width:100%;
     padding:5px;
+  }
+
+  .footer {
+    display:flex;
+    justify-content: space-between;
   }
 
 }

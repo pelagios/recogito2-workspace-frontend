@@ -36,19 +36,23 @@ export default class DistributeCopies extends Component {
         
         <table className="recipients">
           <tbody>
-            { recipients }
+            { recipients.length > 0 ? recipients :
+              <tr><td className="add-recipients">Add recipients below</td></tr> }
           </tbody>
         </table>
 
         <UserSearch 
-          placeholder="Add a recipient"
           exclude={this.state.recipients.map(c => c.username)} 
           onSelect={this.addRecipient} />
 
-        <button
-          className="btn" 
-          disabled={recipients.length === 0}
-          onClick={this.sendCopies}>Send now</button>
+        <div className="footer">
+          <button
+            className="btn" 
+            disabled={recipients.length === 0}
+            onClick={this.sendCopies}>Send now</button>
+
+          <button className="btn" onClick={this.props.onClose}>Close</button>
+        </div>
       </div>
     )
   }

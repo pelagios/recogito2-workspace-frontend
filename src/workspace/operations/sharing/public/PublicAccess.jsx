@@ -93,6 +93,10 @@ export default class PublicAccess extends Component {
             they cannot add annotations, even when public annotation is enabled. Blocking 
             access to document content will also limit some of the download options.
           </p>
+
+          <div className="footer">
+            <button className="btn" onClick={this.props.onClose}>Close</button>
+          </div>
         </div>
       </div>
     )

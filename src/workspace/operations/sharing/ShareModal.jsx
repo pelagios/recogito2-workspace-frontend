@@ -29,11 +29,11 @@ export default class ShareModal extends Component {
 
   getView = () => {
     if (this.state.view === 'PUBLIC_ACCESS')
-      return <PublicAccess item={this.props.selection.get(0)} />
+      return <PublicAccess item={this.props.selection.get(0)} onClose={this.props.onClose}/>
     else if (this.state.view === 'COLLABORATORS')
-      return <Collaborators item={this.props.selection.get(0)} />
+      return <Collaborators item={this.props.selection.get(0)} onClose={this.props.onClose} />
     else if (this.state.view === 'DISTRIBUTE_COPIES')
-      return <DistributeCopies item={this.props.selection.get(0)} />
+      return <DistributeCopies item={this.props.selection.get(0)} onClose={this.props.onClose} />
   }
 
   render() {
@@ -68,12 +68,6 @@ export default class ShareModal extends Component {
           <div className="multi-share-body">
             <div className="view-container">
               { this.getView() }     
-            </div>     
-
-            <div className="footer">
-              <button
-                className="btn"
-                onClick={this.props.onClose}>Close</button>
             </div>
           </div>
         </div>
