@@ -57,9 +57,7 @@ export default class ShareModal extends Component {
                 Collaborators
               </li>
 
-              <li 
-                className={this.state.view === 'DISTRIBUTE_COPIES' ? 'active' : ''}
-                onClick={() => this.setView('DISTRIBUTE_COPIES')}>
+              <li className="disabled">
                 Distribute Copies
               </li>
             </ul>
