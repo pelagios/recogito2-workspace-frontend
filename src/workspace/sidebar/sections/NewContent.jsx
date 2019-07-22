@@ -86,7 +86,7 @@ export default class NewContent extends Component {
               { this.hasFeature("rise") &&
                 <Menu.Item 
                   icon={'\uf0f6'} 
-                  label="From SHINE repository" 
+                  label="From RISE" 
                   onSelect={this.select(() => this.props.onImportSource('SHINE'))} />
               }
             </Menu.Group>
