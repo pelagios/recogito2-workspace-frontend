@@ -126,7 +126,9 @@ export default class App extends Component {
   }
 
   sendMessage = () => {
-    console.log('Send message');
+    const sender = this.state.me.username;
+    const recipient = this.state.visitedAccount.username;
+    operations.sendMessage(sender, recipient);
   }
 
   forkSelection = () =>  {
