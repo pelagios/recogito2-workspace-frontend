@@ -11,6 +11,15 @@ const Sidebar = props => {
         <IdentityInfo account={props.account} />
       </div>
 
+      { props.me && props.me.feature_toggles && props.me.feature_toggles.includes("send-message") &&
+        <div className="section send-message">
+          <button className="btn" onClick={props.onSendMessage}>
+            <span className="icon">&#xf0e0;</span>
+            <span className="label">Send Message</span>
+          </button>
+        </div>
+      }
+
       <ActivityHistory 
         className="section" 
         width={237}

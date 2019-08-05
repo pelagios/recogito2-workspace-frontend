@@ -16,7 +16,10 @@ const Profile = props => {
     <React.Fragment>
       <TopBar me={props.me} />
 
-      <Sidebar account={props.visitedAccount}/>
+      <Sidebar 
+        me={props.me}
+        account={props.visitedAccount}
+        onSendMessage={props.onSendMessage} />
 
       <div className="main-content">
         <Breadcrumbs 

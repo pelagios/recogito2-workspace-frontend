@@ -13,4 +13,20 @@
     border-bottom:none;
   }
 
+  .section.send-message {
+
+    * {
+      vertical-align:baseline;
+    }
+
+    .btn {
+      width:100%;
+    }
+
+    .icon {
+      padding-right:10px;
+    }
+
+  }
+
 }

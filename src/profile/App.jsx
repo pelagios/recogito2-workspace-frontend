@@ -125,6 +125,10 @@ export default class App extends Component {
     });
   }
 
+  sendMessage = () => {
+    console.log('Send message');
+  }
+
   forkSelection = () =>  {
     const { selection } = this.state;
 
@@ -151,6 +155,7 @@ export default class App extends Component {
         onSelect={this.select}
         onSort={this.sortTable}
         onChangeColumnConfig={this.changeColumnConfig} 
+        onSendMessage={this.sendMessage}
         onFork={this.forkSelection} />
     );
   }
