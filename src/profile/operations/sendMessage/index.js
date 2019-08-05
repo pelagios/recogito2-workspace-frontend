@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import axios from 'axios';
 import Modal from '../../../common/Modal';
 
 class SendMessageForm extends Component {
+
+  state = {
+    message: ''
+  }
+
+  onChange = evt => {
+    this.setState({ message: evt.target.value });
+  }
 
   render() {
     return(
@@ -13,7 +22,7 @@ class SendMessageForm extends Component {
         <div>
           <dl>
             <dt>
-              <label for="recipient">To</label>
+              <label htmlFor="recipient">To</label>
             </dt>
             <dd>
               <input 
@@ -26,10 +35,13 @@ class SendMessageForm extends Component {
 
           <dl>
             <dt>
-              <label for="message">Message</label>
+              <label htmlFor="message">Message</label>
             </dt>
             <dd>
-              <textarea rows={10} />
+              <textarea 
+                rows={10} 
+                value={this.state.message}
+                onChange={this.onChange} />
             </dd>
           </dl>
 
@@ -38,7 +50,9 @@ class SendMessageForm extends Component {
               className="btn outline small" 
               onClick={this.props.onCancel}>Cancel</button>
 
-            <button className="btn small">Send</button>
+            <button
+              className="btn small"
+              onClick={() => this.props.onSend(this.state.message)}>Send</button>
           </div>
         </div>
       </Modal>
@@ -58,25 +72,19 @@ export const sendMessage = (from, to) => {
       resolve();
     }
 
-    render(
-      <SendMessageForm 
-        recipient={to} 
-        onCancel={onCancel} />, container
-    );
-
-    /*
-    const onOk = folderName => { 
-      const currentFolderId = document.location.hash.substring(1);
-
-      axios.post('/api/folder', {
-        title: folderName || 'Unnamed Folder',
-        parent: currentFolderId
-      }).then(() => {
+    const onSend = message => {
+      axios.post('/api/send-message', { to, message }).then(() => {
         container.remove();
         resolve();
       });
     }
-    */
+
+    render(
+      <SendMessageForm 
+        recipient={to} 
+        onSend={onSend}
+        onCancel={onCancel} />, container
+    );
   });
 
 }
