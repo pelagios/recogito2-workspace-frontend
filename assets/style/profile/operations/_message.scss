@@ -1,3 +1,49 @@
 .message-form-container {
+
+  .modal-wrapper {
+    width:560px;
+  }
+
+  dt, dd {
+    display:inline-block;
+    vertical-align:top;
+  }
+
+  dt {
+    width:90px;
+    text-align:right;
+  }
+
+  input, textarea {
+    outline:none;
+    -webkit-appearance:none;
+    box-sizing:border-box;
+    color:$form-type;
+    background-color:#fff;
+    border:1px solid $form-grey-border;
+    padding:5px 6px;
+    margin:0 10px 4px 10px;
+    width:420px;
+    font-size:16px;
+    resize:none;
+  }
+
+  input:disabled {
+    color:#bfbfbf;
+  }
+
+  input:focus, textarea:focus {
+    border-color:$form-blue-border;
+    box-shadow:0 0 4px 0 $form-blue-glow;
+  }
+
+  .buttons {
+    text-align:right;
+    padding:0 20px 20px 0;
+
+    button {
+      margin-left:10px;
+    }
+  }
   
 }

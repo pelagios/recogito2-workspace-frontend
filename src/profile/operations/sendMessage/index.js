@@ -29,16 +29,16 @@ class SendMessageForm extends Component {
               <label for="message">Message</label>
             </dt>
             <dd>
-              <textarea />
+              <textarea rows={10} />
             </dd>
           </dl>
 
           <div className="buttons">
             <button
-              className="btn outline" 
+              className="btn outline small" 
               onClick={this.props.onCancel}>Cancel</button>
 
-            <button className="btn">Send</button>
+            <button className="btn small">Send</button>
           </div>
         </div>
       </Modal>
