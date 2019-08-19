@@ -16,7 +16,7 @@ export default class App extends Component {
     
     this.state = initialState();
 
-    this._profileOwner = (process.env.NODE_ENV === 'development') ? 'foobar' : window.location.pathname.substring(1);
+    this._profileOwner = (process.env.NODE_ENV === 'development') ? 'pelagios3' : window.location.pathname.substring(1);
     this._rootEl = document.getElementById('app');
 
     window.onhashchange = this.refreshPage;

@@ -26,8 +26,11 @@
     right:20px;
 
     .fork-button {
+      font-family:Assistant;
+      padding:0;
+      border:none;
+      outline:none;
       position:relative;
-      top:3px;
       background-color:$ocean;
       color:#fff;
       display:inline-block;
@@ -39,6 +42,7 @@
       overflow:hidden;
       cursor:pointer;
       text-align:center;
+      vertical-align:text-bottom;
 
       @include rounded-corners(3px);
 

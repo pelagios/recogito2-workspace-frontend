@@ -10,7 +10,11 @@ import TopBar from './top/TopBar';
 
 const Profile = props => {
 
+  // Does the user have the 'forking' feature toggle?
   const canFork = props.selection.isSingleDocument() && props.me.feature_toggles && props.me.feature_toggles.includes("forking");
+
+  // Are the selected documents public (necessary additional condition for forking)
+  const isSelectionPublic = props.selection.getItems().every(item => item.public_visibility === 'PUBLIC');
 
   return (
     <React.Fragment>
@@ -33,12 +37,13 @@ const Profile = props => {
             timeout={200} 
             classNames="fork-button">
 
-            <div 
-              className="fork-button"
+            <button
+              disabled={!isSelectionPublic}
+              className="btn fork-button"
               onClick={props.onFork}> 
               <span className="icon">&#xf126;</span>             
               <span className="label">Clone to my workspace</span>
-            </div>
+            </button>
           </CSSTransition>
 
           <HeaderIcon
