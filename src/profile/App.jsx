@@ -117,7 +117,7 @@ export default class App extends Component {
     });      
   }
 
-  changeColumConfig = columns => {
+  changeColumnConfig = columns => {
     this.setState(prev => { 
       const config = {...prev.table_config, ...{ columns: columns } };
       persistState('table_config', config);
