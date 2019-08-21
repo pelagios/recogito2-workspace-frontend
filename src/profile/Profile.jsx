@@ -10,11 +10,8 @@ import TopBar from './top/TopBar';
 
 const Profile = props => {
 
-  // Does the user have the 'forking' feature toggle?
-  const canFork = props.selection.isSingleDocument() && props.me.feature_toggles && props.me.feature_toggles.includes("forking");
-
-  // Are the selected documents public (necessary additional condition for forking)
-  const isSelectionPublic = props.selection.getItems().every(item => item.public_visibility === 'PUBLIC');
+  // Forking only for single document selection + public document
+  const canFork = props.selection.isSingleDocument() && props.selection.get(0).public_visibility === 'PUBLIC';
 
   return (
     <React.Fragment>
@@ -38,7 +35,6 @@ const Profile = props => {
             classNames="fork-button">
 
             <button
-              disabled={!isSelectionPublic}
               className="btn fork-button"
               onClick={props.onFork}> 
               <span className="icon">&#xf126;</span>             
