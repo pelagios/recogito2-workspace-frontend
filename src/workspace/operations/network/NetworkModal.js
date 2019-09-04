@@ -6,12 +6,12 @@ const NetworkTreeNode = props => {
 
   return (
     <li>
-      <a>
+      <a className={props.selected === props.id ? 'selected' : ''}>
         { props.owner }/{ props.id }
       </a>
       { props.children && 
         <ul>
-          { props.children.map(doc => <NetworkTreeNode key={doc.id} {...doc} />) }
+          { props.children.map(doc => <NetworkTreeNode key={doc.id} selected={props.selected} {...doc} />) }
         </ul>
       }
     </li>
@@ -53,7 +53,7 @@ export default class NetworkModal extends Component {
         <div className="explore-network">
           { this.state.network && 
             <ul>
-              <NetworkTreeNode {...this.state.network} />
+              <NetworkTreeNode {...this.state.network} selected={this.props.selection.get(0).id} />
             </ul>
           }
         </div>
