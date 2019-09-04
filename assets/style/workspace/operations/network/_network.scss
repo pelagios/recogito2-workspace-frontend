@@ -35,10 +35,10 @@
 
     li::before {
       content:'';
-      width:14px;
+      width:12px;
       position:absolute;
       border-bottom:1px solid rgba($ocean, 0.6); // darken($lightgrey-border-darker, 8%);
-      left:8px;
+      left:10px;
       top:14px;
     }
 
@@ -46,7 +46,7 @@
       content:'';
       height:28px;
       top:-14px;
-      left:8px;
+      left:10px;
       position:absolute;
       border-left:1px solid rgba($ocean, 0.6); // darken($lightgrey-border-darker, 8%);
     }
