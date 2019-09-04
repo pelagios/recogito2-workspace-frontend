@@ -1,0 +1,53 @@
+.explore-network-modal {
+
+  .modal-wrapper {
+    max-width:420px;
+  }
+
+  .explore-network {
+    padding:30px 20px;
+
+    ul {
+      list-style-type:none;
+      padding:0;
+      margin:0;
+    }
+
+    li {
+      position:relative;
+      padding:0;
+      margin:0 20px;
+    }
+
+    li > a {
+      display:block;
+      margin:0 23px;
+      padding:3px;
+    }
+
+    li::before {
+      content:'';
+      width:12px;
+      position:absolute;
+      border-bottom:2px solid darken($lightgrey-border-darker, 8%);
+      left:8px;
+      top:14px;
+    }
+
+    li::after {
+      content:'';
+      height:28px;
+      top:-14px;
+      left:8px;
+      position:absolute;
+      border-left:2px solid darken($lightgrey-border-darker, 8%);
+    }
+
+    li:first-child::after {
+      top:0;
+      height:14;
+    }
+    
+  }
+
+}

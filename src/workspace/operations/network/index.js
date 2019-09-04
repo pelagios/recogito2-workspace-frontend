@@ -15,6 +15,7 @@ export const exploreNetwork = selection => {
 
     render(
       <NetworkModal
+        selection={selection}
         onClose={close} />, container);
   });
 

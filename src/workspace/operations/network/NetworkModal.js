@@ -1,9 +1,37 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Modal from '../../../common/Modal';
+
+const NetworkTreeNode = props => {
+
+  return (
+    <li>
+      <a>
+        { props.owner }/{ props.id }
+      </a>
+      { props.children && 
+        <ul>
+          { props.children.map(doc => <NetworkTreeNode key={doc.id} {...doc} />) }
+        </ul>
+      }
+    </li>
+  );
+
+}
 
 export default class NetworkModal extends Component {
 
+  state = {
+    network: null
+  }
+
   componentDidMount() {
+    // Assuming a single-document selection, enforced through the menu component
+    const docId = this.props.selection.get(0).id;
+
+    axios.get(`/api/document/${docId}/network`)
+      .then(response => this.setState({ network: response.data }));
+
     document.addEventListener('keydown', this.onKeydown, false);
   }
 
@@ -23,7 +51,11 @@ export default class NetworkModal extends Component {
         title="Explore Network"
         onClose={this.props.onClose}>
         <div className="explore-network">
-          <p>{/* TODO */}</p>
+          { this.state.network && 
+            <ul>
+              <NetworkTreeNode {...this.state.network} />
+            </ul>
+          }
         </div>
       </Modal>
     )
