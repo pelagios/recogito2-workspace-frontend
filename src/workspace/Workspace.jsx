@@ -35,6 +35,7 @@ const Workspace = props => {
           onDuplicateSelection={props.onDuplicateSelection}
           onDeleteSelection={props.onDeleteSelection} 
           onShareSelection={props.onShareSelection} 
+          onExploreNetwork={props.onExploreNetwork}
           onNER={props.onNER} 
           onSearchResponse={props.onSearchResponse}
           onQuitSearch={props.onQuitSearch} />

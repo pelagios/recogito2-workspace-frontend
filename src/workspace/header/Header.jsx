@@ -61,6 +61,13 @@ const OptionsMenu = props => {
           label="Share" 
           disabled={!canShare} 
           onSelect={props.onShareSelection} />
+
+        { props.account.feature_toggles.includes("explore-network") &&
+          <Menu.Item
+            icon={'\uf126'} 
+            label="Explore network" 
+            onSelect={props.onExploreNetwork} />
+        }
       </Menu.Group>
 
       <Menu.Group>
@@ -148,13 +155,15 @@ export default class Header extends Component {
             </CSSTransition>
 
             { this.state.optionsMenuVisible &&
-              <OptionsMenu 
+              <OptionsMenu
+                account={this.props.account} 
                 view={this.props.view} 
                 selection={this.props.selection} 
                 onMoveSelection={this.closeAndThen(this.props.onMoveSelection)}
                 onDuplicateSelection={this.closeAndThen(this.props.onDuplicateSelection)}
                 onDeleteSelection={this.closeAndThen(this.props.onDeleteSelection)} 
                 onShareSelection={this.closeAndThen(this.props.onShareSelection)}
+                onExploreNetwork={this.closeAndThen(this.props.onExploreNetwork)}
                 onNER={this.closeAndThen(this.props.onNER)}
                 onCancel={this.closeOptionsMenu} /> }
 

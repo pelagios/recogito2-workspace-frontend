@@ -5,6 +5,7 @@ import { updateReadme, deleteReadme } from './readme';
 import { moveSelection } from './move';
 import { deleteSelection, duplicateSelection } from './selection';
 import { shareSelection } from './sharing';
+import { exploreNetwork } from './network';
 
 /** 
  * Wraps all operations into one object so that 
@@ -21,5 +22,6 @@ export default {
   moveSelection,
   duplicateSelection,
   shareSelection,
+  exploreNetwork,
   entityRecognition
 };
