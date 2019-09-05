@@ -6,17 +6,17 @@ import BaseRowComponent from './BaseRowComponent';
 
 /** Formatting rules for possible field types **/
 const FORMATTERS = {
-  language: (language) => 
+  language: language => 
     language.toUpperCase(),
 
-  uploaded_at: (datetime) => 
+  uploaded_at: datetime => 
     new Intl.DateTimeFormat('en-GB', {
       year : 'numeric',
       month: 'short',
       day  : '2-digit'
     }).format(new Date(datetime)),
   
-  last_edit_at: (datetime) => 
+  last_edit_at: datetime => 
     <TimeAgo date={datetime} />,
 
   public_visibility: (visibility) => {
@@ -28,7 +28,7 @@ const FORMATTERS = {
       return ( <span className="icon" title="Private">&#xf023;</span> );
   },
 
-  access_level: (level) => {
+  access_level: level => {
     if (level === 'ADMIN')
       return ( <span className="icon" title="ADMIN">&#xf0ad;</span> );
     else if (level === 'WRITE')
@@ -37,13 +37,13 @@ const FORMATTERS = {
       return ( <span className="icon" title="READ">&#xf06e;</span> );
   },
 
-  annotations: (annotations) =>
+  annotations: annotations =>
     <NumberFormat 
       displayType="text"
       value={annotations}
       thousandSeparator={true} />,
 
-  status_ratio: (ratio) => {
+  status_ratio: ratio => {
     const total = ratio.verified + ratio.unverified + ratio.not_identifiable;
     const pctGreen = ratio.verified / total * 100;
     const pctYellow = ratio.not_identifiable / total * 100;
@@ -68,7 +68,13 @@ const FORMATTERS = {
         <span className="not_identifiable" style={{ width: `${pctYellow}%` }} />
       </span>
     )
-  }
+  },
+
+  cloned_from: clonedFrom =>
+    <span className="cloned-from">
+      <a href={`/${clonedFrom.username}`}>{clonedFrom.username}</a> / 
+      <a href={`/document/${clonedFrom.id}`}>{clonedFrom.id}</a>
+    </span>
 
 };
 
