@@ -13,8 +13,9 @@ const COLUMNS_GENERAL = [
   'last_edit_by',
   'annotations',
   'public_visibility',
-  'status_ratio'
-  // 'activity'
+  'status_ratio',
+  'cloned_from',
+  'has_clones'
 ];
 
 // Columns specific to SHARED_WITH_ME view
@@ -40,7 +41,8 @@ export const HEADER_NAMES = {
   annotations       : 'Annotations',
   public_visibility : 'Visibility',
   status_ratio      : 'Verification ratio',
-  activity          : 'Activity graph',
+  cloned_from       : 'Cloned from',
+  has_clones        : 'Has clones',
 
   owner             : 'Document owner',
   shared_by         : 'Shared by',
@@ -61,7 +63,8 @@ export const COLUMN_WIDTH = {
   annotations       : 'M',
   public_visibility : 'M',
   status_ratio      : 'M',
-  activity          : 'M',
+  cloned_from       : 'M',
+  has_clones        : 'S',
 
   owner             : 'M',
   shared_by         : 'M',
