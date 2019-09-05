@@ -29,7 +29,7 @@ export default class NetworkModal extends Component {
     // Assuming a single-document selection, enforced through the menu component
     const docId = this.props.selection.get(0).id;
 
-    axios.get(`/api/document/${docId}/network`)
+    axios.get(`/api/network/document/${docId}`)
       .then(response => this.setState({ network: response.data }));
 
     document.addEventListener('keydown', this.onKeydown, false);
