@@ -72,8 +72,8 @@ const FORMATTERS = {
 
   cloned_from: clonedFrom =>
     <span className="cloned-from">
-      <a href={`/${clonedFrom.username}`}>{clonedFrom.username}</a> / 
-      <a href={`/document/${clonedFrom.id}`}>{clonedFrom.id}</a>
+      <span>{clonedFrom.username}</span> / 
+      <span>{clonedFrom.id}</span>
     </span>
 
 };
