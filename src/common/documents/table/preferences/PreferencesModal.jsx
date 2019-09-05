@@ -82,7 +82,7 @@ export default class PreferencesModal extends Component {
 
   render() {
     // Helper to create a single checkbox + label row
-    const createRow = (field) =>
+    const createRow = field =>
       <li key={field}>
         <input
           type="checkbox"
