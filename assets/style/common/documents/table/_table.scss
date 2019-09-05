@@ -194,6 +194,19 @@
       }
     }
 
+    .has-clones {
+      text-align:center;
+      display:inline-block;
+      width:100%;
+    }
+
+    .has-clones::before {
+      content:'\f126';
+      font-family:FontAwesome;
+      display:inline-block;
+      padding-right:3px;
+    }
+
     .icon {
       font-size:14px;
       text-align:center;
