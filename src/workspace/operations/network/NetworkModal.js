@@ -2,20 +2,41 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from '../../../common/Modal';
 
-const NetworkTreeNode = props => {
+class NetworkTreeNode extends Component  {
 
-  return (
-    <li>
-      <a className={props.selected === props.id ? 'selected' : ''}>
-        { props.owner }/{ props.id }
-      </a>
-      { props.children && 
-        <ul>
-          { props.children.map(doc => <NetworkTreeNode key={doc.id} selected={props.selected} {...doc} />) }
-        </ul>
-      }
-    </li>
-  );
+  state = {
+    edits_since: null
+  }
+
+  componentDidMount() {
+    const { cloned_at } = this.props; // null for root
+    if (cloned_at) {
+      axios.get(`/api/document/${this.props.id}/contributions/count?since=${encodeURIComponent(cloned_at)}`)
+        .then(response => this.setState({ edits_since: response.data.contributions }));
+    }
+  }
+
+  render() {
+    return (
+      <li>
+        <span className={this.props.selected === this.props.id ? 'selected doc-id' : 'doc-id'}>
+          <a href={`/${this.props.owner}`}>{ this.props.owner }</a> / 
+          <a href={`/document/${this.props.id}`}>{ this.props.id }</a>
+        </span>
+        { this.state.edits_since && <span className="edits-since">+ {this.state.edits_since} edits</span> }
+        { this.props.children && 
+          <ul>
+            { this.props.children.map(doc => 
+              <NetworkTreeNode 
+                key={doc.id} 
+                selected={this.props.selected} 
+                {...doc} /> 
+            )}
+          </ul>
+        }
+      </li>
+    )
+  }
 
 }
 
@@ -25,12 +46,23 @@ export default class NetworkModal extends Component {
     network: null
   }
 
+  // Traverses the network tree to retrieve "my" instance in it
+  findMyClone = network => {
+    const myId = this.props.selection.get(0).id;
+
+    const findInChildren = children => {
+    }
+  }
+
   componentDidMount() {
     // Assuming a single-document selection, enforced through the menu component
     const docId = this.props.selection.get(0).id;
 
     axios.get(`/api/document/${docId}/network`)
-      .then(response => this.setState({ network: response.data }));
+      .then(response => {
+
+        this.setState({ network: response.data })
+      });
 
     document.addEventListener('keydown', this.onKeydown, false);
   }
@@ -53,7 +85,9 @@ export default class NetworkModal extends Component {
         <div className="explore-network">
           { this.state.network && 
             <ul>
-              <NetworkTreeNode {...this.state.network} selected={this.props.selection.get(0).id} />
+              <NetworkTreeNode 
+                {...this.state.network.root} 
+                selected={this.props.selection.get(0).id} />
             </ul>
           }
         </div>
