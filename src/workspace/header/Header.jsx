@@ -13,6 +13,10 @@ const OptionsMenu = props => {
   const canShare = // Single folder in my workspace
     props.selection.isSingleFolder() && props.view === 'MY_DOCUMENTS';
 
+  const hasNetwork = // Single document with 'has_clones' or 'cloned_from'
+    props.selection.isSingleDocument() &&
+    (props.selection.get(0).has_clones || props.selection.get(0).cloned_from);
+
   const openInNewTab = () => {
     window.open(`document/${props.selection.get(0).id}/part/1/edit`, '_blank');
     props.onCancel();
@@ -65,6 +69,7 @@ const OptionsMenu = props => {
         { props.account.feature_toggles.includes("explore-network") &&
           <Menu.Item
             icon={'\uf126'} 
+            disabled={!hasNetwork}
             label="Explore network" 
             onSelect={props.onExploreNetwork} />
         }
