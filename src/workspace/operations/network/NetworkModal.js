@@ -46,14 +46,6 @@ export default class NetworkModal extends Component {
     network: null
   }
 
-  // Traverses the network tree to retrieve "my" instance in it
-  findMyClone = network => {
-    const myId = this.props.selection.get(0).id;
-
-    const findInChildren = children => {
-    }
-  }
-
   componentDidMount() {
     // Assuming a single-document selection, enforced through the menu component
     const docId = this.props.selection.get(0).id;
