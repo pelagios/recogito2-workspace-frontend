@@ -66,13 +66,11 @@ const OptionsMenu = props => {
           disabled={!canShare} 
           onSelect={props.onShareSelection} />
 
-        { props.account.feature_toggles.includes("explore-network") &&
-          <Menu.Item
-            icon={'\uf126'} 
-            disabled={!hasNetwork}
-            label="Explore network" 
-            onSelect={props.onExploreNetwork} />
-        }
+        <Menu.Item
+          icon={'\uf126'} 
+          disabled={!hasNetwork}
+          label="Explore network" 
+          onSelect={props.onExploreNetwork} />
       </Menu.Group>
 
       <Menu.Group>
