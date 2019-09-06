@@ -20,10 +20,13 @@ class NetworkTreeNode extends Component  {
     return (
       <li>
         <span className={this.props.selected === this.props.id ? 'selected doc-id' : 'doc-id'}>
-          <a href={`/${this.props.owner}`}>{ this.props.owner }</a> / 
-          <a href={`/document/${this.props.id}`}>{ this.props.id }</a>
+          <a href={`/${this.props.owner}`}>
+            { this.props.owner }
+          </a> / <a href={`/document/${this.props.id}`}>
+            { this.props.id }
+          </a>
         </span>
-        { this.state.edits_since && <span className="edits-since">+ {this.state.edits_since} edits</span> }
+        { this.state.edits_since > 0 && <span className="edits-since">+ {this.state.edits_since} edits</span> }
         { this.props.children && 
           <ul>
             { this.props.children.map(doc => 
