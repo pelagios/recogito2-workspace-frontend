@@ -72,8 +72,7 @@ const FORMATTERS = {
 
   cloned_from: clonedFrom =>
     <span className="cloned-from">
-      <span>{clonedFrom.username}</span> / 
-      <span>{clonedFrom.id}</span>
+      <span>{clonedFrom.username}</span> / <span>{clonedFrom.id}</span>
     </span>,
 
   has_clones: hasClones =>
