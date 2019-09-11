@@ -16,6 +16,16 @@ class NetworkTreeNode extends Component  {
     }
   }
 
+  /*
+  merge = () => {
+    axios.post(`/api/document/${this.props.selected}/merge?from=${this.props.id}`)
+      .then(response => {
+        // TODO catch errors, close window, refresh view - all that sort of stuff
+        console.log(response.data);
+      });
+  }
+  */
+
   render() {
     return (
       <li>
