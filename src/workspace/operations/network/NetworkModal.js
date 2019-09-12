@@ -36,12 +36,20 @@ class NetworkTreeNode extends Component  {
             { this.props.id }
           </a>
         </span>
-        { this.state.edits_since > 0 && <span className="edits-since">+ {this.state.edits_since} edits</span> }
+        { this.state.edits_since > 0 && 
+          <>
+            <span className="edits-since">+ {this.state.edits_since} edits</span>
+            { this.props.account.feature_toggles.includes('merge-documents') && 
+              <button className="merge btn tiny" onClick={this.merge}>MERGE</button> 
+            }
+          </>
+        }
         { this.props.children && 
           <ul>
             { this.props.children.map(doc => 
               <NetworkTreeNode 
                 key={doc.id} 
+                account={this.props.account}
                 selected={this.props.selected} 
                 {...doc} /> 
             )}
@@ -91,6 +99,7 @@ export default class NetworkModal extends Component {
           { this.state.network && 
             <ul>
               <NetworkTreeNode 
+                account={this.props.account}
                 {...this.state.network.root} 
                 selected={this.props.selection.get(0).id} />
             </ul>

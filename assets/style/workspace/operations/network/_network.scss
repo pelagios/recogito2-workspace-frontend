@@ -21,6 +21,17 @@
       margin:0 18px;
     }
 
+    li > .merge {
+      padding:2px 12px;
+      vertical-align:top;
+      margin-left:8px;
+      display:none;
+    }
+
+    li:hover > .merge {
+      display:inline-block;
+    }
+
     span.doc-id {
       display:inline-block;
       margin:0 8px 0 22px;

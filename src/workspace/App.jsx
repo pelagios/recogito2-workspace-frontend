@@ -229,7 +229,7 @@ export default class App extends Component {
         onDuplicateSelection={this.duplicateSelection}
         onDeleteSelection={this.deleteSelection}
         onShareSelection={() => operations.shareSelection(this.state.selection)}
-        onExploreNetwork={() => operations.exploreNetwork(this.state.selection)}
+        onExploreNetwork={() => operations.exploreNetwork(this.state.selection, this.state.account)}
         onNER={() => operations.entityRecognition(this.state.selection).then(this.refreshPage)}
         onSearchResponse={this.onSearchResponse}
         onQuitSearch={this.onQuitSearch}
