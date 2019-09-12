@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from '../../../common/Modal';
+import { prompt } from '../prompt';
 
 class NetworkTreeNode extends Component  {
 
@@ -16,20 +17,33 @@ class NetworkTreeNode extends Component  {
     }
   }
 
-  /*
   merge = () => {
-    axios.post(`/api/document/${this.props.selected}/merge?from=${this.props.id}`)
-      .then(response => {
-        // TODO catch errors, close window, refresh view - all that sort of stuff
-        console.log(response.data);
-      });
+    const executeMerge = () => {
+      axios.post(`/api/document/${this.props.selected}/merge?from=${this.props.id}`)
+        .then(response => this.props.onMergeComplete());
+
+      // TODO handle errors
+    }
+
+    const message = 
+      `This operation will merge annotations from both documents, potentially overwriting 
+       edits you have made. Are you sure you want to do this?`;
+
+    prompt({
+      title: 'Merge Annotations',
+      message: message,
+      type: 'WARNING',
+      onConfirm: executeMerge
+    });
   }
-  */
 
   render() {
+    const { feature_toggles} = this.props.account;
+    const isSelected = this.props.selected == this.props.id;
+
     return (
       <li>
-        <span className={this.props.selected === this.props.id ? 'selected doc-id' : 'doc-id'}>
+        <span className={isSelected ? 'selected doc-id' : 'doc-id'}>
           <a href={`/${this.props.owner}`}>
             { this.props.owner }
           </a> / <a href={`/document/${this.props.id}`}>
@@ -39,8 +53,8 @@ class NetworkTreeNode extends Component  {
         { this.state.edits_since > 0 && 
           <>
             <span className="edits-since">+ {this.state.edits_since} edits</span>
-            { this.props.account.feature_toggles.includes('merge-documents') && 
-              <button className="merge btn tiny" onClick={this.merge}>MERGE</button> 
+            { feature_toggles && feature_toggles.includes('merge-documents') && !isSelected &&
+              <button className="merge btn tiny" onClick={this.merge}>Merge Annotations</button> 
             }
           </>
         }
@@ -51,6 +65,7 @@ class NetworkTreeNode extends Component  {
                 key={doc.id} 
                 account={this.props.account}
                 selected={this.props.selected} 
+                onMergeComplete={this.props.onMergeComplete}
                 {...doc} /> 
             )}
           </ul>
@@ -101,7 +116,8 @@ export default class NetworkModal extends Component {
               <NetworkTreeNode 
                 account={this.props.account}
                 {...this.state.network.root} 
-                selected={this.props.selection.get(0).id} />
+                selected={this.props.selection.get(0).id} 
+                onMergeComplete={this.props.onMergeComplete} />
             </ul>
           }
         </div>

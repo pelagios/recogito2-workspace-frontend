@@ -17,7 +17,8 @@ export const exploreNetwork = (selection, account) => {
       <NetworkModal
         selection={selection}
         account={account}
-        onClose={close} />, container);
+        onClose={close} 
+        onMergeComplete={close} />, container);
   });
 
 }

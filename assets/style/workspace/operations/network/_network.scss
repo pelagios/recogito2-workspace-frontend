@@ -1,13 +1,13 @@
 .explore-network-modal {
 
   .modal-wrapper {
-    width:440px;
-    min-width:440px;
-    max-width:440px;
+    width:600px;
+    min-width:600px;
+    max-width:600px;
   }
 
   .explore-network {
-    padding:30px 20px;
+    padding:30px 20px 30px 0;
 
     ul {
       list-style-type:none;
@@ -24,7 +24,7 @@
     li > .merge {
       padding:2px 12px;
       vertical-align:top;
-      margin-left:8px;
+      margin-left:20px;
       display:none;
     }
 
