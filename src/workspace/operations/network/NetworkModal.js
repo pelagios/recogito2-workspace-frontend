@@ -39,7 +39,7 @@ class NetworkTreeNode extends Component  {
 
   render() {
     const { feature_toggles} = this.props.account;
-    const isSelected = this.props.selected == this.props.id;
+    const isSelected = this.props.selected === this.props.id;
 
     return (
       <li>
