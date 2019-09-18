@@ -77,7 +77,7 @@ const identifySource = url => {
     return 'CTS';
   else if (url.endsWith('.xml'))
     return 'TEI_XML';
-  else if (url.includes('textgridlab.org') && url.includes('teicorpus'))
+  else if (url.includes('textgridlab.org'))
     return 'TEI_XML'; // Textgrid doesn't end links with .xml...
   else // to be extended later
     return 'IIIF';
@@ -125,7 +125,6 @@ export const uploadFiles = files => {
  */
 export const importSource = (typ, url) => {
   const sourceType = typ || identifySource(url);
-
   if (typ === 'SHINE') {
     return importFromShine().then(files => { 
       if (files)
