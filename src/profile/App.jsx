@@ -73,7 +73,7 @@ export default class App extends Component {
     const config = this.state.presentation === 'GRID' ? null :
       {
         columns: Columns.expandAggregatedColumns(this.state.table_config.columns),
-        sort: this.state.table_config.sorting
+        sort: this.state.table_config.sorting.by ? this.state.table_config.sorting : null
       }
 
     return axios.post(`/api/directory/${path}`, config).then(r => {
