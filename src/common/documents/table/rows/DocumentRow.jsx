@@ -43,6 +43,12 @@ const FORMATTERS = {
       value={annotations}
       thousandSeparator={true} />,
 
+  my_annotations: annotations =>
+    <NumberFormat 
+      displayType="text"
+      value={annotations}
+      thousandSeparator={true} />,
+  
   status_ratio: ratio => {
     const total = ratio.verified + ratio.unverified + ratio.not_identifiable;
     const pctGreen = ratio.verified / total * 100;
