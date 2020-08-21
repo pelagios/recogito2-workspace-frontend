@@ -19,7 +19,10 @@ const FORMATTERS = {
   last_edit_at: datetime => 
     <TimeAgo date={datetime} />,
 
-  public_visibility: (visibility) => {
+  my_last_edit_at: datetime => 
+    <TimeAgo date={datetime} />,
+  
+    public_visibility: (visibility) => {
     if (visibility === 'PUBLIC') 
       return ( <span className="icon" title="Open to anyone">&#xf09c;</span> );
     else if (visibility === 'WITH_LINK')
