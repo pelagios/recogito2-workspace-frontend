@@ -91,7 +91,7 @@ export default class NewContent extends Component {
               { this.hasFeature('webmaps') && <Menu.Item
                 icon={'\uf278'}
                 label="Web Map (WMTS, XYZ)"
-                onSelect={this.select(() => this.props.onImportSource('WMTS_XYZ'))} />
+                onSelect={this.select(() => this.props.onImportSource('WEBMAP'))} />
               }
             </Menu.Group>
           </Menu>
