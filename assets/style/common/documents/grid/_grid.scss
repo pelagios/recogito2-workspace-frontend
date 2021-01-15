@@ -116,6 +116,9 @@
       content:'\f0ce';
     }
 
+    .document.MAP_WMTS::before { content: '\f279'; }
+    .document.MAP_XYZ::before { content: '\f279'; }
+
     .document.IMAGE_IIIF   {
       background-image:url("/assets/images/iiif-logo.png");
       background-repeat:no-repeat;

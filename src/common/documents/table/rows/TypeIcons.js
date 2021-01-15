@@ -4,7 +4,9 @@ const ICONS = {
   TEXT_TEIXML  : 'icon_tei.png',
   IMAGE_UPLOAD : 'icon_image.png',
   IMAGE_IIIF   : 'icon_iiif.png',
-  DATA_CSV     : 'icon_csv.png'
+  DATA_CSV     : 'icon_csv.png',
+  MAP_WMTS     : 'icon_map.png',
+  MAP_XYZ      : 'icon_map.png' 
 };
 
 export default class TypeIcons {
