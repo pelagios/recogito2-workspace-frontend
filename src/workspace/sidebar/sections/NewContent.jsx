@@ -90,7 +90,7 @@ export default class NewContent extends Component {
 
               { this.hasFeature('webmaps') && <Menu.Item
                 icon={'\uf278'}
-                label="Web Map (WMTS, XYZ)"
+                label="WMTS Web Map Service"
                 onSelect={this.select(() => this.props.onImportSource('WEBMAP'))} />
               }
             </Menu.Group>
