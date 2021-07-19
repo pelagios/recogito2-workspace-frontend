@@ -1,6 +1,7 @@
 import { createFolder, renameFolder } from './folder';
 import { uploadFiles, importSource } from './importing';
 import { entityRecognition } from './ner';
+import { mapKurator } from './mapkurator';
 import { updateReadme, deleteReadme } from './readme';
 import { moveSelection } from './move';
 import { deleteSelection, duplicateSelection } from './selection';
@@ -23,5 +24,6 @@ export default {
   duplicateSelection,
   shareSelection,
   exploreNetwork,
-  entityRecognition
+  entityRecognition,
+  mapKurator
 };

@@ -37,6 +37,7 @@ const Workspace = props => {
           onShareSelection={props.onShareSelection} 
           onExploreNetwork={props.onExploreNetwork}
           onNER={props.onNER} 
+          onMapKurator={props.onMapKurator}
           onSearchResponse={props.onSearchResponse}
           onQuitSearch={props.onQuitSearch} />
 

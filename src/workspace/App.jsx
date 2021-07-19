@@ -231,6 +231,7 @@ export default class App extends Component {
         onShareSelection={() => operations.shareSelection(this.state.selection)}
         onExploreNetwork={() => operations.exploreNetwork(this.state.selection, this.state.account)}
         onNER={() => operations.entityRecognition(this.state.selection).then(this.refreshPage)}
+        onMapKurator={() => operations.mapKurator(this.state.selection).then(this.refreshPage)}
         onSearchResponse={this.onSearchResponse}
         onQuitSearch={this.onQuitSearch}
         onUploadFiles={files => operations.uploadFiles(files).then(this.refreshPage)}

@@ -22,6 +22,10 @@ const OptionsMenu = props => {
     props.onCancel();
   }
 
+  const { feature_toggles} = props.account;
+
+  const hasMapKurator = feature_toggles.includes('mrm');
+
   // TODO probably worth splitting this up into a separate source file, or
   // perhaps two (one OptionsMenu container & one presentational component)
   return (
@@ -79,6 +83,14 @@ const OptionsMenu = props => {
           label="Named Entity Recognition" 
           disabled={!props.selection.includesText()} 
           onSelect={props.onNER} />
+
+        {hasMapKurator && 
+          <Menu.Item 
+            icon={'\uf278'} 
+            label="mapKurator" 
+            disabled={props.selection.includesText()} 
+            onSelect={props.onMapKurator} />
+        }
       </Menu.Group>
     </Menu>
   );
@@ -168,6 +180,7 @@ export default class Header extends Component {
                 onShareSelection={this.closeAndThen(this.props.onShareSelection)}
                 onExploreNetwork={this.closeAndThen(this.props.onExploreNetwork)}
                 onNER={this.closeAndThen(this.props.onNER)}
+                onMapKurator={this.closeAndThen(this.props.onMapKurator)}
                 onCancel={this.closeOptionsMenu} /> }
 
             <HeaderIcon
