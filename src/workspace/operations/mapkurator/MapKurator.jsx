@@ -1,9 +1,35 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class MapKurator extends Component {
 
-  // onClose
-  // onComplete
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      running: false,
+      jobId: null
+    }
+
+    this.start();
+  }
+
+  start = () => {
+    // This is unsafely hard-wired to assume a single image filepart
+    const document = this.props.selection.getItems()[0];
+
+    const taskDefinition = {
+      task_type: 'MAPKURATOR', 
+      documents: [ document.id ], 
+    }
+
+    axios.post('/api/job', taskDefinition).then(response => {
+      this.setState({
+        running: true,
+        jobId: response.data.job_id
+      });
+    });
+  }
 
   render() {
     const isDone = false;
