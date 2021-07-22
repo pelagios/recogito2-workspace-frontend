@@ -7,11 +7,27 @@ export default class MapKurator extends Component {
     super(props);
 
     this.state = {
-      running: false,
+      complete: false,
       jobId: null
     }
 
     this.start();
+  }
+
+  pollProgress() { 
+    axios.get(`/api/job/${this.state.jobId}`)
+      .then(result => {
+        const isDone = result.data.status === 'COMPLETED' || result.data.status === 'FAILED';
+        if (isDone)
+          this.setState({ complete: true });
+        else
+          setTimeout(() => this.pollProgress(), 1000);
+      })
+      .catch(error => {
+        if (error.response.status === 404)
+          // Tasks might still be initializing
+          setTimeout(() => this.pollProgress(), 1000);
+      });
   }
 
   start = () => {
@@ -26,19 +42,18 @@ export default class MapKurator extends Component {
 
     axios.post('/api/job', taskDefinition).then(response => {
       this.setState({
-        running: true,
         jobId: response.data.job_id
       });
+
+      this.pollProgress();
     });
   }
 
   render() {
-    const isDone = false;
-
     return (
       <div className="job-progress">
         <div className="header">
-          mapKurator { isDone && <button 
+          mapKurator { this.state.complete && <button 
             className="close nostyle"
             onClick={this.props.onClose}>&#xe897;</button>
           }
@@ -46,7 +61,10 @@ export default class MapKurator extends Component {
 
         <div className="body">
           <div className="message">
-            This may take a while...
+            { this.state.complete ? 
+              <span>Processing complete!</span> : 
+              <span>This may take a while...</span>
+            }
           </div>
         </div>
       </div>
