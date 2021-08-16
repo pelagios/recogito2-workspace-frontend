@@ -36,8 +36,7 @@ export default class MapKurator extends Component {
 
     const taskDefinition = {
       task_type: 'MAPKURATOR', 
-      documents: [ document.id ], 
-      version: '1.0'
+      documents: [ document.id ]
     }
 
     axios.post('/api/job', taskDefinition).then(response => {
