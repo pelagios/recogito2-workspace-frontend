@@ -37,6 +37,16 @@ export default class NewContent extends Component {
     return this.props.account.feature_toggles && this.props.account.feature_toggles.includes(name);
   }
 
+  hasAnyFeature = names => {
+    if (!this.props.account.feature_toggles)
+      return false;
+
+    const toggles = new Set(this.props.account.feature_toggles);
+    const intersection = names.filter(n => toggles.has(n));
+    
+    return intersection.length > 0;
+  }
+
   render() {
     return (
       <div className="section create-new">
@@ -88,7 +98,7 @@ export default class NewContent extends Component {
                 label="From RISE Repository" 
                 onSelect={this.select(() => this.props.onImportSource('SHINE'))} />
 
-              { this.hasFeature('webmaps') && <Menu.Item
+              { this.hasAnyFeature(['webmaps', 'mrm' ]) && <Menu.Item
                 icon={'\uf278'}
                 label="WMTS Web Map Service"
                 onSelect={this.select(() => this.props.onImportSource('WEBMAP'))} />
