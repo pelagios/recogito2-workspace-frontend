@@ -8,18 +8,15 @@ export const mapKurator = selection => {
     const container = document.createElement('div');
     document.body.appendChild(container);
 
-    const onComplete = () => {
+    const onComplete = () =>
       resolve();
-    }
 
-    const onClose = () => {
+    const onClose = () =>
       container.remove();
-    }
 
     render(
       <MapKurator 
         selection={selection}
-        onCancel={onClose} 
         onClose={onClose}
         onComplete={onComplete} />, container);
   });

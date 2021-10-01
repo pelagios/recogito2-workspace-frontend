@@ -8,7 +8,8 @@ export default class MapKurator extends Component {
 
     this.state = {
       complete: false,
-      jobId: null
+      jobId: null,
+      error: null
     }
 
     this.start();
@@ -18,10 +19,17 @@ export default class MapKurator extends Component {
     axios.get(`/api/job/${this.state.jobId}`)
       .then(result => {
         const isDone = result.data.status === 'COMPLETED' || result.data.status === 'FAILED';
-        if (isDone)
-          this.setState({ complete: true });
-        else
+        if (isDone) {
+          if (result.data.status === 'FAILED') {
+            this.setState({ complete: true, error: true });
+            this.props.onComplete();
+          } else {
+            this.setState({ complete: true });
+            this.props.onComplete();
+          }
+        } else {
           setTimeout(() => this.pollProgress(), 1000);
+        }
       })
       .catch(error => {
         if (error.response.status === 404)
@@ -60,8 +68,15 @@ export default class MapKurator extends Component {
 
         <div className="body">
           <div className="message">
-            { this.state.complete ? 
-              <span>Processing complete!</span> : 
+            {(this.state.complete && !this.state.error) && 
+              <span>Processing successful!</span>
+            }
+
+            {this.state.error && 
+              <span>Processing failed.</span>
+            }
+
+            {!this.state.complete &&
               <span>This may take a while...</span>
             }
           </div>
