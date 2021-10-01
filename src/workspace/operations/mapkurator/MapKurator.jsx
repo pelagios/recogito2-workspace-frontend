@@ -21,7 +21,8 @@ export default class MapKurator extends Component {
         const isDone = result.data.status === 'COMPLETED' || result.data.status === 'FAILED';
         if (isDone) {
           if (result.data.status === 'FAILED') {
-            this.setState({ complete: true, error: true });
+            const { message } = result.data.subtasks[0];
+            this.setState({ complete: true, error: message });
             this.props.onComplete();
           } else {
             this.setState({ complete: true });
@@ -73,7 +74,7 @@ export default class MapKurator extends Component {
             }
 
             {this.state.error && 
-              <span>Processing failed.</span>
+              <span>Processing failed: {this.state.error}</span>
             }
 
             {!this.state.complete &&
