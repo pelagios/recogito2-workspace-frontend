@@ -22,7 +22,7 @@ const OptionsMenu = props => {
     props.onCancel();
   }
 
-  const { feature_toggles} = props.account;
+  const feature_toggles = props.account.feature_toggles || [];
 
   const hasMapKurator = feature_toggles.includes('mrm');
 
