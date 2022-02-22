@@ -24,7 +24,7 @@ const OptionsMenu = props => {
 
   const feature_toggles = props.account.feature_toggles || [];
 
-  const hasMapKurator = feature_toggles.includes('mrm');
+  const hasMapKurator = true; // feature_toggles.includes('mrm');
 
   // TODO probably worth splitting this up into a separate source file, or
   // perhaps two (one OptionsMenu container & one presentational component)
