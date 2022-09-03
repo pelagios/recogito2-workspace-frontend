@@ -7,8 +7,10 @@ import Search from './search/Search';
 
 const OptionsMenu = props => {
 
+  console.log(props.selection.get(0).owner, props.account);
+  
   const canDuplicate = // Single document in my workspace
-    props.selection.isSingleDocument() && props.view === 'MY_DOCUMENTS';
+    props.selection.isSingleDocument() && props.account && props.selection.get(0).owner === props.account.username;
 
   const canShare = // Single folder in my workspace
     props.selection.isSingleFolder() && props.view === 'MY_DOCUMENTS';
