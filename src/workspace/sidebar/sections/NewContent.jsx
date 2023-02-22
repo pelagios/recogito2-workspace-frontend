@@ -98,11 +98,10 @@ export default class NewContent extends Component {
                 label="From RISE Repository" 
                 onSelect={this.select(() => this.props.onImportSource('SHINE'))} />
 
-              { this.hasAnyFeature(['webmaps', 'mrm' ]) && <Menu.Item
+              <Menu.Item
                 icon={'\uf278'}
                 label="WMTS Web Map Service"
                 onSelect={this.select(() => this.props.onImportSource('WEBMAP'))} />
-              }
             </Menu.Group>
           </Menu>
         }

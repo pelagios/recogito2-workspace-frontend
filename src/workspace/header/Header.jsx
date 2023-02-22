@@ -26,8 +26,6 @@ const OptionsMenu = props => {
 
   const feature_toggles = props.account.feature_toggles || [];
 
-  const hasMapKurator = feature_toggles.includes('mrm');
-
   // TODO probably worth splitting this up into a separate source file, or
   // perhaps two (one OptionsMenu container & one presentational component)
   return (
@@ -86,13 +84,11 @@ const OptionsMenu = props => {
           disabled={!props.selection.includesText()} 
           onSelect={props.onNER} />
 
-        {hasMapKurator && 
-          <Menu.Item 
-            icon={'\uf278'} 
-            label="mapKurator" 
-            disabled={props.selection.includesText()} 
-            onSelect={props.onMapKurator} />
-        }
+        <Menu.Item 
+          icon={'\uf278'} 
+          label="mapKurator" 
+          disabled={props.selection.includesText()} 
+          onSelect={props.onMapKurator} />
       </Menu.Group>
     </Menu>
   );
